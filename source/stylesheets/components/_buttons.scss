@@ -1,0 +1,59 @@
+.button {
+  padding: 1em 2em;
+  font-weight: font-weight('bold');
+  cursor: pointer;
+  color: palette('blue');
+  background: palette('white');
+  border: 0;
+  border-radius: 40px;
+}
+
+.button--destak {
+  color: palette('white');
+  background: palette('blue');
+}
+
+%button-with-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+
+  &::after {
+    margin-left: 0.3em;
+    font-size: ms(-2);
+    line-height: 0;
+    content: ' \27F6';
+  }
+}
+
+.button--with-arrow {
+  @extend %button-with-arrow;
+}
+
+
+.button--with-arrow-down {
+  @extend %button-with-arrow;
+
+  &::after {
+    transform: rotate(90deg);
+  }
+}
+
+.button--large {
+  align-self: center;
+  width: 100%;
+  max-width: 35.625rem;
+}
+
+.button--small {
+  padding: 0.3em 1.6em;
+}
+
+.button--margin-top {
+  margin-top: 1rem;
+}
+
+.button--margin-bottom {
+  margin-bottom: 1rem;
+}

@@ -1,0 +1,56 @@
+    {{ partial "head.html" . }}
+
+    <body class="relations-investor">
+      {{ partial "header.html" . }}
+
+      <div class="container">
+        <article class="row">
+          <div class="one-third">
+            <h1>{{ .Title }}</h1>
+            {{ .Content }}
+          </div>
+          <div class="two-thirds">
+            <img src="/assets/images/investor-relations.svg" alt="{{ .Title }}">
+          </div>
+        </article>
+      </div>
+      <div class="grey-bg investor-relations__buttons-container">
+        <div class="container">
+            <div class="investor-relations__buttons">
+              <a
+                class="button button--destak button--margin-bottom"
+                href="https://www.basement.io/"
+                target="_blank"
+              >
+                {{ i18n "getToKnowBasementIo" }}
+              </a>
+              <a
+                hidden
+                download
+                class="button button--with-arrow-down button--destak button--margin-bottom"
+                href="https://www.basement.io/"
+                target="_blank"
+              >
+                {{ i18n "codeOfConduct" }}
+              </a>
+              <a
+                hidden
+                download
+                class="button button--destak"
+                href="https://www.basement.io/"
+                target="_blank"
+              >
+                {{ i18n "governanceGuide" }}
+              </a>
+            </div>
+            <section>
+              {{ partial "contact-form.html" (dict "class" "contact-form--to-the-left" "title" .Title) }}
+            </section>
+          </div>
+      </div>
+
+      {{ partial "footer.html" . }}
+
+      {{ partial "scripts.html" . }}
+    </body>
+</html>

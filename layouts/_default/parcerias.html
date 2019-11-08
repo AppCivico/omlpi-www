@@ -1,0 +1,58 @@
+    {{ partial "head.html" . }}
+
+    <body>
+      {{ partial "header.html" . }}
+
+      <div class="container">
+
+        {{ $content_parts := split .Content "<!-- more -->" }}
+
+        <article>
+          <div class="row row--halfs row--center">
+            <div class="half">
+              <h1>{{ .Title }}</h1>
+              {{ .Content }}
+            </div>
+            <div class="half">
+              <img src="/assets/images/partners.svg" alt="{{ .Title }}" class="half__svg">
+            </div>
+          </div>
+
+        </article>
+
+        {{ with (where $.Site.Pages "Type" "parcerias") }}
+          <div class="cases">
+            {{ range $i, $case := (where $.Site.Pages "Type" "parcerias") }}
+              <article class="cases__item {{ if not (modBool $i 2)}} cases__item--reverse {{end}}">
+                <div class="cases__image">
+                  <img src="{{ .Params.image }}" alt="{{ .Title }}">
+                </div>
+                <div class="cases__text">
+                  <h1>{{ .Title }}</h1>
+                  {{ .Content }}
+                  {{ with .Params.link }}
+                    <a href="{{ . }}" class="button button--destak" target="_blank">
+                      {{ i18n "link" }}
+                    </a>
+                  {{ end }}
+                </div>
+              </article>
+            {{ end }}
+          </div>
+        {{ end }}
+
+          <div class="row row--halfs">
+            <div class="half">
+              {{ partial "contact-form.html" (dict "title" .Title) }}
+            </div>
+          </div>
+      </div>
+
+
+
+
+      {{ partial "footer.html" . }}
+
+      {{ partial "scripts.html" . }}
+    </body>
+</html>

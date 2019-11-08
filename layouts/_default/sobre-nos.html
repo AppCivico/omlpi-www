@@ -1,0 +1,71 @@
+    {{ partial "head.html" . }}
+
+    <body class="body-style-1">
+      {{ partial "header.html" . }}
+
+      {{ $content_parts := split .Content "<!-- more -->" }}
+
+      <div class="container">
+        <article class="row">
+          <div class="one-third">
+            <h1>{{ .Title }}</h1>
+              {{ index $content_parts 0 | markdownify }}
+          </div>
+          <div class="two-thirds">
+            <img src="/assets/images/about-us.svg" alt="{{ .Title }}">
+          </div>
+        </article>
+
+        <article class="row">
+          <div class="two-thirds">
+            <div class="foundation-boxes">
+              <div class="foundation-boxes__box">
+                <span class="foundation-boxes__number">
+                  35+
+                </span>
+                <span class="foundation-boxes__text">
+                  {{ i18n "projects" }}
+                </span>
+              </div>
+              <div class="foundation-boxes__box">
+                <span class="foundation-boxes__number">
+                  50+
+                </span>
+                <span class="foundation-boxes__text">
+                  {{ i18n "impactOrganizations" }}
+                </span>
+              </div>
+              <div class="foundation-boxes__box">
+                <span class="foundation-boxes__number">
+                  400+
+                </span>
+                <span class="foundation-boxes__text">
+                  {{ i18n "politicalLeaders" }}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="one-third">
+            {{ index $content_parts 1 | markdownify }}
+          </div>
+        </article>
+
+        <article class="row row--width-limit">
+          {{ index $content_parts 2 | markdownify }}
+          <a
+            class="button button--destak button--margin-top"
+            href="/organizacoes#cases"
+          >
+            {{ i18n "seeOurCases" }}
+          </a>
+        </article>
+      </div>
+
+
+
+
+      {{ partial "footer.html" . }}
+
+      {{ partial "scripts.html" . }}
+    </body>
+</html>

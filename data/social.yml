@@ -1,0 +1,16 @@
+list:
+  - name: facebook
+    icon: "assets/facebook.svg"
+    url: 'https://www.facebook.com/AppCivicoCSB/'
+  - name: twitter
+    icon: "assets/twitter.svg"
+    url: 'https://twitter.com/appcivico'
+  - name: instagram
+    icon: "assets/instagram.svg"
+    url: 'https://www.instagram.com/appcivico/'
+  - name: whatsapp
+    icon: "assets/whatsapp.svg"
+    url: 'https://api.whatsapp.com/send?phone=5511932843282&text=Ol%C3%A1,%20quero%20saber%20mais%20sobre%20o%20AppC%C3%ADvico!'
+  - name: github
+    icon: "assets/github.svg"
+    url: 'https://github.com/AppCivico'

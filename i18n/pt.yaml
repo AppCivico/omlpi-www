@@ -1,0 +1,139 @@
+# - id: actionLine
+#   translation:
+#     one: "Linha de ação"
+#     other: "Linhas de ação"
+
+
+# Generic
+- id: month
+  translation: "mês"
+- id: projects
+  translation: "Projetos"
+- id: impactOrganizations
+  translation: "Organizações de impacto"
+- id: politicalLeaders
+  translation: "Líderes políticos"
+- id: services
+  translation: "Serviços"
+- id: link
+  translation: "Link"
+- id: apply
+  translation: "Aplicar"
+- id: findOutMore
+  translation: "Saiba mais"
+- id: robots
+  translation: "Robôs"
+
+# Home
+- id: flagText
+  translation: "Fortaleça sua influência digital"
+- id: flagDescription
+  translation: "Software feito para impulsionar líderes e organizações!"
+- id: organizeContacts
+  translation: "Transformamos nossos clientes em especialistas para fazer política digital "
+- id: organizeContactsDescription
+  translation: "Desenvolvemos uma plataforma para ajudar a entender a influência digital de sua rede, sem ser conhecedor de tecnologia."
+- id: startYourNetworkStrategy
+  translation: "Qualifique sua audiência com pontuação a cada interação"
+- id: startYourNetworkStrategyDescription
+  translation: "Com nosso sistema de pontos você consegue qualificar todos seus contatos. Saiba quem é mais engajado com as suas causas e como cada plataforma ajuda na sua influência digital."
+- id: potentializeYourInfluence
+  translation: "Com nossos robôs, integre e automatize"
+- id: potentializeYourInfluenceDescription
+  translation: "Com AppCívico você conhece seu público com ferramentas de monitoramento e avaliação, melhorando o nível de engajamento da sua rede."
+- id: knowAboutPerformance
+  translation: "Uma maneira simples para compreender cada contato nas suas mais diversas plataformas"
+- id: knowAboutPerformanceDescription
+  translation: "Organize contatos, plataformas e atividades, criando robôs que integram e deixam automáticas tarefas repetitivas. Ganhe mais tempo para seu time!"
+- id: bestOfDigitalTecnology
+  translation: "Mapeamos as melhores tecnologias para lideranças"
+- id: bestOfDigitalTecnologyDescription
+  translation: "Integramos ferramentas e serviços que promovem qualidade no relacionamento entre pessoas e representantes."
+- id: wantToKnowMore
+  translation: "Nossa missão é conectar brasileiros à política digital"
+- id: wantToKnowMoreDescription
+  translation: "Interessado em saber mais? Escreva pra gente."
+- id: testimonialsTitle
+  translation: "Eles desenvolveram o potencial on-line, encontrando maneiras de engajar mais usuários no ambiente digital"
+- id: writeToUs
+  translation: "Escreva pra gente!"
+- id: talkNow
+  translation: "Fale agora"
+- id: cardsTitle
+  translation: "Nossa plataforma permite que você organize sua base de contatos de maneira estruturada para desenvolver ações com as melhores ferramentas e técnicas disponíveis no mercado"
+- id: plansTitle
+  translation: "Um plano para cada perfil"
+- id: warranty
+  translation: "Garantia de 15 dias"
+- id: payWith
+  translation: "Pagável com:"
+- id: tryNow
+  translation: "Experimente agora"
+- id: bestSeller
+  translation: "mais vendido"
+- id: creditCard
+  translation: "Cartão de crédito"
+- id: paymentSlip
+  translation: "Boleto bancário"
+- id: safePayment
+  translation: "Pagamento seguro"
+
+#about us
+- id: seeOurCases
+  translation: "Conheça nossos cases"
+
+#investor relations
+- id: getToKnowBasementIo
+  translation: "Conheça o Basement.io"
+- id: codeOfConduct
+  translation: "Código de conduta"
+- id: governanceGuide
+  translation: "Guida de Governança"
+
+#cases
+- id: cases
+  translation: "Cases de sucesso"
+
+#forms
+- id: name
+  translation: "Nome Completo"
+- id: email
+  translation: "Email"
+- id: phone
+  translation: "Telefone"
+- id: message
+  translation: "Mensagem"
+- id: send
+  translation: "Enviar"
+- id: signUp
+  translation: "Assine"
+- id: contactForm
+  translation: "Formulário de contato"
+
+#reseller
+- id: startEarningNow
+  translation: "Comece a ganhar já!"
+- id: becomeAnAffiliate
+  translation: "Torne-se um afiliado."
+- id: signUpNow
+  translation: "Cadastre-se agora mesmo!"
+
+#jobs
+- id: jobs
+  translation: "Vagas"
+- id: noJobs
+  translation: "Não temos nenhuma vaga em aberto no momento."
+
+#footer
+- id: stayUpToDate
+  translation: "Fique por dentro!"
+- id: stayUpToDateDescription
+  translation: "Nossa newsletter tem novidades sobre tecnologia digital para formação e engajamento de redes."
+- id: signUp
+  translation: "Assinar"
+- id: followUs
+  translation: "Acompanhe nossas redes sociais"
+- id: getInTouch
+  translation: "Entre em contato"
+- id: communities
+  translation: "Comunidades"

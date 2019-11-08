@@ -1,0 +1,75 @@
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    flex-direction: row;
+  }
+}
+
+header .logo {
+  display: block;
+  width: 12rem;
+  height: 4.2rem;
+  margin: 0 auto;
+  background-image: image('logo.svg');
+  background-size: contain;
+
+  @media screen and (min-width: breakpoint('phablet')) {
+    width: 14rem;
+  }
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    width: 20rem;
+    margin: 0;
+  }
+}
+
+header .main-nav {
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    margin-left: auto;
+  }
+}
+
+.menu {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0;
+  font-weight: font-weight('bold');
+  font-size: ms(0);
+  list-style: none;
+
+  @media screen and (min-width: breakpoint('phablet')) {
+    font-size: ms(1);
+  }
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    width: auto;
+  }
+}
+
+.menu li {
+  @media screen and (min-width: breakpoint('tablet')) {
+    margin-left: 2rem;
+  }
+}
+
+.menu li a {
+  color: palette('black');
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    font-size: ms(0);
+  }
+}
+
+.menu li:last-child a {
+  padding: 0.6em 2em;
+  color: palette('white');
+  background-color: palette('blue');
+  border-radius: 20px;
+}
