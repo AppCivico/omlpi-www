@@ -23,7 +23,7 @@ $title-font-stack: $basic-title-font-stack !default;
 ///
 /// @example scss
 /// $text-font-stack: ComicSans, $native-font-stack;
-$text-font-stack: $native-font-stack !default;
+$text-font-stack: $lato-font-stack !default;
 
 
 /// Code (monospace) font stack
@@ -99,6 +99,9 @@ $modularscale: (
 /// @require {function} palette
 /// @todo Customize the colors or add new ones to match your design needs.
 $palette: (
+  'dark-blue-grey': (
+    'base': rgb(50, 33, 92),
+  ),
   'red': (
     'light': rgb(252, 124, 108),
     'base': rgb(237, 84, 84),

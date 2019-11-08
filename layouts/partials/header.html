@@ -1,7 +1,11 @@
-<div class="container">
-  <header class="main-header {{ if not .IsHome }}  intern-header {{ end }}">
-    <a href="{{ .Site.BaseURL }}" class="logo"></a>
+<header class="main-header">
+  <div class="container">
     <nav class="main-nav">
+      <button class="menu__toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <ul class="menu">
         {{ $firstUrlElement := print "/" (index (split .URL "/") 1)  }}
 
@@ -27,5 +31,6 @@
         {{ end }}
       </ul>
     </nav>
-  </header>
-</div>
+    <a href="{{ .Site.BaseURL }}" class="logo"></a>
+  </div>
+</header>

@@ -1,0 +1,32 @@
+.search-area {
+  padding: 3rem 0;
+  background-image: linear-gradient(to bottom, #000002, #040536 31%, #1b0f75 59%, #ce64f5);
+}
+
+.search-area form {
+  position: relative;
+}
+
+.search-area label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: font-weight('bold');
+  font-size: ms(2);
+  color: palette('white');
+}
+
+.search-area input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: ms(-1);
+}
+
+.search-area button {
+  position: absolute;
+  right: 0;
+  width: 1.875rem;
+  height: 1.875rem;
+  text-indent: -999em;
+  background-color: transparent;
+  border: 0;
+}
