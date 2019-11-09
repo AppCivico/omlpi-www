@@ -40,11 +40,11 @@ legend,
 caption,
 details > summary {
   font-weight: font-weight('heading');
-  font-family: $ibm-font-stack;
   font-feature-settings: 'case' 1, 'cpsp' 1, 'cswh' 1, 'liga' 1, 'locl' 1, 'lnum' 1, 'pnum' 1, 'titl' 1, 'zero' 1;
 
   break-after: avoid;
   page-break-after: avoid;
+  color: palette('dark-blue-grey');
 }
 
 h1 a,
@@ -68,23 +68,36 @@ dt a {
 }
 
 h1 {
-  font-size: ms(6);
+  font-size: ms(4);
   line-height: 1;
-  color: palette('blue');
 
   @media screen and (min-width: breakpoint('tablet')) {
     font-size: ms(8);
   }
 }
 
+h2 {
+  font-weight: font-weight('text');
+  font-size: ms(2);
+  line-height: 1;
+  color: palette('gray');
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    font-size: ms(4);
+  }
+}
+
 p {
   padding: 0;
-  /*  -moz-font-feature-settings: 'onum' 1, 'pnum' 1, 'zero' 1;
-  -ms-font-feature-settings: 'onum' 1, 'pnum' 1, 'zero' 1;
-  -webkit-font-feature-settings: 'onum' 1, 'pnum' 1, 'zero' 1;
-  font-feature-settings: 'onum' 1, 'pnum' 1, 'zero' 1;*/
   margin-top: 0;
   margin-bottom: $leading * 1em;
+  font-size: ms(-1);
+}
+
+a,
+a:link {
+  text-decoration: underline;
+  color: palette('perrywinkle');
 }
 
 /**

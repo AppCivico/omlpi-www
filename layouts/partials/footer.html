@@ -1,30 +1,29 @@
 <footer class="site-footer">
   <div class="container">
-    <section class="newsletter">
-      <div class="newsletter__text">
-        <h2>{{ i18n "stayUpToDate" }}</h2>
-        <p>{{ i18n "stayUpToDateDescription" }}</p>
-      </div>
-      <form
-        action="https://appcivico.us19.list-manage.com/subscribe/post?u=0d4bd8cb58a460811f95cc194&id=274cf7e623"
-        method="POST"
-        class="newsletter__form"
-      >
-        <label for="name">
-          {{ i18n "name" }}
-          <input type="text" name="MERGE1" required>
-        </label>
-        <label for="email">
-          {{ i18n "email" }}
-          <input type="email" name="MERGE0" required>
-        </label>
-        <button class="button">{{ i18n "signUp" }}</button>
-      </form>
-
-    </section>
-
     <section class="site-footer__colophon">
-      <a href="{{ .Site.BaseURL }}" class="logo"></a>
+      <nav class="site-footer__nav">
+        <ul>
+          {{ with .Site.Menus.about }}
+            {{ range . }}
+
+            <!--
+              this is a workaround for seting target on hugo menu links
+              there is no official way to do it by now.
+              @see https://github.com/jpescador/hugo-future-imperfect/issues/100
+            -->
+
+            {{ $url := urls.Parse .URL }}
+            {{ $baseurl := urls.Parse $.Site.Params.Baseurl }}
+
+            <li>
+              <a href="{{ .URL }}" {{ if ne $url.Host $baseurl.Host }} target="_blank" {{ end }}>
+                {{ .Name }}
+              </a>
+            </li>
+            {{ end }}
+          {{ end }}
+        </ul>
+      </nav>
       <nav class="site-footer__nav">
         <ul>
           {{ with .Site.Menus.footer }}
@@ -46,10 +45,22 @@
             </li>
             {{ end }}
           {{ end }}
+
+          <li class="site-footer__social">
+            {{ with $.Site.Data.social }}
+            <ul>
+              {{ range .list }}
+              <li>
+                <a href="{{ .url }}" class="{{ .name }}" target="_blank">{{ .name }}</a>
+              </li>
+              {{ end }}
+            </ul>
+            {{ end }}
+          </li>
         </ul>
       </nav>
+      <a href="{{ .Site.BaseURL }}" class="logo"></a>
       <address>
-        <span>{{ i18n "getInTouch" }}</span>
         {{ with $.Site.Data.contact }}
           {{ range . }}
             {{ with .phone }}
@@ -70,18 +81,6 @@
           {{ end }}
         {{ end }}
       </address>
-      <div class="site-footer__social">
-        {{ with $.Site.Data.social }}
-          <h4>{{ i18n "communities" }}</h4>
-          <ul>
-            {{ range .list }}
-              <li>
-                <a href="{{ .url }}" class="{{ .name }}" target="_blank">{{ .name }}</a>
-              </li>
-            {{ end }}
-          </ul>
-        {{ end }}
-      </div>
     </section>
   </div>
 </footer>

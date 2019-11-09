@@ -1,15 +1,16 @@
 .site-footer {
-  font-size: ms(-1);
+  font-size: ms(-2);
   color: palette('white');
-  background-color: palette('blue', 'dark');
+  background-color: palette('dark-blue-grey');
 }
 
 .site-footer__colophon {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-between;
   padding-top: 3rem;
   padding-bottom: 3rem;
-  border-top: 1px solid palette('white');
 
   @media screen and (min-width: breakpoint('desktop')) {
     flex-wrap: nowrap;
@@ -18,9 +19,9 @@
 }
 
 .site-footer__colophon .logo {
-  display: block;
   width: 18rem;
   height: 2.15rem;
+  margin-top: 2rem;
   background-image: image('logo-footer.svg');
   background-size: contain;
 }
@@ -34,8 +35,6 @@
 }
 
 .site-footer__nav ul {
-  display: flex;
-  flex-wrap: wrap;
   padding-left: 0;
   margin: 0;
 
@@ -48,7 +47,7 @@
   }
 }
 
-.site-footer__nav ul li {
+.site-footer__nav > ul > li {
   width: 100%;
   margin-bottom: 1.5rem;
   list-style: none;
@@ -60,38 +59,14 @@
 }
 
 .site-footer__nav ul a {
-  font-weight: font-weight('bold');
+  text-decoration: none;
   color: palette('white');
 }
 
 
 .site-footer address {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  min-width: max-content;
   margin-top: 1rem;
   font-style: normal;
-
-  @media screen and (min-width: breakpoint('desktop')) {
-    padding-right: 3rem;
-    margin-top: 0;
-  }
-}
-
-.site-footer address span {
-  width: 100%;
-  margin-bottom: 1rem;
-  font-weight: font-weight('bold');
-
-  @media screen and (min-width: breakpoint('tablet')) {
-    margin-bottom: 2rem;
-  }
-}
-
-.site-footer address a {
-  width: 100%;
-  color: palette('white');
 }
 
 .site-footer address p {
@@ -100,20 +75,10 @@
 
 .site-footer__social {
   width: 100%;
-  margin-top: 3rem;
 
   @media screen and (min-width: breakpoint('desktop')) {
     width: auto;
     margin-top: 0;
-  }
-}
-
-.site-footer__social h4 {
-  margin-top: 0;
-  margin-bottom: 1rem;
-
-  @media screen and (min-width: breakpoint('tablet')) {
-    margin-bottom: 2rem;
   }
 }
 
@@ -134,8 +99,8 @@
 
 .site-footer__social li a {
   display: block;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 1.4rem;
+  height: 1.4rem;
   overflow: hidden;
   text-indent: 999em;
   background-size: contain;
@@ -143,19 +108,19 @@
 }
 
 .site-footer__social .facebook {
-  background: image('facebook.svg');
+  background-image: image('facebook.svg');
 }
 
 .site-footer__social .twitter {
-  background: image('twitter.svg');
+  background-image: image('twitter.svg');
 }
 
 .site-footer__social .instagram {
-  background: image('instagram.svg');
+  background-image: image('instagram.svg');
 }
 
 .site-footer__social .whatsapp {
-  background: image('whatsapp.svg');
+  background-image: image('whatsapp.svg');
 }
 
 .site-footer__social .github {

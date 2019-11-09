@@ -102,6 +102,9 @@ $palette: (
   'dark-blue-grey': (
     'base': rgb(50, 33, 92),
   ),
+  'perrywinkle': (
+    'base': rgb(159, 147, 221),
+  ),
   'red': (
     'light': rgb(252, 124, 108),
     'base': rgb(237, 84, 84),
@@ -133,7 +136,7 @@ $palette: (
   'gray': (
     'x-light': rgb(248, 248, 248),
     'light': rgb(242, 242, 242),
-    'base': rgb(230, 230, 230),
+    'base': rgb(110, 110, 110),
     'dark': rgb(64, 68, 71),
     'x-dark': shade(rgb(64, 68, 71), 10%),
   ),
