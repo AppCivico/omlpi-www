@@ -228,7 +228,7 @@ $stroke: 1px !default;
 /// gutter default width
 /// @todo Customize it to match your design.
 /// @type number
-$gutter: $leading * $body-font-size / 1em * 1rem;
+$gutter: 4.938rem;
 
 @function _im-to-em($breakpoints, $base-value: 16px) {
   $new-breakpoints: ();

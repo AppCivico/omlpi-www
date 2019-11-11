@@ -18,19 +18,24 @@
       <section>
         <div class="container">
           <h1>Panorama Geral do Brasil</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie. Mauris malesuada nisi sit amet augue accumsan tincidunt. Maecenas tincidunt, velit ac porttitor pulvinar, tortor eros facilisis libero, vitae commodo nunc quam et ligula. Ut nec ipsum sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer id nisi nec nulla luctus lacinia non eu turpis. Etiam in ex imperdiet justo tincidunt egestas. Ut porttitor urna ac augue cursus tincidunt sit amet sed orci.
-          </p>
-          <div id="chart-brasil" class="chart"></div>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie. Mauris malesuada nisi sit amet augue accumsan tincidunt. Maecenas tincidunt, velit ac porttitor pulvinar, tortor eros facilisis libero, vitae commodo nunc quam et ligula. Ut nec ipsum sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer id nisi nec nulla luctus lacinia non eu turpis. Etiam in ex imperdiet justo tincidunt egestas. Ut porttitor urna ac augue cursus tincidunt sit amet sed orci.
-          </p>
-          <h2>Estatísticas de Planos Muncipais para Primeira Infância</h2>
-          <div id="chart-pie" class="chart"></div>
-
-          <p>
-            <a href="/estudo">Saiba mais sobre como foi feito o estudo do Observa.</a>
-          </p>
+          <div class="chart-text">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie. Mauris malesuada nisi sit amet augue accumsan tincidunt. Maecenas tincidunt, velit ac porttitor pulvinar, tortor eros facilisis libero, vitae commodo nunc quam et ligula. Ut nec ipsum sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer id nisi nec nulla luctus lacinia non eu turpis. Etiam in ex imperdiet justo tincidunt egestas. Ut porttitor urna ac augue cursus tincidunt sit amet sed orci.
+            </p>
+            <div id="chart-brasil" class="chart"></div>
+          </div>
+          <div class="chart-text">
+            <div class="chart-text__text">
+              <h2>Estatísticas de Planos Muncipais para Primeira Infância</h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie. Mauris malesuada nisi sit amet augue accumsan tincidunt. Maecenas tincidunt, velit ac porttitor pulvinar, tortor eros facilisis libero, vitae commodo nunc quam et ligula. Ut nec ipsum sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer id nisi nec nulla luctus lacinia non eu turpis. Etiam in ex imperdiet justo tincidunt egestas. Ut porttitor urna ac augue cursus tincidunt sit amet sed orci.
+              </p>
+            </div>
+            <div id="chart-pie" class="chart"></div>
+            <p>
+              <a href="/estudo">Saiba mais sobre como foi feito o estudo do Observa.</a>
+            </p>
+          </div>
         </div>
       </section>
 
@@ -94,12 +99,8 @@
           chart: {
             type: 'column'
           },
-          title: {
-            text: 'Monthly Average Rainfall'
-          },
-          subtitle: {
-            text: 'Source: WorldClimate.com'
-          },
+          title: null,
+          subtitle: null,
           xAxis: {
             categories: [
               'Jan',

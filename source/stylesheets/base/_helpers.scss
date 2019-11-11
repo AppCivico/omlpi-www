@@ -145,7 +145,7 @@ textarea {
   }
 
   &:root::before {
-    padding: $gutter;
+    padding: 2rem;
 
     background-color: palette('debug');
 

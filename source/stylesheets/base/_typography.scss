@@ -92,6 +92,10 @@ p {
   margin-top: 0;
   margin-bottom: $leading * 1em;
   font-size: ms(-1);
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    font-size: ms(0);
+  }
 }
 
 a,

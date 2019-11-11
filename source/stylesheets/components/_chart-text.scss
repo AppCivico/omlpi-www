@@ -1,0 +1,24 @@
+.chart-text {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.chart-text > * {
+  @media screen and (min-width: breakpoint('desktop')) {
+    width: 50%;
+    padding: 0 1rem;
+
+    &:first-child {
+      margin-left: -1rem;
+    }
+
+    &:last-child {
+      margin-right: -1rem;
+    }
+  }
+}
