@@ -23,7 +23,8 @@ menu:
     weight: 1
   - identifier: "Eixo 1"
     name: "Eixo 1"
-    url: "/eixo-1"
+    # url: "/eixo-1"
+    url: "/city"
     weight: 2
   - identifier: "Eixo 2"
     name: "Eixo 2"

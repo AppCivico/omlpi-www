@@ -1,0 +1,74 @@
+    {{ partial "head.html" . }}
+
+    <body>
+      {{ partial "header.html" . }}
+
+      <header
+        class='map-area'
+        >
+        <div class="container">
+          <h1>{{ .Title }}</h1>
+        </div>
+      </header>
+
+      <section>
+        <div class="container">
+          <div class="buttons-group">
+            <button class="button-icon button-icon--health">Saúde</button>
+            <button class="button-icon button-icon--education">Educação</button>
+            <button class="button-icon button-icon--social-care">Assistência Social</button>
+            <div class="buttons-grou__normie-links">
+              <a href="/historico">Ver histórico</a>
+              <a href="/dados" download>Fazer download dos dados</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <details>
+            <summary>Número de matrículasde educação infantil: 7.500 MIL</summary>
+            <div>
+              <p>Homer J Simpson</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>Número de matrículasde educação infantil: 7.500 MIL</summary>
+            <div>
+              <p>Homer J Simpson</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>Número de matrículasde educação infantil: 7.500 MIL</summary>
+            <div>
+              <p>Homer J Simpson</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="download">
+        <div class="container">
+          <h2>Download</h2>
+
+          <p>Faça download dos dados completo que  o Observa coletou e analisou.</p>
+          <a href="" download class="button">Documento Completo</a>
+
+          <p>Faça download dos dados sobre Educação resumido de Campo Grande que o Observa coletou e analisou. </p>
+          <a href="" download class="button">Documento Completo</a>
+        </div>
+      </section>
+
+      {{ partial "footer.html" . }}
+
+      {{ partial "scripts.html" . }}
+
+      <script>
+
+      </script>
+
+    </body>
+</html>

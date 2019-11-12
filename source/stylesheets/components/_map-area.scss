@@ -1,0 +1,27 @@
+.map-area {
+  padding: 9rem 0;
+  margin-bottom: 2rem;
+  background-image: linear-gradient(
+    to bottom, rgba(0, 0, 2, 0.7),
+    rgba(4, 5, 54, 0.7) 31%,
+    rgba(27, 15, 117, 0.7) 59%,
+    rgba(206, 100, 245, 0.7),
+  );
+  background-size: cover;
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    min-height: 30rem;
+  }
+}
+
+.map-area h1 {
+  font-weight: font-weight('text');
+  text-align: center;
+  color: palette('white');
+}
+
+.search-area .container {
+  max-width: 40.625rem;
+  margin-right: auto;
+  margin-left: auto;
+}

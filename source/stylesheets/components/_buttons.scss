@@ -1,59 +1,44 @@
-.button {
-  padding: 1em 2em;
-  font-weight: font-weight('bold');
-  cursor: pointer;
-  color: palette('blue');
-  background: palette('white');
-  border: 0;
-  border-radius: 40px;
-}
-
-.button--destak {
+.button-icon {
+  display: inline-flex;
+  padding: 0.8rem 1.2rem;
+  text-transform: uppercase;
   color: palette('white');
-  background: palette('blue');
-}
+  background-color: palette('gray', 'light');
+  border: 0;
+  border-radius: 5px;
 
-%button-with-arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: max-content;
-
-  &::after {
-    margin-left: 0.3em;
-    font-size: ms(-2);
-    line-height: 0;
-    content: ' \27F6';
+  &::before {
+    margin-right: 0.5rem;
+    background-size: contain;
+    content: '';
   }
 }
 
-.button--with-arrow {
-  @extend %button-with-arrow;
-}
-
-
-.button--with-arrow-down {
-  @extend %button-with-arrow;
-
-  &::after {
-    transform: rotate(90deg);
+.button-icon--health {
+  &::before {
+    width: 1.25rem;
+    height: 1.25rem;
+    background-image: image('health.svg');
   }
 }
 
-.button--large {
-  align-self: center;
-  width: 100%;
-  max-width: 35.625rem;
+.button-icon--education {
+  &::before {
+    width: 1.125rem;
+    height: 1.312rem;
+    background-image: image('graduation-hat.svg');
+  }
 }
 
-.button--small {
-  padding: 0.3em 1.6em;
+.button-icon--social-care {
+  &::before {
+    width: 1.4rem;
+    height: 1rem;
+    background-image: image('users.svg');
+  }
 }
 
-.button--margin-top {
-  margin-top: 1rem;
+.button-icon--active {
+  background-color: palette('blue', 'greeny');
 }
 
-.button--margin-bottom {
-  margin-bottom: 1rem;
-}
