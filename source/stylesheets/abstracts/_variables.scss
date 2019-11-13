@@ -44,6 +44,7 @@ $code-font-stack: $basic-code-font-stack !default;
 /// @todo Customize the weights or add new ones to match your design needs.
 /// @type Map
 $font-weights: (
+  'light': 300,
   'text': 400,
   'bold': 600,
   'heading': 600,
