@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <testsuites>
-<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/appcivico-www/source/scripts/config.js">
-<testcase time="0" name="/home/eduruiz/code/appcivico-www/source/scripts/config.js" />
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/config.js">
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/config.js" />
 </testsuite>
-<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/appcivico-www/source/scripts/contactForm/index.js">
-<testcase time="0" name="/home/eduruiz/code/appcivico-www/source/scripts/contactForm/index.js" />
-</testsuite>
-<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/appcivico-www/source/scripts/index.js">
-<testcase time="0" name="/home/eduruiz/code/appcivico-www/source/scripts/index.js" />
-</testsuite>
-<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/appcivico-www/source/scripts/newsletterForm/index.js">
-<testcase time="0" name="/home/eduruiz/code/appcivico-www/source/scripts/newsletterForm/index.js" />
-</testsuite>
-<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/appcivico-www/source/scripts/vendor.js">
-<testcase time="0" name="/home/eduruiz/code/appcivico-www/source/scripts/vendor.js" />
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/index.js">
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/index.js" />
 </testsuite>
 </testsuites>
