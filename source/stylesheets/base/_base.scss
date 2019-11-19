@@ -164,10 +164,12 @@ section {
  * Add the correct display in all browsers.
  */
 summary {
+  position: relative;
   display: list-item;
-
+  padding-right: 1rem;
+  margin-bottom: 1rem;
+  font-weight: font-weight('text');
   list-style-type: none;
-
   cursor: pointer;
 
   &::-webkit-details-marker {
@@ -178,14 +180,33 @@ summary {
     outline: -webkit-focus-ring-color auto 5px;
   }
 
-  &::before {
-    padding-right: 0.5em;
+  &::after {
+    position: absolute;
+    top: 0.75rem;
+    right: 0;
+    border-right: solid transparent;
+    border-left: solid transparent;
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-left-width: 5px;
+    border-top-style: solid;
+    border-top-color: palette('blue', 'greeny');
+    content: '';
+    transition: transform 0.3s;
 
-    content: '\25B6';
+    @media screen and (min-width: breakpoint('phablet')) {
+      border-top-width: 8px;
+      border-right-width: 8px;
+      border-left-width: 8px;
+    }
   }
 
-  details[open] > &::before {
-    content: '\25BC';
+  @media screen and (min-width: breakpoint('desktop')) {
+    font-size: ms(1);
+  }
+
+  details[open] > &::after {
+    transform: rotate(90deg);
   }
 }
 

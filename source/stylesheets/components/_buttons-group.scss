@@ -1,8 +1,43 @@
 .buttons-group {
-  display: inline-block;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-bottom: 2rem;
+
+
+  @media screen and (min-width: breakpoint('phablet')) {
+    justify-content: flex-start;
+  }
 }
 
 .buttons-group .button-icon {
   margin-bottom: 1rem;
+
+  @media screen and (min-width: breakpoint('phablet')) {
+    margin-left: 2rem;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.buttons-group__normie-links {
+  width: 100%;
+  text-align: left;
+}
+
+.buttons-group__normie-links a {
+  margin-left: 1rem;
+  font-size: ms(-2);
+  text-decoration: underline;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  @media screen and (min-width: breakpoint('phablet')) {
+    font-size: ms(-1);
+  }
 }
 

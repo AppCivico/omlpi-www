@@ -37,8 +37,7 @@ h4,
 h5,
 h6,
 legend,
-caption,
-details > summary {
+caption {
   font-weight: font-weight('heading');
   font-feature-settings: 'case' 1, 'cpsp' 1, 'cswh' 1, 'liga' 1, 'locl' 1, 'lnum' 1, 'pnum' 1, 'titl' 1, 'zero' 1;
 
@@ -98,8 +97,7 @@ p {
   }
 }
 
-a,
-a:link {
+a {
   text-decoration: underline;
   color: palette('perrywinkle');
 }

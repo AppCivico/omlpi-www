@@ -12,10 +12,10 @@
       <section>
         <div class="container">
           <div class="buttons-group">
-            <button class="button-icon button-icon--health">Saúde</button>
-            <button class="button-icon button-icon--education">Educação</button>
-            <button class="button-icon button-icon--social-care">Assistência Social</button>
-            <div class="buttons-grou__normie-links">
+            <button class="button-icon button--icon button--health">Saúde</button>
+            <button class="button-icon button--icon button--education">Educação</button>
+            <button class="button-icon button--icon button--social-care">Assistência Social</button>
+            <div class="buttons-group__normie-links">
               <a href="/historico">Ver histórico</a>
               <a href="/dados" download>Fazer download dos dados</a>
             </div>
@@ -26,21 +26,21 @@
       <section>
         <div class="container">
           <details>
-            <summary>Número de matrículasde educação infantil: 7.500 MIL</summary>
+            <summary>Número de matrículasde educação infantil: <strong>7.500 MIL</strong></summary>
             <div>
               <p>Homer J Simpson</p>
             </div>
           </details>
 
           <details>
-            <summary>Número de matrículasde educação infantil: 7.500 MIL</summary>
+            <summary>Número de matrículasde educação infantil: <strong>7.500 MIL</strong></summary>
             <div>
               <p>Homer J Simpson</p>
             </div>
           </details>
 
           <details>
-            <summary>Número de matrículasde educação infantil: 7.500 MIL</summary>
+            <summary>Número de matrículasde educação infantil: <strong>7.500 MIL</strong></summary>
             <div>
               <p>Homer J Simpson</p>
             </div>
@@ -48,17 +48,21 @@
         </div>
       </section>
 
-      <section class="download">
-        <div class="container">
+      <div class="container">
+        <section class="download">
           <h2>Download</h2>
 
-          <p>Faça download dos dados completo que  o Observa coletou e analisou.</p>
-          <a href="" download class="button">Documento Completo</a>
+          <div class="download__block">
+            <p>Faça download dos dados completo que  o Observa coletou e analisou.</p>
+            <a href="" download class="button">Documento Completo</a>
+          </div>
 
-          <p>Faça download dos dados sobre Educação resumido de Campo Grande que o Observa coletou e analisou. </p>
-          <a href="" download class="button">Documento Completo</a>
-        </div>
-      </section>
+          <div class="download__block">
+            <p>Faça download dos dados sobre Educação resumido de Campo Grande que o Observa coletou e analisou. </p>
+            <a href="" download class="button">Documento Completo</a>
+          </div>
+        </section>
+      </div>
 
       {{ partial "footer.html" . }}
 
