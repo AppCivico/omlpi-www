@@ -1,0 +1,17 @@
+.infobox {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border: 1px solid palette('gray', 'light');
+}
+
+.infobox__title {
+  font-weight: font-weight('bold');
+  font-size: ms(10);
+}
+
+.infobox h3 {
+  font-weight: font-weight('text');
+  text-transform: uppercase;
+  color: palette('gray', 'light');
+}
