@@ -1,4 +1,8 @@
 .big-number {
+  @media screen and (min-width: breakpoint('phablet')) {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
 .big-number .big-number__title {
@@ -8,11 +12,30 @@
   text-align: center;
 }
 
-.big-number .title {
+.title {
   padding-bottom: 0.5rem;
   text-align: left;
   text-transform: uppercase;
   background-image: linear-gradient(to right, palette('blue', 'greeny') 73px, palette('gray', 'light') 50px);
   background-position: bottom;
   background-size: 100% 2px;
+
+  @media screen and (min-width: breakpoint('phablet')) {
+    width: 100%;
+  }
+}
+
+.big-number__text {
+  @media screen and (min-width: breakpoint('desktop')) {
+    max-width: 41%;
+  }
+}
+
+.big-number .infobox {
+  @media screen and (min-width: breakpoint('desktop')) {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: auto;
+  }
 }
