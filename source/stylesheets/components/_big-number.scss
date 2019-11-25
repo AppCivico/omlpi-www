@@ -1,4 +1,6 @@
 .big-number {
+  margin-bottom: 3rem;
+
   @media screen and (min-width: breakpoint('phablet')) {
     display: flex;
     flex-wrap: wrap;

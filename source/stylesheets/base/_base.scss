@@ -214,6 +214,22 @@ details {
   margin-bottom: 1rem;
 }
 
+details summary ~ * {
+  animation: sweep 0.5s ease-in-out;
+}
+
+@keyframes sweep {
+  0% {
+    margin-left: -10px;
+    opacity: 0;
+  }
+
+  100% {
+    margin-left: 0;
+    opacity: 1;
+  }
+}
+
 
 /**
  * Address `[hidden]` styling not present in IE 8/9.
