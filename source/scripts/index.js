@@ -1,5 +1,5 @@
-// import initContactForm from './contactForm';
+import startSearch from './search';
 // import initNewsletterForm from './newsletterForm';
 
-// initContactForm();
+startSearch();
 // initNewsletterForm();
