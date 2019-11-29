@@ -16,26 +16,58 @@ export default function startSearch() {
   }
 
   async function mountList() {
+
     const list = await getList();
+
+    regionInput.removeAttribute('disabled');
+    regionInput.removeAttribute('aria-busy');
+
     const regionNames = list.map(region => ({
-      label: region.name,
+      label: `${region.name}:${region.type}`,
       value: region.id,
-      type: region.type,
     }));
 
     const awesomplete = new Awesomplete(regionInput, {
+      item: (suggestion, input) => {
+        const html = document.createElement('li');
+        const type = suggestion.label.split(':')[1];
+        let typeString;
+        if (type === 'city') {
+          typeString = 'Município';
+        }
+        if (type === 'state') {
+          typeString = 'Estado';
+        }
+        if (type === 'country') {
+          typeString = 'País';
+        }
+        html.setAttribute('role', 'option');
+        html.setAttribute('class', `awesomplete__${type}`);
+        html.insertAdjacentHTML('beforeend',
+          `<span>${suggestion.label.split(':')[0]}<small>${typeString}</small></span>`);
+        return html;
+      },
       nChars: 1,
       maxItems: 5,
       autoFirst: true,
       filter(text, input) {
-        return fuzzysort.single(removeDiacritics(input), removeDiacritics(text.label));
+        return fuzzysort.single(removeDiacritics(input), removeDiacritics(text.label.split(':')[0]));
       },
       replace(suggestion) {
-        this.input.value = suggestion.label;
+        this.input.value = suggestion.label.split(':')[0];
       },
     });
     awesomplete.list = regionNames;
   }
 
-  mountList();
+  function watchSelection() {
+    regionInput.addEventListener('awesomplete-selectcomplete', (event) => {
+      window.location.href = `/city?id=${event.text.value}`;
+    }, false);
+  }
+
+  if (regionInput) {
+    mountList();
+    watchSelection();
+  }
 }

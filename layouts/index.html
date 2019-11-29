@@ -6,11 +6,13 @@
       <section class='search-area'>
         <div class="container">
           <form action="">
-            <label for="search">
+            <label for="js-region-input">
               {{ i18n "exploreData" }}
             </label>
             <input
-              type="search"
+              type="text"
+              disabled
+              aria-busy="true"
               id="js-region-input"
               placeholder="{{ i18n "exploreDataPlaceholder" }}"
             >

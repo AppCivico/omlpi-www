@@ -2306,27 +2306,50 @@ function startSearch() {
 
             case 2:
               list = _context2.sent;
+              regionInput.removeAttribute('disabled');
+              regionInput.removeAttribute('aria-busy');
               regionNames = list.map(function (region) {
                 return {
-                  label: region.name,
-                  value: region.id,
-                  type: region.type
+                  label: "".concat(region.name, ":").concat(region.type),
+                  value: region.id
                 };
               });
               awesomplete = new _awesomplete.default(regionInput, {
+                item: function item(suggestion, input) {
+                  var html = document.createElement('li');
+                  var type = suggestion.label.split(':')[1];
+                  var typeString;
+
+                  if (type === 'city') {
+                    typeString = 'Município';
+                  }
+
+                  if (type === 'state') {
+                    typeString = 'Estado';
+                  }
+
+                  if (type === 'country') {
+                    typeString = 'País';
+                  }
+
+                  html.setAttribute('role', 'option');
+                  html.setAttribute('class', "awesomplete__".concat(type));
+                  html.insertAdjacentHTML('beforeend', "<span>".concat(suggestion.label.split(':')[0], "<small>").concat(typeString, "</small></span>"));
+                  return html;
+                },
                 nChars: 1,
                 maxItems: 5,
                 autoFirst: true,
                 filter: function filter(text, input) {
-                  return _fuzzysort.default.single(removeDiacritics(input), removeDiacritics(text.label));
+                  return _fuzzysort.default.single(removeDiacritics(input), removeDiacritics(text.label.split(':')[0]));
                 },
                 replace: function replace(suggestion) {
-                  this.input.value = suggestion.label;
+                  this.input.value = suggestion.label.split(':')[0];
                 }
               });
               awesomplete.list = regionNames;
 
-            case 6:
+            case 8:
             case "end":
               return _context2.stop();
           }
@@ -2336,7 +2359,16 @@ function startSearch() {
     return _mountList.apply(this, arguments);
   }
 
-  mountList();
+  function watchSelection() {
+    regionInput.addEventListener('awesomplete-selectcomplete', function (event) {
+      window.location.href = "/city?id=".concat(event.text.value);
+    }, false);
+  }
+
+  if (regionInput) {
+    mountList();
+    watchSelection();
+  }
 }
 
 },{"./config":9,"@babel/runtime/helpers/asyncToGenerator":1,"@babel/runtime/helpers/interopRequireDefault":2,"@babel/runtime/regenerator":4,"awesomplete":5,"fuzzysort":6}]},{},[10]);
