@@ -2315,7 +2315,6 @@ var _fuzzysort = _interopRequireDefault(require("fuzzysort"));
 
 var _config = _interopRequireDefault(require("./config"));
 
-/* eslint-disable */
 function startSearch() {
   var regionInput = document.querySelector('#js-region-input');
 
@@ -2414,7 +2413,8 @@ function startSearch() {
                   return _fuzzysort.default.single(removeDiacritics(input), removeDiacritics(text.label.split(':')[0]));
                 },
                 replace: function replace(suggestion) {
-                  this.input.value = suggestion.label.split(':')[0];
+                  var _ref = [suggestion.label.split(':')[0]];
+                  this.input.value = _ref[0];
                 }
               });
               awesomplete.list = regionNames;

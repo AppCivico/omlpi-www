@@ -1,4 +1,3 @@
-/* eslint-disable */
 import Awesomplete from 'awesomplete';
 import fuzzysort from 'fuzzysort';
 import config from './config';
@@ -54,7 +53,7 @@ export default function startSearch() {
         return fuzzysort.single(removeDiacritics(input), removeDiacritics(text.label.split(':')[0]));
       },
       replace(suggestion) {
-        this.input.value = suggestion.label.split(':')[0];
+        [this.input.value] = [suggestion.label.split(':')[0]];
       },
     });
     awesomplete.list = regionNames;
