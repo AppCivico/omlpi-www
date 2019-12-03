@@ -36,25 +36,50 @@
 
           <section>
             <div class="container" v-for="(indicator, index) in locale.indicators">
-              <details>
-                <summary>
+              <details class="js-details-with-chart">
+                <summary @click="reflowCharts">
                   {{ "{{ indicator.description }}" }}: <strong>{{ "{{ indicator.values.value_absolute }}" }}</strong>
                 </summary>
-                <div v-for="(subindicator, index) in indicator.subindicators">
-                  <div class="big-number">
+                <div v-for="(subindicator, subIndicatorIndex) in indicator.subindicators">
+
+                  <div class="big-number" v-if="subindicator.data.length === 2">
                     <strong class="big-number__title">{{ "{{ indicator.values.value_absolute }}" }}</strong>
                     <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
                     <template v-for="(subindicatorData, index) in subindicator.data">
                       <div class="infobox">
-                        <strong class="infobox__title">3000</strong>
+                        <strong class="infobox__title">{{ "{{ subindicatorData.values.value_absolute }}" }}</strong>
                         <h3>{{ "{{ subindicatorData.description }}" }}</h3>
-                        <div class="infobox__icons" style="clip-path: url(#svgPath)"></div>
-                        <progress class="infobox__progress" value="40" max="100"></progress>
-                        <strong class="infobox__percentage">{{ "{{ subindicatorData.values[0].value_relative }}" }}</strong>
-                        <small class="infobox__year">{{ "{{ subindicatorData.values[0].year }}" }}</small>
+                        <template v-if="subindicatorData.values.value_absolute">
+                          <div class="infobox__icons" style=" clip-path: url(#svgPath); background-image: linear-gradient(90deg, #47b3af {{ "{{ subindicatorData.values.value_relative }}" }}, #a3a3a3 0);">
+                          </div>
+                          <progress class="infobox__progress" :value="subindicatorData.values.value_relative" max="100"></progress>
+                          <strong class="infobox__percentage">{{ "{{ subindicatorData.values.value_relative }}" }}</strong>
+                        </template>
+                        <small class="infobox__year">{{ "{{ subindicatorData.values.year }}" }}</small>
                       </div>
                     </template>
                   </div>
+
+
+                  <div class="big-number" v-if="subindicator.data.length > 2 && subindicator.data.length <= 3">
+                    <div class="info-chart">
+                      <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
+                      <div class="infobox">
+                        <div :id="`pie-chart-${indicator.id}-${subindicator.id}`" class="chart"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="big-number" v-if="subindicator.data.length > 3">
+                    <div class="info-chart">
+                      <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
+                      <div class="infobox">
+                        <div :id="`bar-chart-${indicator.id}-${subindicator.id}`" class="chart"></div>
+                      </div>
+                    </div>
+                  </div>
+
+
                 </div>
               </details>
           </section>
@@ -105,142 +130,160 @@
 
         {{ partial "scripts.html" . }}
 
-        <script>
-
-          const pieCharts = document.querySelectorAll('.js-chart-pie');
-
-          pieCharts.forEach(pieCharts => {
-            Highcharts.chart(pieCharts, {
-              chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                type: 'pie'
-              },
-              title: false,
-              tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-              },
-              plotOptions: {
-                pie: {
-                  allowPointSelect: true,
-                  cursor: 'pointer',
-                  dataLabels: {
-                    enabled: false
-                  },
-                  showInLegend: true
-                }
-              },
-              series: [{
-                name: 'Brands',
-                colorByPoint: true,
-                data: [{
-                  name: 'Chrome',
-                  y: 61.41,
-                  sliced: true,
-                  selected: true
-                }, {
-                  name: 'Internet Explorer',
-                  y: 11.84
-                }, {
-                  name: 'Firefox',
-                  y: 10.85
-                }, {
-                  name: 'Edge',
-                  y: 4.67
-                }, {
-                  name: 'Safari',
-                  y: 4.18
-                }, {
-                  name: 'Other',
-                  y: 7.05
-                }]
-              }]
-            });
+        <script charset="utf-8">
+          console.log($vue.pieData)
+          $vue.pieData.forEach(pieChart => {
+            console.log('oi')
           });
-
-          const brCharts = document.querySelectorAll('.js-chart-brasil');
-
-          brCharts.forEach(brChart => {
-            Highcharts.chart(brChart, {
-              chart: {
-                type: 'column'
-              },
-              title: null,
-              subtitle: null,
-              xAxis: {
-                categories: [
-                  'Jan',
-                  'Feb',
-                  'Mar',
-                  'Apr',
-                  'May',
-                  'Jun',
-                  'Jul',
-                  'Aug',
-                  'Sep',
-                  'Oct',
-                  'Nov',
-                  'Dec'
-                ],
-                crosshair: true
-              },
-              yAxis: {
-                min: 0,
-                title: {
-                  text: 'Rainfall (mm)'
-                }
-              },
-              tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-              },
-              plotOptions: {
-                column: {
-                  pointPadding: 0.2,
-                  borderWidth: 0
-                }
-              },
-              series: [{
-                name: 'Tokyo',
-                data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-
-              }, {
-                name: 'New York',
-                data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
-
-              }, {
-                name: 'London',
-                data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
-
-              }, {
-                name: 'Berlin',
-                data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
-
-              }]
-            });
-          });
-
-
-          const details = document.querySelectorAll('.js-details-with-chart');
-          const charts = document.querySelectorAll('.js-chart');
-
-          details.forEach(detail => {
-
-      // chartContainer.addEventListener('transitionend', () => {
-      //   highChart.reflow();
-      // }, false);
-
-            detail.addEventListener('transitionend', () => {
-              Highcharts.charts.forEach(chart => chart.reflow())
-            });
-          });
-
         </script>
+      <!--   <script> -->
+      <!--     $vue.pieData.forEach(pieChart => { -->
+      <!--       console.log(pieChart) -->
+      <!--       Highcharts.chart(pieChart, { -->
+      <!--         chart: { -->
+      <!--           plotBackgroundColor: null, -->
+      <!--           plotBorderWidth: null, -->
+      <!--           plotShadow: false, -->
+      <!--           type: 'pie' -->
+      <!--         }, -->
+      <!--         title: false, -->
+      <!--         tooltip: { -->
+      <!--           pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>' -->
+      <!--         }, -->
+      <!--         plotOptions: { -->
+      <!--           pie: { -->
+      <!--             allowPointSelect: true, -->
+      <!--             cursor: 'pointer', -->
+      <!--             dataLabels: { -->
+      <!--               enabled: false -->
+      <!--             }, -->
+      <!--             showInLegend: true -->
+      <!--           } -->
+      <!--         }, -->
+      <!--         series: [{ -->
+      <!--           name: 'Brands', -->
+      <!--           colorByPoint: true, -->
+      <!--           data: [{ -->
+      <!--             name: 'Chrome', -->
+      <!--             y: 61.41, -->
+      <!--             sliced: true, -->
+      <!--             selected: true -->
+      <!--           }, { -->
+      <!--             name: 'Internet Explorer', -->
+      <!--             y: 11.84 -->
+      <!--           }, { -->
+      <!--             name: 'Firefox', -->
+      <!--             y: 10.85 -->
+      <!--           }, { -->
+      <!--             name: 'Edge', -->
+      <!--             y: 4.67 -->
+      <!--           }, { -->
+      <!--             name: 'Safari', -->
+      <!--             y: 4.18 -->
+      <!--           }, { -->
+      <!--             name: 'Other', -->
+      <!--             y: 7.05 -->
+      <!--           }] -->
+      <!--         }] -->
+      <!--       }); -->
+      <!--     }); -->
+      <!--  -->
+      <!--     const brCharts = document.querySelectorAll('.js&#45;chart&#45;brasil'); -->
+      <!--  -->
+      <!--     brCharts.forEach(brChart => { -->
+      <!--       Highcharts.chart(brChart, { -->
+      <!--         chart: { -->
+      <!--           type: 'column' -->
+      <!--         }, -->
+      <!--         title: null, -->
+      <!--         subtitle: null, -->
+      <!--         xAxis: { -->
+      <!--           categories: [ -->
+      <!--             'Jan', -->
+      <!--             'Feb', -->
+      <!--             'Mar', -->
+      <!--             'Apr', -->
+      <!--             'May', -->
+      <!--             'Jun', -->
+      <!--             'Jul', -->
+      <!--             'Aug', -->
+      <!--             'Sep', -->
+      <!--             'Oct', -->
+      <!--             'Nov', -->
+      <!--             'Dec' -->
+      <!--           ], -->
+      <!--           crosshair: true -->
+      <!--         }, -->
+      <!--         yAxis: { -->
+      <!--           min: 0, -->
+      <!--           title: { -->
+      <!--             text: 'Rainfall (mm)' -->
+      <!--           } -->
+      <!--         }, -->
+      <!--         tooltip: { -->
+      <!--           headerFormat: '<span style="font&#45;size:10px">{point.key}</span><table>', -->
+      <!--           pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' + -->
+      <!--           '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>', -->
+      <!--           footerFormat: '</table>', -->
+      <!--           shared: true, -->
+      <!--           useHTML: true -->
+      <!--         }, -->
+      <!--         plotOptions: { -->
+      <!--           column: { -->
+      <!--             pointPadding: 0.2, -->
+      <!--             borderWidth: 0 -->
+      <!--           } -->
+      <!--         }, -->
+      <!--         series: [{ -->
+      <!--           name: 'Tokyo', -->
+      <!--           data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4] -->
+      <!--  -->
+      <!--         }, { -->
+      <!--           name: 'New York', -->
+      <!--           data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3] -->
+      <!--  -->
+      <!--         }, { -->
+      <!--           name: 'London', -->
+      <!--           data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2] -->
+      <!--  -->
+      <!--         }, { -->
+      <!--           name: 'Berlin', -->
+      <!--           data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1] -->
+      <!--  -->
+      <!--         }] -->
+      <!--       }); -->
+      <!--     }); -->
+      <!--  -->
+      <!--  -->
+      <!--     const details = document.querySelectorAll('.js&#45;details&#45;with&#45;chart'); -->
+      <!--     const charts = document.querySelectorAll('.js&#45;chart'); -->
+      <!--  -->
+      <!--     details.forEach(detail => { -->
+      <!--  -->
+      <!-- chartContainer.addEventListener('transitionend', () => { -->
+      <!--    highChart.reflow(); -->
+      <!--  }, false); -->
+      <!--  -->
+      <!--       detail.addEventListener('transitionend', () => { -->
+      <!--         Highcharts.charts.forEach(chart => chart.reflow()) -->
+      <!--       }); -->
+      <!--     }); -->
+      <!--  -->
+      <!--   </script> -->
 
+      <script>
+          // const details = document.querySelectorAll('.js-details-with-chart');
+          // const charts = document.querySelectorAll('.js-chart');
+
+          // details.forEach(detail => {
+            // chartContainer.addEventListener('transitionend', () => {
+            //   highChart.reflow();
+            // }, false);
+          //   detail.addEventListener('transitionend', () => {
+          //     Highcharts.charts.forEach(chart => chart.reflow())
+          //   });
+          // });
+
+      </script>
     </body>
 </html>

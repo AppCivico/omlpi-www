@@ -2239,6 +2239,8 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 var _config = _interopRequireDefault(require("./config"));
 
 /* global Vue */
+
+/* global Highcharts */
 if (window.location.href.indexOf('city') > -1) {
   window.$vue = new Vue({
     el: '#app',
@@ -2249,40 +2251,100 @@ if (window.location.href.indexOf('city') > -1) {
     computed: {
       loading: function loading() {
         return !this.locale;
+      },
+      pieData: function pieData() {
+        var data = [];
+
+        if (!this.loading) {
+          this.locale.indicators.forEach(function (indicator) {
+            indicator.subindicators.forEach(function (subindicator) {
+              if (subindicator.data.length > 2 && subindicator.data.length <= 3) {
+                var updatedSubindicator = subindicator;
+                updatedSubindicator.indicatorId = indicator.id;
+                data.push(updatedSubindicator);
+              }
+            });
+          });
+        }
+
+        return data;
+      },
+      barsData: function barsData() {
+        var data = [];
+
+        if (!this.loading) {
+          this.locale.indicators.forEach(function (indicator) {
+            indicator.subindicators.forEach(function (subindicator) {
+              if (subindicator.data.length > 3) {
+                var updatedSubindicator = subindicator;
+                updatedSubindicator.indicatorId = indicator.id;
+                data.push(updatedSubindicator);
+              }
+            });
+          });
+        }
+
+        return data;
       }
     },
     created: function created() {},
-    mounted: function mounted() {
-      this.getData();
-    },
+    mounted: function () {
+      var _mounted = (0, _asyncToGenerator2.default)(
+      /*#__PURE__*/
+      _regenerator.default.mark(function _callee() {
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.getData();
+
+              case 2:
+                _context.next = 4;
+                return this.generateCharts();
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function mounted() {
+        return _mounted.apply(this, arguments);
+      }
+
+      return mounted;
+    }(),
     methods: {
       getData: function () {
         var _getData = (0, _asyncToGenerator2.default)(
         /*#__PURE__*/
-        _regenerator.default.mark(function _callee() {
+        _regenerator.default.mark(function _callee2() {
           var response, json;
-          return _regenerator.default.wrap(function _callee$(_context) {
+          return _regenerator.default.wrap(function _callee2$(_context2) {
             while (1) {
-              switch (_context.prev = _context.next) {
+              switch (_context2.prev = _context2.next) {
                 case 0:
-                  _context.next = 2;
-                  return fetch("".concat(_config.default.api.domain, "data?locale_id=").concat(this.localeId));
+                  _context2.next = 2;
+                  return fetch("".concat(_config.default.api.domain, "data?locale_id=").concat(this.localeId, "&year=2018"));
 
                 case 2:
-                  response = _context.sent;
-                  _context.next = 5;
+                  response = _context2.sent;
+                  _context2.next = 5;
                   return response.json();
 
                 case 5:
-                  json = _context.sent;
+                  json = _context2.sent;
                   this.locale = json.locale;
 
                 case 7:
                 case "end":
-                  return _context.stop();
+                  return _context2.stop();
               }
             }
-          }, _callee, this);
+          }, _callee2, this);
         }));
 
         function getData() {
@@ -2290,7 +2352,125 @@ if (window.location.href.indexOf('city') > -1) {
         }
 
         return getData;
-      }()
+      }(),
+      //   data: [{
+      //     name: 'Chrome',
+      //     y: 61.41,
+      //   }, {
+      //     name: 'Internet Explorer',
+      //     y: 11.84
+      //   }, {
+      //     name: 'Firefox',
+      //     y: 10.85
+      //   }, {
+      //     name: 'Edge',
+      //     y: 4.67
+      //   }, {
+      //     name: 'Safari',
+      //     y: 4.18
+      //   }, {
+      //     name: 'Other',
+      //     y: 7.05
+      //   }]
+      formatDataToPieCharts: function formatDataToPieCharts(items) {
+        var data = [];
+        items.data.forEach(function (item) {
+          data.push({
+            name: item.description,
+            y: Number(item.values.value_relative)
+          });
+        });
+        return data;
+      },
+      formatDataToBarsCharts: function formatDataToBarsCharts(items) {
+        var data = [];
+        items.data.forEach(function (item) {
+          data.push({
+            name: item.description,
+            data: [Number(item.values.value_relative)]
+          });
+        });
+        return data;
+      },
+      getBarChartTitles: function getBarChartTitles(items) {
+        return items.data.map(function (item) {
+          return item.description;
+        });
+      },
+      reflowCharts: function reflowCharts() {
+        var details = document.querySelectorAll('.js-details-with-chart');
+        details.forEach(function (detail) {
+          detail.addEventListener('transitionend', function () {
+            Highcharts.charts.forEach(function (chart) {
+              return chart.reflow();
+            });
+          });
+        });
+      },
+      generateCharts: function generateCharts() {
+        var _this = this;
+
+        this.barsData.forEach(function (chart) {
+          Highcharts.chart("bar-chart-".concat(chart.indicatorId, "-").concat(chart.id), {
+            chart: {
+              type: 'column'
+            },
+            title: null,
+            subtitle: null,
+            xAxis: {
+              categories: _this.getBarChartTitles(chart),
+              crosshair: true
+            },
+            yAxis: {
+              min: 0,
+              title: {
+                text: false
+              }
+            },
+            tooltip: {
+              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+              pointFormat: '<tr>' + '<td style="padding:0"><b>{point.y}</b></td></tr>',
+              footerFormat: '</table>',
+              shared: true,
+              useHTML: true
+            },
+            plotOptions: {
+              column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+              }
+            },
+            series: _this.formatDataToBarsCharts(chart)
+          });
+        });
+        this.pieData.forEach(function (chart) {
+          Highcharts.chart("pie-chart-".concat(chart.indicatorId, "-").concat(chart.id), {
+            chart: {
+              plotBackgroundColor: null,
+              plotBorderWidth: null,
+              plotShadow: false,
+              type: 'pie'
+            },
+            title: false,
+            tooltip: {
+              pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+              pie: {
+                allowPointSelect: false,
+                cursor: 'pointer',
+                dataLabels: {
+                  enabled: false
+                },
+                showInLegend: true
+              }
+            },
+            series: [{
+              data: _this.formatDataToPieCharts(chart)
+            }]
+          });
+        });
+      }
     }
   });
 }
