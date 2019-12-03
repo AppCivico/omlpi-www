@@ -2223,10 +2223,79 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 
 var _search = _interopRequireDefault(require("./search"));
 
-// import initNewsletterForm from './newsletterForm';
-(0, _search.default)(); // initNewsletterForm();
+require("./populateData");
 
-},{"./search":11,"@babel/runtime/helpers/interopRequireDefault":2}],11:[function(require,module,exports){
+(0, _search.default)();
+
+},{"./populateData":11,"./search":12,"@babel/runtime/helpers/interopRequireDefault":2}],11:[function(require,module,exports){
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
+var _config = _interopRequireDefault(require("./config"));
+
+/* global Vue */
+if (window.location.href.indexOf('city') > -1) {
+  window.$vue = new Vue({
+    el: '#app',
+    data: {
+      localeId: window.location.search.split('id=')[1],
+      locale: null
+    },
+    computed: {
+      loading: function loading() {
+        return !this.locale;
+      }
+    },
+    created: function created() {},
+    mounted: function mounted() {
+      this.getData();
+    },
+    methods: {
+      getData: function () {
+        var _getData = (0, _asyncToGenerator2.default)(
+        /*#__PURE__*/
+        _regenerator.default.mark(function _callee() {
+          var response, json;
+          return _regenerator.default.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.next = 2;
+                  return fetch("".concat(_config.default.api.domain, "data?locale_id=").concat(this.localeId));
+
+                case 2:
+                  response = _context.sent;
+                  _context.next = 5;
+                  return response.json();
+
+                case 5:
+                  json = _context.sent;
+                  this.locale = json.locale;
+
+                case 7:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, this);
+        }));
+
+        function getData() {
+          return _getData.apply(this, arguments);
+        }
+
+        return getData;
+      }()
+    }
+  });
+}
+
+},{"./config":9,"@babel/runtime/helpers/asyncToGenerator":1,"@babel/runtime/helpers/interopRequireDefault":2,"@babel/runtime/regenerator":4}],12:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");

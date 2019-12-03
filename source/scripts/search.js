@@ -16,7 +16,6 @@ export default function startSearch() {
   }
 
   async function mountList() {
-
     const list = await getList();
 
     regionInput.removeAttribute('disabled');
