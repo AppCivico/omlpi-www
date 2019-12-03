@@ -6,106 +6,13 @@
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/index.js">
 <testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/index.js" />
 </testsuite>
-<testsuite package="org.eslint" time="0" tests="91" errors="91" name="/home/eduruiz/code/omlpi-www/source/scripts/populateData--vanilla.js">
-<testcase time="0" name="org.eslint.semi"><failure message="Missing semicolon."><![CDATA[line 13, col 33, Error - Missing semicolon. (semi)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 42, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 42, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 42, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 42, col 39, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 43, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 43, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 43, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 43, col 67, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 44, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 44, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 44, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 44, col 46, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 45, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 45, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 45, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 45, col 47, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.max-len"><failure message="Line 46 exceeds the maximum line length of 100."><![CDATA[line 46, col 1, Error - Line 46 exceeds the maximum line length of 100. (max-len)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 46, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 46, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 46, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 46, col 397, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 47, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 47, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 47, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 47, col 23, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 48, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 48, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 48, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 48, col 38, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 49, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 49, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 49, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 49, col 63, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 50, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 50, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 50, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 50, col 36, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 51, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 51, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 51, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 51, col 86, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 52, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 52, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 52, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 52, col 87, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 53, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 53, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 53, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 53, col 67, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 54, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 54, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 54, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 54, col 60, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 55, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 55, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 55, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 55, col 23, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 56, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 56, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 56, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 56, col 38, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 57, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 57, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 57, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 57, col 63, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 58, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 58, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 58, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 58, col 36, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 59, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 59, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 59, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 59, col 86, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 60, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 60, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 60, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 60, col 67, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 61, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 61, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 61, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 61, col 60, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 62, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 62, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 62, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 62, col 23, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.indent"><failure message="Expected indentation of 4 spaces but found 6."><![CDATA[line 63, col 1, Error - Expected indentation of 4 spaces but found 6. (indent)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space after &apos;{&apos;."><![CDATA[line 63, col 7, Error - Requires a space after &apos;{&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-lone-blocks"><failure message="Nested block is redundant."><![CDATA[line 63, col 7, Error - Nested block is redundant. (no-lone-blocks)]]></failure></testcase>
-<testcase time="0" name="org.eslint.block-spacing"><failure message="Requires a space before &apos;}&apos;."><![CDATA[line 63, col 21, Error - Requires a space before &apos;}&apos;. (block-spacing)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-console"><failure message="Unexpected console statement."><![CDATA[line 65, col 5, Warning - Unexpected console statement. (no-console)]]></failure></testcase>
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/populateData--vanilla.js">
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/populateData--vanilla.js" />
 </testsuite>
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/populateData.js">
 <testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/populateData.js" />
 </testsuite>
-<testsuite package="org.eslint" time="0" tests="4" errors="4" name="/home/eduruiz/code/omlpi-www/source/scripts/search.js">
-<testcase time="0" name="org.eslint.import/no-unresolved"><failure message="Unable to resolve path to module &apos;awesomplete&apos;."><![CDATA[line 1, col 25, Error - Unable to resolve path to module &apos;awesomplete&apos;. (import/no-unresolved)]]></failure></testcase>
-<testcase time="0" name="org.eslint.import/no-unresolved"><failure message="Unable to resolve path to module &apos;fuzzysort&apos;."><![CDATA[line 2, col 23, Error - Unable to resolve path to module &apos;fuzzysort&apos;. (import/no-unresolved)]]></failure></testcase>
-<testcase time="0" name="org.eslint.no-unused-vars"><failure message="&apos;input&apos; is defined but never used."><![CDATA[line 30, col 26, Error - &apos;input&apos; is defined but never used. (no-unused-vars)]]></failure></testcase>
-<testcase time="0" name="org.eslint.prefer-destructuring"><failure message="Use array destructuring."><![CDATA[line 56, col 9, Error - Use array destructuring. (prefer-destructuring)]]></failure></testcase>
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/search.js">
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/search.js" />
 </testsuite>
 </testsuites>

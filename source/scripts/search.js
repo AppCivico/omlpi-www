@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Awesomplete from 'awesomplete';
 import fuzzysort from 'fuzzysort';
 import config from './config';
@@ -27,7 +28,7 @@ export default function startSearch() {
     }));
 
     const awesomplete = new Awesomplete(regionInput, {
-      item: (suggestion, input) => {
+      item: (suggestion) => {
         const html = document.createElement('li');
         const type = suggestion.label.split(':')[1];
         let typeString;
