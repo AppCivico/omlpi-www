@@ -2315,6 +2315,7 @@ var _fuzzysort = _interopRequireDefault(require("fuzzysort"));
 
 var _config = _interopRequireDefault(require("./config"));
 
+/* eslint-disable */
 function startSearch() {
   var regionInput = document.querySelector('#js-region-input');
 
@@ -2384,7 +2385,7 @@ function startSearch() {
                 };
               });
               awesomplete = new _awesomplete.default(regionInput, {
-                item: function item(suggestion, input) {
+                item: function item(suggestion) {
                   var html = document.createElement('li');
                   var type = suggestion.label.split(':')[1];
                   var typeString;

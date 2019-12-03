@@ -38,11 +38,11 @@
             <div class="container" v-for="(indicator, index) in locale.indicators">
               <details>
                 <summary>
-                  {{ "{{ indicator.description }}" }}: <strong>{{ "{{ indicator.values[1].value_absolute }}" }}</strong>
+                  {{ "{{ indicator.description }}" }}: <strong>{{ "{{ indicator.values.value_absolute }}" }}</strong>
                 </summary>
                 <div v-for="(subindicator, index) in indicator.subindicators">
                   <div class="big-number">
-                    <strong class="big-number__title">{{ "{{ indicator.values[1].value_absolute }}" }}</strong>
+                    <strong class="big-number__title">{{ "{{ indicator.values.value_absolute }}" }}</strong>
                     <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
                     <template v-for="(subindicatorData, index) in subindicator.data">
                       <div class="infobox">
