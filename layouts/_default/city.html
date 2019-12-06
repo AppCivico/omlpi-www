@@ -23,9 +23,27 @@
           <section>
             <div class="container">
               <div class="buttons-group">
-                <button class="button-icon button--icon button--health button-icon--active">Saúde</button>
-                <button class="button-icon button--icon button--education">Educação</button>
-                <button class="button-icon button--icon button--social-care">Assistência Social</button>
+                <button
+                  @click="selectedArea = 1"
+                  class="button-icon button--icon button--health"
+                  :class="selectedArea === 1 ? 'button-icon--active' : ''"
+                >
+                Saúde
+                </button>
+                <button
+                  @click="selectedArea = 2"
+                  class="button-icon button--icon button--education"
+                  :class="selectedArea === 2 ? 'button-icon--active' : ''"
+                >
+                  Educação
+                </button>
+                <button
+                  @click="selectedArea = 3"
+                  class="button-icon button--icon button--social-care"
+                  :class="selectedArea === 3 ? 'button-icon--active' : ''"
+                >
+                  Assistência Social
+                </button>
                 <div class="buttons-group__normie-links">
                   <a href="/historico">Ver histórico</a>
                   <a href="/dados" download>Fazer download dos dados</a>
@@ -36,7 +54,10 @@
 
           <section>
             <div class="container" v-for="(indicator, index) in locale.indicators">
-              <details class="js-details-with-chart">
+              <details
+                v-show="indicator.area.id === selectedArea"
+                class="js-details-with-chart"
+              >
                 <summary @click="reflowCharts">
                   {{ "{{ indicator.description }}" }}: <strong>{{ "{{ indicator.values.value_absolute }}" }}</strong>
                 </summary>
@@ -60,7 +81,6 @@
                     </template>
                   </div>
 
-
                   <div class="big-number" v-if="subindicator.data.length > 2 && subindicator.data.length <= 3">
                     <div class="info-chart">
                       <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
@@ -78,8 +98,6 @@
                       </div>
                     </div>
                   </div>
-
-
                 </div>
               </details>
           </section>
@@ -129,161 +147,5 @@
         {{ end }}
 
         {{ partial "scripts.html" . }}
-
-        <script charset="utf-8">
-          console.log($vue.pieData)
-          $vue.pieData.forEach(pieChart => {
-            console.log('oi')
-          });
-        </script>
-      <!--   <script> -->
-      <!--     $vue.pieData.forEach(pieChart => { -->
-      <!--       console.log(pieChart) -->
-      <!--       Highcharts.chart(pieChart, { -->
-      <!--         chart: { -->
-      <!--           plotBackgroundColor: null, -->
-      <!--           plotBorderWidth: null, -->
-      <!--           plotShadow: false, -->
-      <!--           type: 'pie' -->
-      <!--         }, -->
-      <!--         title: false, -->
-      <!--         tooltip: { -->
-      <!--           pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>' -->
-      <!--         }, -->
-      <!--         plotOptions: { -->
-      <!--           pie: { -->
-      <!--             allowPointSelect: true, -->
-      <!--             cursor: 'pointer', -->
-      <!--             dataLabels: { -->
-      <!--               enabled: false -->
-      <!--             }, -->
-      <!--             showInLegend: true -->
-      <!--           } -->
-      <!--         }, -->
-      <!--         series: [{ -->
-      <!--           name: 'Brands', -->
-      <!--           colorByPoint: true, -->
-      <!--           data: [{ -->
-      <!--             name: 'Chrome', -->
-      <!--             y: 61.41, -->
-      <!--             sliced: true, -->
-      <!--             selected: true -->
-      <!--           }, { -->
-      <!--             name: 'Internet Explorer', -->
-      <!--             y: 11.84 -->
-      <!--           }, { -->
-      <!--             name: 'Firefox', -->
-      <!--             y: 10.85 -->
-      <!--           }, { -->
-      <!--             name: 'Edge', -->
-      <!--             y: 4.67 -->
-      <!--           }, { -->
-      <!--             name: 'Safari', -->
-      <!--             y: 4.18 -->
-      <!--           }, { -->
-      <!--             name: 'Other', -->
-      <!--             y: 7.05 -->
-      <!--           }] -->
-      <!--         }] -->
-      <!--       }); -->
-      <!--     }); -->
-      <!--  -->
-      <!--     const brCharts = document.querySelectorAll('.js&#45;chart&#45;brasil'); -->
-      <!--  -->
-      <!--     brCharts.forEach(brChart => { -->
-      <!--       Highcharts.chart(brChart, { -->
-      <!--         chart: { -->
-      <!--           type: 'column' -->
-      <!--         }, -->
-      <!--         title: null, -->
-      <!--         subtitle: null, -->
-      <!--         xAxis: { -->
-      <!--           categories: [ -->
-      <!--             'Jan', -->
-      <!--             'Feb', -->
-      <!--             'Mar', -->
-      <!--             'Apr', -->
-      <!--             'May', -->
-      <!--             'Jun', -->
-      <!--             'Jul', -->
-      <!--             'Aug', -->
-      <!--             'Sep', -->
-      <!--             'Oct', -->
-      <!--             'Nov', -->
-      <!--             'Dec' -->
-      <!--           ], -->
-      <!--           crosshair: true -->
-      <!--         }, -->
-      <!--         yAxis: { -->
-      <!--           min: 0, -->
-      <!--           title: { -->
-      <!--             text: 'Rainfall (mm)' -->
-      <!--           } -->
-      <!--         }, -->
-      <!--         tooltip: { -->
-      <!--           headerFormat: '<span style="font&#45;size:10px">{point.key}</span><table>', -->
-      <!--           pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' + -->
-      <!--           '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>', -->
-      <!--           footerFormat: '</table>', -->
-      <!--           shared: true, -->
-      <!--           useHTML: true -->
-      <!--         }, -->
-      <!--         plotOptions: { -->
-      <!--           column: { -->
-      <!--             pointPadding: 0.2, -->
-      <!--             borderWidth: 0 -->
-      <!--           } -->
-      <!--         }, -->
-      <!--         series: [{ -->
-      <!--           name: 'Tokyo', -->
-      <!--           data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4] -->
-      <!--  -->
-      <!--         }, { -->
-      <!--           name: 'New York', -->
-      <!--           data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3] -->
-      <!--  -->
-      <!--         }, { -->
-      <!--           name: 'London', -->
-      <!--           data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2] -->
-      <!--  -->
-      <!--         }, { -->
-      <!--           name: 'Berlin', -->
-      <!--           data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1] -->
-      <!--  -->
-      <!--         }] -->
-      <!--       }); -->
-      <!--     }); -->
-      <!--  -->
-      <!--  -->
-      <!--     const details = document.querySelectorAll('.js&#45;details&#45;with&#45;chart'); -->
-      <!--     const charts = document.querySelectorAll('.js&#45;chart'); -->
-      <!--  -->
-      <!--     details.forEach(detail => { -->
-      <!--  -->
-      <!-- chartContainer.addEventListener('transitionend', () => { -->
-      <!--    highChart.reflow(); -->
-      <!--  }, false); -->
-      <!--  -->
-      <!--       detail.addEventListener('transitionend', () => { -->
-      <!--         Highcharts.charts.forEach(chart => chart.reflow()) -->
-      <!--       }); -->
-      <!--     }); -->
-      <!--  -->
-      <!--   </script> -->
-
-      <script>
-          // const details = document.querySelectorAll('.js-details-with-chart');
-          // const charts = document.querySelectorAll('.js-chart');
-
-          // details.forEach(detail => {
-            // chartContainer.addEventListener('transitionend', () => {
-            //   highChart.reflow();
-            // }, false);
-          //   detail.addEventListener('transitionend', () => {
-          //     Highcharts.charts.forEach(chart => chart.reflow())
-          //   });
-          // });
-
-      </script>
     </body>
 </html>

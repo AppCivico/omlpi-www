@@ -2245,6 +2245,7 @@ if (window.location.href.indexOf('city') > -1) {
   window.$vue = new Vue({
     el: '#app',
     data: {
+      selectedArea: 2,
       localeId: window.location.search.split('id=')[1],
       locale: null
     },
