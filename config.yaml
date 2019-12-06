@@ -19,20 +19,20 @@ menu:
   header:
   - identifier: "Início"
     name: "Início"
-    url: "/"
+    url: "#"
     weight: 1
-  - identifier: "Eixo 1"
-    name: "Eixo 1"
-    # url: "/eixo-1"
-    url: "/city"
+  - identifier: "Indicadores"
+    name: "Indicadores"
+    url: "/eixo-1"
+    url: "/"
     weight: 2
-  - identifier: "Eixo 2"
-    name: "Eixo 2"
-    url: "/eixo-2"
+  - identifier: "plano para primeira infância"
+    name: "plano para primeira infância"
+    url: "#"
     weight: 3
-  - identifier: "Eixo 3"
-    name: "Eixo 3"
-    url: "/eixo-3"
+  - identifier: "biblioteca"
+    name: "biblioteca"
+    url: "#"
     weight: 4
   about:
   - identifier: "Sobre a Andi"
