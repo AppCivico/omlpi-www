@@ -1,5 +1,4 @@
-// import initContactForm from './contactForm';
-// import initNewsletterForm from './newsletterForm';
+import startSearch from './search';
+import './populateData';
 
-// initContactForm();
-// initNewsletterForm();
+startSearch();

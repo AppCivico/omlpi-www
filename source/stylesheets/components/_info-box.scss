@@ -6,10 +6,8 @@
   border: 1px solid palette('gray', 'x-light');
 
   @media screen and (min-width: breakpoint('phablet')) {
-    margin-top: 0;
-    margin-right: auto;
-    margin-bottom: 0;
-    margin-left: auto;
+    margin-right: 2rem;
+    margin-left: 2rem;
   }
 
 }

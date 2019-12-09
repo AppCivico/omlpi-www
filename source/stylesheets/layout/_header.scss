@@ -47,6 +47,16 @@
   text-decoration: none;
   text-transform: uppercase;
   color: palette('white');
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    margin-left: 1rem;
+    font-size: ms(-1);
+  }
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    margin-left: 4rem;
+    font-size: ms(0);
+  }
 }
 
 .menu__toggle {

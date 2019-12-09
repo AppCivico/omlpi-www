@@ -6,10 +6,16 @@
       <section class='search-area'>
         <div class="container">
           <form action="">
-            <label for="search">
+            <label for="js-region-input">
               {{ i18n "exploreData" }}
             </label>
-            <input type="search" id="search" placeholder="{{ i18n "exploreDataPlaceholder" }}">
+            <input
+              type="text"
+              disabled
+              aria-busy="true"
+              id="js-region-input"
+              placeholder="{{ i18n "exploreDataPlaceholder" }}"
+            >
             <button>{{ i18n "search" }}</button>
           </form>
         </div>
@@ -19,22 +25,28 @@
         <div class="container">
           <h1>Panorama Geral do Brasil</h1>
           <div class="chart-text">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie. Mauris malesuada nisi sit amet augue accumsan tincidunt. Maecenas tincidunt, velit ac porttitor pulvinar, tortor eros facilisis libero, vitae commodo nunc quam et ligula. Ut nec ipsum sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer id nisi nec nulla luctus lacinia non eu turpis. Etiam in ex imperdiet justo tincidunt egestas. Ut porttitor urna ac augue cursus tincidunt sit amet sed orci.
-            </p>
-            <div id="chart-brasil" class="chart"></div>
-          </div>
-          <div class="chart-text">
-            <div class="chart-text__text">
-              <h2>Estatísticas de Planos Muncipais para Primeira Infância</h2>
+            <div class="chart-text__content">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie. Mauris malesuada nisi sit amet augue accumsan tincidunt. Maecenas tincidunt, velit ac porttitor pulvinar, tortor eros facilisis libero, vitae commodo nunc quam et ligula. Ut nec ipsum sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer id nisi nec nulla luctus lacinia non eu turpis. Etiam in ex imperdiet justo tincidunt egestas. Ut porttitor urna ac augue cursus tincidunt sit amet sed orci.
+                Em 8 de março de 2016 foi estabelecida os princípios e diretrizes para a formulação e a implementação de políticas públicas sobre crianças de até seis anos de idade: a Lei Federal Nº 13.257, conhecida como o Marco Legal da Primeira Infância.
+              </p>
+              <p>
+                Para auxiliar no panorama geral do Brasil sobre o Marco Legal da Primeira Infância,  a ANDI que é uma organização não-governamental, julgou necessário o investimento intelectual para analisar dados e disponibilizar o acesso a informações confiáveis, relativos às políticas públicas de Primeira Infância, em nível municipal, estadual/distrital e nacional. Para contribuir ao trabalho de legisladores, gestores públicos, lideranças da sociedade civil e pesquisadores, na promoção e defesa dos direitos da população de 0 a 6 anos.
               </p>
             </div>
-            <div id="chart-pie" class="chart"></div>
-            <p>
-              <a href="/estudo">Saiba mais sobre como foi feito o estudo do Observa.</a>
-            </p>
+            <div class="chart-text__content">
+              <p>
+                Com a publicação da lei, o Brasil se tornou o primeiro país da América Latina a reconhecer a importância da primeira fase da vida. Diversos estudos científicos têm comprovado que os seis primeiros anos de vida da criança, incluindo a gestação, são cruciais para o desenvolvimento humano.
+              </p>
+              <p>
+                O Observa então apresenta-se para expor indicadores gerados e analisados de foram exclusiva, a partir de bases de dados do governo federal e apurados para os 5.570 municípios do Brasil.
+              </p>
+              <p>
+                Pesquise sobre o seu estado ou município!
+              </p>
+              <p>
+                <a href="/estudo">Saiba mais sobre como foi feito o estudo do Observa.</a>
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -42,121 +54,6 @@
       {{ partial "footer.html" . }}
 
       {{ partial "scripts.html" . }}
-
-      <script>
-        // Build the chart
-        Highcharts.chart('chart-pie', {
-          chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-          },
-          title: false,
-          tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-          },
-          plotOptions: {
-            pie: {
-              allowPointSelect: true,
-              cursor: 'pointer',
-              dataLabels: {
-                enabled: false
-              },
-              showInLegend: true
-            }
-          },
-          series: [{
-            name: 'Brands',
-            colorByPoint: true,
-            data: [{
-              name: 'Chrome',
-              y: 61.41,
-              sliced: true,
-              selected: true
-            }, {
-              name: 'Internet Explorer',
-              y: 11.84
-            }, {
-              name: 'Firefox',
-              y: 10.85
-            }, {
-              name: 'Edge',
-              y: 4.67
-            }, {
-              name: 'Safari',
-              y: 4.18
-            }, {
-              name: 'Other',
-              y: 7.05
-            }]
-          }]
-        });
-
-
-
-        Highcharts.chart('chart-brasil', {
-          chart: {
-            type: 'column'
-          },
-          title: null,
-          subtitle: null,
-          xAxis: {
-            categories: [
-              'Jan',
-              'Feb',
-              'Mar',
-              'Apr',
-              'May',
-              'Jun',
-              'Jul',
-              'Aug',
-              'Sep',
-              'Oct',
-              'Nov',
-              'Dec'
-            ],
-            crosshair: true
-          },
-          yAxis: {
-            min: 0,
-            title: {
-              text: 'Rainfall (mm)'
-            }
-          },
-          tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-          },
-          plotOptions: {
-            column: {
-              pointPadding: 0.2,
-              borderWidth: 0
-            }
-          },
-          series: [{
-            name: 'Tokyo',
-            data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-
-          }, {
-            name: 'New York',
-            data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
-
-          }, {
-            name: 'London',
-            data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
-
-          }, {
-            name: 'Berlin',
-            data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
-
-          }]
-        });
-      </script>
 
       <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 

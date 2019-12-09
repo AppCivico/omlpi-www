@@ -2,8 +2,9 @@
 
 // 2. Vendors
 @import
-'../../node_modules/modularscale-sass/stylesheets/modularscale';
-// '../../node_modules/tiny-slider/src/tiny-slider.scss';
+'../../node_modules/modularscale-sass/stylesheets/modularscale',
+'../../node_modules/awesomplete/awesomplete';
+// '../../node_modules/awesomplete/awesomplete.theme';
 // '../../node_modules/include-media/dist/include-media';
 
 // 1. Configuration and helpers
@@ -38,10 +39,9 @@
 'components/download',
 'components/big-number',
 'components/info-box',
-'components/info-chart';
-
-
-
+'components/info-chart',
+'components/awesomplete',
+'components/loading';
 
 // 6. Page-specific styles
 // @import
