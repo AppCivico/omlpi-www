@@ -1,0 +1,68 @@
+.send-plan {
+  margin-bottom: 3rem;
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    display: flex;
+  }
+}
+
+.send-plan__text {
+  max-width: 50%;
+  padding-right: 3rem;
+}
+
+.send-plan__text h3 {
+  font-size: ms(4);
+  color: palette('purple');
+}
+
+.send-plan__text p {
+  font-size: ms(1);
+  color: palette('purple');
+}
+
+.send-plan__fields {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  @media screen and (min-width: breakpoint('phablet')) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 50%;
+  }
+}
+
+.send-plan__fields label {
+  font-size: ms(-1);
+  text-transform: uppercase;
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    width: 48%;
+  }
+}
+
+.send-plan__fields label[for='plan'] {
+  width: 100%;
+  max-width: 100%;
+}
+
+.send-plan__fields input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+  border: 2px solid palette('purple');
+  border-radius: 5px;
+}
+
+.send-plan__fields button {
+  justify-content: center;
+  min-width: 12.5rem;
+  margin: 0 auto;
+
+  @media screen and (min-width: breakpoint('phablet')) {
+    margin-right: 0;
+  }
+}

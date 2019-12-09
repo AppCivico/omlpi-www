@@ -13,6 +13,10 @@
   @extend %button;
 }
 
+.button--purple {
+  background-color: palette('purple');
+}
+
 
 
 .button--icon {

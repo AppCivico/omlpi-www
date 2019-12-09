@@ -149,7 +149,7 @@ textarea {
 
     background-color: palette('debug');
 
-    opacity: 0.2;
+    // opacity: 0.2;
 
     @media screen and (min-width: breakpoint('phablet')) {
       content: 'breakpoint: phablet';
