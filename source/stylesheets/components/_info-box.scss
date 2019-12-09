@@ -6,6 +6,7 @@
   border: 1px solid palette('gray', 'x-light');
 
   @media screen and (min-width: breakpoint('phablet')) {
+    min-width: 15rem;
     margin-right: 2rem;
     margin-left: 2rem;
   }
@@ -26,7 +27,7 @@
 
 .infobox__icons {
   align-self: center;
-  width: 14.375rem;
+  width: 11rem;
   height: 1.75rem;
   padding-bottom: 1rem;
   background-image: linear-gradient(to right, palette('blue', 'greeny') 50%, palette('gray', 'light') 50px);
