@@ -4,6 +4,7 @@
   @media screen and (min-width: breakpoint('phablet')) {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
   }
 }
 
