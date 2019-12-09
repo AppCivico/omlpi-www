@@ -83,7 +83,7 @@ if (window.location.href.indexOf('city') > -1) {
         items.data.forEach((item) => {
           data.push({
             name: item.description,
-            y: Number(item.values.value_relative)
+            y: Number(item.values.value_relative),
           });
         });
         return data;
