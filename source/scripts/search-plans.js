@@ -1,5 +1,6 @@
 import Awesomplete from 'awesomplete';
 import fuzzysort from 'fuzzysort';
+import Swal from 'sweetalert2/dist/sweetalert2';
 import config from './config';
 
 export default function startPlansSearch() {
@@ -58,7 +59,11 @@ export default function startPlansSearch() {
 
   function watchSelection() {
     regionInput.addEventListener('awesomplete-selectcomplete', (event) => {
-      window.alert('Não implementado ainda "/');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Área em desenvolvimento :(',
+      });
       // window.location.href = `/city?id=${event.text.value}`;
     }, false);
   }
