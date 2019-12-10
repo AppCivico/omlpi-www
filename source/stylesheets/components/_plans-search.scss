@@ -7,6 +7,11 @@
     image('plans-bottom-left.svg'),
     image('plans-bottom-right.svg');
     background-position: top left, bottom left, bottom right;
+    background-size: 10%, 8%, 5%;
+  }
+
+  @media screen and (min-width: breakpoint('extra-wide')) {
+    background-size: auto;
   }
 }
 

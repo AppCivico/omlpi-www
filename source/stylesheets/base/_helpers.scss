@@ -166,5 +166,9 @@ textarea {
     @media screen and (min-width: breakpoint('wide')) {
       content: 'breakpoint: wide';
     }
+
+    @media screen and (min-width: breakpoint('extra-wide')) {
+      content: 'breakpoint: extra-wide';
+    }
   }
 }
