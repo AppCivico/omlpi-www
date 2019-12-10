@@ -21,6 +21,7 @@
 .plans-search__text {
 
   @media screen and (min-width: breakpoint('desktop')) {
+    max-width: 35.625rem;
     padding-right: 6rem;
   }
 }

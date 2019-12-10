@@ -4,4 +4,9 @@ export default {
       ? 'https://omlpi-api.appcivico.com/v1/'
       : 'https://dev-omlpi-api.appcivico.com/v1/'),
   },
+  apiCMS: {
+    domain: (window.location.hostname.indexOf('observatoriodaprimeirainfancia') !== -1
+      ? 'https://omlpi-api.appcivico.com/v1/'
+      : 'https://omlpi-strapi.herokuapp.com/'),
+  },
 };

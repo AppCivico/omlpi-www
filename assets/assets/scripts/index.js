@@ -2212,6 +2212,9 @@ exports.default = void 0;
 var _default = {
   api: {
     domain: window.location.hostname.indexOf('observatoriodaprimeirainfancia') !== -1 ? 'https://omlpi-api.appcivico.com/v1/' : 'https://dev-omlpi-api.appcivico.com/v1/'
+  },
+  apiCMS: {
+    domain: window.location.hostname.indexOf('observatoriodaprimeirainfancia') !== -1 ? 'https://omlpi-api.appcivico.com/v1/' : 'https://omlpi-strapi.herokuapp.com/'
   }
 };
 exports.default = _default;
@@ -2223,11 +2226,14 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 
 var _search = _interopRequireDefault(require("./search"));
 
+var _searchPlans = _interopRequireDefault(require("./search-plans"));
+
 require("./populateData");
 
 (0, _search.default)();
+(0, _searchPlans.default)();
 
-},{"./populateData":11,"./search":12,"@babel/runtime/helpers/interopRequireDefault":2}],11:[function(require,module,exports){
+},{"./populateData":11,"./search":13,"./search-plans":12,"@babel/runtime/helpers/interopRequireDefault":2}],11:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -2476,6 +2482,145 @@ if (window.location.href.indexOf('city') > -1) {
 }
 
 },{"./config":9,"@babel/runtime/helpers/asyncToGenerator":1,"@babel/runtime/helpers/interopRequireDefault":2,"@babel/runtime/regenerator":4}],12:[function(require,module,exports){
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = startPlansSearch;
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
+var _awesomplete = _interopRequireDefault(require("awesomplete"));
+
+var _fuzzysort = _interopRequireDefault(require("fuzzysort"));
+
+var _config = _interopRequireDefault(require("./config"));
+
+function startPlansSearch() {
+  var regionInput = document.querySelector('#js-plan-search');
+
+  function removeDiacritics(string) {
+    return string.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  function getList() {
+    return _getList.apply(this, arguments);
+  }
+
+  function _getList() {
+    _getList = (0, _asyncToGenerator2.default)(
+    /*#__PURE__*/
+    _regenerator.default.mark(function _callee() {
+      var response, json;
+      return _regenerator.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return fetch("".concat(_config.default.apiCMS.domain, "locales"));
+
+            case 2:
+              response = _context.sent;
+              _context.next = 5;
+              return response.json();
+
+            case 5:
+              json = _context.sent;
+              return _context.abrupt("return", json);
+
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, this);
+    }));
+    return _getList.apply(this, arguments);
+  }
+
+  function mountList() {
+    return _mountList.apply(this, arguments);
+  }
+
+  function _mountList() {
+    _mountList = (0, _asyncToGenerator2.default)(
+    /*#__PURE__*/
+    _regenerator.default.mark(function _callee2() {
+      var list, regionNames, awesomplete;
+      return _regenerator.default.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return getList();
+
+            case 2:
+              list = _context2.sent;
+              regionInput.removeAttribute('disabled');
+              regionInput.removeAttribute('aria-busy');
+              regionNames = list.map(function (region) {
+                return {
+                  label: "".concat(region.name, ":").concat(region.state ? 'city' : 'state'),
+                  value: region.id
+                };
+              });
+              awesomplete = new _awesomplete.default(regionInput, {
+                item: function item(suggestion) {
+                  var html = document.createElement('li');
+                  var type = suggestion.label.split(':')[1];
+                  var typeString = 'Município'; // if (type === 'state') {
+                  //   typeString = 'Estado';
+                  // }
+                  // if (type === 'country') {
+                  //   typeString = 'País';
+                  // }
+
+                  html.setAttribute('role', 'option');
+                  html.setAttribute('class', "awesomplete__".concat(type));
+                  html.insertAdjacentHTML('beforeend', "<span>".concat(suggestion.label.split(':')[0], "<small>").concat(typeString, "</small></span>"));
+                  return html;
+                },
+                nChars: 1,
+                maxItems: 5,
+                autoFirst: true,
+                filter: function filter(text, input) {
+                  return _fuzzysort.default.single(removeDiacritics(input), removeDiacritics(text.label.split(':')[0]));
+                },
+                replace: function replace(suggestion) {
+                  var _ref = [suggestion.label.split(':')[0]];
+                  this.input.value = _ref[0];
+                }
+              });
+              awesomplete.list = regionNames;
+
+            case 8:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, this);
+    }));
+    return _mountList.apply(this, arguments);
+  }
+
+  function watchSelection() {
+    regionInput.addEventListener('awesomplete-selectcomplete', function (event) {
+      window.alert('Não implementado ainda "/'); // window.location.href = `/city?id=${event.text.value}`;
+    }, false);
+  }
+
+  if (regionInput) {
+    mountList();
+    watchSelection();
+  }
+}
+
+},{"./config":9,"@babel/runtime/helpers/asyncToGenerator":1,"@babel/runtime/helpers/interopRequireDefault":2,"@babel/runtime/regenerator":4,"awesomplete":5,"fuzzysort":6}],13:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
