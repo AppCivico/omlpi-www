@@ -59,6 +59,10 @@
   }
 }
 
+.menu .active a {
+  border-bottom: 1px solid palette('white');
+}
+
 .menu__toggle {
   width: 2.19rem;
   padding: 0.3rem;
