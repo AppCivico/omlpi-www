@@ -58,6 +58,7 @@ export default function startPlansSearch() {
   }
 
   function watchSelection() {
+    /* eslint-disable no-unused-vars */
     regionInput.addEventListener('awesomplete-selectcomplete', (event) => {
       Swal.fire({
         icon: 'error',

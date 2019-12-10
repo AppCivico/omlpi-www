@@ -12,6 +12,9 @@
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/populateData.js">
 <testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/populateData.js" />
 </testsuite>
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/search-plans.js">
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/search-plans.js" />
+</testsuite>
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/search.js">
 <testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/search.js" />
 </testsuite>
