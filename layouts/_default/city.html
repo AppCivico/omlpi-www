@@ -17,6 +17,24 @@
           <header class='map-area'>
             <div class="container">
               <h1>{{ "{{ locale.name }}" }}</h1>
+
+              <section class='search-area'>
+                <div class="container">
+                  <form action="">
+                    <label for="js-region-input">
+                      {{ i18n "exploreData" }}
+                    </label>
+                    <input
+                      type="text"
+                      disabled
+                      aria-busy="true"
+                      id="js-region-input"
+                      placeholder="{{ i18n "exploreDataPlaceholder" }}"
+                      >
+                      <button>{{ i18n "search" }}</button>
+                  </form>
+                </div>
+              </section>
             </div>
           </header>
 
@@ -59,7 +77,8 @@
                 class="js-details-with-chart"
               >
                 <summary @click="reflowCharts">
-                  {{ "{{ indicator.description }}" }}: <strong>{{ "{{ indicator.values.value_absolute }}" }}</strong>
+                  {{ "{{ indicator.description }}" }}:
+                  <strong v-text="indicator.values.value_absolute || `${indicator.values.value_relative}%`"></strong>
                 </summary>
                 <div v-for="(subindicator, subIndicatorIndex) in indicator.subindicators">
 
@@ -67,9 +86,9 @@
                     <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
                     <template v-for="(subindicatorData, index) in subindicator.data">
                       <div class="infobox">
-                        <strong class="infobox__title">{{ "{{ subindicatorData.values.value_absolute }}" }}</strong>
-                        <h3>{{ "{{ subindicatorData.description }}" }}</h3>
-                        <template v-if="subindicatorData.values.value_absolute">
+                        <template v-if="subindicatorData.values.value_relative">
+                          <strong class="infobox__title">{{ "{{ subindicatorData.values.value_absolute }}" }}</strong>
+                          <h3>{{ "{{ subindicatorData.description }}" }}</h3>
                           <div
                             class="infobox__icons"
                             style="clip-path: url(#svgPath);"
@@ -81,9 +100,17 @@
                             :value="subindicatorData.values.value_relative" max="100"
                           >
                           </progress>
-                          <strong class="infobox__percentage">{{ "{{ subindicatorData.values.value_relative }}" }}</strong>
+                          <strong class="infobox__percentage">
+                            {{ "{{ subindicatorData.values.value_relative }}" }}%
+                          </strong>
                         </template>
-                        <small class="infobox__year">{{ "{{ subindicatorData.values.year }}" }}</small>
+
+                        <template v-else>
+                          <h3>{{ "{{ subindicatorData.description }}" }}</h3>
+                          <strong class="infobox__title">
+                            {{ "{{ subindicatorData.values.value_absolute }}" }}
+                          </strong>
+                        </template>
                       </div>
                     </template>
                   </div>

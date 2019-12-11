@@ -5340,7 +5340,7 @@ if (window.location.href.indexOf('city') > -1) {
               switch (_context2.prev = _context2.next) {
                 case 0:
                   _context2.next = 2;
-                  return fetch("".concat(_config.default.api.domain, "data?locale_id=").concat(this.localeId, "&year=2018"));
+                  return fetch("".concat(_config.default.api.domain, "data?locale_id=").concat(this.localeId));
 
                 case 2:
                   response = _context2.sent;
@@ -5389,7 +5389,7 @@ if (window.location.href.indexOf('city') > -1) {
         items.data.forEach(function (item) {
           data.push({
             name: item.description,
-            y: Number(item.values.value_relative)
+            y: Number(item.values.value_relative) ? Number(item.values.value_relative) : Number(item.values.value_absolute)
           });
         });
         return data;
@@ -5399,7 +5399,7 @@ if (window.location.href.indexOf('city') > -1) {
         items.data.forEach(function (item) {
           data.push({
             name: item.description,
-            data: [Number(item.values.value_relative)]
+            data: [Number(item.values.value_relative) ? Number(item.values.value_relative) : Number(item.values.value_absolute)]
           });
         });
         return data;

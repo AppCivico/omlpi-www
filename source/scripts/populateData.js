@@ -53,7 +53,7 @@ if (window.location.href.indexOf('city') > -1) {
     },
     methods: {
       async getData() {
-        const response = await fetch(`${config.api.domain}data?locale_id=${this.localeId}&year=2018`);
+        const response = await fetch(`${config.api.domain}data?locale_id=${this.localeId}`);
         const json = await response.json();
         this.locale = json.locale;
       },
@@ -83,7 +83,9 @@ if (window.location.href.indexOf('city') > -1) {
         items.data.forEach((item) => {
           data.push({
             name: item.description,
-            y: Number(item.values.value_relative),
+            y: Number(item.values.value_relative)
+              ? Number(item.values.value_relative)
+              : Number(item.values.value_absolute),
           });
         });
         return data;
@@ -94,7 +96,9 @@ if (window.location.href.indexOf('city') > -1) {
         items.data.forEach((item) => {
           data.push({
             name: item.description,
-            data: [Number(item.values.value_relative)],
+            data: [Number(item.values.value_relative)
+              ? Number(item.values.value_relative)
+              : Number(item.values.value_absolute)],
           });
         });
         return data;
