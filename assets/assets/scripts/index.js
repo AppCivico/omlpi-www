@@ -5233,12 +5233,36 @@ var _search = _interopRequireDefault(require("./search"));
 
 var _searchPlans = _interopRequireDefault(require("./search-plans"));
 
+var _menu = _interopRequireDefault(require("./menu"));
+
 require("./populateData");
 
 (0, _search.default)();
 (0, _searchPlans.default)();
+(0, _menu.default)();
 
-},{"./populateData":12,"./search":14,"./search-plans":13,"@babel/runtime/helpers/interopRequireDefault":2}],12:[function(require,module,exports){
+},{"./menu":12,"./populateData":13,"./search":15,"./search-plans":14,"@babel/runtime/helpers/interopRequireDefault":2}],12:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = startMenutoggle;
+
+function startMenutoggle() {
+  var menuButton = document.querySelector('.js-menu-toggle');
+  var menuList = document.querySelector('.js-menu-list');
+
+  function toggleMenu() {
+    menuList.classList.toggle('active');
+  }
+
+  menuButton.addEventListener('click', function () {
+    toggleMenu();
+  });
+}
+
+},{}],13:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5486,7 +5510,7 @@ if (window.location.href.indexOf('city') > -1) {
   });
 }
 
-},{"./config":10,"@babel/runtime/helpers/asyncToGenerator":1,"@babel/runtime/helpers/interopRequireDefault":2,"@babel/runtime/regenerator":4}],13:[function(require,module,exports){
+},{"./config":10,"@babel/runtime/helpers/asyncToGenerator":1,"@babel/runtime/helpers/interopRequireDefault":2,"@babel/runtime/regenerator":4}],14:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5633,7 +5657,7 @@ function startPlansSearch() {
   }
 }
 
-},{"./config":10,"@babel/runtime/helpers/asyncToGenerator":1,"@babel/runtime/helpers/interopRequireDefault":2,"@babel/runtime/regenerator":4,"awesomplete":5,"fuzzysort":6,"sweetalert2/dist/sweetalert2":8}],14:[function(require,module,exports){
+},{"./config":10,"@babel/runtime/helpers/asyncToGenerator":1,"@babel/runtime/helpers/interopRequireDefault":2,"@babel/runtime/regenerator":4,"awesomplete":5,"fuzzysort":6,"sweetalert2/dist/sweetalert2":8}],15:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
