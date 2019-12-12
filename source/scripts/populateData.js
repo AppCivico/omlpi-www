@@ -3,6 +3,18 @@
 /* global Highcharts */
 import config from './config';
 
+Highcharts.setOptions({
+  lang: {
+    printChart: 'Imprimir Gráfico',
+    viewFullscreen: 'Ver em tela cheia',
+
+    downloadPNG: 'Baixar PNG',
+    downloadJPEG: 'Baixar JPG',
+    downloadPDF: 'Baixar PDF',
+    downloadSVG: 'Baixar SVG',
+  },
+});
+
 if (window.location.href.indexOf('city') > -1) {
   window.$vue = new Vue({
     el: '#app',
@@ -57,26 +69,6 @@ if (window.location.href.indexOf('city') > -1) {
         const json = await response.json();
         this.locale = json.locale;
       },
-
-      //   data: [{
-      //     name: 'Chrome',
-      //     y: 61.41,
-      //   }, {
-      //     name: 'Internet Explorer',
-      //     y: 11.84
-      //   }, {
-      //     name: 'Firefox',
-      //     y: 10.85
-      //   }, {
-      //     name: 'Edge',
-      //     y: 4.67
-      //   }, {
-      //     name: 'Safari',
-      //     y: 4.18
-      //   }, {
-      //     name: 'Other',
-      //     y: 7.05
-      //   }]
 
       formatDataToPieCharts(items) {
         const data = [];
@@ -148,6 +140,14 @@ if (window.location.href.indexOf('city') > -1) {
                 borderWidth: 0,
               },
             },
+            exporting: {
+              buttons: {
+                contextButton: {
+                  // text: 'Download',
+                  menuItems: ['downloadPNG', 'downloadJPG', 'downloadPDF', 'downloadSVG'],
+                },
+              },
+            },
             series: this.formatDataToBarsCharts(chart),
           });
         });
@@ -172,6 +172,14 @@ if (window.location.href.indexOf('city') > -1) {
                   enabled: false,
                 },
                 showInLegend: true,
+              },
+            },
+            exporting: {
+              buttons: {
+                contextButton: {
+                  // text: 'Download',
+                  menuItems: ['downloadPNG', 'downloadJPG', 'downloadPDF', 'downloadSVG'],
+                },
               },
             },
             series: [{
