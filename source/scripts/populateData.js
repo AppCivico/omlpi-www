@@ -29,7 +29,9 @@ if (window.location.href.indexOf('city') > -1) {
         return !this.locale;
       },
       indicatorsCount() {
-        return this.locale.indicators.filter(indicator => indicator.area.id === this.selectedArea).length;
+        return this.locale.indicators.filter(
+          indicator => indicator.area.id === this.selectedArea,
+        ).length;
       },
       pieData() {
         const data = [];
