@@ -5273,6 +5273,8 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _config = _interopRequireDefault(require("./config"));
 
+var _search = _interopRequireDefault(require("./search"));
+
 /* global Vue */
 
 /* global Highcharts */
@@ -5298,6 +5300,13 @@ if (window.location.href.indexOf('city') > -1) {
     computed: {
       loading: function loading() {
         return !this.locale;
+      },
+      indicatorsCount: function indicatorsCount() {
+        var _this = this;
+
+        return this.locale.indicators.filter(function (indicator) {
+          return indicator.area.id === _this.selectedArea;
+        }).length;
       },
       pieData: function pieData() {
         var data = [];
@@ -5351,6 +5360,9 @@ if (window.location.href.indexOf('city') > -1) {
                 return this.generateCharts();
 
               case 4:
+                (0, _search.default)();
+
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -5436,7 +5448,7 @@ if (window.location.href.indexOf('city') > -1) {
         });
       },
       generateCharts: function generateCharts() {
-        var _this = this;
+        var _this2 = this;
 
         this.barsData.forEach(function (chart) {
           Highcharts.chart("bar-chart-".concat(chart.indicatorId, "-").concat(chart.id), {
@@ -5446,7 +5458,7 @@ if (window.location.href.indexOf('city') > -1) {
             title: null,
             subtitle: null,
             xAxis: {
-              categories: _this.getBarChartTitles(chart),
+              categories: _this2.getBarChartTitles(chart),
               crosshair: true
             },
             yAxis: {
@@ -5475,7 +5487,7 @@ if (window.location.href.indexOf('city') > -1) {
                 }
               }
             },
-            series: _this.formatDataToBarsCharts(chart)
+            series: _this2.formatDataToBarsCharts(chart)
           });
         });
         this.pieData.forEach(function (chart) {
@@ -5509,7 +5521,7 @@ if (window.location.href.indexOf('city') > -1) {
               }
             },
             series: [{
-              data: _this.formatDataToPieCharts(chart)
+              data: _this2.formatDataToPieCharts(chart)
             }]
           });
         });
@@ -5518,7 +5530,7 @@ if (window.location.href.indexOf('city') > -1) {
   });
 }
 
-},{"./config":10,"@babel/runtime/helpers/asyncToGenerator":1,"@babel/runtime/helpers/interopRequireDefault":2,"@babel/runtime/regenerator":4}],14:[function(require,module,exports){
+},{"./config":10,"./search":15,"@babel/runtime/helpers/asyncToGenerator":1,"@babel/runtime/helpers/interopRequireDefault":2,"@babel/runtime/regenerator":4}],14:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");

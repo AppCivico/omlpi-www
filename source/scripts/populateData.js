@@ -2,6 +2,7 @@
 /* global Vue */
 /* global Highcharts */
 import config from './config';
+import startSearch from './search';
 
 Highcharts.setOptions({
   lang: {
@@ -26,6 +27,9 @@ if (window.location.href.indexOf('city') > -1) {
     computed: {
       loading() {
         return !this.locale;
+      },
+      indicatorsCount() {
+        return this.locale.indicators.filter(indicator => indicator.area.id === this.selectedArea).length;
       },
       pieData() {
         const data = [];
@@ -62,6 +66,7 @@ if (window.location.href.indexOf('city') > -1) {
     async mounted() {
       await this.getData();
       await this.generateCharts();
+      startSearch();
     },
     methods: {
       async getData() {

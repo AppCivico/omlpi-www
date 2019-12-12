@@ -18,12 +18,9 @@
             <div class="container">
               <h1>{{ "{{ locale.name }}" }}</h1>
 
-              <section class='search-area'>
+              <section class='search-area search-area__intern'>
                 <div class="container">
                   <form action="">
-                    <label for="js-region-input">
-                      {{ i18n "exploreData" }}
-                    </label>
                     <input
                       type="text"
                       disabled
@@ -71,6 +68,9 @@
           </section>
 
           <section>
+            <div class="container">
+              <p v-if="!indicatorsCount">Não há dados para esse tema</p>
+            </div>
             <div class="container" v-for="(indicator, index) in locale.indicators">
               <details
                 v-show="indicator.area.id === selectedArea"
