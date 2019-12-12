@@ -105,8 +105,9 @@ textarea {
   &::after,
   &:root::before {
     position: fixed;
-    top: 0;
+    // top: 0;
     // right: 0;
+    bottom: 0;
 
     z-index: layer('modal');
 
@@ -149,7 +150,7 @@ textarea {
 
     background-color: palette('debug');
 
-    opacity: 0.2;
+    // opacity: 0.2;
 
     @media screen and (min-width: breakpoint('phablet')) {
       content: 'breakpoint: phablet';
@@ -165,6 +166,10 @@ textarea {
 
     @media screen and (min-width: breakpoint('wide')) {
       content: 'breakpoint: wide';
+    }
+
+    @media screen and (min-width: breakpoint('extra-wide')) {
+      content: 'breakpoint: extra-wide';
     }
   }
 }

@@ -3,7 +3,8 @@
 // 2. Vendors
 @import
 '../../node_modules/modularscale-sass/stylesheets/modularscale',
-'../../node_modules/awesomplete/awesomplete';
+'../../node_modules/awesomplete/awesomplete',
+'../../node_modules/sweetalert2/src/sweetalert2.scss';
 // '../../node_modules/awesomplete/awesomplete.theme';
 // '../../node_modules/include-media/dist/include-media';
 
@@ -41,7 +42,10 @@
 'components/info-box',
 'components/info-chart',
 'components/awesomplete',
-'components/loading';
+'components/loading',
+'components/plans-search',
+'components/big-banner',
+'components/send-plan';
 
 // 6. Page-specific styles
 // @import

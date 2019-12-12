@@ -1,12 +1,12 @@
 <header class="main-header">
   <div class="container">
     <nav class="main-nav">
-      <button class="menu__toggle">
+      <button class="js-menu-toggle menu__toggle">
         <span></span>
         <span></span>
         <span></span>
       </button>
-      <ul class="menu">
+      <ul class="js-menu-list menu">
         {{ $firstUrlElement := print "/" (index (split .URL "/") 1)  }}
 
         {{ with .Site.Menus.header }}

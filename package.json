@@ -69,6 +69,7 @@
   },
   "dependencies": {
     "awesomplete": "^1.1.5",
-    "fuzzysort": "^1.1.4"
+    "fuzzysort": "^1.1.4",
+    "sweetalert2": "^9.5.3"
   }
 }

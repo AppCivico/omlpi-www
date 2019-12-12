@@ -1,6 +1,6 @@
 {
-    "name": "APPCIVICO",
-    "short_name": "APPCIVICO",
+    "name": "Obseravt\u00f3rio",
+    "short_name": "Obseravt\u00f3rio",
     "icons": [
         {
             "src": "/favicon/android-chrome-192x192.png",
@@ -13,7 +13,7 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
+    "theme_color": "#32215c",
+    "background_color": "#32215c",
     "display": "standalone"
 }
