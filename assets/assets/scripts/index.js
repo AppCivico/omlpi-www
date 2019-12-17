@@ -5219,7 +5219,10 @@ var _default = {
     domain: window.location.hostname.indexOf('observatoriodaprimeirainfancia') !== -1 ? 'https://omlpi-api.appcivico.com/v1/' : 'https://dev-omlpi-api.appcivico.com/v1/'
   },
   apiCMS: {
-    domain: window.location.hostname.indexOf('observatoriodaprimeirainfancia') !== -1 ? 'https://omlpi-api.appcivico.com/v1/' : 'https://omlpi-strapi.herokuapp.com/'
+    domain: window.location.hostname.indexOf('observatoriodaprimeirainfancia') !== -1 ? 'https://omlpi-strapi.appcivico.com/' : 'https://dev-omlpi-strapi.appcivico.com/'
+  },
+  storage: {
+    domain: window.location.hostname.indexOf('observatoriodaprimeirainfancia') !== -1 ? 'https://omlpi-strapi.appcivico.com/' : 'https://dev-omlpi-strapi.appcivico.com/'
   }
 };
 exports.default = _default;
@@ -5237,11 +5240,13 @@ var _menu = _interopRequireDefault(require("./menu"));
 
 require("./populateData");
 
+require("./plans");
+
 (0, _search.default)();
 (0, _searchPlans.default)();
 (0, _menu.default)();
 
-},{"./menu":12,"./populateData":13,"./search":15,"./search-plans":14,"@babel/runtime/helpers/interopRequireDefault":2}],12:[function(require,module,exports){
+},{"./menu":12,"./plans":13,"./populateData":14,"./search":16,"./search-plans":15,"@babel/runtime/helpers/interopRequireDefault":2}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5273,6 +5278,79 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _config = _interopRequireDefault(require("./config"));
 
+/* global Vue */
+if (window.location.href.indexOf('plano-para-primeira-infancia') > -1) {
+  window.$vuePlans = new Vue({
+    el: '#app',
+    data: {
+      locale: null,
+      infographic: null
+    },
+    computed: {
+      loading: function loading() {
+        return !this.locale;
+      },
+      indicatorsCount: function indicatorsCount() {
+        var _this = this;
+
+        return this.locale.indicators.filter(function (indicator) {
+          return indicator.area.id === _this.selectedArea;
+        }).length;
+      }
+    },
+    mounted: function () {
+      var _mounted = (0, _asyncToGenerator2.default)(
+      /*#__PURE__*/
+      _regenerator.default.mark(function _callee() {
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.getInfoGraphic();
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function mounted() {
+        return _mounted.apply(this, arguments);
+      }
+
+      return mounted;
+    }(),
+    methods: {
+      getInfoGraphic: function getInfoGraphic() {
+        var _this2 = this;
+
+        fetch("".concat(_config.default.apiCMS.domain, "infographics/1")).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          _this2.infographic = {};
+          _this2.infographic.small = "".concat(_config.default.storage.domain).concat(response.big.url);
+          _this2.infographic.big = "".concat(_config.default.storage.domain).concat(response.small.url);
+          _this2.infographic.url = "".concat(_config.default.storage.domain).concat(response.pdf.url);
+        });
+      }
+    }
+  });
+}
+
+},{"./config":10,"@babel/runtime/helpers/asyncToGenerator":1,"@babel/runtime/helpers/interopRequireDefault":2,"@babel/runtime/regenerator":4}],14:[function(require,module,exports){
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
+var _config = _interopRequireDefault(require("./config"));
+
 var _search = _interopRequireDefault(require("./search"));
 
 /* global Vue */
@@ -5290,7 +5368,7 @@ Highcharts.setOptions({
 });
 
 if (window.location.href.indexOf('city') > -1) {
-  window.$vue = new Vue({
+  window.$vuePopulateData = new Vue({
     el: '#app',
     data: {
       selectedArea: 2,
@@ -5530,7 +5608,7 @@ if (window.location.href.indexOf('city') > -1) {
   });
 }
 
-},{"./config":10,"./search":15,"@babel/runtime/helpers/asyncToGenerator":1,"@babel/runtime/helpers/interopRequireDefault":2,"@babel/runtime/regenerator":4}],14:[function(require,module,exports){
+},{"./config":10,"./search":16,"@babel/runtime/helpers/asyncToGenerator":1,"@babel/runtime/helpers/interopRequireDefault":2,"@babel/runtime/regenerator":4}],15:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5677,7 +5755,7 @@ function startPlansSearch() {
   }
 }
 
-},{"./config":10,"@babel/runtime/helpers/asyncToGenerator":1,"@babel/runtime/helpers/interopRequireDefault":2,"@babel/runtime/regenerator":4,"awesomplete":5,"fuzzysort":6,"sweetalert2/dist/sweetalert2":8}],15:[function(require,module,exports){
+},{"./config":10,"@babel/runtime/helpers/asyncToGenerator":1,"@babel/runtime/helpers/interopRequireDefault":2,"@babel/runtime/regenerator":4,"awesomplete":5,"fuzzysort":6,"sweetalert2/dist/sweetalert2":8}],16:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");

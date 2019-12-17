@@ -17,7 +17,7 @@ Highcharts.setOptions({
 });
 
 if (window.location.href.indexOf('city') > -1) {
-  window.$vue = new Vue({
+  window.$vuePopulateData = new Vue({
     el: '#app',
     data: {
       selectedArea: 2,

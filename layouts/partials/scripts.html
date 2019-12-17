@@ -1,6 +1,13 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
+{{ if eq (getenv "NODE_ENV") "development" }}
+  <script src="https://vuejs.org/js/vue.js"></script>
+{{ else }}
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+{{ end }}
+
+
 {{ $vendorJS := resources.Get "assets/scripts/vendor.js" }}
 {{ $secureVendorJS := $vendorJS | resources.Minify | resources.Fingerprint "sha512" }}
 <script type="text/javascript" src="{{ $secureVendorJS.RelPermalink }}" integrity="{{ $secureVendorJS.Data.Integrity }}"></script>
@@ -8,5 +15,3 @@
 {{ $js := resources.Get "assets/scripts/index.js" }}
 {{ $secureJS := $js | resources.Minify | resources.Fingerprint "sha512" }}
 <script type="text/javascript" src="{{ $secureJS.RelPermalink }}" integrity="{{ $secureJS.Data.Integrity }}"></script>
-
-

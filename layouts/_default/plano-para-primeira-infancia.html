@@ -1,11 +1,5 @@
     {{ partial "head.html" . }}
 
-    {{ if eq (getenv "NODE_ENV") "development" }}
-      <link rel="preload" src="https://vuejs.org/js/vue.js" crossorigin="anonymous">
-    {{ else }}
-      <link rel="preload" src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js" crossorigin="anonymous">
-    {{ end }}
-
     <body>
       {{ partial "header.html" . }}
       <div hidden>
@@ -13,7 +7,7 @@
         <img src="/assets/images/city.svg" alt="">
       </div>
 
-      <main class="alabaster">
+      <main class="alabaster" id="app">
         <div class="container">
           <form class="plans-search">
             <div class="plans-search__text">
@@ -115,12 +109,13 @@
 
         <div class="big-banner">
           <div class="container">
-            <a href="#">
+            <a :href="infographic.url" target="_blank">
               <img
-                srcset="
-                  /assets/images/o-brasil-na-rota.jpg 350w,
-                  /assets/images/o-brasil-na-rota-large.jpg 1059w"
-                src="/assets/images/o-brasil-na-rota.jpg"
+                v-bind:srcset="`
+                  ${infographic.small} 350w,
+                  ${infographic.big} 1059w
+                `"
+                :src="infographic.big"
                 alt="O brasil na rota"
               >
             </a>
@@ -169,12 +164,6 @@
       </main>
 
       {{ partial "footer.html" . }}
-
-      {{ if eq (getenv "NODE_ENV") "development" }}
-        <script src="https://vuejs.org/js/vue.js"></script>
-      {{ else }}
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
-      {{ end }}
 
       {{ partial "scripts.html" . }}
     </body>

@@ -29,6 +29,13 @@
   <link rel="preload" type="text/javascript" as="script"
     href="{{ $secureJS.RelPermalink }}" integrity="{{ $secureJS.Data.Integrity }}">
 
+  {{ if eq (getenv "NODE_ENV") "development" }}
+  <link rel="preload" src="https://vuejs.org/js/vue.js" crossorigin="anonymous">
+  {{ else }}
+  <link rel="preload" src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js" crossorigin="anonymous">
+  {{ end }}
+
+
   <script type="text/javascript">
     document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/, '');
   </script>
