@@ -1,3 +1,5 @@
+/* global $vuePlans */
+
 import Awesomplete from 'awesomplete';
 import fuzzysort from 'fuzzysort';
 import Swal from 'sweetalert2/dist/sweetalert2';
@@ -18,6 +20,7 @@ export default function startPlansSearch() {
 
   async function mountList() {
     const list = await getList();
+    $vuePlans.locales = list;
 
     regionInput.removeAttribute('disabled');
     regionInput.removeAttribute('aria-busy');
@@ -60,11 +63,12 @@ export default function startPlansSearch() {
   function watchSelection() {
     /* eslint-disable no-unused-vars */
     regionInput.addEventListener('awesomplete-selectcomplete', (event) => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Área em desenvolvimento :(',
-      });
+      $vuePlans.setLocale(event.text.value);
+      // Swal.fire({
+      //   icon: 'error',
+      //   title: 'Oops...',
+      //   text: 'Área em desenvolvimento :(',
+      // });
       // window.location.href = `/city?id=${event.text.value}`;
     }, false);
   }

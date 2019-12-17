@@ -5,23 +5,29 @@ if (window.location.href.indexOf('plano-para-primeira-infancia') > -1) {
   window.$vuePlans = new Vue({
     el: '#app',
     data: {
-      locale: null,
       infographic: null,
+      locales: null,
+      selectedLocale: null,
+      selectedLocaleId: null,
     },
     computed: {
       loading() {
         return !this.locale;
       },
-      indicatorsCount() {
-        return this.locale.indicators.filter(
-          indicator => indicator.area.id === this.selectedArea,
-        ).length;
-      },
     },
     async mounted() {
       await this.getInfoGraphic();
+      await this.getLocales();
     },
     methods: {
+      async getLocales() {
+        const response = await fetch(`${config.apiCMS.domain}locales/1`);
+        const json = await response.json();
+        this.locale = json.locale;
+      },
+      setLocale(localeId) {
+        this.selectedLocale = this.locales.filter(locale => locale.id === localeId);
+      },
       getInfoGraphic() {
         fetch(`${config.apiCMS.domain}infographics/1`)
           .then(response => response.json())

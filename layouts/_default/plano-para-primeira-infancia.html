@@ -109,7 +109,11 @@
 
         <div class="big-banner">
           <div class="container">
-            <a :href="infographic.url" target="_blank">
+            <a
+              v-if="infographic"
+              :href="infographic.url"
+              target="_blank"
+            >
               <img
                 v-bind:srcset="`
                   ${infographic.small} 350w,
