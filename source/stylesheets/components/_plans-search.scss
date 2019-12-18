@@ -80,3 +80,7 @@
     display: block;
   }
 }
+
+.plans-search__map .active path {
+  fill: palette('purple');
+}

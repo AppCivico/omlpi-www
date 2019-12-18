@@ -26,7 +26,7 @@ export default function startPlansSearch() {
     regionInput.removeAttribute('aria-busy');
 
     const regionNames = list.map(region => ({
-      label: `${region.name}:${region.state ? 'city' : 'state'}`,
+      label: `${region.name}:${region.type}`,
       value: region.id,
     }));
 
@@ -34,13 +34,13 @@ export default function startPlansSearch() {
       item: (suggestion) => {
         const html = document.createElement('li');
         const type = suggestion.label.split(':')[1];
-        const typeString = 'Município';
-        // if (type === 'state') {
-        //   typeString = 'Estado';
-        // }
-        // if (type === 'country') {
-        //   typeString = 'País';
-        // }
+        let typeString = 'Município';
+        if (type === 'state') {
+          typeString = 'Estado';
+        }
+        if (type === 'region') {
+          typeString = 'Região';
+        }
         html.setAttribute('role', 'option');
         html.setAttribute('class', `awesomplete__${type}`);
         html.insertAdjacentHTML('beforeend',

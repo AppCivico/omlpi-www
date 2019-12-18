@@ -5286,7 +5286,9 @@ if (window.location.href.indexOf('plano-para-primeira-infancia') > -1) {
       infographic: null,
       locales: null,
       selectedLocale: null,
-      selectedLocaleId: null
+      selectedLocaleId: null,
+      relatedLocales: null,
+      capital: null
     },
     computed: {
       loading: function loading() {
@@ -5358,21 +5360,82 @@ if (window.location.href.indexOf('plano-para-primeira-infancia') > -1) {
 
         return getLocales;
       }(),
+      setMapDestak: function setMapDestak(locale) {
+        var map = document.querySelector('.js-brazil-map');
+
+        if (map.querySelector('.active')) {
+          map.querySelector('.active').classList.remove('active');
+        }
+
+        map.querySelector(".".concat(locale)).classList.add('active');
+      },
       setLocale: function setLocale(localeId) {
-        this.selectedLocale = this.locales.filter(function (locale) {
+        var _this = this;
+
+        this.resetSelectedLocales();
+        this.selectedLocale = this.locales.find(function (locale) {
           return locale.id === localeId;
         });
+
+        if (this.selectedLocale.type === 'state') {
+          var cities = this.locales.filter(function (locale) {
+            return locale.type === 'city' && locale.state === _this.selectedLocale.state;
+          });
+          this.capital = this.locales.find(function (locale) {
+            return locale.type === 'city' && locale.state === _this.selectedLocale.state && locale.is_capital;
+          });
+          this.relatedLocales = this.getSectionedLocales(cities).sort(function (a, b) {
+            return a.title > b.title ? 1 : -1;
+          });
+          this.setMapDestak(this.selectedLocale.state);
+        }
+
+        if (this.selectedLocale.type === 'region') {
+          var states = this.locales.filter(function (locale) {
+            return locale.type === 'state' && locale.region === _this.selectedLocale.region;
+          });
+          this.relatedLocales = this.getSectionedLocales(states).sort(function (a, b) {
+            return a.title > b.title ? 1 : -1;
+          });
+          this.setMapDestak(this.selectedLocale.region);
+        }
+
+        if (this.selectedLocale.type === 'city') {
+          this.setMapDestak(this.selectedLocale.state);
+        }
+      },
+      getSectionedLocales: function getSectionedLocales(locales) {
+        return Object.values(locales.reduce(function (acc, locale) {
+          var firstLetter = locale.name[0].toLocaleUpperCase();
+
+          if (!acc[firstLetter]) {
+            acc[firstLetter] = {
+              title: firstLetter,
+              data: [locale]
+            };
+          } else {
+            acc[firstLetter].data.push(locale);
+          }
+
+          return acc;
+        }, {}));
+      },
+      resetSelectedLocales: function resetSelectedLocales() {
+        this.selectedLocale = null;
+        this.selectedLocaleId = null;
+        this.relatedLocales = null;
+        this.capital = null;
       },
       getInfoGraphic: function getInfoGraphic() {
-        var _this = this;
+        var _this2 = this;
 
         fetch("".concat(_config.default.apiCMS.domain, "infographics/1")).then(function (response) {
           return response.json();
         }).then(function (response) {
-          _this.infographic = {};
-          _this.infographic.small = "".concat(_config.default.storage.domain).concat(response.big.url);
-          _this.infographic.big = "".concat(_config.default.storage.domain).concat(response.small.url);
-          _this.infographic.url = "".concat(_config.default.storage.domain).concat(response.pdf.url);
+          _this2.infographic = {};
+          _this2.infographic.small = "".concat(_config.default.storage.domain).concat(response.big.url);
+          _this2.infographic.big = "".concat(_config.default.storage.domain).concat(response.small.url);
+          _this2.infographic.url = "".concat(_config.default.storage.domain).concat(response.pdf.url);
         });
       }
     }
@@ -5735,7 +5798,7 @@ function startPlansSearch() {
               regionInput.removeAttribute('aria-busy');
               regionNames = list.map(function (region) {
                 return {
-                  label: "".concat(region.name, ":").concat(region.state ? 'city' : 'state'),
+                  label: "".concat(region.name, ":").concat(region.type),
                   value: region.id
                 };
               });
@@ -5743,12 +5806,15 @@ function startPlansSearch() {
                 item: function item(suggestion) {
                   var html = document.createElement('li');
                   var type = suggestion.label.split(':')[1];
-                  var typeString = 'Município'; // if (type === 'state') {
-                  //   typeString = 'Estado';
-                  // }
-                  // if (type === 'country') {
-                  //   typeString = 'País';
-                  // }
+                  var typeString = 'Município';
+
+                  if (type === 'state') {
+                    typeString = 'Estado';
+                  }
+
+                  if (type === 'region') {
+                    typeString = 'Região';
+                  }
 
                   html.setAttribute('role', 'option');
                   html.setAttribute('class', "awesomplete__".concat(type));

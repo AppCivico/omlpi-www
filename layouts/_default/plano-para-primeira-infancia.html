@@ -33,77 +33,45 @@
                 <button type="submit">Pesquisar</button>
               </div>
             </div>
-            <img src="/assets/images/brazil-map.svg" alt="Mapa do Brasil" class="plans-search__map">
+
+            {{ partial "svg/brazil-map.svg" (dict "class" "map-books") }}
           </form>
         </div>
 
-        <section class="plans-result">
+        <section class="plans-result" v-if="selectedLocale">
           <div class="container">
             <a class="plans-result__send-plan">Não encontrou o plano do seu estado? Envie para nós.</a>
             <header class="plans-result__header">
               <span class="plans-result__location">
-                <span class="plans-result__first-letter">M</span>
-                Minas Gerais
+                <span class="plans-result__first-letter">
+                  {{ "{{ selectedLocale.name.split('')[0].toUpperCase() }}" }}
+                </span>
+                  {{ "{{ selectedLocale.name }}" }}
               </span>
-              <span class="plans-result__capital-icon">Belo Horizonte</span>
+              <span
+                v-if="capital"
+                class="plans-result__capital-icon"
+              >
+                {{ "{{ capital.name }}" }}
+              </span>
             </header>
-            <ul class="plans-result__list">
-              <li class="plans-result__list-first-letter">A</li>
-              <li>
-                Abadia dos Dourados - sem informações
-              </li>
-              <li>
-                Vila Bela da Santíssima Trindade - sem informações
-              </li>
-              <li class="plans-result__has-plan">
-                Vila Bela da Santíssima Trindade -
-                <a href="#">Download do plano</a>
-              </li>
-              <li class="plans-result__has-plan">
-                Abaeté -
-                <a href="#">Download do plano</a>
-              </li>
-              <li class="plans-result__has-plan">
-                Abre Campo -
-                <a href="#">Download do plano</a>
-              </li>
-              <li>Acaiaca - sem informações</li>
-              <li>Açucena</li>
-              <li>Água Boa</li>
-              <li>Água Comprida</li>
-              <li>Aguanil</li>
-              <li>Águas Formosas</li>
-              <li>Águas Vermelhas</li>
-              <li>Aimorés</li>
-              <li>Aiuruoca</li>
-              <li>Alagoa</li>
-              <li>Albertina</li>
-              <li>Além Paraíba</li>
-              <li>Alfenas</li>
-              <li>Alfredo Vasconcelos</li>
-              <li>Almenara</li>
-              <li>Alpercata</li>
-              <li>Alpinópolis</li>
-              <li>Alterosa</li>
-              <li class="plans-result__list-first-letter">B</li>
-              <li>Baependi</li>
-              <li>Baldim</li>
-              <li>Bambuí</li>
-              <li>Bandeira</li>
-              <li>Bandeira do Sul</li>
-              <li>Barão de Cocais</li>
-              <li>Barão de Monte Alto</li>
-              <li>Barbacena</li>
-              <li>Barra Longa</li>
-              <li>Barroso</li>
-              <li>Bela Vista de Minas</li>
-              <li>Belmiro Braga</li>
-              <li>Belo Horizonte</li>
-              <li>Belo Oriente</li>
-              <li>Belo Vale</li>
-              <li>Berilo</li>
-              <li>Berizal</li>
-            </ul>
+            <template v-if="relatedLocales">
+              <ul
+                v-for="relatedLocale in relatedLocales"
+                class="plans-result__list"
+              >
+                <li class="plans-result__list-first-letter">{{ "{{ relatedLocale.title }}" }}</li>
+                <template v-for="locale in relatedLocale.data">
+                  <li
+                    :class="locale.plan ? 'plans-result__has-plan' : ''"
+                  >
+                    {{ "{{ locale.name }}" }} -
+                    <a v-if="locale.plan" :href="locale.plan.url">Download do plano</a>
+                    <template v-else>sem informações</template>
+                  </li>
+                </template>
+              </ul>
+            </template>
           </div>
         </section>
 
