@@ -78,11 +78,12 @@
         <div class="big-banner">
           <div class="container">
             <a
-              v-if="infographic"
+              v-if="infographic.url"
               :href="infographic.url"
               target="_blank"
             >
               <img
+                v-if="infographic.big || infographic.small"
                 v-bind:srcset="`
                   ${infographic.small} 350w,
                   ${infographic.big} 1059w
@@ -126,8 +127,8 @@
               </label>
 
               <label for="plan">
-                Upload:
-                <input type="file" name="plan">
+                Upload: (pdf)
+                <input type="file" name="plan" accept="application/pdf,application/vnd.ms-excel">
               </label>
               <button type="submit" class="button button--purple">{{ i18n "send" }}</button>
             </div>

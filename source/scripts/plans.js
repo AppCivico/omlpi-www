@@ -91,9 +91,17 @@ if (window.location.href.indexOf('plano-para-primeira-infancia') > -1) {
           .then(response => response.json())
           .then((response) => {
             this.infographic = {};
-            this.infographic.small = `${config.storage.domain}${response.big.url}`;
-            this.infographic.big = `${config.storage.domain}${response.small.url}`;
-            this.infographic.url = `${config.storage.domain}${response.pdf.url}`;
+            if (response.small && response.small.url) {
+              this.infographic.small = `${config.storage.domain}${response.small.url}`;
+            }
+
+            if (response.big && response.big.url) {
+              this.infographic.big = `${config.storage.domain}${response.big.url}`;
+            }
+
+            if (response.pdf && response.pdf.url) {
+              this.infographic.url = `${config.storage.domain}${response.pdf.url}`;
+            }
           });
       },
     },

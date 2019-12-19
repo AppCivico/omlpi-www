@@ -2428,9 +2428,18 @@ if (window.location.href.indexOf('plano-para-primeira-infancia') > -1) {
           return response.json();
         }).then(function (response) {
           _this2.infographic = {};
-          _this2.infographic.small = "".concat(_config.default.storage.domain).concat(response.big.url);
-          _this2.infographic.big = "".concat(_config.default.storage.domain).concat(response.small.url);
-          _this2.infographic.url = "".concat(_config.default.storage.domain).concat(response.pdf.url);
+
+          if (response.small && response.small.url) {
+            _this2.infographic.small = "".concat(_config.default.storage.domain).concat(response.small.url);
+          }
+
+          if (response.big && response.big.url) {
+            _this2.infographic.big = "".concat(_config.default.storage.domain).concat(response.big.url);
+          }
+
+          if (response.pdf && response.pdf.url) {
+            _this2.infographic.url = "".concat(_config.default.storage.domain).concat(response.pdf.url);
+          }
         });
       }
     }
