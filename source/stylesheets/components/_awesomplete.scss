@@ -27,8 +27,9 @@
 }
 
 .awesomplete__country,
-.awesomplete__city,
-.awesomplete__state {
+.awesomplete__region,
+.awesomplete__state,
+.awesomplete__city {
   display: flex;
   align-items: center;
 
@@ -45,10 +46,14 @@
   background-image: image('brazil.svg');
 }
 
-.awesomplete__city::before {
-  background-image: image('city.svg');
+.awesomplete__region::before {
+  background-image: image('region.svg');
 }
 
 .awesomplete__state::before {
   background-image: image('location-pin.svg');
+}
+
+.awesomplete__city::before {
+  background-image: image('city.svg');
 }

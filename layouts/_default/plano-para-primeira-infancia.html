@@ -12,24 +12,22 @@
           <form class="plans-search">
             <div class="plans-search__text">
               <h1>
-                A Andi disponibiliza um estudo sobre 100 Planos de Primeira Infância no Brasil.
-                <br>
-                Encontre um plano!
+                  Se você possuí o Plano de Primeira Infância de alguma localidade do Brasil,
+                  <a href="#enviar-plano" >envie pra nós!</a>
               </h1>
               <h2>
-                Se você possuí o Plano de Primeira Infância de alguma localidade do Brazil, envie pra nós!
+                <label for="js-plan-search">
+                  Escolha um estado, município ou região para encontrar um plano
+                </label>
               </h2>
               <div class="plans-search__input">
-                <label for="plan-search">
-                  Escolha um estado ou município
                   <input
                     id="js-plan-search"
                     disabled
                     aria-busy="true"
                     type="text"
-                    placeholder="Campo Grande MS"
+                    placeholder="Brasília, Goiás, Centro Oeste"
                   >
-                </label>
                 <button type="submit">Pesquisar</button>
               </div>
             </div>
@@ -40,11 +38,14 @@
 
         <section class="plans-result" v-if="selectedLocale">
           <div class="container">
-            <a class="plans-result__send-plan">Não encontrou o plano do seu estado? Envie para nós.</a>
+            <a href="#enviar-plano" class="plans-result__send-plan">Não encontrou o plano do seu estado? Envie para nós.</a>
             <header class="plans-result__header">
               <span class="plans-result__location">
-                <span class="plans-result__first-letter">
-                  {{ "{{ selectedLocale.name.split('')[0].toUpperCase() }}" }}
+                <span
+                  class="plans-result__first-letter"
+                  :class="selectedLocale.type === 'region' ? 'plans-result__first-letter--region' : ''"
+                >
+                  {{ "{{ selectedLocale.type === 'region' ? '' : selectedLocale.name.split('')[0].toUpperCase() }}" }}
                 </span>
                   {{ "{{ selectedLocale.name }}" }} -
                   <a
@@ -60,7 +61,7 @@
                 v-if="capital"
                 class="plans-result__capital-icon"
               >
-                {{ "{{ capital.name }}" }}
+                {{ "{{ capital.name }}" }} -
                 <a
                   v-if="capital.plan"
                   :href="`${storageDomain}${capital.plan.url}`"
@@ -118,10 +119,10 @@
         </div>
 
         <div class="container">
-          <form class="send-plan" action="">
+          <form class="send-plan" action="" id="enviar-plano">
             <div class="send-plan__text">
               <h3>Não encontrou o plano do seu município?</h3>
-              <p>Seu municípo possuí um Plano para a Primeira Infância. </p>
+              <p>Seu município possuí um Plano para a Primeira Infância. </p>
 
               <p>Envie para o Observatório para que ele seja disponibilizado aqui, preenchendo o formulário.</p>
 

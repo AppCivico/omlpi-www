@@ -20,14 +20,8 @@ if (window.location.href.indexOf('plano-para-primeira-infancia') > -1) {
     },
     async mounted() {
       await this.getInfoGraphic();
-      await this.getLocales();
     },
     methods: {
-      async getLocales() {
-        const response = await fetch(`${config.apiCMS.domain}locales/1`);
-        const json = await response.json();
-        this.locale = json.locale;
-      },
       setMapDestak(locale) {
         const map = document.querySelector('.js-brazil-map');
 

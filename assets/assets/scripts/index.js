@@ -2303,10 +2303,6 @@ if (window.location.href.indexOf('plano-para-primeira-infancia') > -1) {
                 return this.getInfoGraphic();
 
               case 2:
-                _context.next = 4;
-                return this.getLocales();
-
-              case 4:
               case "end":
                 return _context.stop();
             }
@@ -2321,41 +2317,6 @@ if (window.location.href.indexOf('plano-para-primeira-infancia') > -1) {
       return mounted;
     }(),
     methods: {
-      getLocales: function () {
-        var _getLocales = (0, _asyncToGenerator2.default)(
-        /*#__PURE__*/
-        _regenerator.default.mark(function _callee2() {
-          var response, json;
-          return _regenerator.default.wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  _context2.next = 2;
-                  return fetch("".concat(_config.default.apiCMS.domain, "locales/1"));
-
-                case 2:
-                  response = _context2.sent;
-                  _context2.next = 5;
-                  return response.json();
-
-                case 5:
-                  json = _context2.sent;
-                  this.locale = json.locale;
-
-                case 7:
-                case "end":
-                  return _context2.stop();
-              }
-            }
-          }, _callee2, this);
-        }));
-
-        function getLocales() {
-          return _getLocales.apply(this, arguments);
-        }
-
-        return getLocales;
-      }(),
       setMapDestak: function setMapDestak(locale) {
         var map = document.querySelector('.js-brazil-map');
 
@@ -2758,7 +2719,7 @@ function startPlansSearch() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("".concat(_config.default.apiCMS.domain, "locales"));
+              return fetch("".concat(_config.default.apiCMS.domain, "locales?_limit=7000"));
 
             case 2:
               response = _context.sent;
