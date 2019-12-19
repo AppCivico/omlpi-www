@@ -82,6 +82,10 @@
   }
 }
 
+.plans-search__map path {
+  transition: fill 0.3s;
+}
+
 .plans-search__map .active path {
   fill: palette('purple');
 }
