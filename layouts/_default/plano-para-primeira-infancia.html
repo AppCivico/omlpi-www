@@ -46,13 +46,29 @@
                 <span class="plans-result__first-letter">
                   {{ "{{ selectedLocale.name.split('')[0].toUpperCase() }}" }}
                 </span>
-                  {{ "{{ selectedLocale.name }}" }}
+                  {{ "{{ selectedLocale.name }}" }} -
+                  <a
+                    v-if="selectedLocale.plan"
+                    :href="`${storageDomain}${selectedLocale.plan.url}`"
+                    target="_blank"
+                  >
+                    Download do plano
+                  </a>
+                  <template v-else>sem informações</template>
               </span>
               <span
                 v-if="capital"
                 class="plans-result__capital-icon"
               >
                 {{ "{{ capital.name }}" }}
+                <a
+                  v-if="capital.plan"
+                  :href="`${storageDomain}${capital.plan.url}`"
+                  target="_blank"
+                >
+                  Download do plano
+                </a>
+                <template v-else>sem informações</template>
               </span>
             </header>
             <template v-if="relatedLocales">
@@ -66,7 +82,13 @@
                     :class="locale.plan ? 'plans-result__has-plan' : ''"
                   >
                     {{ "{{ locale.name }}" }} -
-                    <a v-if="locale.plan" :href="locale.plan.url">Download do plano</a>
+                    <a
+                      v-if="locale.plan"
+                      :href="`${storageDomain}${locale.plan.url}`"
+                      target="_blank"
+                    >
+                      Download do plano
+                    </a>
                     <template v-else>sem informações</template>
                   </li>
                 </template>

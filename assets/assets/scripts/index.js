@@ -2283,7 +2283,8 @@ if (window.location.href.indexOf('plano-para-primeira-infancia') > -1) {
       selectedLocale: null,
       selectedLocaleId: null,
       relatedLocales: null,
-      capital: null
+      capital: null,
+      storageDomain: _config.default.storage.domain
     },
     computed: {
       loading: function loading() {
