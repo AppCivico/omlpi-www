@@ -2386,7 +2386,7 @@ if (window.location.href.indexOf('plano-para-primeira-infancia') > -1) {
       getInfoGraphic: function getInfoGraphic() {
         var _this2 = this;
 
-        fetch("".concat(_config.default.apiCMS.domain, "infographics/1")).then(function (response) {
+        fetch("".concat(_config.default.apiCMS.domain, "infograficos/1")).then(function (response) {
           return response.json();
         }).then(function (response) {
           _this2.infographic = {};
@@ -2719,7 +2719,7 @@ function startPlansSearch() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("".concat(_config.default.apiCMS.domain, "locales?_limit=7000"));
+              return fetch("".concat(_config.default.apiCMS.domain, "localidades?_limit=7000"));
 
             case 2:
               response = _context.sent;

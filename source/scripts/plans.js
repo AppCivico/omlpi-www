@@ -82,7 +82,7 @@ if (window.location.href.indexOf('plano-para-primeira-infancia') > -1) {
         this.capital = null;
       },
       getInfoGraphic() {
-        fetch(`${config.apiCMS.domain}infographics/1`)
+        fetch(`${config.apiCMS.domain}infograficos/1`)
           .then(response => response.json())
           .then((response) => {
             this.infographic = {};

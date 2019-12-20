@@ -13,7 +13,7 @@ export default function startPlansSearch() {
   }
 
   async function getList() {
-    const response = await fetch(`${config.apiCMS.domain}locales?_limit=7000`);
+    const response = await fetch(`${config.apiCMS.domain}localidades?_limit=7000`);
     const json = await response.json();
     return json;
   }
