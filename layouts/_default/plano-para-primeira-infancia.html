@@ -151,7 +151,13 @@
 
               <label for="plan">
                 Upload: (pdf)
-                <input type="file" name="plan" accept="application/pdf,application/vnd.ms-excel">
+                <input type="file" id="plan" v-model="form.file" name="plan" accept="application/pdf,application/vnd.ms-excel">
+                <span class="plan__custom-upload">
+                  <span class="plan__custom-upload-text">
+                    {{ "{{ form.file }}" }}
+                  </span>
+                  <div class="plan__custom-upload-button">Upload</div>
+                </span>
               </label>
               <button type="submit" class="button button--purple">{{ i18n "send" }}</button>
             </div>
