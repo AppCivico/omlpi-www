@@ -40,7 +40,10 @@
           <div class="container">
             <a href="#enviar-plano" class="plans-result__send-plan">Não encontrou o plano do seu estado? Envie para nós.</a>
             <header class="plans-result__header">
-              <span class="plans-result__location">
+              <span
+                class="plans-result__location"
+                :class="selectedLocale.plan ? 'plans-result__location--with-plan' : ''"
+                >
                 <span
                   class="plans-result__first-letter"
                   :class="selectedLocale.type === 'region' ? 'plans-result__first-letter--region' : ''"
