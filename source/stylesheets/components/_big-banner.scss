@@ -1,11 +1,16 @@
 .big-banner {
   width: 100%;
   margin: 1rem 0;
+  text-align: center;
 
   @media screen and (min-width: breakpoint('phablet')) {
     margin-top: 3rem;
     margin-bottom: 3rem;
   }
+}
+
+.big-banner a {
+  display: inline-block;
 }
 
 .big-banner img {

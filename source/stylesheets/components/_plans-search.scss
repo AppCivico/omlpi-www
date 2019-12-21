@@ -2,15 +2,15 @@
   background-color: palette('gray', 'alabaster');
 
 
-  @media screen and (min-width: breakpoint('wide')) {
+  // @media screen and (min-width: breakpoint('extra-wide')) {
+  //   background-size: 10%, 8%, 5%;
+  // }
+
+  @media screen and (min-width: breakpoint('extra-wide')) {
     background-image: image('plans-top-left.svg'),
     image('plans-bottom-left.svg'),
     image('plans-bottom-right.svg');
     background-position: top left, bottom left, bottom right;
-    background-size: 10%, 8%, 5%;
-  }
-
-  @media screen and (min-width: breakpoint('extra-wide')) {
     background-size: auto;
   }
 }
@@ -19,6 +19,7 @@
   @media screen and (min-width: breakpoint('desktop')) {
     display: flex;
     align-items: center;
+    justify-content: space-around;
     margin-top: 3rem;
   }
 }
@@ -79,4 +80,12 @@
   @media screen and (min-width: breakpoint('desktop')) {
     display: block;
   }
+}
+
+.plans-search__map path {
+  transition: fill 0.3s;
+}
+
+.plans-search__map .active path {
+  fill: palette('purple');
 }

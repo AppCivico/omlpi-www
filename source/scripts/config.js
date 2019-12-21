@@ -6,7 +6,12 @@ export default {
   },
   apiCMS: {
     domain: (window.location.hostname.indexOf('observatoriodaprimeirainfancia') !== -1
-      ? 'https://omlpi-api.appcivico.com/v1/'
-      : 'https://omlpi-strapi.herokuapp.com/'),
+      ? 'https://omlpi-strapi.appcivico.com/'
+      : 'https://dev-omlpi-strapi.appcivico.com/'),
+  },
+  storage: {
+    domain: (window.location.hostname.indexOf('observatoriodaprimeirainfancia') !== -1
+      ? 'https://omlpi-strapi.appcivico.com/'
+      : 'https://dev-omlpi-strapi.appcivico.com/'),
   },
 };

@@ -1,11 +1,5 @@
     {{ partial "head.html" . }}
 
-    {{ if eq (getenv "NODE_ENV") "development" }}
-      <link rel="preload" src="https://vuejs.org/js/vue.js" crossorigin="anonymous">
-    {{ else }}
-      <link rel="preload" src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js" crossorigin="anonymous">
-    {{ end }}
-
     <body>
       {{ partial "header.html" . }}
       <div hidden>
@@ -13,44 +7,111 @@
         <img src="/assets/images/city.svg" alt="">
       </div>
 
-      <main class="alabaster">
+      <main class="alabaster" id="app">
         <div class="container">
           <form class="plans-search">
             <div class="plans-search__text">
               <h1>
-                A Andi disponibiliza um estudo sobre 100 Planos de Primeira Infância no Brasil.
-                <br>
-                Encontre um plano!
+                  Se você possuí o Plano de Primeira Infância de alguma localidade do Brasil,
+                  <a href="#enviar-plano" >envie pra nós!</a>
               </h1>
               <h2>
-                Se você possuí o Plano de Primeira Infância de alguma localidade do Brazil, envie pra nós!
+                <label for="js-plan-search">
+                  Escolha um estado, município ou região para encontrar um plano
+                </label>
               </h2>
               <div class="plans-search__input">
-                <label for="plan-search">
-                  Escolha um estado ou município
                   <input
                     id="js-plan-search"
                     disabled
                     aria-busy="true"
                     type="text"
-                    placeholder="Campo Grande MS"
+                    placeholder="Brasília, Goiás, Centro Oeste"
                   >
-                </label>
                 <button type="submit">Pesquisar</button>
               </div>
             </div>
-            <img src="/assets/images/brazil-map.svg" alt="Mapa do Brasil" class="plans-search__map">
+
+            {{ partial "svg/brazil-map.svg" (dict "class" "map-books") }}
           </form>
         </div>
 
+        <section class="plans-result" v-if="selectedLocale">
+          <div class="container">
+            <a href="#enviar-plano" class="plans-result__send-plan">Não encontrou o plano do seu estado? Envie para nós.</a>
+            <header class="plans-result__header">
+              <span class="plans-result__location">
+                <span
+                  class="plans-result__first-letter"
+                  :class="selectedLocale.type === 'region' ? 'plans-result__first-letter--region' : ''"
+                >
+                  {{ "{{ selectedLocale.type === 'region' ? '' : selectedLocale.name.split('')[0].toUpperCase() }}" }}
+                </span>
+                  {{ "{{ selectedLocale.name }}" }} -
+                  <a
+                    v-if="selectedLocale.plan"
+                    :href="`${storageDomain}${selectedLocale.plan.url}`"
+                    target="_blank"
+                  >
+                    Download do plano
+                  </a>
+                  <template v-else>sem informações</template>
+              </span>
+              <span
+                v-if="capital"
+                class="plans-result__capital-icon"
+              >
+                {{ "{{ capital.name }}" }} -
+                <a
+                  v-if="capital.plan"
+                  :href="`${storageDomain}${capital.plan.url}`"
+                  target="_blank"
+                >
+                  Download do plano
+                </a>
+                <template v-else>sem informações</template>
+              </span>
+            </header>
+            <template v-if="relatedLocales">
+              <ul
+                v-for="relatedLocale in relatedLocales"
+                class="plans-result__list"
+              >
+                <li class="plans-result__list-first-letter">{{ "{{ relatedLocale.title }}" }}</li>
+                <template v-for="locale in relatedLocale.data">
+                  <li
+                    :class="locale.plan ? 'plans-result__has-plan' : ''"
+                  >
+                    {{ "{{ locale.name }}" }} -
+                    <a
+                      v-if="locale.plan"
+                      :href="`${storageDomain}${locale.plan.url}`"
+                      target="_blank"
+                    >
+                      Download do plano
+                    </a>
+                    <template v-else>sem informações</template>
+                  </li>
+                </template>
+              </ul>
+            </template>
+          </div>
+        </section>
+
         <div class="big-banner">
           <div class="container">
-            <a href="#">
+            <a
+              v-if="infographic && infographic.url"
+              :href="infographic.url"
+              target="_blank"
+            >
               <img
-                srcset="
-                  /assets/images/o-brasil-na-rota.jpg 350w,
-                  /assets/images/o-brasil-na-rota-large.jpg 1059w"
-                src="/assets/images/o-brasil-na-rota.jpg"
+                v-if="infographic.big || infographic.small"
+                v-bind:srcset="`
+                  ${infographic.small} 350w,
+                  ${infographic.big} 1059w
+                `"
+                :src="infographic.big"
                 alt="O brasil na rota"
               >
             </a>
@@ -58,10 +119,10 @@
         </div>
 
         <div class="container">
-          <form class="send-plan" action="">
+          <form class="send-plan" action="" id="enviar-plano">
             <div class="send-plan__text">
               <h3>Não encontrou o plano do seu município?</h3>
-              <p>Seu municípo possuí um Plano para a Primeira Infância. </p>
+              <p>Seu município possuí um Plano para a Primeira Infância. </p>
 
               <p>Envie para o Observatório para que ele seja disponibilizado aqui, preenchendo o formulário.</p>
 
@@ -89,8 +150,8 @@
               </label>
 
               <label for="plan">
-                Upload:
-                <input type="file" name="plan">
+                Upload: (pdf)
+                <input type="file" name="plan" accept="application/pdf,application/vnd.ms-excel">
               </label>
               <button type="submit" class="button button--purple">{{ i18n "send" }}</button>
             </div>
@@ -99,12 +160,6 @@
       </main>
 
       {{ partial "footer.html" . }}
-
-      {{ if eq (getenv "NODE_ENV") "development" }}
-        <script src="https://vuejs.org/js/vue.js"></script>
-      {{ else }}
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
-      {{ end }}
 
       {{ partial "scripts.html" . }}
     </body>

@@ -14,6 +14,7 @@
 }
 
 .send-plan__text h3 {
+  margin-top: 0;
   font-size: ms(4);
   color: palette('purple');
 }
@@ -62,7 +63,7 @@
 
 .send-plan__fields button {
   justify-content: center;
-  min-width: 12.5rem;
+  // min-width: 10.5rem;
   margin: 0 auto;
 
   @media screen and (min-width: breakpoint('phablet')) {
