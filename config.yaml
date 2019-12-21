@@ -28,7 +28,7 @@ menu:
     weight: 2
   - identifier: "plano para primeira infância"
     name: "plano para primeira infância"
-    url: "#"
+    url: "/plano-para-primeira-infancia"
     weight: 3
   - identifier: "biblioteca"
     name: "biblioteca"
