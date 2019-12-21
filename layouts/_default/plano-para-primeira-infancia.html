@@ -40,7 +40,10 @@
           <div class="container">
             <a href="#enviar-plano" class="plans-result__send-plan">Não encontrou o plano do seu estado? Envie para nós.</a>
             <header class="plans-result__header">
-              <span class="plans-result__location">
+              <span
+                class="plans-result__location"
+                :class="selectedLocale.plan ? 'plans-result__location--with-plan' : ''"
+                >
                 <span
                   class="plans-result__first-letter"
                   :class="selectedLocale.type === 'region' ? 'plans-result__first-letter--region' : ''"
@@ -151,7 +154,13 @@
 
               <label for="plan">
                 Upload: (pdf)
-                <input type="file" name="plan" accept="application/pdf,application/vnd.ms-excel">
+                <input type="file" id="plan" v-model="form.file" name="plan" accept="application/pdf,application/vnd.ms-excel">
+                <span class="plan__custom-upload">
+                  <span class="plan__custom-upload-text">
+                    {{ "{{ form.file }}" }}
+                  </span>
+                  <div class="plan__custom-upload-button">Upload</div>
+                </span>
               </label>
               <button type="submit" class="button button--purple">{{ i18n "send" }}</button>
             </div>
