@@ -3,6 +3,7 @@ import startPlansSearch from './search-plans';
 import startMenutoggle from './menu';
 import './populateData';
 import './plans';
+import './articles';
 
 startSearch();
 startPlansSearch();

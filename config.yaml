@@ -32,7 +32,7 @@ menu:
     weight: 3
   - identifier: "biblioteca"
     name: "biblioteca"
-    url: "#"
+    url: "/biblioteca"
     weight: 4
   about:
   - identifier: "Sobre a Andi"

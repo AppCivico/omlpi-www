@@ -21,6 +21,12 @@
   background-image: none;
 }
 
+.search-area__library {
+  min-height: 0;
+  padding: 3rem 0 1.5rem;
+  background: none;
+}
+
 .search-area .container {
   max-width: 40.625rem;
   margin-right: auto;
@@ -44,6 +50,16 @@
   }
 }
 
+.search-area__library label {
+  font-size: ms(1);
+  color: palette('gray');
+}
+
+.search-area__library .awesomplete {
+  margin-top: 0.5rem;
+}
+
+
 .search-area input {
   width: 100%;
   padding: 0.8rem 1.5rem;
@@ -54,7 +70,7 @@
 
 .search-area button {
   position: absolute;
-  right: 0;
+  right: 1rem;
   bottom: 0;
   width: 2.2rem;
   height: 3.125rem;
