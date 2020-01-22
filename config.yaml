@@ -19,12 +19,11 @@ menu:
   header:
   - identifier: "Início"
     name: "Início"
-    url: "#"
+    url: "/"
     weight: 1
   - identifier: "Indicadores"
     name: "Indicadores"
-    url: "/eixo-1"
-    url: "/"
+    url: "/indicadores"
     weight: 2
   - identifier: "plano para primeira infância"
     name: "plano para primeira infância"
