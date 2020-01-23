@@ -1,0 +1,68 @@
+.main-areas h1 {
+  font-weight: font-weight('light');
+  font-size: ms(6);
+  line-height: 1.2;
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    font-size: ms(11);
+  }
+}
+
+.main-area__boxes {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+
+
+  @media screen and (min-width: breakpoint('phablet')) {
+    margin-bottom: 3rem;
+  }
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    padding: 3rem;
+  }
+}
+
+.main-area__boxes .button {
+  justify-content: center;
+  margin-top: auto;
+  font-size: ms(-1);
+
+  @media screen and (min-width: breakpoint('desktop')) {
+  }
+}
+
+.main-area__box {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3rem;
+
+  @media screen and (min-width: breakpoint('phablet')) {
+    text-align: center;
+  }
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    width: calc(100% / 3 - 1rem);
+    margin-bottom: 2rem;
+  }
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    width: calc(100% / 3 - 1.9rem);
+  }
+}
+
+.main-area__box h2 {
+  line-height: 1.2;
+  text-align: center;
+  color: palette('purple');
+
+  @media screen and (min-width: breakpoint('phablet')) {
+    font-size: ms(3);
+  }
+}

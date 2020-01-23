@@ -1,0 +1,43 @@
+.indicator-boxes {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: breakpoint('phablet')) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
+
+.indicator-boxes__box {
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  color: palette('white');
+  background: palette('green');
+
+  @media screen and (min-width: breakpoint('phablet')) {
+    width: calc(50% - 0.5rem);
+    text-align: center;
+  }
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    width: calc(100% / 3 - 0.5rem);
+  }
+}
+
+.indicator-boxes__box h3 {
+  font-weight: font-weight('normal');
+  font-size: ms(0);
+}
+
+.indicator-boxes__box h3,
+.indicator-boxes__box h4 {
+  color: palette('white');
+}
+
+.indicator-boxes__box h4 {
+  margin: 1rem;
+  font-size: ms(8);
+  text-align: center;
+}
