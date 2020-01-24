@@ -25,6 +25,9 @@
               </div>
               <div class="library-item__content">
                 <h2>{{ "{{ article.title }}" }}</h2>
+                <span class="library-item__author">
+                  {{ "{{ article.author }}" }}
+                </span>
                 <span class="library-item__time">
                   Data de publicação
                   <time :datetime="article.date">{{ "{{ article.date }}" }}</time>

@@ -5838,28 +5838,35 @@ if (window.location.href.indexOf('biblioteca') > -1) {
         _regenerator.default.mark(function _callee2() {
           var _this2 = this;
 
-          var articles;
+          var articles, tagged;
           return _regenerator.default.wrap(function _callee2$(_context2) {
             while (1) {
               switch (_context2.prev = _context2.next) {
                 case 0:
-                  articles = [];
-                  _context2.next = 3;
+                  _context2.next = 2;
                   return fetch("".concat(_config.default.apiCMS.domain, "artigos?title_contains=").concat(this.searchQuery)).then(function (response) {
                     return response.json();
                   }).then(function (response) {
                     articles = response;
                   });
 
-                case 3:
-                  _context2.next = 5;
+                case 2:
+                  _context2.next = 4;
+                  return fetch("".concat(_config.default.apiCMS.domain, "artigos/tagged/").concat(this.searchQuery)).then(function (response) {
+                    return response.json();
+                  }).then(function (response) {
+                    tagged = response;
+                  });
+
+                case 4:
+                  _context2.next = 6;
                   return fetch("".concat(_config.default.apiCMS.domain, "artigos?author_contains=").concat(this.searchQuery)).then(function (response) {
                     return response.json();
                   }).then(function (response) {
-                    _this2.articles = (0, _uniqBy2.default)([].concat((0, _toConsumableArray2.default)(articles), (0, _toConsumableArray2.default)(response)), 'id');
+                    _this2.articles = (0, _uniqBy2.default)([].concat((0, _toConsumableArray2.default)(articles), (0, _toConsumableArray2.default)(tagged), (0, _toConsumableArray2.default)(response)), 'id');
                   });
 
-                case 5:
+                case 6:
                 case "end":
                   return _context2.stop();
               }

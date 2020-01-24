@@ -42,16 +42,21 @@ if (window.location.href.indexOf('biblioteca') > -1) {
           });
       },
       async searchArticles() {
-        let articles = [];
+        let articles;
+        let tagged;
 
         await fetch(`${config.apiCMS.domain}artigos?title_contains=${this.searchQuery}`)
           .then(response => response.json())
           .then((response) => { articles = response; });
 
+        await fetch(`${config.apiCMS.domain}artigos/tagged/${this.searchQuery}`)
+          .then(response => response.json())
+          .then((response) => { tagged = response; });
+
         await fetch(`${config.apiCMS.domain}artigos?author_contains=${this.searchQuery}`)
           .then(response => response.json())
           .then((response) => {
-            this.articles = _uniqBy([...articles, ...response], 'id');
+            this.articles = _uniqBy([...articles, ...tagged, ...response], 'id');
           });
       },
 
