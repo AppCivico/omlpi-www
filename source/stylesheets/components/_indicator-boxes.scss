@@ -26,7 +26,8 @@
     top: 4.375rem;
     width: 9.7rem;
     height: 0.25rem;
-    background: linear-gradient(87deg, rgba(215,100,245,1) 0%, rgba(206,100,245,1) 36%, rgba(103,218,214,1) 63%, rgba(193,241,240,1) 100%);
+    background: linear-gradient(87deg, palette('gradient', 'purple') 0%, palette('gradient', 'purple-lighter') 36%,
+      palette('gradient', 'blue') 63%, palette('gradient', 'blue-lighter') 100%);
     content: '';
   }
 
@@ -51,7 +52,7 @@
   display: block;
   font-weight: bold;
 
-  &:before {
+  &::before {
     display: inline-block;
     width: 1.25rem;
     height: 1.25rem;
