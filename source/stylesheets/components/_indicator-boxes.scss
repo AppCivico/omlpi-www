@@ -5,34 +5,90 @@
   padding: 1.5rem;
   background: palette('green');
 
-  @media screen and (min-width: breakpoint('phablet')) {
+  @media screen and (min-width: breakpoint('desktop')) {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    padding: 2rem;
   }
 }
 
 .indicator-boxes h2 {
+  position: relative;
+  margin-bottom: 2rem;
   font-weight: font-weight('bold');
-  font-size: ms(8);
+  font-size: ms(4);
+  line-height: 1.2;
   color: palette('white');
+
+  &::before {
+    position: absolute;
+    top: 4.375rem;
+    width: 9.7rem;
+    height: 0.25rem;
+    background: linear-gradient(87deg, rgba(215,100,245,1) 0%, rgba(206,100,245,1) 36%, rgba(103,218,214,1) 63%, rgba(193,241,240,1) 100%);
+    content: '';
+  }
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    width: calc(20% - 0.5rem);
+  }
+}
+
+
+.indicator-boxes .brazil-header {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: ms(11);
+}
+
+.indicator-boxes h2 span {
+  display: block;
+  text-transform: uppercase;
+}
+
+.indicator-boxes-axis {
+  display: block;
+  font-weight: bold;
+
+  &:before {
+    display: inline-block;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.8rem;
+    vertical-align: text-bottom;
+    background-size: 100%;
+    content: '';
+  }
+}
+
+.indicator-boxes-axis--health {
+  background-image: image('health.svg');
+}
+
+.indicator-boxes-axis--education {
+  background-image: image('education.svg');
+}
+
+.indicator-boxes-axis--social-assistance {
+  background-image: image('people.svg');
 }
 
 .indicator-boxes__box {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   color: palette('white');
 
-  @media screen and (min-width: breakpoint('phablet')) {
-    width: calc(50% - 0.5rem);
-    text-align: center;
+  @media screen and (min-width: breakpoint('desktop')) {
+    width: calc(25% - 0.5rem);
   }
 
-  @media screen and (min-width: breakpoint('tablet')) {
-    width: calc(100% / 3 - 0.5rem);
+  @media screen and (min-width: breakpoint('desktop')) {
+    width: calc(25% - 1rem);
   }
 }
 
 .indicator-boxes__box h3 {
+  margin-top: 0.5rem;
   font-weight: font-weight('normal');
   font-size: ms(0);
 }
@@ -43,7 +99,7 @@
 }
 
 .indicator-boxes__box h4 {
-  margin: 1rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
   font-size: ms(8);
-  text-align: center;
 }

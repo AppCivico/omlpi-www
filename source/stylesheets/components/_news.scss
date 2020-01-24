@@ -22,6 +22,14 @@
     width: calc(100% / 3 - 1rem);
     margin-bottom: 2rem;
   }
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    width: calc(100% / 3 - 2rem);
+  }
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    width: calc(100% / 3 - 4rem);
+  }
 }
 
 .news h1 {
