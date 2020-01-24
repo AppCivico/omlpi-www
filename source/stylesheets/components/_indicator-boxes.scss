@@ -2,6 +2,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  padding: 1.5rem;
+  background: palette('green');
 
   @media screen and (min-width: breakpoint('phablet')) {
     flex-direction: row;
@@ -10,11 +12,15 @@
   }
 }
 
+.indicator-boxes h2 {
+  font-weight: font-weight('bold');
+  font-size: ms(8);
+  color: palette('white');
+}
+
 .indicator-boxes__box {
-  padding: 1.5rem;
   margin-bottom: 1rem;
   color: palette('white');
-  background: palette('green');
 
   @media screen and (min-width: breakpoint('phablet')) {
     width: calc(50% - 0.5rem);
