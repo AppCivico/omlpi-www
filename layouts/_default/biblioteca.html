@@ -27,11 +27,14 @@
                 <h2>{{ "{{ article.title }}" }}</h2>
                 <span class="library-item__author">
                   Autor: {{ "{{ article.author }}" }}
-                </span>
-                <span class="library-item__time">
+                  |
                   Data de publicação
                   <time :datetime="article.date">{{ "{{ article.date }}" }}</time>
+                  |
+                  Organização: USP
                 </span>
+                <!-- <span class="library&#45;item__time"> -->
+                <!-- </span> -->
                 <div class="library-item__tags">
                   <template v-for="(tag, index) in article.tags">
                     <a @click="searchByTag(tag.name)">{{ "{{ tag.name }}" }}</a>
@@ -46,7 +49,7 @@
 
                 <a
                   :href="`${storageDomain}${article.file.url}`"
-                  class="button button--purple"
+                  class="button"
                   download
                 >
                   baixar

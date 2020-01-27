@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 2.5rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid palette('gray', 'light');
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid palette('gray', 'x-light');
 
   @media screen and (min-width: breakpoint('desktop')) {
     display: flex;
@@ -13,12 +13,9 @@
 }
 
 .library-item__image {
-  display: none;
-  align-self: center;
-
-  @media screen and (min-width: breakpoint('phablet')) {
-    display: block;
-  }
+  display: flex;
+  align-self: flex-start;
+  justify-content: center;
 }
 
 .library-item__content {
@@ -32,6 +29,7 @@
 }
 
 .library-item h2 {
+  margin-top: 0;
   font-weight: font-weight('bold');
   font-size: ms(3);
   line-height: 1.2;
@@ -56,7 +54,8 @@
 }
 
 .library-item__tags {
-  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   margin-left: -0.5rem;
 }
 
