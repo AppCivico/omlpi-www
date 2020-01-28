@@ -23,7 +23,7 @@
           <div class="white-box main-area__boxes">
             <div class="main-area__box">
               <figure>
-                <img src="/assets/images/home-indicators.png" alt="Indicadores">
+                <img src="/assets/images/home-indicators.jpg" alt="Indicadores">
               </figure>
               <h2>Indicadores</h2>
               <p>Construímos um ambiente onde é possível pesquisar por indicadores e seus desagregadores com base no Marco Legal de 2016, para auxiliar no processo de construção de políticas públicas em todo o território nacional.</p>
@@ -32,7 +32,7 @@
             </div>
             <div class="main-area__box">
               <figure>
-                <img src="/assets/images/home-plan.png" alt="Plano para Primeira Infância">
+                <img src="/assets/images/home-plan.jpg" alt="Plano para Primeira Infância">
               </figure>
               <h2>Plano para Primeira Infância</h2>
               <p>O Observa analisou 100 planos de primeira infância no Brasil e criou um infográfico para informar e documentar os 5.570 municípios existente na nossa nação.</p>
@@ -41,7 +41,7 @@
             </div>
             <div class="main-area__box">
               <figure>
-                <img src="/assets/images/home-articles.png" alt="Biblioteca">
+                <img src="/assets/images/home-articles.jpg" alt="Biblioteca">
               </figure>
               <h2>Biblioteca</h2>
               <p>Com o intuito de disseminar as informações, conhecimentos e materiais referenciais sobre os temas: Marco Legal 2016 e Primeira Infância.</p>
@@ -95,25 +95,31 @@
         </div>
       </section>
 
-      <section>
-        <div class="news">
+      <section id="app-news">
+        <div class="news" v-if="news && news.length > 0">
           <div class="container">
             <h1>Notícias</h1>
-            <div class="news__item">
-              <img src="https://via.placeholder.com/750x700/e3e3e3/fff" alt="gatchenho">
-              <h2>Conheça projetos que se tornaram lei no primeiro  semestre</h2>
-              <time datetime="24/09/2019">24/09/2019</time>
-            </div>
-            <div class="news__item">
-              <img src="https://via.placeholder.com/750x700/e3e3e3/fff" alt="gatchenho">
-              <h2>Conheça projetos que se tornaram lei no primeiro  semestre</h2>
-              <time datetime="24/09/2019">24/09/2019</time>
-            </div>
-            <div class="news__item">
-              <img src="https://via.placeholder.com/750x700/e3e3e3/fff" alt="gatchenho">
-              <h2>Conheça projetos que se tornaram lei no primeiro  semestre</h2>
-              <time datetime="24/09/2019">24/09/2019</time>
-            </div>
+            <template v-for="(article, index) in news">
+              <div class="news__item">
+                <a
+                  v-if="article.image && article.image.url"
+                  target="_blank"
+                  :href="article.link"
+                >
+                <img
+                  :src="`${storageDomain}${article.image.url}`"
+                  :alt="article.title"
+                >
+                </a>
+                <a
+                  target="_blank"
+                  :href="article.link"
+                >
+                  <h2>{{ "{{ article.title }}" }}</h2>
+                </a>
+                <time :datetime="article.date">{{ "{{ convertDate(article.date) }}" }}</time>
+              </div>
+            </template>
           </div>
         </div>
       </section>

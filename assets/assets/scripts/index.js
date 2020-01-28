@@ -5952,11 +5952,13 @@ require("./plans");
 
 require("./articles");
 
+require("./news");
+
 (0, _search.default)();
 (0, _searchPlans.default)();
 (0, _menu.default)();
 
-},{"./articles":137,"./menu":140,"./plans":141,"./populateData":142,"./search":144,"./search-plans":143,"@babel/runtime/helpers/interopRequireDefault":3}],140:[function(require,module,exports){
+},{"./articles":137,"./menu":140,"./news":141,"./plans":142,"./populateData":143,"./search":145,"./search-plans":144,"@babel/runtime/helpers/interopRequireDefault":3}],140:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5978,6 +5980,70 @@ function startMenutoggle() {
 }
 
 },{}],141:[function(require,module,exports){
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
+var _config = _interopRequireDefault(require("./config"));
+
+/* global Vue */
+window.$vuePlans = new Vue({
+  el: '#app-news',
+  data: {
+    news: null,
+    storageDomain: _config.default.storage.domain
+  },
+  computed: {
+    loading: function loading() {
+      return !this.locale;
+    }
+  },
+  mounted: function () {
+    var _mounted = (0, _asyncToGenerator2.default)(
+    /*#__PURE__*/
+    _regenerator.default.mark(function _callee() {
+      return _regenerator.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return this.getNews();
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, this);
+    }));
+
+    function mounted() {
+      return _mounted.apply(this, arguments);
+    }
+
+    return mounted;
+  }(),
+  methods: {
+    getNews: function getNews() {
+      var _this = this;
+
+      fetch("".concat(_config.default.apiCMS.domain, "noticias?_limit=30&_sort=date:ASC")).then(function (response) {
+        return response.json();
+      }).then(function (response) {
+        _this.news = response;
+      });
+    },
+    convertDate: function convertDate(date) {
+      return new Date(date).toLocaleDateString('BR');
+    }
+  }
+});
+
+},{"./config":138,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/regenerator":8}],142:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6126,7 +6192,7 @@ if (window.location.href.indexOf('plano-para-primeira-infancia') > -1) {
   });
 }
 
-},{"./config":138,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/regenerator":8}],142:[function(require,module,exports){
+},{"./config":138,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/regenerator":8}],143:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6394,7 +6460,7 @@ if (window.location.href.indexOf('city') > -1) {
   });
 }
 
-},{"./config":138,"./search":144,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/regenerator":8}],143:[function(require,module,exports){
+},{"./config":138,"./search":145,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/regenerator":8}],144:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6545,7 +6611,7 @@ function startPlansSearch() {
   }
 }
 
-},{"./config":138,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/regenerator":8,"awesomplete":9,"fuzzysort":10}],144:[function(require,module,exports){
+},{"./config":138,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/regenerator":8,"awesomplete":9,"fuzzysort":10}],145:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");

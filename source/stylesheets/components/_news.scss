@@ -16,6 +16,8 @@
 }
 
 .news__item {
+  display: flex;
+  flex-direction: column;
   margin-top: 2rem;
 
   @media screen and (min-width: breakpoint('tablet')) {
@@ -46,11 +48,13 @@
   padding-bottom: 0.8rem;
   margin-bottom: 0.8rem;
   color: palette('white');
-  border-bottom: 1px solid palette('white');
 }
 
 .news time {
+  padding-top: 1rem;
+  margin-top: auto;
   font-style: normal;
   font-size: ms(-1);
   color: palette('black');
+  border-top: 1px solid palette('white');
 }
