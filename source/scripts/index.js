@@ -5,6 +5,7 @@ import './populateData';
 import './plans';
 import './articles';
 import './news';
+import './axis';
 
 startSearch();
 startPlansSearch();

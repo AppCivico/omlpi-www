@@ -17,36 +17,23 @@
         </div>
       </section>
 
-      <section>
+      <section id="app-axis">
         <div class="container main-areas">
           <h1>Conheça os três eixos do Observa</h1>
           <div class="white-box main-area__boxes">
-            <div class="main-area__box">
+            <div
+              class="main-area__box"
+              v-for="(item, index) in axis"
+            >
               <figure>
-                <img src="/assets/images/home-indicators.jpg" alt="Indicadores">
+                <img
+                  :src="`${storageDomain}${item.image.url}`"
+                  :alt="item.title"
+                >
               </figure>
-              <h2>Indicadores</h2>
-              <p>Construímos um ambiente onde é possível pesquisar por indicadores e seus desagregadores com base no Marco Legal de 2016, para auxiliar no processo de construção de políticas públicas em todo o território nacional.</p>
-              <p>Entenda os indicadores de seu estado, município, ou região.</p>
-              <a href="/indicadores" class="button button--purple">explorar os indicadores</a>
-            </div>
-            <div class="main-area__box">
-              <figure>
-                <img src="/assets/images/home-plan.jpg" alt="Plano para Primeira Infância">
-              </figure>
-              <h2>Plano para Primeira Infância</h2>
-              <p>O Observa analisou 100 planos de primeira infância no Brasil e criou um infográfico para informar e documentar os 5.570 municípios existente na nossa nação.</p>
-              <p>Descubra se seu município possuí um plano para a primeira infância e nos ajude mandando o plano de seu estado.</p>
-              <a href="/plano-para-primeira-infancia/" class="button button--purple">100 Planos para Primeira Infância</a>
-            </div>
-            <div class="main-area__box">
-              <figure>
-                <img src="/assets/images/home-articles.jpg" alt="Biblioteca">
-              </figure>
-              <h2>Biblioteca</h2>
-              <p>Com o intuito de disseminar as informações, conhecimentos e materiais referenciais sobre os temas: Marco Legal 2016 e Primeira Infância.</p>
-              <p>O Observa montou um repositório de arquivos importantes com esses temas.</p>
-              <a href="/biblioteca/" class="button button--purple">Conheça a nossa biblioteca</a>
+              <h2>{{ "{{ item.title }}" }}</h2>
+              <div v-html="marked(item.text)"></div>
+              <a :href="item.link" class="button button--purple">{{ "{{ item.link_title }}" }}</a>
             </div>
           </div>
         </div>
