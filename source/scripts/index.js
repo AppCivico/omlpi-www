@@ -6,6 +6,8 @@ import './plans';
 import './articles';
 import './news';
 import './axis';
+import './homeBanner';
+import './homeAbout';
 
 startSearch();
 startPlansSearch();

@@ -3,22 +3,27 @@
     <body>
       {{ partial "header.html" . }}
 
-      <section class='search-area search-area--home'>
-        <div class="container">
-          <header>
-            <h1>
-              A Primeira Infância é Prioridade no Brasil
-            </h1>
-          </header>
-          <p>
-            O Observa é uma plataforma que visa auxíliar nas criações de políticas públicas para crianças
-            de 0 à 6 anos, com base na lei de 2016 (Marco Legal).
-          </p>
-        </div>
+      <section
+        id="app-home-banner"
+        class='search-area search-area--home'
+      >
+        <template v-if="banner">
+          <div class="container">
+            <header>
+              <h1>
+                {{ "{{ banner.title }}" }}
+              </h1>
+            </header>
+            <div v-html="marked(banner.text)"></div>
+          </div>
+        </template>
       </section>
 
       <section id="app-axis">
-        <div class="container main-areas">
+        <div
+          class="container main-areas"
+          v-if="axis"
+        >
           <h1>Conheça os três eixos do Observa</h1>
           <div class="white-box main-area__boxes">
             <div
@@ -83,7 +88,10 @@
       </section>
 
       <section id="app-news">
-        <div class="news" v-if="news && news.length > 0">
+        <div
+          class="news"
+          v-if="news && news.length > 0"
+        >
           <div class="container">
             <h1>Notícias</h1>
             <template v-for="(article, index) in news">
@@ -111,17 +119,31 @@
         </div>
       </section>
 
-      <section class="about-us">
-        <figure class="about-us__image">
-          <img src="https://via.placeholder.com/768x580" alt="">
-        </figure>
-        <div class="about-us__text">
-          <div class="container">
-            <h1>Quem somos</h1>
-            <p>A ANDI é uma organização da sociedade civil, sem fins de lucro e apartidária, que articula ações inovadoras em mídia para o desenvolvimento. Suas estratégias estão fundamentadas na promoção e no fortalecimento de um diálogo profissional e ético entre as redações, as faculdades de comunicação e de outros campos do conhecimento, os poderes públicos e as entidades relacionadas à agenda do desenvolvimento sustentável e dos direitos humanos nos âmbitos nacional e global.</p>
-            <a class="button" href="">Conheça mais</a>
+      <section
+        id="app-home-about"
+        class="about-us"
+      >
+        <template v-if="about">
+          <figure class="about-us__image">
+            <img
+              :src="`${storageDomain}${about.image.url}`"
+              :alt="about.title"
+            >
+          </figure>
+          <div class="about-us__text">
+            <div class="container">
+              <h1>{{ "{{ about.title }}" }}</h1>
+              <div v-html="marked(about.text)"></div>
+              <a
+                target="_blank"
+                class="button"
+                :href="about.link"
+              >
+                {{ "{{ about.link_title }}" }}
+              </a>
+            </div>
           </div>
-        </div>
+        </template>
       </section>
 
 
