@@ -1,6 +1,7 @@
 .indicator-boxes {
   position: relative;
   display: flex;
+  z-index: 2;
   flex-direction: column;
   padding: 1.5rem;
   background: palette('green');

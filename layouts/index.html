@@ -27,7 +27,8 @@
           <h1>Conheça os três eixos do Observa</h1>
           <div class="white-box main-area__boxes">
             <div
-              class="main-area__box"
+              class="main-area__box wow"
+              :class="getLoopClass(index)"
               v-for="(item, index) in axis"
             >
               <figure>
@@ -87,7 +88,10 @@
         </div>
       </section>
 
-      <section id="app-news">
+      <section
+        class="wow fadeInUp"
+        id="app-news"
+      >
         <div
           class="news"
           v-if="news && news.length > 0"
@@ -130,7 +134,7 @@
               :alt="about.title"
             >
           </figure>
-          <div class="about-us__text">
+          <div class="about-us__text wow fadeInRight">
             <div class="container">
               <h1>{{ "{{ about.title }}" }}</h1>
               <div v-html="marked(about.text)"></div>
@@ -148,7 +152,11 @@
 
 
       {{ partial "footer.html" . }}
-
+      <script src="https://cdn.jsdelivr.net/npm/wowjs@1.1.2/dist/wow.min.js"></script>
       {{ partial "scripts.html" . }}
+
+      <script>
+        new WOW().init();
+      </script>
     </body>
 </html>

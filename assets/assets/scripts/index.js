@@ -9042,6 +9042,17 @@ window.$vueAxis = new Vue({
     },
     marked: function marked(content) {
       return _dompurify.default.sanitize((0, _marked2.default)(content));
+    },
+    getLoopClass: function getLoopClass(index) {
+      if (index === 0) {
+        return 'fadeInLeft';
+      }
+
+      if (index === 2) {
+        return 'fadeInRight';
+      }
+
+      return true;
     }
   }
 });
