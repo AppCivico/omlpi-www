@@ -3,12 +3,14 @@
 }
 
 .main-header {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 1rem 0;
   margin-top: 0;
   background-color: palette('purple');
+  box-shadow: 0 4px 20px 0 palette('shadow');
 
   @media screen and (min-width: breakpoint('tablet')) {
     flex-direction: row;
