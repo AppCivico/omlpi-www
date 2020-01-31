@@ -8,6 +8,7 @@ import './news';
 import './axis';
 import './homeBanner';
 import './homeAbout';
+import './homeIndicators';
 
 startSearch();
 startPlansSearch();

@@ -45,46 +45,34 @@
         </div>
       </section>
 
-      <section>
+      <section id="app-home-indicators">
         <div class="container">
           <h1>Referências</h1>
-          <div class="indicator-boxes">
-            <h2 class="brazil-header">Brasil</h2>
-            <div class="indicator-boxes__box">
-              <span class="indicator-boxes-axis indicator-boxes-axis--health">Saúde</span>
-              <h3>Proporção de nascidos vivos cujas mães realizaram pelo menos 7 consultas pré-natal</h3>
-              <h4>33.4567</h4>
+          <transition name="fade">
+            <div class="indicator-boxes" v-if="indicators">
+              <template v-for="(locale, index) in indicators.locales">
+                <h2 v-if="index === 0" class="brazil-header">{{ "{{ locale.name }}" }}</h2>
+                <h2 v-else>
+                  Municípios
+                  <span>{{ "{{ locale.name }}" }}</span>
+                </h2>
+                <template v-for="(indicator, index) in locale.indicators">
+                  <div class="indicator-boxes__box">
+                    <span
+                      class="indicator-boxes-axis"
+                      :class="`indicator-boxes-axis--${getAxisClass(indicator.area.id)}`"
+                    >
+                      {{ "{{ indicator.area.name }}" }}
+                    </span>
+                    <h3>{{ "{{ indicator.description }}" }}</h3>
+                    <h4>
+                      {{ "{{ indicator.values.value_relative ? indicator.values.value_relative : indicator.values.value_absolute }}" }}
+                    </h4>
+                  </div>
+                </template>
+              </template>
             </div>
-            <div class="indicator-boxes__box">
-              <span class="indicator-boxes-axis indicator-boxes-axis--education">Educação</span>
-              <h3>Proporção de nascidos vivos cujas mães realizaram pelo menos 7 consultas pré-natal</h3>
-              <h4>33.4567</h4>
-            </div>
-            <div class="indicator-boxes__box">
-              <span class="indicator-boxes-axis indicator-boxes-axis--social-assistance">Assistência Social</span>
-              <h3>Proporção de nascidos vivos cujas mães realizaram pelo menos 7 consultas pré-natal</h3>
-              <h4>33.4567</h4>
-            </div>
-            <h2>
-              Municípios
-              <span>Laranjeiras</span>
-            </h2>
-            <div class="indicator-boxes__box">
-              <span class="indicator-boxes-axis indicator-boxes-axis--health">Saúde</span>
-              <h3>Proporção de nascidos vivos cujas mães realizaram pelo menos 7 consultas pré-natal</h3>
-              <h4>33.4567</h4>
-            </div>
-            <div class="indicator-boxes__box">
-              <span class="indicator-boxes-axis indicator-boxes-axis--education">Educação</span>
-              <h3>Proporção de nascidos vivos cujas mães realizaram pelo menos 7 consultas pré-natal</h3>
-              <h4>33.4567</h4>
-            </div>
-            <div class="indicator-boxes__box">
-              <span class="indicator-boxes-axis indicator-boxes-axis--social-assistance">Assistência Social</span>
-              <h3>Proporção de nascidos vivos cujas mães realizaram pelo menos 7 consultas pré-natal</h3>
-              <h4>33.4567</h4>
-            </div>
-          </div>
+          </transition>
         </div>
       </section>
 

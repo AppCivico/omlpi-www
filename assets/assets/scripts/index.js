@@ -9222,6 +9222,92 @@ window.$vueHomeBanner = new Vue({
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
+var _marked = _interopRequireDefault(require("marked"));
+
+var _dompurify = _interopRequireDefault(require("dompurify"));
+
+var _config = _interopRequireDefault(require("./config"));
+
+/* global Vue */
+window.$vueHomeIndicators = new Vue({
+  el: '#app-home-indicators',
+  data: {
+    indicators: null,
+    storageDomain: _config.default.storage.domain
+  },
+  computed: {
+    loading: function loading() {
+      return !this.locale;
+    }
+  },
+  mounted: function () {
+    var _mounted = (0, _asyncToGenerator2.default)(
+    /*#__PURE__*/
+    _regenerator.default.mark(function _callee() {
+      return _regenerator.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return this.getIIndicators();
+
+            case 2:
+              this.startIndicatorsCounter();
+
+            case 3:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, this);
+    }));
+
+    function mounted() {
+      return _mounted.apply(this, arguments);
+    }
+
+    return mounted;
+  }(),
+  methods: {
+    startIndicatorsCounter: function startIndicatorsCounter() {
+      var _this = this;
+
+      setInterval(function () {
+        _this.getIIndicators();
+      }, 3000);
+    },
+    getIIndicators: function getIIndicators() {
+      var _this2 = this;
+
+      fetch("".concat(_config.default.api.domain, "data/random_indicator")).then(function (response) {
+        return response.json();
+      }).then(function (response) {
+        _this2.indicators = response;
+      });
+    },
+    getAxisClass: function getAxisClass(area) {
+      if (area === 1) {
+        return 'health';
+      }
+
+      if (area === 2) {
+        return 'education';
+      }
+
+      return 'social-assistance';
+    }
+  }
+});
+
+},{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"dompurify":12,"marked":146}],156:[function(require,module,exports){
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 var _search = _interopRequireDefault(require("./search"));
 
 var _searchPlans = _interopRequireDefault(require("./search-plans"));
@@ -9242,11 +9328,13 @@ require("./homeBanner");
 
 require("./homeAbout");
 
+require("./homeIndicators");
+
 (0, _search.default)();
 (0, _searchPlans.default)();
 (0, _menu.default)();
 
-},{"./articles":150,"./axis":151,"./homeAbout":153,"./homeBanner":154,"./menu":156,"./news":157,"./plans":158,"./populateData":159,"./search":161,"./search-plans":160,"@babel/runtime/helpers/interopRequireDefault":4}],156:[function(require,module,exports){
+},{"./articles":150,"./axis":151,"./homeAbout":153,"./homeBanner":154,"./homeIndicators":155,"./menu":157,"./news":158,"./plans":159,"./populateData":160,"./search":162,"./search-plans":161,"@babel/runtime/helpers/interopRequireDefault":4}],157:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9267,7 +9355,7 @@ function startMenutoggle() {
   });
 }
 
-},{}],157:[function(require,module,exports){
+},{}],158:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -9331,7 +9419,7 @@ window.$vuePlans = new Vue({
   }
 });
 
-},{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],158:[function(require,module,exports){
+},{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],159:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -9480,7 +9568,7 @@ if (window.location.href.indexOf('plano-para-primeira-infancia') > -1) {
   });
 }
 
-},{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],159:[function(require,module,exports){
+},{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],160:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -9748,7 +9836,7 @@ if (window.location.href.indexOf('city') > -1) {
   });
 }
 
-},{"./config":152,"./search":161,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],160:[function(require,module,exports){
+},{"./config":152,"./search":162,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],161:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -9899,7 +9987,7 @@ function startPlansSearch() {
   }
 }
 
-},{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}],161:[function(require,module,exports){
+},{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}],162:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10045,4 +10133,4 @@ function startSearch() {
   }
 }
 
-},{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}]},{},[155]);
+},{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}]},{},[156]);

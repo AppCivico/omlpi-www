@@ -97,6 +97,9 @@
 
 .indicator-boxes__box h3,
 .indicator-boxes__box h4 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: palette('white');
 }
 
@@ -104,4 +107,9 @@
   margin-top: 0.8rem;
   margin-bottom: 0.8rem;
   font-size: ms(8);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
