@@ -12,7 +12,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
       has_more: true,
       itens_qtd: 1,
       pagination_start: 0,
-      pagination_limit: 1,
+      pagination_limit: 15,
     },
     computed: {
       loading() {

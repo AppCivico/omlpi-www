@@ -28,8 +28,14 @@
           </section>
           <template v-if="articles && articles.length !== 0">
             <article class="library-item" v-for="(article, index) in articles">
-              <div class="library-item__image">
-                <img src="http://placekitten.com/242/342" alt="capa da publicação">
+              <div
+                class="library-item__image"
+                v-if="article.image.url"
+              >
+                <img
+                  :src="`${storageDomain}${article.image.url}`"
+                  :alt="article.title"
+                >
               </div>
               <div class="library-item__content">
                 <h2>{{ "{{ article.title }}" }}</h2>
@@ -50,9 +56,9 @@
                 </div>
                 <p>
                   {{ "{{ article.excerpt }}" }}
-                  <button class="library-item__show-more">
-                    Continuar lendo…
-                  </button>
+                  <!-- <button class="library&#45;item__show&#45;more"> -->
+                  <!--   Continuar lendo… -->
+                  <!-- </button> -->
                 </p>
 
                 <a
@@ -64,13 +70,13 @@
                 </a>
               </div>
             </article>
-            <a
-              class="button library-item__load-more"
-              v-if="has_more"
-              @click.prevent="getArticles(true)"
-            >
-              Carregar mais
-            </a>
+            <!-- <a -->
+            <!--   class="button library&#45;item__load&#45;more" -->
+            <!--   v&#45;if="has_more" -->
+            <!--   @click.prevent="getArticles(true)" -->
+            <!-- > -->
+            <!--   Carregar mais -->
+            <!-- </a> -->
           </template>
           <div v-else>
             <p>Nenhum resultado para sua busca</p>
