@@ -9226,10 +9226,6 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _marked = _interopRequireDefault(require("marked"));
-
-var _dompurify = _interopRequireDefault(require("dompurify"));
-
 var _config = _interopRequireDefault(require("./config"));
 
 /* global Vue */
@@ -9237,6 +9233,7 @@ window.$vueHomeIndicators = new Vue({
   el: '#app-home-indicators',
   data: {
     indicators: null,
+    triggerAnimation: true,
     storageDomain: _config.default.storage.domain
   },
   computed: {
@@ -9277,17 +9274,20 @@ window.$vueHomeIndicators = new Vue({
       var _this = this;
 
       setInterval(function () {
+        _this.indicators = {};
+
         _this.getIIndicators();
-      }, 3000);
+      }, 6000);
     },
     getIIndicators: function getIIndicators() {
       var _this2 = this;
 
+      this.triggerAnimation = false;
       fetch("".concat(_config.default.api.domain, "data/random_indicator")).then(function (response) {
         return response.json();
       }).then(function (response) {
         _this2.indicators = response;
-      });
+      }).then(this.triggerAnimation = true);
     },
     getAxisClass: function getAxisClass(area) {
       if (area === 1) {
@@ -9303,7 +9303,7 @@ window.$vueHomeIndicators = new Vue({
   }
 });
 
-},{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"dompurify":12,"marked":146}],156:[function(require,module,exports){
+},{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],156:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
