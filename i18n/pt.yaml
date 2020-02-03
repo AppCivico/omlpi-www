@@ -13,5 +13,9 @@
 # Home
 - id: exploreData
   translation: "Explore sobre os dados da Primeira Infância Brasil"
+- id: exploreArticles
+  translation: "Pesquise por artigos ou categorias"
+- id: exploreArticlesPlaceholder
+  translation: "Ex. Primeira Infancia"
 - id: exploreDataPlaceholder
   translation: "Ex. Estado, Município ou Região"

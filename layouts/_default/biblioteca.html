@@ -1,0 +1,91 @@
+    {{ partial "head.html" . }}
+
+    <body>
+      {{ partial "header.html" . }}
+
+      <main class="alabaster" id="app">
+        <header class="header-text">
+          <div class="container">
+            <h1>
+              BIBLIOTECA PARA UM SISTEMA DE GARANTIA
+              <span>PARA PRIMEIRA INFÂNCIA</span>
+            </h1>
+          </div>
+        </header>
+        <div class="container">
+          <section class='search-area search-area__library'>
+            <form action="" @submit.prevent="searchArticles">
+              <label for="js-articles-search">
+                {{ i18n "exploreArticles" }}
+                <input
+                  type="text"
+                  v-model="searchQuery"
+                  placeholder="{{ i18n "exploreArticlesPlaceholder" }}"
+                  >
+              </label>
+                <button>{{ i18n "search" }}</button>
+            </form>
+          </section>
+          <template v-if="articles && articles.length !== 0">
+            <article class="library-item" v-for="(article, index) in articles">
+              <div
+                class="library-item__image"
+                v-if="article.image.url"
+              >
+                <img
+                  :src="`${storageDomain}${article.image.url}`"
+                  :alt="article.title"
+                >
+              </div>
+              <div class="library-item__content">
+                <h2>{{ "{{ article.title }}" }}</h2>
+                <span class="library-item__author">
+                  Autor: {{ "{{ article.author }}" }}
+                  |
+                  Data de publicação
+                  <time :datetime="article.date">{{ "{{ article.date }}" }}</time>
+                  |
+                  Organização: USP
+                </span>
+                <!-- <span class="library&#45;item__time"> -->
+                <!-- </span> -->
+                <div class="library-item__tags">
+                  <template v-for="(tag, index) in article.tags">
+                    <a @click="searchByTag(tag.name)">{{ "{{ tag.name }}" }}</a>
+                  </template>
+                </div>
+                <p>
+                  {{ "{{ article.excerpt }}" }}
+                  <!-- <button class="library&#45;item__show&#45;more"> -->
+                  <!--   Continuar lendo… -->
+                  <!-- </button> -->
+                </p>
+
+                <a
+                  :href="`${storageDomain}${article.file.url}`"
+                  class="button"
+                  download
+                >
+                  baixar
+                </a>
+              </div>
+            </article>
+            <!-- <a -->
+            <!--   class="button library&#45;item__load&#45;more" -->
+            <!--   v&#45;if="has_more" -->
+            <!--   @click.prevent="getArticles(true)" -->
+            <!-- > -->
+            <!--   Carregar mais -->
+            <!-- </a> -->
+          </template>
+          <div v-else>
+            <p>Nenhum resultado para sua busca</p>
+          </div>
+        </div>
+      </main>
+
+      {{ partial "footer.html" . }}
+
+      {{ partial "scripts.html" . }}
+    </body>
+</html>

@@ -1,0 +1,38 @@
+.about-us {
+  display: flex;
+  flex-direction: column;
+  background-color: palette('dark-blue-grey');
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    flex-direction: row;
+  }
+}
+
+.about-us__image {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.about-us__image img {
+  display: block;
+}
+
+.about-us__text {
+  padding-bottom: 3rem;
+  color: palette('white');
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    max-width: 37.5rem;
+  }
+
+  @media screen and (min-width: breakpoint('wide')) {
+    padding-right: 3rem;
+    padding-left: 3rem;
+  }
+}
+
+.about-us__text h1 {
+  font-weight: font-weight('light');
+  color: palette('white');
+}

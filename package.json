@@ -40,10 +40,10 @@
   "author": "Eduardo Ruiz <contato@duruiz.com.br>",
   "license": "GPL-3.0-only",
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.3.4",
-    "@babel/runtime": "^7.3.4",
     "@babel/core": "^7.1.6",
+    "@babel/plugin-transform-runtime": "^7.3.4",
     "@babel/preset-env": "^7.1.6",
+    "@babel/runtime": "^7.3.4",
     "autoprefixer": "^9.1.5",
     "babel-eslint": "^10.0.0",
     "babel-preset-env": "^1.7.0",
@@ -59,7 +59,7 @@
     "eslint-plugin-vue": "^4.7.1",
     "imagemin-cli": "^5.0.0",
     "modularscale-sass": "^3.0.5",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "npm-run-all": "^4.1.5",
     "onchange": "^4.1.0",
     "postcss-cli": "^6.0.0",
@@ -69,7 +69,10 @@
   },
   "dependencies": {
     "awesomplete": "^1.1.5",
+    "dompurify": "^2.0.7",
     "fuzzysort": "^1.1.4",
+    "lodash": "^4.17.15",
+    "marked": "^0.8.0",
     "sweetalert2": "^9.5.3"
   }
 }
