@@ -1,5 +1,5 @@
 .search-area {
-  padding: 9rem 0;
+  padding: 3rem 0;
   // sass-lint:disable-block no-color-literals
   background-image: linear-gradient(
     to bottom, rgba(0, 0, 2, 0.7),
@@ -11,7 +11,9 @@
   background-size: cover;
 
   @media screen and (min-width: breakpoint('desktop')) {
-    min-height: 30rem;
+    display: flex;
+    align-items: center;
+    min-height: 16.188rem;
   }
 }
 
@@ -76,6 +78,7 @@
 .search-area__library {
   min-height: 0;
   padding: 3rem 0 1.5rem;
+  margin-bottom: 2rem;
   background: none;
 }
 
@@ -91,11 +94,11 @@
 
 .search-area form {
   position: relative;
+  width: 100%;
 }
 
 .search-area label {
   display: block;
-  margin-bottom: 1rem;
   font-weight: font-weight('bold');
   font-size: ms(3);
   line-height: 1.3;
