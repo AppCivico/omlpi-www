@@ -2,7 +2,7 @@
 import config from './config';
 
 if (document.querySelector('#app-news')) {
-  window.$vuePlans = new Vue({
+  window.$vueNews = new Vue({
     el: '#app-news',
     data: {
       news: null,

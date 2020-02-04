@@ -5,7 +5,8 @@
   flex-direction: column;
   min-height: 32.5rem;
   padding: 1.5rem;
-  background: palette('green');
+  background-color: palette('green');
+  box-shadow: 0 2px 4px 0 palette('black', 'opacity');
 
   @media screen and (min-width: breakpoint('desktop')) {
     flex-direction: row;

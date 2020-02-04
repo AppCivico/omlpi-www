@@ -9107,6 +9107,9 @@ if (document.querySelector('#app-home-about')) {
     computed: {
       loading: function loading() {
         return !this.locale;
+      },
+      hasNews: function hasNews() {
+        return window.$vueNews && window.$vueNews.news && window.$vueNews.news.length > 0;
       }
     },
     mounted: function () {
@@ -9376,7 +9379,7 @@ var _config = _interopRequireDefault(require("./config"));
 
 /* global Vue */
 if (document.querySelector('#app-news')) {
-  window.$vuePlans = new Vue({
+  window.$vueNews = new Vue({
     el: '#app-news',
     data: {
       news: null,

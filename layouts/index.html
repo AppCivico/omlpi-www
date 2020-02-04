@@ -94,10 +94,7 @@
         </div>
       </section>
 
-      <section
-        class="wow fadeInUp"
-        id="app-news"
-      >
+      <section id="app-news">
         <div
           class="news"
           v-if="news && news.length > 0"
@@ -132,8 +129,12 @@
       <section
         id="app-home-about"
         class="about-us"
+        :class="hasNews ? '' : 'about-us--boxed'"
       >
-        <template v-if="about">
+        <div
+          v-if="about"
+          :class="hasNews ? '' : 'container'"
+        >
           <figure class="about-us__image">
             <img
               :src="`${storageDomain}${about.image.url}`"
@@ -141,7 +142,9 @@
             >
           </figure>
           <div class="about-us__text wow fadeInRight">
-            <div class="container">
+            <div
+              :class="hasNews ? 'container' : ''"
+            >
               <h1>{{ "{{ about.title }}" }}</h1>
               <div v-html="marked(about.text)"></div>
               <a
@@ -153,7 +156,7 @@
               </a>
             </div>
           </div>
-        </template>
+        </div>
       </section>
 
 

@@ -14,6 +14,9 @@ if (document.querySelector('#app-home-about')) {
       loading() {
         return !this.locale;
       },
+      hasNews() {
+        return window.$vueNews && window.$vueNews.news && window.$vueNews.news.length > 0;
+      },
     },
     async mounted() {
       await this.getAbout();
