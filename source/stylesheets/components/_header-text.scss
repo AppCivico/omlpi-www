@@ -1,6 +1,13 @@
 .header-text {
   padding: 3rem 0;
-  background: palette('purple');
+  // sass-lint:disable-block no-color-literals
+  background-image: linear-gradient(
+    to bottom, rgba(0, 0, 2, 0.7),
+    rgba(4, 5, 54, 0.7) 31%,
+    rgba(27, 15, 117, 0.7) 59%,
+    rgba(206, 100, 245, 0.7),
+  ),
+  image('library.png');
 }
 
 .header-text h1 {

@@ -41,6 +41,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
             }
           });
       },
+
       async searchArticles() {
         if (this.searchQuery === '') {
           return this.getArticles();
