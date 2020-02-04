@@ -99,7 +99,10 @@
           class="news"
           v-if="news && news.length > 0"
         >
-          <div class="container">
+          <div
+            class="container"
+            :class="news.length === 2 ? 'container--two-news' : ''"
+          >
             <h1>Notícias</h1>
             <template v-for="(article, index) in news">
               <div class="news__item">
@@ -133,7 +136,7 @@
       >
         <div
           v-if="about"
-          :class="hasNews ? '' : 'container'"
+          :class="hasNews ? 'about-us' : 'container'"
         >
           <figure class="about-us__image">
             <img
