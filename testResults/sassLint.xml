@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<testsuites>
-<testsuite package="org.eslint" time="0" tests="1" errors="1" name="./source/stylesheets/components/_indicator-boxes.scss">
-<testcase time="0" name="org.eslint.no-transition-all"><failure message="The keyword `all` should not be used with the property `transition`"><![CDATA[line 117, col 3, Error - The keyword `all` should not be used with the property `transition` (no-transition-all)]]></failure></testcase>
-</testsuite>
-</testsuites>

@@ -106,7 +106,7 @@
 }
 
 .indicator-boxes__box h4 {
-  @include truncate;
+  // @include truncate;
   margin-top: 0.8rem;
   margin-bottom: 0.8rem;
   font-size: ms(8);

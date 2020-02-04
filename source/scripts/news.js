@@ -1,30 +1,32 @@
 /* global Vue */
 import config from './config';
 
-window.$vuePlans = new Vue({
-  el: '#app-news',
-  data: {
-    news: null,
-    storageDomain: config.storage.domain,
-  },
-  computed: {
-    loading() {
-      return !this.locale;
+if (document.querySelector('#app-news')) {
+  window.$vuePlans = new Vue({
+    el: '#app-news',
+    data: {
+      news: null,
+      storageDomain: config.storage.domain,
     },
-  },
-  async mounted() {
-    await this.getNews();
-  },
-  methods: {
-    getNews() {
-      fetch(`${config.apiCMS.domain}noticias?_limit=30&_sort=date:ASC`)
-        .then(response => response.json())
-        .then((response) => {
-          this.news = response;
-        });
+    computed: {
+      loading() {
+        return !this.locale;
+      },
     },
-    convertDate(date) {
-      return new Date(date).toLocaleDateString('BR');
+    async mounted() {
+      await this.getNews();
     },
-  },
-});
+    methods: {
+      getNews() {
+        fetch(`${config.apiCMS.domain}noticias?_limit=30&_sort=date:ASC`)
+          .then(response => response.json())
+          .then((response) => {
+            this.news = response;
+          });
+      },
+      convertDate(date) {
+        return new Date(date).toLocaleDateString('BR');
+      },
+    },
+  });
+}

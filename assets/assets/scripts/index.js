@@ -8994,68 +8994,70 @@ var _dompurify = _interopRequireDefault(require("dompurify"));
 var _config = _interopRequireDefault(require("./config"));
 
 /* global Vue */
-window.$vueAxis = new Vue({
-  el: '#app-axis',
-  data: {
-    axis: null,
-    storageDomain: _config.default.storage.domain
-  },
-  computed: {
-    loading: function loading() {
-      return !this.locale;
-    }
-  },
-  mounted: function () {
-    var _mounted = (0, _asyncToGenerator2.default)(
-    /*#__PURE__*/
-    _regenerator.default.mark(function _callee() {
-      return _regenerator.default.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return this.getAxis();
+if (document.querySelector('#app-axis')) {
+  window.$vueAxis = new Vue({
+    el: '#app-axis',
+    data: {
+      axis: null,
+      storageDomain: _config.default.storage.domain
+    },
+    computed: {
+      loading: function loading() {
+        return !this.locale;
+      }
+    },
+    mounted: function () {
+      var _mounted = (0, _asyncToGenerator2.default)(
+      /*#__PURE__*/
+      _regenerator.default.mark(function _callee() {
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.getAxis();
 
-            case 2:
-            case "end":
-              return _context.stop();
+              case 2:
+              case "end":
+                return _context.stop();
+            }
           }
+        }, _callee, this);
+      }));
+
+      function mounted() {
+        return _mounted.apply(this, arguments);
+      }
+
+      return mounted;
+    }(),
+    methods: {
+      getAxis: function getAxis() {
+        var _this = this;
+
+        fetch("".concat(_config.default.apiCMS.domain, "eixos?_limit=30&_sort=order:ASC")).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          _this.axis = response;
+        });
+      },
+      marked: function marked(content) {
+        return _dompurify.default.sanitize((0, _marked2.default)(content));
+      },
+      getLoopClass: function getLoopClass(index) {
+        if (index === 0) {
+          return 'fadeInLeft';
         }
-      }, _callee, this);
-    }));
 
-    function mounted() {
-      return _mounted.apply(this, arguments);
-    }
+        if (index === 2) {
+          return 'fadeInRight';
+        }
 
-    return mounted;
-  }(),
-  methods: {
-    getAxis: function getAxis() {
-      var _this = this;
-
-      fetch("".concat(_config.default.apiCMS.domain, "eixos?_limit=30&_sort=order:ASC")).then(function (response) {
-        return response.json();
-      }).then(function (response) {
-        _this.axis = response;
-      });
-    },
-    marked: function marked(content) {
-      return _dompurify.default.sanitize((0, _marked2.default)(content));
-    },
-    getLoopClass: function getLoopClass(index) {
-      if (index === 0) {
-        return 'fadeInLeft';
+        return true;
       }
-
-      if (index === 2) {
-        return 'fadeInRight';
-      }
-
-      return true;
     }
-  }
-});
+  });
+}
 
 },{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"dompurify":12,"marked":146}],152:[function(require,module,exports){
 "use strict";
@@ -9095,57 +9097,59 @@ var _dompurify = _interopRequireDefault(require("dompurify"));
 var _config = _interopRequireDefault(require("./config"));
 
 /* global Vue */
-window.$vueHomeAbout = new Vue({
-  el: '#app-home-about',
-  data: {
-    about: null,
-    storageDomain: _config.default.storage.domain
-  },
-  computed: {
-    loading: function loading() {
-      return !this.locale;
-    }
-  },
-  mounted: function () {
-    var _mounted = (0, _asyncToGenerator2.default)(
-    /*#__PURE__*/
-    _regenerator.default.mark(function _callee() {
-      return _regenerator.default.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return this.getAbout();
-
-            case 2:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, this);
-    }));
-
-    function mounted() {
-      return _mounted.apply(this, arguments);
-    }
-
-    return mounted;
-  }(),
-  methods: {
-    getAbout: function getAbout() {
-      var _this = this;
-
-      fetch("".concat(_config.default.apiCMS.domain, "sobres?_limit=1")).then(function (response) {
-        return response.json();
-      }).then(function (response) {
-        _this.about = (0, _objectSpread2.default)({}, response[0]);
-      });
+if (document.querySelector('#app-home-about')) {
+  window.$vueHomeAbout = new Vue({
+    el: '#app-home-about',
+    data: {
+      about: null,
+      storageDomain: _config.default.storage.domain
     },
-    marked: function marked(content) {
-      return _dompurify.default.sanitize((0, _marked2.default)(content));
+    computed: {
+      loading: function loading() {
+        return !this.locale;
+      }
+    },
+    mounted: function () {
+      var _mounted = (0, _asyncToGenerator2.default)(
+      /*#__PURE__*/
+      _regenerator.default.mark(function _callee() {
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.getAbout();
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function mounted() {
+        return _mounted.apply(this, arguments);
+      }
+
+      return mounted;
+    }(),
+    methods: {
+      getAbout: function getAbout() {
+        var _this = this;
+
+        fetch("".concat(_config.default.apiCMS.domain, "sobres?_limit=1")).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          _this.about = (0, _objectSpread2.default)({}, response[0]);
+        });
+      },
+      marked: function marked(content) {
+        return _dompurify.default.sanitize((0, _marked2.default)(content));
+      }
     }
-  }
-});
+  });
+}
 
 },{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/objectSpread":7,"@babel/runtime/regenerator":10,"dompurify":12,"marked":146}],154:[function(require,module,exports){
 "use strict";
@@ -9165,57 +9169,59 @@ var _dompurify = _interopRequireDefault(require("dompurify"));
 var _config = _interopRequireDefault(require("./config"));
 
 /* global Vue */
-window.$vueHomeBanner = new Vue({
-  el: '#app-home-banner',
-  data: {
-    banner: null,
-    storageDomain: _config.default.storage.domain
-  },
-  computed: {
-    loading: function loading() {
-      return !this.locale;
-    }
-  },
-  mounted: function () {
-    var _mounted = (0, _asyncToGenerator2.default)(
-    /*#__PURE__*/
-    _regenerator.default.mark(function _callee() {
-      return _regenerator.default.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return this.getBanner();
-
-            case 2:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, this);
-    }));
-
-    function mounted() {
-      return _mounted.apply(this, arguments);
-    }
-
-    return mounted;
-  }(),
-  methods: {
-    getBanner: function getBanner() {
-      var _this = this;
-
-      fetch("".concat(_config.default.apiCMS.domain, "banners?_limit=1")).then(function (response) {
-        return response.json();
-      }).then(function (response) {
-        _this.banner = (0, _objectSpread2.default)({}, response[0]);
-      });
+if (document.querySelector('#app-home-banner')) {
+  window.$vueHomeBanner = new Vue({
+    el: '#app-home-banner',
+    data: {
+      banner: null,
+      storageDomain: _config.default.storage.domain
     },
-    marked: function marked(content) {
-      return _dompurify.default.sanitize((0, _marked2.default)(content));
+    computed: {
+      loading: function loading() {
+        return !this.locale;
+      }
+    },
+    mounted: function () {
+      var _mounted = (0, _asyncToGenerator2.default)(
+      /*#__PURE__*/
+      _regenerator.default.mark(function _callee() {
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.getBanner();
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function mounted() {
+        return _mounted.apply(this, arguments);
+      }
+
+      return mounted;
+    }(),
+    methods: {
+      getBanner: function getBanner() {
+        var _this = this;
+
+        fetch("".concat(_config.default.apiCMS.domain, "banners?_limit=1")).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          _this.banner = (0, _objectSpread2.default)({}, response[0]);
+        });
+      },
+      marked: function marked(content) {
+        return _dompurify.default.sanitize((0, _marked2.default)(content));
+      }
     }
-  }
-});
+  });
+}
 
 },{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/objectSpread":7,"@babel/runtime/regenerator":10,"dompurify":12,"marked":146}],155:[function(require,module,exports){
 "use strict";
@@ -9229,79 +9235,81 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 var _config = _interopRequireDefault(require("./config"));
 
 /* global Vue */
-window.$vueHomeIndicators = new Vue({
-  el: '#app-home-indicators',
-  data: {
-    indicators: null,
-    triggerAnimation: true,
-    storageDomain: _config.default.storage.domain
-  },
-  computed: {
-    loading: function loading() {
-      return !this.locale;
-    }
-  },
-  mounted: function () {
-    var _mounted = (0, _asyncToGenerator2.default)(
-    /*#__PURE__*/
-    _regenerator.default.mark(function _callee() {
-      return _regenerator.default.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return this.getIIndicators();
+if (document.querySelector('#app-home-indicators')) {
+  window.$vueHomeIndicators = new Vue({
+    el: '#app-home-indicators',
+    data: {
+      indicators: null,
+      triggerAnimation: true,
+      storageDomain: _config.default.storage.domain
+    },
+    computed: {
+      loading: function loading() {
+        return !this.locale;
+      }
+    },
+    mounted: function () {
+      var _mounted = (0, _asyncToGenerator2.default)(
+      /*#__PURE__*/
+      _regenerator.default.mark(function _callee() {
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.getIIndicators();
 
-            case 2:
-              this.startIndicatorsCounter();
+              case 2:
+                this.startIndicatorsCounter();
 
-            case 3:
-            case "end":
-              return _context.stop();
+              case 3:
+              case "end":
+                return _context.stop();
+            }
           }
+        }, _callee, this);
+      }));
+
+      function mounted() {
+        return _mounted.apply(this, arguments);
+      }
+
+      return mounted;
+    }(),
+    methods: {
+      startIndicatorsCounter: function startIndicatorsCounter() {
+        var _this = this;
+
+        setInterval(function () {
+          _this.indicators = {};
+
+          _this.getIIndicators();
+        }, 6000);
+      },
+      getIIndicators: function getIIndicators() {
+        var _this2 = this;
+
+        this.triggerAnimation = false;
+        fetch("".concat(_config.default.api.domain, "data/random_indicator")).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          _this2.indicators = response;
+        }).then(this.triggerAnimation = true);
+      },
+      getAxisClass: function getAxisClass(area) {
+        if (area === 1) {
+          return 'health';
         }
-      }, _callee, this);
-    }));
 
-    function mounted() {
-      return _mounted.apply(this, arguments);
-    }
+        if (area === 2) {
+          return 'education';
+        }
 
-    return mounted;
-  }(),
-  methods: {
-    startIndicatorsCounter: function startIndicatorsCounter() {
-      var _this = this;
-
-      setInterval(function () {
-        _this.indicators = {};
-
-        _this.getIIndicators();
-      }, 6000);
-    },
-    getIIndicators: function getIIndicators() {
-      var _this2 = this;
-
-      this.triggerAnimation = false;
-      fetch("".concat(_config.default.api.domain, "data/random_indicator")).then(function (response) {
-        return response.json();
-      }).then(function (response) {
-        _this2.indicators = response;
-      }).then(this.triggerAnimation = true);
-    },
-    getAxisClass: function getAxisClass(area) {
-      if (area === 1) {
-        return 'health';
+        return 'social-assistance';
       }
-
-      if (area === 2) {
-        return 'education';
-      }
-
-      return 'social-assistance';
     }
-  }
-});
+  });
+}
 
 },{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],156:[function(require,module,exports){
 "use strict";
@@ -9367,57 +9375,59 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 var _config = _interopRequireDefault(require("./config"));
 
 /* global Vue */
-window.$vuePlans = new Vue({
-  el: '#app-news',
-  data: {
-    news: null,
-    storageDomain: _config.default.storage.domain
-  },
-  computed: {
-    loading: function loading() {
-      return !this.locale;
-    }
-  },
-  mounted: function () {
-    var _mounted = (0, _asyncToGenerator2.default)(
-    /*#__PURE__*/
-    _regenerator.default.mark(function _callee() {
-      return _regenerator.default.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return this.getNews();
-
-            case 2:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, this);
-    }));
-
-    function mounted() {
-      return _mounted.apply(this, arguments);
-    }
-
-    return mounted;
-  }(),
-  methods: {
-    getNews: function getNews() {
-      var _this = this;
-
-      fetch("".concat(_config.default.apiCMS.domain, "noticias?_limit=30&_sort=date:ASC")).then(function (response) {
-        return response.json();
-      }).then(function (response) {
-        _this.news = response;
-      });
+if (document.querySelector('#app-news')) {
+  window.$vuePlans = new Vue({
+    el: '#app-news',
+    data: {
+      news: null,
+      storageDomain: _config.default.storage.domain
     },
-    convertDate: function convertDate(date) {
-      return new Date(date).toLocaleDateString('BR');
+    computed: {
+      loading: function loading() {
+        return !this.locale;
+      }
+    },
+    mounted: function () {
+      var _mounted = (0, _asyncToGenerator2.default)(
+      /*#__PURE__*/
+      _regenerator.default.mark(function _callee() {
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.getNews();
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function mounted() {
+        return _mounted.apply(this, arguments);
+      }
+
+      return mounted;
+    }(),
+    methods: {
+      getNews: function getNews() {
+        var _this = this;
+
+        fetch("".concat(_config.default.apiCMS.domain, "noticias?_limit=30&_sort=date:ASC")).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          _this.news = response;
+        });
+      },
+      convertDate: function convertDate(date) {
+        return new Date(date).toLocaleDateString('BR');
+      }
     }
-  }
-});
+  });
+}
 
 },{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],159:[function(require,module,exports){
 "use strict";
