@@ -45,7 +45,7 @@
                   Data de publicação
                   <time :datetime="article.date">{{ "{{ article.date }}" }}</time>
                   |
-                  Organização: USP
+                  Organização: {{ "{{ article.organization }}" }}
                 </span>
                 <!-- <span class="library&#45;item__time"> -->
                 <!-- </span> -->
@@ -55,7 +55,7 @@
                   </template>
                 </div>
                 <p>
-                  {{ "{{ article.excerpt }}" }}
+                  {{ "{{ article.description }}" }}
                   <!-- <button class="library&#45;item__show&#45;more"> -->
                   <!--   Continuar lendo… -->
                   <!-- </button> -->
