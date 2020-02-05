@@ -48,49 +48,62 @@
       <section id="app-home-indicators">
         <div class="container">
           <h1>Referências</h1>
-            <div
-              v-if="indicators && triggerAnimation"
-              v-show="triggerAnimation"
-            >
-              <transition-group name="list" tag="div" class="indicator-boxes">
-                <template v-for="(locale, index) in indicators.locales">
-                  <h2
-                    :key="`${index}-title`"
-                    v-if="index === 0"
-                    class="brazil-header"
-                    :style="`transition-delay: ${index/5}s`"
+          <div v-if="indicators" class="indicator-boxes">
+            <template v-for="(locale, index) in indicators.locales" >
+              <h2
+                :key="`${index}-title`"
+                v-if="index === 0"
+                class="brazil-header"
+                :class="loadingLocales ? 'indicator-header--loading' : ''"
+              >
+                <span>{{ "{{ locale.name }}" }}</span>
+              </h2>
+              <h2
+                :key="`${index}-title`"
+                v-else
+                :class="loadingLocales ? 'indicator-header--loading' : ''"
+              >
+                Municípios
+                <transition name="fade" mode="out-in">
+                <span :key="locale.name">{{ "{{ locale.name }}" }}</span>
+                </transition>
+              </h2>
+              <template
+                v-for="(indicator, innerIndex) in locale.indicators"
+              >
+                <div
+                  :key="`${index}-box-${innerIndex}`"
+                  class="indicator-boxes__box"
+                >
+                  <span
+                    class="indicator-boxes-axis"
+                    :class="`indicator-boxes-axis--${getAxisClass(indicator.area.id)}`"
+                    :style="`transition-delay: ${(index > 0 ? innerIndex + animationCount : innerIndex)/4}s`"
                   >
-                  <span>{{ "{{ locale.name }}" }}</span>
-                  </h2>
-                  <h2
-                    :key="`${index}-title`"
-                    :style="`transition-delay: ${index/4}s`"
-                    v-else
-                  >
-                    Municípios
-                    <span>{{ "{{ locale.name }}" }}</span>
-                  </h2>
-                  <template v-for="(indicator, innerIndex) in locale.indicators">
-                    <div
-                      :key="`${index}-box-${innerIndex}`"
-                      class="indicator-boxes__box"
-                      :style="`transition-delay: ${index + innerIndex/4}s`"
+                    {{ "{{ indicator.area.name }}" }}
+                  </span>
+
+                  <transition name="fade" mode="out-in">
+                    <h3
+                      :key="indicator.description"
+                      :style="`transition-delay: ${(index > 0 ? innerIndex + animationCount : innerIndex)/4}s`"
                     >
-                      <span
-                        class="indicator-boxes-axis"
-                        :class="`indicator-boxes-axis--${getAxisClass(indicator.area.id)}`"
-                      >
-                        {{ "{{ indicator.area.name }}" }}
-                      </span>
-                      <h3>{{ "{{ indicator.description }}" }}</h3>
-                      <h4>
-                        {{ "{{ indicator.values.value_relative ? indicator.values.value_relative : indicator.values.value_absolute }}" }}
-                      </h4>
-                    </div>
-                  </template>
-                </template>
-              </transition-group>
-            </div>
+                      {{ "{{ indicator.description }}" }}
+                    </h3>
+                  </transition>
+
+                  <transition name="fade" mode="out-in">
+                    <h4
+                      :key="indicator.values.value_relative ? indicator.values.value_relative : indicator.values.value_absolute"
+                      :style="`transition-delay: ${(index > 0 ? innerIndex + animationCount : innerIndex)/4}s`"
+                    >
+                      {{ "{{ indicator.values.value_relative ? indicator.values.value_relative : indicator.values.value_absolute }}" }}
+                    </h4>
+                  </transition>
+                </div>
+              </template>
+            </template>
+          </div>
         </div>
       </section>
 

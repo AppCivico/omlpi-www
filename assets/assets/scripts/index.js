@@ -9265,6 +9265,9 @@ if (document.querySelector('#app-home-indicators')) {
     el: '#app-home-indicators',
     data: {
       indicators: null,
+      animationCount: 3,
+      loadingLocales: false,
+      additionalLocaleId: null,
       triggerAnimation: true,
       storageDomain: _config.default.storage.domain
     },
@@ -9282,7 +9285,7 @@ if (document.querySelector('#app-home-indicators')) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.getIIndicators();
+                return this.getIndicators();
 
               case 2:
                 this.startIndicatorsCounter();
@@ -9306,20 +9309,29 @@ if (document.querySelector('#app-home-indicators')) {
         var _this = this;
 
         setInterval(function () {
-          _this.indicators = {};
-
-          _this.getIIndicators();
+          _this.getIndicators();
         }, 6000);
       },
-      getIIndicators: function getIIndicators() {
+      getIndicators: function getIndicators() {
         var _this2 = this;
 
-        this.triggerAnimation = false;
-        fetch("".concat(_config.default.api.domain, "data/random_indicator")).then(function (response) {
+        this.loadingLocales = true;
+        var url = "".concat(_config.default.api.domain, "data/random_indicator");
+
+        if (this.additionalLocaleId) {
+          url = "".concat(_config.default.api.domain, "data/random_indicator?locale_id_ne=").concat(this.additionalLocaleId);
+        }
+
+        fetch(url).then(function (response) {
           return response.json();
         }).then(function (response) {
           _this2.indicators = response;
-        }).then(this.triggerAnimation = true);
+          _this2.additionalLocaleId = response.locales[1].id;
+          return true;
+        }).then(function () {
+          _this2.loadingLocales = false;
+          return true;
+        });
       },
       getAxisClass: function getAxisClass(area) {
         if (area === 1) {

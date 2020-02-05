@@ -6,6 +6,9 @@ if (document.querySelector('#app-home-indicators')) {
     el: '#app-home-indicators',
     data: {
       indicators: null,
+      animationCount: 3,
+      loadingLocales: false,
+      additionalLocaleId: null,
       triggerAnimation: true,
       storageDomain: config.storage.domain,
     },
@@ -15,24 +18,34 @@ if (document.querySelector('#app-home-indicators')) {
       },
     },
     async mounted() {
-      await this.getIIndicators();
+      await this.getIndicators();
       this.startIndicatorsCounter();
     },
     methods: {
       startIndicatorsCounter() {
         setInterval(() => {
-          this.indicators = {};
-          this.getIIndicators();
+          this.getIndicators();
         }, 6000);
       },
-      getIIndicators() {
-        this.triggerAnimation = false;
-        fetch(`${config.api.domain}data/random_indicator`)
+      getIndicators() {
+        this.loadingLocales = true;
+        let url = `${config.api.domain}data/random_indicator`;
+
+        if (this.additionalLocaleId) {
+          url = `${config.api.domain}data/random_indicator?locale_id_ne=${this.additionalLocaleId}`;
+        }
+
+        fetch(url)
           .then(response => response.json())
           .then((response) => {
             this.indicators = response;
+            this.additionalLocaleId = response.locales[1].id;
+            return true;
           })
-          .then((this.triggerAnimation = true));
+          .then(() => {
+            this.loadingLocales = false;
+            return true;
+          });
       },
       getAxisClass(area) {
         if (area === 1) {
