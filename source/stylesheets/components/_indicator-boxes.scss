@@ -16,6 +16,15 @@
   }
 }
 
+.indicator-title {
+  font-weight: font-weight('light');
+  font-size: ms(6);
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    font-size: ms(11);
+  }
+}
+
 .indicator-boxes h2 {
   position: relative;
   margin-bottom: 2rem;
