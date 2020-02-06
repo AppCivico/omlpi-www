@@ -25,7 +25,7 @@ if (document.querySelector('#app-news')) {
           });
       },
       convertDate(date) {
-        return new Date(date).toLocaleDateString('BR');
+        return new Date(date).toLocaleDateString('pt-br');
       },
     },
   });
