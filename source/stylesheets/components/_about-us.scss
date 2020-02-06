@@ -1,11 +1,28 @@
 .about-us {
   display: flex;
   flex-direction: column;
+  margin-right: auto;
+  margin-left: auto;
   background-color: palette('dark-blue-grey');
 
   @media screen and (min-width: breakpoint('tablet')) {
     flex-direction: row;
   }
+}
+
+.about-us--container {
+  margin-right: 0;
+  margin-left: 0;
+  background-color: palette('dark-blue-grey');
+
+  @media screen and (min-width: breakpoint('wide')) {
+    padding-right: 1.875rem;
+    padding-left: 1.875rem;
+  }
+}
+
+.about-us--container .about-us {
+  max-width: 75rem;
 }
 
 .about-us--boxed {
@@ -43,6 +60,7 @@
 .about-us__image {
   display: flex;
   align-items: center;
+  justify-content: center;
   margin: 0;
 }
 

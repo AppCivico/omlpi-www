@@ -9460,7 +9460,7 @@ if (document.querySelector('#app-news')) {
         });
       },
       convertDate: function convertDate(date) {
-        return new Date(date).toLocaleDateString('pt-br');
+        return new Date(date).toLocaleDateString('pt-BR');
       }
     }
   });
