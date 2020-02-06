@@ -27,8 +27,7 @@
           <h1>Conheça os três eixos do Observa</h1>
           <div class="white-box main-area__boxes">
             <div
-              class="main-area__box wow"
-              :class="getLoopClass(index)"
+              class="main-area__box"
               v-for="(item, index) in axis"
             >
               <figure>
@@ -155,7 +154,7 @@
               :alt="about.title"
             >
           </figure>
-          <div class="about-us__text wow fadeInRight">
+          <div class="about-us__text">
             <div
               :class="hasNews ? 'container' : ''"
             >
