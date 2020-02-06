@@ -54,14 +54,12 @@
                 :key="`${index}-title`"
                 v-if="index === 0"
                 class="brazil-header"
-                :class="loadingLocales ? 'indicator-header--loading' : ''"
               >
                 <span>{{ "{{ locale.name }}" }}</span>
               </h2>
               <h2
                 :key="`${index}-title`"
                 v-else
-                :class="loadingLocales ? 'indicator-header--loading' : ''"
               >
                 Municípios
                 <transition name="fade" mode="out-in">
