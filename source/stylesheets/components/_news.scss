@@ -15,6 +15,16 @@
   }
 }
 
+.news .container--two-news {
+  justify-content: flex-start;
+}
+
+.news .container--two-news .news__item:last-child {
+  @media screen and (min-width: breakpoint('tablet')) {
+    margin-left: 5rem;
+  }
+}
+
 .news__item {
   display: flex;
   flex-direction: column;

@@ -1,46 +1,61 @@
 /* global Vue */
 import config from './config';
 
-window.$vueHomeIndicators = new Vue({
-  el: '#app-home-indicators',
-  data: {
-    indicators: null,
-    triggerAnimation: true,
-    storageDomain: config.storage.domain,
-  },
-  computed: {
-    loading() {
-      return !this.locale;
+if (document.querySelector('#app-home-indicators')) {
+  window.$vueHomeIndicators = new Vue({
+    el: '#app-home-indicators',
+    data: {
+      indicators: null,
+      animationCount: 3,
+      loadingLocales: false,
+      additionalLocaleId: null,
+      triggerAnimation: true,
+      storageDomain: config.storage.domain,
     },
-  },
-  async mounted() {
-    await this.getIIndicators();
-    this.startIndicatorsCounter();
-  },
-  methods: {
-    startIndicatorsCounter() {
-      setInterval(() => {
-        this.indicators = {};
-        this.getIIndicators();
-      }, 6000);
+    computed: {
+      loading() {
+        return !this.locale;
+      },
     },
-    getIIndicators() {
-      this.triggerAnimation = false;
-      fetch(`${config.api.domain}data/random_indicator`)
-        .then(response => response.json())
-        .then((response) => {
-          this.indicators = response;
-        })
-        .then((this.triggerAnimation = true));
+    async mounted() {
+      await this.getIndicators();
+      this.startIndicatorsCounter();
     },
-    getAxisClass(area) {
-      if (area === 1) {
-        return 'health';
-      }
-      if (area === 2) {
-        return 'education';
-      }
-      return 'social-assistance';
+    methods: {
+      startIndicatorsCounter() {
+        setInterval(() => {
+          this.getIndicators();
+        }, 6000);
+      },
+      getIndicators() {
+        this.loadingLocales = true;
+        let url = `${config.api.domain}data/random_indicator`;
+
+        if (this.additionalLocaleId) {
+          url = `${config.api.domain}data/random_indicator?locale_id_ne=${this.additionalLocaleId}`;
+        }
+
+        fetch(url)
+          .then(response => response.json())
+          .then((response) => {
+            this.indicators = response;
+            this.additionalLocaleId = response.locales[1].id;
+            return true;
+          })
+          .then(() => {
+            this.loadingLocales = false;
+            return true;
+          });
+      },
+      getAxisClass(area) {
+        if (area === 1) {
+          return 'health';
+        }
+        if (area === 2) {
+          return 'education';
+        }
+        return 'social-assistance';
+      },
     },
-  },
-});
+  });
+}

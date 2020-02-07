@@ -3,15 +3,25 @@
   display: flex;
   z-index: 2;
   flex-direction: column;
-  min-height: 32.5rem;
+  // min-height: 32.5rem;
   padding: 1.5rem;
-  background: palette('green');
+  background-color: palette('green');
+  box-shadow: 0 2px 4px 0 palette('black', 'opacity');
 
   @media screen and (min-width: breakpoint('desktop')) {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 2rem;
+  }
+}
+
+.indicator-title {
+  font-weight: font-weight('light');
+  font-size: ms(6);
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    font-size: ms(11);
   }
 }
 
@@ -39,6 +49,7 @@
 .indicator-boxes h2 span {
   position: relative;
   display: block;
+  margin-top: 0.5rem;
   text-transform: uppercase;
 
   &::before {
@@ -46,11 +57,31 @@
     bottom: -1rem;
     width: 9.7rem;
     height: 0.25rem;
-    background: linear-gradient(87deg, palette('gradient', 'purple') 0%, palette('gradient', 'purple-lighter') 36%,
-      palette('gradient', 'blue') 63%, palette('gradient', 'blue-lighter') 100%);
+    background: linear-gradient(87deg, palette('gradient', 'purple') 0%, palette('gradient', 'purple-lighter') 20%,
+      palette('gradient', 'blue') 30%, palette('gradient', 'blue-lighter') 50%);
+    background-size: 200%;
     content: '';
   }
+}
 
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.indicator-header--loading span {
+  &::before {
+    animation: gradient-animation 1s ease infinite;
+  }
 }
 
 .indicator-boxes-axis {
@@ -106,24 +137,26 @@
 }
 
 .indicator-boxes__box h4 {
-  @include truncate;
+  // @include truncate;
   margin-top: 0.8rem;
   margin-bottom: 0.8rem;
   font-size: ms(8);
 }
 
-.list-enter-active,
-.list-leave-active {
-  transition: opacity 1s, transform 1s;
-}
-
-.list-enter,
-.list-leave-to /* .list-leave-active below version 2.1.8 */ {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.3s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.fade-enter,
+.slide-fade-leave-to {
+  // transform: translateX(10px);
+  opacity: 0;
+  transition: opacity 0.3s;
 }

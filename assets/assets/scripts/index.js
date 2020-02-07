@@ -8901,35 +8901,57 @@ if (window.location.href.indexOf('biblioteca') > -1) {
         _regenerator.default.mark(function _callee2() {
           var _this2 = this;
 
-          var articles, tagged;
+          var byTitle, byOrganization, byTag;
           return _regenerator.default.wrap(function _callee2$(_context2) {
             while (1) {
               switch (_context2.prev = _context2.next) {
                 case 0:
-                  _context2.next = 2;
+                  if (!(this.searchQuery === '')) {
+                    _context2.next = 2;
+                    break;
+                  }
+
+                  return _context2.abrupt("return", this.getArticles());
+
+                case 2:
+                  byTitle = [];
+                  byOrganization = [];
+                  byTag = [];
+                  _context2.next = 7;
                   return fetch("".concat(_config.default.apiCMS.domain, "artigos?title_contains=").concat(this.searchQuery)).then(function (response) {
                     return response.json();
                   }).then(function (response) {
-                    articles = response;
+                    byTitle = response;
                   });
 
-                case 2:
-                  _context2.next = 4;
+                case 7:
+                  _context2.next = 9;
+                  return fetch("".concat(_config.default.apiCMS.domain, "artigos?organization_contains=").concat(this.searchQuery)).then(function (response) {
+                    return response.json();
+                  }).then(function (response) {
+                    byOrganization = response;
+                  });
+
+                case 9:
+                  _context2.next = 11;
                   return fetch("".concat(_config.default.apiCMS.domain, "artigos/tagged/").concat(this.searchQuery)).then(function (response) {
                     return response.json();
                   }).then(function (response) {
-                    tagged = response;
+                    byTag = response;
                   });
 
-                case 4:
-                  _context2.next = 6;
+                case 11:
+                  _context2.next = 13;
                   return fetch("".concat(_config.default.apiCMS.domain, "artigos?author_contains=").concat(this.searchQuery)).then(function (response) {
                     return response.json();
                   }).then(function (response) {
-                    _this2.articles = (0, _uniqBy2.default)([].concat((0, _toConsumableArray2.default)(articles), (0, _toConsumableArray2.default)(tagged), (0, _toConsumableArray2.default)(response)), 'id');
+                    _this2.articles = (0, _uniqBy2.default)([].concat((0, _toConsumableArray2.default)(byTitle), (0, _toConsumableArray2.default)(byOrganization), (0, _toConsumableArray2.default)(byTag), (0, _toConsumableArray2.default)(response)), 'id');
                   });
 
-                case 6:
+                case 13:
+                  return _context2.abrupt("return", true);
+
+                case 14:
                 case "end":
                   return _context2.stop();
               }
@@ -8994,68 +9016,70 @@ var _dompurify = _interopRequireDefault(require("dompurify"));
 var _config = _interopRequireDefault(require("./config"));
 
 /* global Vue */
-window.$vueAxis = new Vue({
-  el: '#app-axis',
-  data: {
-    axis: null,
-    storageDomain: _config.default.storage.domain
-  },
-  computed: {
-    loading: function loading() {
-      return !this.locale;
-    }
-  },
-  mounted: function () {
-    var _mounted = (0, _asyncToGenerator2.default)(
-    /*#__PURE__*/
-    _regenerator.default.mark(function _callee() {
-      return _regenerator.default.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return this.getAxis();
+if (document.querySelector('#app-axis')) {
+  window.$vueAxis = new Vue({
+    el: '#app-axis',
+    data: {
+      axis: null,
+      storageDomain: _config.default.storage.domain
+    },
+    computed: {
+      loading: function loading() {
+        return !this.locale;
+      }
+    },
+    mounted: function () {
+      var _mounted = (0, _asyncToGenerator2.default)(
+      /*#__PURE__*/
+      _regenerator.default.mark(function _callee() {
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.getAxis();
 
-            case 2:
-            case "end":
-              return _context.stop();
+              case 2:
+              case "end":
+                return _context.stop();
+            }
           }
+        }, _callee, this);
+      }));
+
+      function mounted() {
+        return _mounted.apply(this, arguments);
+      }
+
+      return mounted;
+    }(),
+    methods: {
+      getAxis: function getAxis() {
+        var _this = this;
+
+        fetch("".concat(_config.default.apiCMS.domain, "eixos?_limit=30&_sort=order:ASC")).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          _this.axis = response;
+        });
+      },
+      marked: function marked(content) {
+        return _dompurify.default.sanitize((0, _marked2.default)(content));
+      },
+      getLoopClass: function getLoopClass(index) {
+        if (index === 0) {
+          return 'fadeInLeft';
         }
-      }, _callee, this);
-    }));
 
-    function mounted() {
-      return _mounted.apply(this, arguments);
-    }
+        if (index === 2) {
+          return 'fadeInRight';
+        }
 
-    return mounted;
-  }(),
-  methods: {
-    getAxis: function getAxis() {
-      var _this = this;
-
-      fetch("".concat(_config.default.apiCMS.domain, "eixos?_limit=30&_sort=order:ASC")).then(function (response) {
-        return response.json();
-      }).then(function (response) {
-        _this.axis = response;
-      });
-    },
-    marked: function marked(content) {
-      return _dompurify.default.sanitize((0, _marked2.default)(content));
-    },
-    getLoopClass: function getLoopClass(index) {
-      if (index === 0) {
-        return 'fadeInLeft';
+        return true;
       }
-
-      if (index === 2) {
-        return 'fadeInRight';
-      }
-
-      return true;
     }
-  }
-});
+  });
+}
 
 },{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"dompurify":12,"marked":146}],152:[function(require,module,exports){
 "use strict";
@@ -9095,57 +9119,62 @@ var _dompurify = _interopRequireDefault(require("dompurify"));
 var _config = _interopRequireDefault(require("./config"));
 
 /* global Vue */
-window.$vueHomeAbout = new Vue({
-  el: '#app-home-about',
-  data: {
-    about: null,
-    storageDomain: _config.default.storage.domain
-  },
-  computed: {
-    loading: function loading() {
-      return !this.locale;
-    }
-  },
-  mounted: function () {
-    var _mounted = (0, _asyncToGenerator2.default)(
-    /*#__PURE__*/
-    _regenerator.default.mark(function _callee() {
-      return _regenerator.default.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return this.getAbout();
-
-            case 2:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, this);
-    }));
-
-    function mounted() {
-      return _mounted.apply(this, arguments);
-    }
-
-    return mounted;
-  }(),
-  methods: {
-    getAbout: function getAbout() {
-      var _this = this;
-
-      fetch("".concat(_config.default.apiCMS.domain, "sobres?_limit=1")).then(function (response) {
-        return response.json();
-      }).then(function (response) {
-        _this.about = (0, _objectSpread2.default)({}, response[0]);
-      });
+if (document.querySelector('#app-home-about')) {
+  window.$vueHomeAbout = new Vue({
+    el: '#app-home-about',
+    data: {
+      about: null,
+      storageDomain: _config.default.storage.domain
     },
-    marked: function marked(content) {
-      return _dompurify.default.sanitize((0, _marked2.default)(content));
+    computed: {
+      loading: function loading() {
+        return !this.locale;
+      },
+      hasNews: function hasNews() {
+        return window.$vueNews && window.$vueNews.news && window.$vueNews.news.length > 0;
+      }
+    },
+    mounted: function () {
+      var _mounted = (0, _asyncToGenerator2.default)(
+      /*#__PURE__*/
+      _regenerator.default.mark(function _callee() {
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.getAbout();
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function mounted() {
+        return _mounted.apply(this, arguments);
+      }
+
+      return mounted;
+    }(),
+    methods: {
+      getAbout: function getAbout() {
+        var _this = this;
+
+        fetch("".concat(_config.default.apiCMS.domain, "sobres?_limit=1")).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          _this.about = (0, _objectSpread2.default)({}, response[0]);
+        });
+      },
+      marked: function marked(content) {
+        return _dompurify.default.sanitize((0, _marked2.default)(content));
+      }
     }
-  }
-});
+  });
+}
 
 },{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/objectSpread":7,"@babel/runtime/regenerator":10,"dompurify":12,"marked":146}],154:[function(require,module,exports){
 "use strict";
@@ -9165,57 +9194,59 @@ var _dompurify = _interopRequireDefault(require("dompurify"));
 var _config = _interopRequireDefault(require("./config"));
 
 /* global Vue */
-window.$vueHomeBanner = new Vue({
-  el: '#app-home-banner',
-  data: {
-    banner: null,
-    storageDomain: _config.default.storage.domain
-  },
-  computed: {
-    loading: function loading() {
-      return !this.locale;
-    }
-  },
-  mounted: function () {
-    var _mounted = (0, _asyncToGenerator2.default)(
-    /*#__PURE__*/
-    _regenerator.default.mark(function _callee() {
-      return _regenerator.default.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return this.getBanner();
-
-            case 2:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, this);
-    }));
-
-    function mounted() {
-      return _mounted.apply(this, arguments);
-    }
-
-    return mounted;
-  }(),
-  methods: {
-    getBanner: function getBanner() {
-      var _this = this;
-
-      fetch("".concat(_config.default.apiCMS.domain, "banners?_limit=1")).then(function (response) {
-        return response.json();
-      }).then(function (response) {
-        _this.banner = (0, _objectSpread2.default)({}, response[0]);
-      });
+if (document.querySelector('#app-home-banner')) {
+  window.$vueHomeBanner = new Vue({
+    el: '#app-home-banner',
+    data: {
+      banner: null,
+      storageDomain: _config.default.storage.domain
     },
-    marked: function marked(content) {
-      return _dompurify.default.sanitize((0, _marked2.default)(content));
+    computed: {
+      loading: function loading() {
+        return !this.locale;
+      }
+    },
+    mounted: function () {
+      var _mounted = (0, _asyncToGenerator2.default)(
+      /*#__PURE__*/
+      _regenerator.default.mark(function _callee() {
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.getBanner();
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function mounted() {
+        return _mounted.apply(this, arguments);
+      }
+
+      return mounted;
+    }(),
+    methods: {
+      getBanner: function getBanner() {
+        var _this = this;
+
+        fetch("".concat(_config.default.apiCMS.domain, "banners?_limit=1")).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          _this.banner = (0, _objectSpread2.default)({}, response[0]);
+        });
+      },
+      marked: function marked(content) {
+        return _dompurify.default.sanitize((0, _marked2.default)(content));
+      }
     }
-  }
-});
+  });
+}
 
 },{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/objectSpread":7,"@babel/runtime/regenerator":10,"dompurify":12,"marked":146}],155:[function(require,module,exports){
 "use strict";
@@ -9229,79 +9260,93 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 var _config = _interopRequireDefault(require("./config"));
 
 /* global Vue */
-window.$vueHomeIndicators = new Vue({
-  el: '#app-home-indicators',
-  data: {
-    indicators: null,
-    triggerAnimation: true,
-    storageDomain: _config.default.storage.domain
-  },
-  computed: {
-    loading: function loading() {
-      return !this.locale;
-    }
-  },
-  mounted: function () {
-    var _mounted = (0, _asyncToGenerator2.default)(
-    /*#__PURE__*/
-    _regenerator.default.mark(function _callee() {
-      return _regenerator.default.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return this.getIIndicators();
+if (document.querySelector('#app-home-indicators')) {
+  window.$vueHomeIndicators = new Vue({
+    el: '#app-home-indicators',
+    data: {
+      indicators: null,
+      animationCount: 3,
+      loadingLocales: false,
+      additionalLocaleId: null,
+      triggerAnimation: true,
+      storageDomain: _config.default.storage.domain
+    },
+    computed: {
+      loading: function loading() {
+        return !this.locale;
+      }
+    },
+    mounted: function () {
+      var _mounted = (0, _asyncToGenerator2.default)(
+      /*#__PURE__*/
+      _regenerator.default.mark(function _callee() {
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.getIndicators();
 
-            case 2:
-              this.startIndicatorsCounter();
+              case 2:
+                this.startIndicatorsCounter();
 
-            case 3:
-            case "end":
-              return _context.stop();
+              case 3:
+              case "end":
+                return _context.stop();
+            }
           }
+        }, _callee, this);
+      }));
+
+      function mounted() {
+        return _mounted.apply(this, arguments);
+      }
+
+      return mounted;
+    }(),
+    methods: {
+      startIndicatorsCounter: function startIndicatorsCounter() {
+        var _this = this;
+
+        setInterval(function () {
+          _this.getIndicators();
+        }, 6000);
+      },
+      getIndicators: function getIndicators() {
+        var _this2 = this;
+
+        this.loadingLocales = true;
+        var url = "".concat(_config.default.api.domain, "data/random_indicator");
+
+        if (this.additionalLocaleId) {
+          url = "".concat(_config.default.api.domain, "data/random_indicator?locale_id_ne=").concat(this.additionalLocaleId);
         }
-      }, _callee, this);
-    }));
 
-    function mounted() {
-      return _mounted.apply(this, arguments);
-    }
+        fetch(url).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          _this2.indicators = response;
+          _this2.additionalLocaleId = response.locales[1].id;
+          return true;
+        }).then(function () {
+          _this2.loadingLocales = false;
+          return true;
+        });
+      },
+      getAxisClass: function getAxisClass(area) {
+        if (area === 1) {
+          return 'health';
+        }
 
-    return mounted;
-  }(),
-  methods: {
-    startIndicatorsCounter: function startIndicatorsCounter() {
-      var _this = this;
+        if (area === 2) {
+          return 'education';
+        }
 
-      setInterval(function () {
-        _this.indicators = {};
-
-        _this.getIIndicators();
-      }, 6000);
-    },
-    getIIndicators: function getIIndicators() {
-      var _this2 = this;
-
-      this.triggerAnimation = false;
-      fetch("".concat(_config.default.api.domain, "data/random_indicator")).then(function (response) {
-        return response.json();
-      }).then(function (response) {
-        _this2.indicators = response;
-      }).then(this.triggerAnimation = true);
-    },
-    getAxisClass: function getAxisClass(area) {
-      if (area === 1) {
-        return 'health';
+        return 'social-assistance';
       }
-
-      if (area === 2) {
-        return 'education';
-      }
-
-      return 'social-assistance';
     }
-  }
-});
+  });
+}
 
 },{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],156:[function(require,module,exports){
 "use strict";
@@ -9367,57 +9412,59 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 var _config = _interopRequireDefault(require("./config"));
 
 /* global Vue */
-window.$vuePlans = new Vue({
-  el: '#app-news',
-  data: {
-    news: null,
-    storageDomain: _config.default.storage.domain
-  },
-  computed: {
-    loading: function loading() {
-      return !this.locale;
-    }
-  },
-  mounted: function () {
-    var _mounted = (0, _asyncToGenerator2.default)(
-    /*#__PURE__*/
-    _regenerator.default.mark(function _callee() {
-      return _regenerator.default.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return this.getNews();
-
-            case 2:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, this);
-    }));
-
-    function mounted() {
-      return _mounted.apply(this, arguments);
-    }
-
-    return mounted;
-  }(),
-  methods: {
-    getNews: function getNews() {
-      var _this = this;
-
-      fetch("".concat(_config.default.apiCMS.domain, "noticias?_limit=30&_sort=date:ASC")).then(function (response) {
-        return response.json();
-      }).then(function (response) {
-        _this.news = response;
-      });
+if (document.querySelector('#app-news')) {
+  window.$vueNews = new Vue({
+    el: '#app-news',
+    data: {
+      news: null,
+      storageDomain: _config.default.storage.domain
     },
-    convertDate: function convertDate(date) {
-      return new Date(date).toLocaleDateString('BR');
+    computed: {
+      loading: function loading() {
+        return !this.locale;
+      }
+    },
+    mounted: function () {
+      var _mounted = (0, _asyncToGenerator2.default)(
+      /*#__PURE__*/
+      _regenerator.default.mark(function _callee() {
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.getNews();
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function mounted() {
+        return _mounted.apply(this, arguments);
+      }
+
+      return mounted;
+    }(),
+    methods: {
+      getNews: function getNews() {
+        var _this = this;
+
+        fetch("".concat(_config.default.apiCMS.domain, "noticias?_limit=30&_sort=date:ASC")).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          _this.news = response;
+        });
+      },
+      convertDate: function convertDate(date) {
+        return new Date(date).toLocaleDateString('pt-BR');
+      }
     }
-  }
-});
+  });
+}
 
 },{"./config":152,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],159:[function(require,module,exports){
 "use strict";

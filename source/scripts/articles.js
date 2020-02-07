@@ -41,23 +41,34 @@ if (window.location.href.indexOf('biblioteca') > -1) {
             }
           });
       },
+
       async searchArticles() {
-        let articles;
-        let tagged;
+        if (this.searchQuery === '') {
+          return this.getArticles();
+        }
+
+        let byTitle = [];
+        let byOrganization = [];
+        let byTag = [];
 
         await fetch(`${config.apiCMS.domain}artigos?title_contains=${this.searchQuery}`)
           .then(response => response.json())
-          .then((response) => { articles = response; });
+          .then((response) => { byTitle = response; });
+
+        await fetch(`${config.apiCMS.domain}artigos?organization_contains=${this.searchQuery}`)
+          .then(response => response.json())
+          .then((response) => { byOrganization = response; });
 
         await fetch(`${config.apiCMS.domain}artigos/tagged/${this.searchQuery}`)
           .then(response => response.json())
-          .then((response) => { tagged = response; });
+          .then((response) => { byTag = response; });
 
         await fetch(`${config.apiCMS.domain}artigos?author_contains=${this.searchQuery}`)
           .then(response => response.json())
           .then((response) => {
-            this.articles = _uniqBy([...articles, ...tagged, ...response], 'id');
+            this.articles = _uniqBy([...byTitle, ...byOrganization, ...byTag, ...response], 'id');
           });
+        return true;
       },
 
       async searchByTag(tag) {

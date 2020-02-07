@@ -1,6 +1,8 @@
 .about-us {
   display: flex;
   flex-direction: column;
+  margin-right: auto;
+  margin-left: auto;
   background-color: palette('dark-blue-grey');
 
   @media screen and (min-width: breakpoint('tablet')) {
@@ -8,9 +10,57 @@
   }
 }
 
+.about-us--container {
+  margin-right: 0;
+  margin-left: 0;
+  background-color: palette('dark-blue-grey');
+
+  @media screen and (min-width: breakpoint('wide')) {
+    padding-right: 1.875rem;
+    padding-left: 1.875rem;
+  }
+}
+
+.about-us--container .about-us {
+  max-width: 75rem;
+}
+
+.about-us--boxed {
+  padding-top: 7rem;
+  padding-bottom: 4rem;
+  margin-top: -4rem;
+}
+
+.about-us--boxed .container {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    flex-direction: row;
+  }
+}
+
+.about-us--boxed .button {
+  justify-content: center;
+
+  @media screen and (min-width: breakpoint('phablet')) {
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+.about-us--boxed .about-us__text {
+  padding-bottom: 0;
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    padding-left: 2rem;
+  }
+}
+
 .about-us__image {
   display: flex;
   align-items: center;
+  justify-content: center;
   margin: 0;
 }
 

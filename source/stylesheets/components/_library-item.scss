@@ -16,6 +16,13 @@
   display: flex;
   align-self: flex-start;
   justify-content: center;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  margin-left: auto;
+
+  @media screen and (min-width: breakpoint('phablet')) {
+    max-width: 15rem;
+  }
 }
 
 .library-item__content {
