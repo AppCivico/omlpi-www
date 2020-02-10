@@ -5557,6 +5557,94 @@ exports.default = _default;
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
+var _config = _interopRequireDefault(require("./config"));
+
+/* global Vue */
+if (document.querySelector('#app-history')) {
+  window.$vueHomeIndicators = new Vue({
+    el: '#app-home-indicators',
+    data: {
+      indicators: null,
+      loadingLocales: false,
+      additionalLocaleId: null,
+      triggerAnimation: true,
+      storageDomain: _config.default.storage.domain
+    },
+    computed: {
+      loading: function loading() {
+        return !this.locale;
+      }
+    },
+    mounted: function () {
+      var _mounted = (0, _asyncToGenerator2.default)(
+      /*#__PURE__*/
+      _regenerator.default.mark(function _callee() {
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.getIndicators();
+
+              case 2:
+                this.startIndicatorsCounter();
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function mounted() {
+        return _mounted.apply(this, arguments);
+      }
+
+      return mounted;
+    }(),
+    methods: {
+      startIndicatorsCounter: function startIndicatorsCounter() {
+        var _this = this;
+
+        setInterval(function () {
+          _this.getIndicators();
+        }, 6000);
+      },
+      getIndicators: function getIndicators() {
+        var _this2 = this;
+
+        this.loadingLocales = true;
+        var url = "".concat(_config.default.api.domain, "data/random_indicator");
+
+        if (this.additionalLocaleId) {
+          url = "".concat(_config.default.api.domain, "data/random_indicator?locale_id_ne=").concat(this.additionalLocaleId);
+        }
+
+        fetch(url).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          _this2.indicators = response;
+          _this2.additionalLocaleId = response.locales[1].id;
+          return true;
+        }).then(function () {
+          _this2.loadingLocales = false;
+          return true;
+        });
+      }
+    }
+  });
+}
+
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],30:[function(require,module,exports){
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
@@ -5627,7 +5715,7 @@ if (document.querySelector('#app-home-about')) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/objectSpread":7,"@babel/runtime/regenerator":10,"dompurify":12,"marked":22}],30:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/objectSpread":7,"@babel/runtime/regenerator":10,"dompurify":12,"marked":22}],31:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5699,7 +5787,7 @@ if (document.querySelector('#app-home-banner')) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/objectSpread":7,"@babel/runtime/regenerator":10,"dompurify":12,"marked":22}],31:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/objectSpread":7,"@babel/runtime/regenerator":10,"dompurify":12,"marked":22}],32:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5799,7 +5887,7 @@ if (document.querySelector('#app-home-indicators')) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],32:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],33:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5826,11 +5914,13 @@ require("./homeAbout");
 
 require("./homeIndicators");
 
+require("./history");
+
 (0, _search.default)();
 (0, _searchPlans.default)();
 (0, _menu.default)();
 
-},{"./articles":26,"./axis":27,"./homeAbout":29,"./homeBanner":30,"./homeIndicators":31,"./menu":33,"./news":34,"./plans":35,"./populateData":36,"./search":38,"./search-plans":37,"@babel/runtime/helpers/interopRequireDefault":4}],33:[function(require,module,exports){
+},{"./articles":26,"./axis":27,"./history":29,"./homeAbout":30,"./homeBanner":31,"./homeIndicators":32,"./menu":34,"./news":35,"./plans":36,"./populateData":37,"./search":39,"./search-plans":38,"@babel/runtime/helpers/interopRequireDefault":4}],34:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5851,7 +5941,7 @@ function startMenutoggle() {
   });
 }
 
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5917,7 +6007,7 @@ if (document.querySelector('#app-news')) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],35:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],36:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6066,7 +6156,7 @@ if (window.location.href.indexOf('plano-para-primeira-infancia') > -1) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],36:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],37:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6334,7 +6424,7 @@ if (window.location.href.indexOf('city') > -1) {
   });
 }
 
-},{"./config":28,"./search":38,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],37:[function(require,module,exports){
+},{"./config":28,"./search":39,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],38:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6485,7 +6575,7 @@ function startPlansSearch() {
   }
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}],38:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}],39:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6631,4 +6721,4 @@ function startSearch() {
   }
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}]},{},[32]);
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}]},{},[33]);
