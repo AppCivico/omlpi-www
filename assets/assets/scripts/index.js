@@ -8881,7 +8881,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
           this.pagination_limit = this.pagination_limit + this.itens_qtd;
         }
 
-        fetch("".concat(_config.default.apiCMS.domain, "artigos?_start=").concat(this.pagination_start, "&_limit=").concat(this.pagination_limit)).then(function (response) {
+        fetch("".concat(_config.default.apiCMS.domain, "artigos")).then(function (response) {
           return response.json();
         }).then(function (response) {
           if (response.length === 0) {
@@ -8901,7 +8901,6 @@ if (window.location.href.indexOf('biblioteca') > -1) {
         _regenerator.default.mark(function _callee2() {
           var _this2 = this;
 
-          var byTitle, byOrganization, byTag;
           return _regenerator.default.wrap(function _callee2$(_context2) {
             while (1) {
               switch (_context2.prev = _context2.next) {
@@ -8914,44 +8913,17 @@ if (window.location.href.indexOf('biblioteca') > -1) {
                   return _context2.abrupt("return", this.getArticles());
 
                 case 2:
-                  byTitle = [];
-                  byOrganization = [];
-                  byTag = [];
-                  _context2.next = 7;
-                  return fetch("".concat(_config.default.apiCMS.domain, "artigos?title_contains=").concat(this.searchQuery)).then(function (response) {
+                  _context2.next = 4;
+                  return fetch("".concat(_config.default.apiCMS.domain, "artigos?q=").concat(this.searchQuery)).then(function (response) {
                     return response.json();
                   }).then(function (response) {
-                    byTitle = response;
+                    _this2.articles = response;
                   });
 
-                case 7:
-                  _context2.next = 9;
-                  return fetch("".concat(_config.default.apiCMS.domain, "artigos?organization_contains=").concat(this.searchQuery)).then(function (response) {
-                    return response.json();
-                  }).then(function (response) {
-                    byOrganization = response;
-                  });
-
-                case 9:
-                  _context2.next = 11;
-                  return fetch("".concat(_config.default.apiCMS.domain, "artigos/tagged/").concat(this.searchQuery)).then(function (response) {
-                    return response.json();
-                  }).then(function (response) {
-                    byTag = response;
-                  });
-
-                case 11:
-                  _context2.next = 13;
-                  return fetch("".concat(_config.default.apiCMS.domain, "artigos?author_contains=").concat(this.searchQuery)).then(function (response) {
-                    return response.json();
-                  }).then(function (response) {
-                    _this2.articles = (0, _uniqBy2.default)([].concat((0, _toConsumableArray2.default)(byTitle), (0, _toConsumableArray2.default)(byOrganization), (0, _toConsumableArray2.default)(byTag), (0, _toConsumableArray2.default)(response)), 'id');
-                  });
-
-                case 13:
+                case 4:
                   return _context2.abrupt("return", true);
 
-                case 14:
+                case 5:
                 case "end":
                   return _context2.stop();
               }
@@ -8969,18 +8941,12 @@ if (window.location.href.indexOf('biblioteca') > -1) {
         var _searchByTag = (0, _asyncToGenerator2.default)(
         /*#__PURE__*/
         _regenerator.default.mark(function _callee3(tag) {
-          var _this3 = this;
-
           return _regenerator.default.wrap(function _callee3$(_context3) {
             while (1) {
               switch (_context3.prev = _context3.next) {
                 case 0:
-                  _context3.next = 2;
-                  return fetch("".concat(_config.default.apiCMS.domain, "artigos/tagged/").concat(tag)).then(function (response) {
-                    return response.json();
-                  }).then(function (response) {
-                    _this3.articles = response;
-                  });
+                  this.searchQuery = tag;
+                  this.searchArticles();
 
                 case 2:
                 case "end":
