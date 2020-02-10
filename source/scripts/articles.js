@@ -1,5 +1,4 @@
 /* global Vue */
-import _uniqBy from 'lodash/uniqBy';
 import config from './config';
 
 if (window.location.href.indexOf('biblioteca') > -1) {
@@ -68,7 +67,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
         // await fetch(`${config.apiCMS.domain}artigos?author_contains=${this.searchQuery}`)
         //   .then(response => response.json())
         //   .then((response) => {
-        //     this.articles = _uniqBy([...byTitle, ...byOrganization, ...byTag, ...response], 'id');
+        //   this.articles = _uniqBy([...byTitle, ...byOrganization, ...byTag, ...response], 'id');
         //   });
         return true;
       },
