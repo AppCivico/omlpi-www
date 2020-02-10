@@ -75,11 +75,11 @@
   font-size: ms(-3);
   text-decoration: none;
   text-transform: uppercase;
-  cursor: pointer;
+  // cursor: pointer;
   color: palette('white');
   background: palette('purple');
   border-radius: 2px;
-  box-shadow: 0 2px 4px 0 palette('black', 'opacity');
+  // box-shadow: 0 2px 4px 0 palette('black', 'opacity');
 }
 
 .library-item__show-more {
