@@ -14,6 +14,12 @@
         </header>
         <div class="container">
           <section class='search-area search-area__library'>
+            <span
+              v-if="searchQuery"
+              class="search-area__informative"
+            >
+              Resultados de busca para: {{ "{{ searchQuery }}" }}
+            </span>
             <form action="" @submit.prevent="searchArticles">
               <label for="js-articles-search">
                 {{ i18n "exploreArticles" }}
@@ -30,7 +36,7 @@
             <article class="library-item" v-for="(article, index) in articles">
               <div
                 class="library-item__image"
-                v-if="article.image.url"
+                v-if="article.image && article.image.url"
               >
                 <img
                   :src="`${storageDomain}${article.image.url}`"
@@ -51,7 +57,7 @@
                 <!-- </span> -->
                 <div class="library-item__tags">
                   <template v-for="(tag, index) in article.tags">
-                    <a @click="searchByTag(tag.name)">{{ "{{ tag.name }}" }}</a>
+                    <a>{{ "{{ tag.name }}" }}</a>
                   </template>
                 </div>
                 <p>
@@ -62,6 +68,7 @@
                 </p>
 
                 <a
+                  v-if="article.file && article.file.url"
                   :href="`${storageDomain}${article.file.url}`"
                   class="button"
                   target="_blank"
