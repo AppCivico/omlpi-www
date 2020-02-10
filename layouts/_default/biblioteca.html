@@ -32,6 +32,12 @@
                 <button>{{ i18n "search" }}</button>
             </form>
           </section>
+          <span
+            v-if="searchQuery && 1 !== 1"
+            class="search-area__informative"
+          >
+            Resultados de busca para: {{ "{{ searchQuery }}" }}
+          </span>
           <template v-if="articles && articles.length !== 0">
             <article class="library-item" v-for="(article, index) in articles">
               <div
