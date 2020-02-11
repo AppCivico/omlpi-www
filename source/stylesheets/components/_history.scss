@@ -7,7 +7,7 @@
   @media screen and (min-width: breakpoint('desktop')) {
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     padding-top: 3rem;
   }
 }
@@ -77,6 +77,11 @@
   @media screen and (min-width: breakpoint('desktop')) {
     width: 25.18rem;
   }
+}
+
+.history__desagregation--full {
+  width: 100%;
+  text-align: center;
 }
 
 .history__desagregation h2 {

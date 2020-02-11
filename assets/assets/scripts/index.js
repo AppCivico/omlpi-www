@@ -5564,19 +5564,47 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 var _config = _interopRequireDefault(require("./config"));
 
 /* global Vue */
+
+/* global Highcharts */
 if (document.querySelector('#app-history')) {
-  window.$vueHomeIndicators = new Vue({
-    el: '#app-home-indicators',
+  window.$vueHistory = new Vue({
+    el: '#app-history',
     data: {
-      indicators: null,
-      loadingLocales: false,
+      locales: null,
+      locale: null,
+      selectedArea: 3,
+      selectedIndicator: 5,
+      loadingLocale: false,
       additionalLocaleId: null,
       triggerAnimation: true,
-      storageDomain: _config.default.storage.domain
+      storageDomain: _config.default.storage.domain,
+      areas: [{
+        id: 1,
+        name: 'Assistência Social',
+        class: 'social-care'
+      }, {
+        id: 2,
+        name: 'Educação',
+        class: 'education'
+      }, {
+        id: 3,
+        name: 'Saúde',
+        class: 'health'
+      }]
     },
     computed: {
       loading: function loading() {
         return !this.locale;
+      },
+      localeId: function localeId() {
+        return new URL(window.location.href).searchParams.get('location_id');
+      },
+      indicators: function indicators() {
+        var _this = this;
+
+        return this.locale.historical[0].indicators.filter(function (item) {
+          return item.area.id === _this.selectedArea;
+        });
       }
     },
     mounted: function () {
@@ -5588,12 +5616,17 @@ if (document.querySelector('#app-history')) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.getIndicators();
+                return this.getLocales();
 
               case 2:
-                this.startIndicatorsCounter();
+                _context.next = 4;
+                return this.getLocale(this.localeId);
 
-              case 3:
+              case 4:
+                _context.next = 6;
+                return this.generateCharts();
+
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -5608,33 +5641,85 @@ if (document.querySelector('#app-history')) {
       return mounted;
     }(),
     methods: {
-      startIndicatorsCounter: function startIndicatorsCounter() {
-        var _this = this;
-
-        setInterval(function () {
-          _this.getIndicators();
-        }, 6000);
-      },
-      getIndicators: function getIndicators() {
+      getLocale: function getLocale(localeId) {
         var _this2 = this;
 
-        this.loadingLocales = true;
-        var url = "".concat(_config.default.api.domain, "data/random_indicator");
-
-        if (this.additionalLocaleId) {
-          url = "".concat(_config.default.api.domain, "data/random_indicator?locale_id_ne=").concat(this.additionalLocaleId);
-        }
-
+        this.loadingLocale = true;
+        var url = "".concat(_config.default.api.domain, "data/historical?locale_id=").concat(localeId || 2803609);
         fetch(url).then(function (response) {
           return response.json();
         }).then(function (response) {
-          _this2.indicators = response;
-          _this2.additionalLocaleId = response.locales[1].id;
+          _this2.locale = response;
           return true;
         }).then(function () {
-          _this2.loadingLocales = false;
+          _this2.loadingLocale = false;
           return true;
         });
+      },
+      getLocales: function getLocales() {
+        var _this3 = this;
+
+        this.loadingLocale = true;
+        fetch("".concat(_config.default.api.domain, "locales")).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          _this3.locales = response.locales;
+          return true;
+        }).then(function () {
+          _this3.loadingLocales = false;
+          return true;
+        });
+      },
+      getYears: function getYears(data) {
+        return data.values.map(function (item) {
+          return item.year;
+        });
+      },
+      formatDataToBarsCharts: function formatDataToBarsCharts(items) {
+        var data = [];
+        items.values.forEach(function (item) {
+          data.push({
+            name: item.year,
+            data: [Number(item.value_relative) ? Number(item.value_relative) : Number(item.value_absolute)]
+          });
+        });
+        return data;
+      },
+      generateCharts: function generateCharts() {
+        Highcharts.chart('js-history', {
+          chart: {
+            type: 'column'
+          },
+          title: {
+            text: this.selectedIndicator.description
+          },
+          subtitle: {
+            text: null
+          },
+          xAxis: {
+            categories: this.getYears(this.selectedIndicator),
+            crosshair: true
+          },
+          yAxis: {
+            min: 0,
+            title: {
+              text: null
+            }
+          },
+          tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr>' + '<td style="padding:0"><b>{point.y}</b></td></tr>',
+            footerFormat: '</table>',
+            useHTML: true
+          },
+          plotOptions: {
+            column: {
+              pointPadding: 0.2,
+              borderWidth: 0
+            }
+          },
+          series: this.formatDataToBarsCharts(this.selectedIndicator)
+        }); // end
       }
     }
   });
