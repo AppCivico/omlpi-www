@@ -25,6 +25,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
         if (search) {
           this.pagination_offset = 0;
           this.pagination_limit = 15;
+          document.querySelector('#js-search-results').scrollIntoView({ behavior: 'smooth' });
         }
 
         let url = `${config.apiCMS.domain}artigos?_limit=${this.pagination_limit}&_offset=${this.pagination_offset}`;

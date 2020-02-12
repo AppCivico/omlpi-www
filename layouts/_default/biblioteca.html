@@ -17,13 +17,14 @@
             <form action="" @submit.prevent="getArticles(false, true)">
               <label for="js-articles-search">
                 {{ i18n "exploreArticles" }}
-                <input
-                  type="text"
-                  v-model="searchQuery"
-                  placeholder="{{ i18n "exploreArticlesPlaceholder" }}"
-                  >
               </label>
-                <button>{{ i18n "search" }}</button>
+              <input
+                id="js-articles-search"
+                type="text"
+                v-model="searchQuery"
+                placeholder="{{ i18n "exploreArticlesPlaceholder" }}"
+              >
+              <button class="search-area__search-text-button">{{ i18n "search" }}</button>
             </form>
           </section>
           <span
@@ -32,7 +33,10 @@
           >
             Resultados de busca para: {{ "{{ searchQuery }}" }}
           </span>
-          <template v-if="articles && articles.length !== 0">
+          <div
+            id="js-search-results"
+            v-if="articles && articles.length !== 0"
+          >
             <article class="library-item" v-for="(article, index) in articles">
               <div
                 class="library-item__image"
@@ -85,7 +89,7 @@
             >
               Carregar mais
             </a>
-          </template>
+          </div>
           <div v-else>
             <p>Nenhum resultado para sua busca</p>
           </div>
