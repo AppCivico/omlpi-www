@@ -5365,9 +5365,6 @@ if (window.location.href.indexOf('biblioteca') > -1) {
         if (search) {
           this.pagination_offset = 0;
           this.pagination_limit = 15;
-          document.querySelector('#js-search-results').scrollIntoView({
-            behavior: 'smooth'
-          });
         }
 
         var url = "".concat(_config.default.apiCMS.domain, "artigos?_limit=").concat(this.pagination_limit, "&_offset=").concat(this.pagination_offset);
@@ -5389,6 +5386,16 @@ if (window.location.href.indexOf('biblioteca') > -1) {
         }).then(function () {
           if (_this.has_more) {
             _this.pagination_offset = _this.pagination_offset + _this.pagination_limit;
+          }
+
+          if (search) {
+            var results = document.querySelector('#js-search-results');
+
+            if (results) {
+              results.scrollIntoView({
+                behavior: 'smooth'
+              });
+            }
           }
         });
       }
