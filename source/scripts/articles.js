@@ -8,9 +8,8 @@ if (window.location.href.indexOf('biblioteca') > -1) {
       articles: null,
       searchQuery: null,
       storageDomain: config.storage.domain,
-      has_more: true,
-      itens_qtd: 1,
-      pagination_start: 0,
+      has_more: false,
+      pagination_offset: 0,
       pagination_limit: 15,
     },
     computed: {
@@ -22,59 +21,33 @@ if (window.location.href.indexOf('biblioteca') > -1) {
       await this.getArticles();
     },
     methods: {
-      getArticles(loadMore) {
-        if (loadMore) {
-          this.pagination_start = this.pagination_start + this.itens_qtd;
-          this.pagination_limit = this.pagination_limit + this.itens_qtd;
+      getArticles(loadMore, search = false) {
+        if (search) {
+          this.pagination_offset = 0;
+          this.pagination_limit = 15;
         }
-        fetch(`${config.apiCMS.domain}artigos`)
+
+        let url = `${config.apiCMS.domain}artigos?_limit=${this.pagination_limit}&_offset=${this.pagination_offset}`;
+
+        if (this.searchQuery) {
+          url = `${config.apiCMS.domain}artigos?_q=${this.searchQuery}&_limit=${this.pagination_limit}&_offset=${this.pagination_offset}`;
+        }
+
+        fetch(url)
           .then(response => response.json())
           .then((response) => {
-            if (response.length === 0) {
-              this.has_more = false;
-            }
             if (loadMore) {
-              this.articles = [...this.articles, ...response];
+              this.articles = [...this.articles, ...response.results];
             } else {
-              this.articles = response;
+              this.articles = response.results;
+            }
+            this.has_more = response.hasMore;
+          })
+          .then(() => {
+            if (this.has_more) {
+              this.pagination_offset = this.pagination_offset + this.pagination_limit;
             }
           });
-      },
-
-      async searchArticles() {
-        if (this.searchQuery === '') {
-          return this.getArticles();
-        }
-
-        // let byTitle = [];
-        // let byOrganization = [];
-        // let byTag = [];
-
-        await fetch(`${config.apiCMS.domain}artigos?q=${this.searchQuery}`)
-          .then(response => response.json())
-          .then((response) => {
-            this.articles = response;
-          });
-
-        // await fetch(`${config.apiCMS.domain}artigos?organization_contains=${this.searchQuery}`)
-        //   .then(response => response.json())
-        //   .then((response) => { byOrganization = response; });
-        //
-        // await fetch(`${config.apiCMS.domain}artigos/tagged/${this.searchQuery}`)
-        //   .then(response => response.json())
-        //   .then((response) => { byTag = response; });
-        //
-        // await fetch(`${config.apiCMS.domain}artigos?author_contains=${this.searchQuery}`)
-        //   .then(response => response.json())
-        //   .then((response) => {
-        //   this.articles = _uniqBy([...byTitle, ...byOrganization, ...byTag, ...response], 'id');
-        //   });
-        return true;
-      },
-
-      async searchByTag(tag) {
-        this.searchQuery = tag;
-        this.searchArticles();
       },
     },
   });

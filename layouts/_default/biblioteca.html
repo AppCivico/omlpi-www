@@ -14,7 +14,7 @@
         </header>
         <div class="container">
           <section class='search-area search-area__library'>
-            <form action="" @submit.prevent="searchArticles">
+            <form action="" @submit.prevent="getArticles(false, true)">
               <label for="js-articles-search">
                 {{ i18n "exploreArticles" }}
                 <input
@@ -78,13 +78,13 @@
                 </a>
               </div>
             </article>
-            <!-- <a -->
-            <!--   class="button library&#45;item__load&#45;more" -->
-            <!--   v&#45;if="has_more" -->
-            <!--   @click.prevent="getArticles(true)" -->
-            <!-- > -->
-            <!--   Carregar mais -->
-            <!-- </a> -->
+            <a
+              class="button library-item__load-more"
+              v-if="has_more"
+              @click.prevent="getArticles(true)"
+            >
+              Carregar mais
+            </a>
           </template>
           <div v-else>
             <p>Nenhum resultado para sua busca</p>

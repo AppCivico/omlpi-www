@@ -5322,9 +5322,8 @@ if (window.location.href.indexOf('biblioteca') > -1) {
       articles: null,
       searchQuery: null,
       storageDomain: _config.default.storage.domain,
-      has_more: true,
-      itens_qtd: 1,
-      pagination_start: 0,
+      has_more: false,
+      pagination_offset: 0,
       pagination_limit: 15
     },
     computed: {
@@ -5361,92 +5360,35 @@ if (window.location.href.indexOf('biblioteca') > -1) {
       getArticles: function getArticles(loadMore) {
         var _this = this;
 
-        if (loadMore) {
-          this.pagination_start = this.pagination_start + this.itens_qtd;
-          this.pagination_limit = this.pagination_limit + this.itens_qtd;
+        var search = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+        if (search) {
+          this.pagination_offset = 0;
+          this.pagination_limit = 15;
         }
 
-        fetch("".concat(_config.default.apiCMS.domain, "artigos")).then(function (response) {
+        var url = "".concat(_config.default.apiCMS.domain, "artigos?_limit=").concat(this.pagination_limit, "&_offset=").concat(this.pagination_offset);
+
+        if (this.searchQuery) {
+          url = "".concat(_config.default.apiCMS.domain, "artigos?_q=").concat(this.searchQuery, "&_limit=").concat(this.pagination_limit, "&_offset=").concat(this.pagination_offset);
+        }
+
+        fetch(url).then(function (response) {
           return response.json();
         }).then(function (response) {
-          if (response.length === 0) {
-            _this.has_more = false;
+          if (loadMore) {
+            _this.articles = [].concat((0, _toConsumableArray2.default)(_this.articles), (0, _toConsumableArray2.default)(response.results));
+          } else {
+            _this.articles = response.results;
           }
 
-          if (loadMore) {
-            _this.articles = [].concat((0, _toConsumableArray2.default)(_this.articles), (0, _toConsumableArray2.default)(response));
-          } else {
-            _this.articles = response;
+          _this.has_more = response.hasMore;
+        }).then(function () {
+          if (_this.has_more) {
+            _this.pagination_offset = _this.pagination_offset + _this.pagination_limit;
           }
         });
-      },
-      searchArticles: function () {
-        var _searchArticles = (0, _asyncToGenerator2.default)(
-        /*#__PURE__*/
-        _regenerator.default.mark(function _callee2() {
-          var _this2 = this;
-
-          return _regenerator.default.wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  if (!(this.searchQuery === '')) {
-                    _context2.next = 2;
-                    break;
-                  }
-
-                  return _context2.abrupt("return", this.getArticles());
-
-                case 2:
-                  _context2.next = 4;
-                  return fetch("".concat(_config.default.apiCMS.domain, "artigos?q=").concat(this.searchQuery)).then(function (response) {
-                    return response.json();
-                  }).then(function (response) {
-                    _this2.articles = response;
-                  });
-
-                case 4:
-                  return _context2.abrupt("return", true);
-
-                case 5:
-                case "end":
-                  return _context2.stop();
-              }
-            }
-          }, _callee2, this);
-        }));
-
-        function searchArticles() {
-          return _searchArticles.apply(this, arguments);
-        }
-
-        return searchArticles;
-      }(),
-      searchByTag: function () {
-        var _searchByTag = (0, _asyncToGenerator2.default)(
-        /*#__PURE__*/
-        _regenerator.default.mark(function _callee3(tag) {
-          return _regenerator.default.wrap(function _callee3$(_context3) {
-            while (1) {
-              switch (_context3.prev = _context3.next) {
-                case 0:
-                  this.searchQuery = tag;
-                  this.searchArticles();
-
-                case 2:
-                case "end":
-                  return _context3.stop();
-              }
-            }
-          }, _callee3, this);
-        }));
-
-        function searchByTag(_x) {
-          return _searchByTag.apply(this, arguments);
-        }
-
-        return searchByTag;
-      }()
+      }
     }
   });
 }
