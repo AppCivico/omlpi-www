@@ -3,52 +3,97 @@
     <body>
       {{ partial "header.html" . }}
 
-      <main class="alabaster" id="app">
+      <main class="alabaster" id="app-history">
         <header class="header-text">
           <div class="container">
             <h1>{{ .Title }}</h1>
           </div>
         </header>
-        <div class="container history">
+        <div class="loading" v-if="loading">
+          Aguarde, carregando as informações...
+        </div>
+        <div v-else class="container history">
           <div class="history__filters white-box">
-            <form action="">
+            <form action="" @submit.prevent="generateCharts">
               <h4>Selecione outro tema</h4>
-              <label for="saude">
-                <input type="radio" name="theme" value="saude">Saúde</input>
-              </label>
-              <label for="educacao">
-                <input type="radio" name="theme" value="educacao">Educação</input>
-              </label>
-              <label for="assistencia-social">
-                <input type="radio" name="theme" value="assistencia-social">Assistência social</input>
-              </label>
+              <div class="history__radio-buttons">
+                <template v-for="area in areas">
+                  <input
+                    type="radio"
+                    name="theme"
+                    :id="`area-${area.id}`"
+                    :value="area.id"
+                    v-model="selectedArea"
+                  >
+                  <label
+                    :for="`area-${area.id}`"
+                    class="button--icon"
+                    :class="`button--${area.class}`"
+                  >
+                    {{ "{{ area.name }}" }}
+                  </label>
+                </template>
+              </div>
 
               <h4>Selecione outra localidade</h4>
-              <select id="location" name="location">
-                <option value="">Município</option>
-                <option value="">Estado</option>
-                <option value="">Região</option>
-                <option value="">Brasil</option>
+              <select
+                id="location"
+                name="location"
+              >
+                <template v-if="locales">
+                  <option
+                    value=""
+                    v-for="locale_item in locales"
+                    :selected="locale_item.id == locale.historical[0].id"
+                  >
+                    {{ "{{ locale_item.name }}" }}
+                  </option>
+                </template>
+                <option
+                  v-else
+                  disabled
+                  selected
+                >
+                  Carregando...
+                </option>
               </select>
 
               <h4>Selecione outro indicador</h4>
-              <select id="location" name="location">
-                <option value="">indicador 1</option>
-                <option value="">indicador 2</option>
-                <option value="">indicador 3</option>
-                <option value="">indicador 4</option>
+              <select
+                id="location"
+                name="location"
+                v-if="locale && locale.historical.length > 0 && locale.historical[0].indicators"
+                v-model="selectedIndicator"
+              >
+                <option
+                  :value="indicator"
+                  v-for="indicator in indicators"
+                >
+                  {{ "{{ indicator.description }}" }}
+                </option>
               </select>
-              <button type="submit">Visualizar</button>
+              <button type="submit" class="button">Visualizar</button>
             </form>
           </div>
           <div class="history__graphics white-box">
-            <div id="js-bars"></div>
+            <div id="js-history"></div>
           </div>
 
-          <div class="history__desagregation white-box">
-            <form action="">
+          <div
+            class="history__desagregation white-box"
+            :class="selectedIndicator &&
+              selectedIndicator.subindicators &&
+              selectedIndicator.subindicators.length === 0 ? 'history__desagregation--full' : ''"
+            >
+            <div v-if="
+              selectedIndicator &&
+              selectedIndicator.subindicators &&
+              selectedIndicator.subindicators.length === 0"
+            >
+              Não há desagregadaores para esse indicador
+            </div>
+            <form action="" v-else>
               <h2>Veja a série histórica das desagregações</h2>
-
               <h4>Selecione outra desagregação</h4>
               <select id="location" name="location">
                 <option value="">indicador 1</option>
@@ -56,10 +101,15 @@
                 <option value="">indicador 3</option>
                 <option value="">indicador 4</option>
               </select>
-              <button type="submit">Visualizar</button>
+              <button type="submit" class="button" disabled>Visualizar</button>
             </form>
           </div>
-          <div class="history__graphics white-box">
+          <div
+            :hidden="selectedIndicator &&
+              selectedIndicator.subindicators &&
+              selectedIndicator.subindicators.length === 0"
+            class="history__graphics white-box"
+          >
             <div id="js-horizontal-bars"></div>
           </div>
         </div>
@@ -68,5 +118,74 @@
       {{ partial "footer.html" . }}
 
       {{ partial "scripts.html" . }}
+
+      <!-- <script> -->
+      <!--   Highcharts.chart('js&#45;horizontal&#45;bars', { -->
+      <!--     chart: { -->
+      <!--       type: 'bar' -->
+      <!--     }, -->
+      <!--     title: { -->
+      <!--       text: 'Historic World Population by Region' -->
+      <!--     }, -->
+      <!--     subtitle: { -->
+      <!--       text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>' -->
+      <!--     }, -->
+      <!--     xAxis: { -->
+      <!--       categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'], -->
+      <!--       title: { -->
+      <!--         text: null -->
+      <!--       } -->
+      <!--     }, -->
+      <!--     yAxis: { -->
+      <!--       min: 0, -->
+      <!--       title: { -->
+      <!--         text: 'Population (millions)', -->
+      <!--         align: 'high' -->
+      <!--       }, -->
+      <!--       labels: { -->
+      <!--         overflow: 'justify' -->
+      <!--       } -->
+      <!--     }, -->
+      <!--     tooltip: { -->
+      <!--       valueSuffix: ' millions' -->
+      <!--     }, -->
+      <!--     plotOptions: { -->
+      <!--       bar: { -->
+      <!--         dataLabels: { -->
+      <!--           enabled: true -->
+      <!--         } -->
+      <!--       } -->
+      <!--     }, -->
+      <!--     legend: { -->
+      <!--       layout: 'vertical', -->
+      <!--       align: 'right', -->
+      <!--       verticalAlign: 'top', -->
+      <!--       x: &#45;40, -->
+      <!--       y: 80, -->
+      <!--       floating: true, -->
+      <!--       borderWidth: 1, -->
+      <!--       backgroundColor: -->
+      <!--       Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF', -->
+      <!--       shadow: true -->
+      <!--     }, -->
+      <!--     credits: { -->
+      <!--       enabled: false -->
+      <!--     }, -->
+      <!--     series: [{ -->
+      <!--       name: 'Year 1800', -->
+      <!--       data: [107, 31, 635, 203, 2] -->
+      <!--     }, { -->
+      <!--       name: 'Year 1900', -->
+      <!--       data: [133, 156, 947, 408, 6] -->
+      <!--     }, { -->
+      <!--       name: 'Year 2000', -->
+      <!--       data: [814, 841, 3714, 727, 31] -->
+      <!--     }, { -->
+      <!--       name: 'Year 2016', -->
+      <!--       data: [1216, 1001, 4436, 738, 40] -->
+      <!--     }] -->
+      <!--   }); -->
+      <!--  -->
+      <!-- </script> -->
     </body>
 </html>

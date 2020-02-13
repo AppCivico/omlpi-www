@@ -4,7 +4,7 @@
       {{ partial "header.html" . }}
 
       <main class="alabaster" id="app">
-        <header class="header-text">
+        <header class="header-text--library">
           <div class="container">
             <h1>
               BIBLIOTECA PARA UM SISTEMA DE GARANTIA
@@ -14,22 +14,17 @@
         </header>
         <div class="container">
           <section class='search-area search-area__library'>
-            <span
-              v-if="searchQuery && 1 !== 1"
-              class="search-area__informative"
-            >
-              Resultados de busca para: {{ "{{ searchQuery }}" }}
-            </span>
-            <form action="" @submit.prevent="searchArticles">
+            <form action="" @submit.prevent="getArticles(false, true)">
               <label for="js-articles-search">
                 {{ i18n "exploreArticles" }}
-                <input
-                  type="text"
-                  v-model="searchQuery"
-                  placeholder="{{ i18n "exploreArticlesPlaceholder" }}"
-                  >
               </label>
-                <button>{{ i18n "search" }}</button>
+              <input
+                id="js-articles-search"
+                type="text"
+                v-model="searchQuery"
+                placeholder="{{ i18n "exploreArticlesPlaceholder" }}"
+              >
+              <button class="search-area__search-text-button">{{ i18n "search" }}</button>
             </form>
           </section>
           <span
@@ -38,7 +33,10 @@
           >
             Resultados de busca para: {{ "{{ searchQuery }}" }}
           </span>
-          <template v-if="articles && articles.length !== 0">
+          <div
+            id="js-search-results"
+            v-if="articles && articles.length !== 0"
+          >
             <article class="library-item" v-for="(article, index) in articles">
               <div
                 class="library-item__image"
@@ -84,14 +82,14 @@
                 </a>
               </div>
             </article>
-            <!-- <a -->
-            <!--   class="button library&#45;item__load&#45;more" -->
-            <!--   v&#45;if="has_more" -->
-            <!--   @click.prevent="getArticles(true)" -->
-            <!-- > -->
-            <!--   Carregar mais -->
-            <!-- </a> -->
-          </template>
+            <a
+              class="button library-item__load-more"
+              v-if="has_more"
+              @click.prevent="getArticles(true)"
+            >
+              Carregar mais
+            </a>
+          </div>
           <div v-else>
             <p>Nenhum resultado para sua busca</p>
           </div>

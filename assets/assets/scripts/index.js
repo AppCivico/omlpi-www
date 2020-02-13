@@ -5322,9 +5322,8 @@ if (window.location.href.indexOf('biblioteca') > -1) {
       articles: null,
       searchQuery: null,
       storageDomain: _config.default.storage.domain,
-      has_more: true,
-      itens_qtd: 1,
-      pagination_start: 0,
+      has_more: false,
+      pagination_offset: 0,
       pagination_limit: 15
     },
     computed: {
@@ -5361,92 +5360,45 @@ if (window.location.href.indexOf('biblioteca') > -1) {
       getArticles: function getArticles(loadMore) {
         var _this = this;
 
-        if (loadMore) {
-          this.pagination_start = this.pagination_start + this.itens_qtd;
-          this.pagination_limit = this.pagination_limit + this.itens_qtd;
+        var search = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+        if (search) {
+          this.pagination_offset = 0;
+          this.pagination_limit = 15;
         }
 
-        fetch("".concat(_config.default.apiCMS.domain, "artigos")).then(function (response) {
+        var url = "".concat(_config.default.apiCMS.domain, "artigos?_limit=").concat(this.pagination_limit, "&_offset=").concat(this.pagination_offset);
+
+        if (this.searchQuery) {
+          url = "".concat(_config.default.apiCMS.domain, "artigos?_q=").concat(this.searchQuery, "&_limit=").concat(this.pagination_limit, "&_offset=").concat(this.pagination_offset);
+        }
+
+        fetch(url).then(function (response) {
           return response.json();
         }).then(function (response) {
-          if (response.length === 0) {
-            _this.has_more = false;
+          if (loadMore) {
+            _this.articles = [].concat((0, _toConsumableArray2.default)(_this.articles), (0, _toConsumableArray2.default)(response.results));
+          } else {
+            _this.articles = response.results;
           }
 
-          if (loadMore) {
-            _this.articles = [].concat((0, _toConsumableArray2.default)(_this.articles), (0, _toConsumableArray2.default)(response));
-          } else {
-            _this.articles = response;
+          _this.has_more = response.hasMore;
+        }).then(function () {
+          if (_this.has_more) {
+            _this.pagination_offset = _this.pagination_offset + _this.pagination_limit;
+          }
+
+          if (search) {
+            var results = document.querySelector('#js-search-results');
+
+            if (results) {
+              results.scrollIntoView({
+                behavior: 'smooth'
+              });
+            }
           }
         });
-      },
-      searchArticles: function () {
-        var _searchArticles = (0, _asyncToGenerator2.default)(
-        /*#__PURE__*/
-        _regenerator.default.mark(function _callee2() {
-          var _this2 = this;
-
-          return _regenerator.default.wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  if (!(this.searchQuery === '')) {
-                    _context2.next = 2;
-                    break;
-                  }
-
-                  return _context2.abrupt("return", this.getArticles());
-
-                case 2:
-                  _context2.next = 4;
-                  return fetch("".concat(_config.default.apiCMS.domain, "artigos?q=").concat(this.searchQuery)).then(function (response) {
-                    return response.json();
-                  }).then(function (response) {
-                    _this2.articles = response;
-                  });
-
-                case 4:
-                  return _context2.abrupt("return", true);
-
-                case 5:
-                case "end":
-                  return _context2.stop();
-              }
-            }
-          }, _callee2, this);
-        }));
-
-        function searchArticles() {
-          return _searchArticles.apply(this, arguments);
-        }
-
-        return searchArticles;
-      }(),
-      searchByTag: function () {
-        var _searchByTag = (0, _asyncToGenerator2.default)(
-        /*#__PURE__*/
-        _regenerator.default.mark(function _callee3(tag) {
-          return _regenerator.default.wrap(function _callee3$(_context3) {
-            while (1) {
-              switch (_context3.prev = _context3.next) {
-                case 0:
-                  this.searchQuery = tag;
-                  this.searchArticles();
-
-                case 2:
-                case "end":
-                  return _context3.stop();
-              }
-            }
-          }, _callee3, this);
-        }));
-
-        function searchByTag(_x) {
-          return _searchByTag.apply(this, arguments);
-        }
-
-        return searchByTag;
-      }()
+      }
     }
   });
 }
@@ -5557,6 +5509,179 @@ exports.default = _default;
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
+var _config = _interopRequireDefault(require("./config"));
+
+/* global Vue */
+
+/* global Highcharts */
+if (document.querySelector('#app-history')) {
+  window.$vueHistory = new Vue({
+    el: '#app-history',
+    data: {
+      locales: null,
+      locale: null,
+      selectedArea: 3,
+      selectedIndicator: 5,
+      loadingLocale: false,
+      additionalLocaleId: null,
+      triggerAnimation: true,
+      storageDomain: _config.default.storage.domain,
+      areas: [{
+        id: 1,
+        name: 'Assistência Social',
+        class: 'social-care'
+      }, {
+        id: 2,
+        name: 'Educação',
+        class: 'education'
+      }, {
+        id: 3,
+        name: 'Saúde',
+        class: 'health'
+      }]
+    },
+    computed: {
+      loading: function loading() {
+        return !this.locale;
+      },
+      localeId: function localeId() {
+        return new URL(window.location.href).searchParams.get('location_id');
+      },
+      indicators: function indicators() {
+        var _this = this;
+
+        return this.locale.historical[0].indicators.filter(function (item) {
+          return item.area.id === _this.selectedArea;
+        });
+      }
+    },
+    mounted: function () {
+      var _mounted = (0, _asyncToGenerator2.default)(
+      /*#__PURE__*/
+      _regenerator.default.mark(function _callee() {
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.getLocales();
+
+              case 2:
+                _context.next = 4;
+                return this.getLocale(this.localeId);
+
+              case 4:
+                _context.next = 6;
+                return this.generateCharts();
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function mounted() {
+        return _mounted.apply(this, arguments);
+      }
+
+      return mounted;
+    }(),
+    methods: {
+      getLocale: function getLocale(localeId) {
+        var _this2 = this;
+
+        this.loadingLocale = true;
+        var url = "".concat(_config.default.api.domain, "data/historical?locale_id=").concat(localeId || 2803609);
+        fetch(url).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          _this2.locale = response;
+          return true;
+        }).then(function () {
+          _this2.loadingLocale = false;
+          return true;
+        });
+      },
+      getLocales: function getLocales() {
+        var _this3 = this;
+
+        this.loadingLocale = true;
+        fetch("".concat(_config.default.api.domain, "locales")).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          _this3.locales = response.locales;
+          return true;
+        }).then(function () {
+          _this3.loadingLocales = false;
+          return true;
+        });
+      },
+      getYears: function getYears(data) {
+        return data.values.map(function (item) {
+          return item.year;
+        });
+      },
+      formatDataToBarsCharts: function formatDataToBarsCharts(items) {
+        var data = [];
+        items.values.forEach(function (item) {
+          data.push({
+            name: item.year,
+            data: [Number(item.value_relative) ? Number(item.value_relative) : Number(item.value_absolute)]
+          });
+        });
+        return data;
+      },
+      generateCharts: function generateCharts() {
+        Highcharts.chart('js-history', {
+          chart: {
+            type: 'column'
+          },
+          title: {
+            text: this.selectedIndicator.description
+          },
+          subtitle: {
+            text: null
+          },
+          xAxis: {
+            categories: this.getYears(this.selectedIndicator),
+            crosshair: true
+          },
+          yAxis: {
+            min: 0,
+            title: {
+              text: null
+            }
+          },
+          tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr>' + '<td style="padding:0"><b>{point.y}</b></td></tr>',
+            footerFormat: '</table>',
+            useHTML: true
+          },
+          plotOptions: {
+            column: {
+              pointPadding: 0.2,
+              borderWidth: 0
+            }
+          },
+          series: this.formatDataToBarsCharts(this.selectedIndicator)
+        }); // end
+      }
+    }
+  });
+}
+
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],30:[function(require,module,exports){
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
@@ -5627,7 +5752,7 @@ if (document.querySelector('#app-home-about')) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/objectSpread":7,"@babel/runtime/regenerator":10,"dompurify":12,"marked":22}],30:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/objectSpread":7,"@babel/runtime/regenerator":10,"dompurify":12,"marked":22}],31:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5699,7 +5824,7 @@ if (document.querySelector('#app-home-banner')) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/objectSpread":7,"@babel/runtime/regenerator":10,"dompurify":12,"marked":22}],31:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/objectSpread":7,"@babel/runtime/regenerator":10,"dompurify":12,"marked":22}],32:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5799,7 +5924,7 @@ if (document.querySelector('#app-home-indicators')) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],32:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],33:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5826,11 +5951,13 @@ require("./homeAbout");
 
 require("./homeIndicators");
 
+require("./history");
+
 (0, _search.default)();
 (0, _searchPlans.default)();
 (0, _menu.default)();
 
-},{"./articles":26,"./axis":27,"./homeAbout":29,"./homeBanner":30,"./homeIndicators":31,"./menu":33,"./news":34,"./plans":35,"./populateData":36,"./search":38,"./search-plans":37,"@babel/runtime/helpers/interopRequireDefault":4}],33:[function(require,module,exports){
+},{"./articles":26,"./axis":27,"./history":29,"./homeAbout":30,"./homeBanner":31,"./homeIndicators":32,"./menu":34,"./news":35,"./plans":36,"./populateData":37,"./search":39,"./search-plans":38,"@babel/runtime/helpers/interopRequireDefault":4}],34:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5851,7 +5978,7 @@ function startMenutoggle() {
   });
 }
 
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5917,7 +6044,7 @@ if (document.querySelector('#app-news')) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],35:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],36:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6066,7 +6193,7 @@ if (window.location.href.indexOf('plano-para-primeira-infancia') > -1) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],36:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],37:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6334,7 +6461,7 @@ if (window.location.href.indexOf('city') > -1) {
   });
 }
 
-},{"./config":28,"./search":38,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],37:[function(require,module,exports){
+},{"./config":28,"./search":39,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],38:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6485,7 +6612,7 @@ function startPlansSearch() {
   }
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}],38:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}],39:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6631,4 +6758,4 @@ function startSearch() {
   }
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}]},{},[32]);
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}]},{},[33]);

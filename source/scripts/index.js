@@ -9,6 +9,7 @@ import './axis';
 import './homeBanner';
 import './homeAbout';
 import './homeIndicators';
+import './history';
 
 startSearch();
 startPlansSearch();
