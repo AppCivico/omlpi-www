@@ -5507,11 +5507,29 @@ exports.default = _default;
 },{}],29:[function(require,module,exports){
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.removeDiacritics = removeDiacritics;
+
+function removeDiacritics(string) {
+  return string.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+},{}],30:[function(require,module,exports){
+"use strict";
+
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
+var _awesomplete = _interopRequireDefault(require("awesomplete"));
+
+var _fuzzysort = _interopRequireDefault(require("fuzzysort"));
+
+var _helpers = require("./helpers");
 
 var _config = _interopRequireDefault(require("./config"));
 
@@ -5525,7 +5543,9 @@ if (document.querySelector('#app-history')) {
       locales: null,
       locale: null,
       selectedArea: 3,
-      selectedIndicator: 5,
+      selectedIndicator: {
+        description: null
+      },
       loadingLocale: false,
       additionalLocaleId: null,
       triggerAnimation: true,
@@ -5557,6 +5577,12 @@ if (document.querySelector('#app-history')) {
         return this.locale.historical[0].indicators.filter(function (item) {
           return item.area.id === _this.selectedArea;
         });
+      }
+    },
+    watch: {
+      // whenever locale changes, this function will run
+      locale: function locale(newLocale) {
+        this.selectedIndicator = newLocale.historical[0].indicators[0];
       }
     },
     mounted: function () {
@@ -5597,7 +5623,7 @@ if (document.querySelector('#app-history')) {
         var _this2 = this;
 
         this.loadingLocale = true;
-        var url = "".concat(_config.default.api.domain, "data/historical?locale_id=").concat(localeId || 2803609);
+        var url = "".concat(_config.default.api.domain, "data/historical?locale_id=").concat(localeId || 1);
         fetch(url).then(function (response) {
           return response.json();
         }).then(function (response) {
@@ -5615,19 +5641,79 @@ if (document.querySelector('#app-history')) {
         fetch("".concat(_config.default.api.domain, "locales")).then(function (response) {
           return response.json();
         }).then(function (response) {
-          _this3.locales = response.locales;
+          _this3.locales = response.locales.map(function (region) {
+            return {
+              label: "".concat(region.name, ":").concat(region.type),
+              value: region.id
+            };
+          });
           return true;
+        }).then(function () {
+          var regionInput = document.querySelector('#myLocation');
+          var awesomplete = new _awesomplete.default(regionInput, {
+            item: function item(suggestion) {
+              var html = document.createElement('li');
+              var type = suggestion.label.split(':')[1];
+              var typeString;
+
+              if (type === 'city') {
+                typeString = 'Município';
+              }
+
+              if (type === 'state') {
+                typeString = 'Estado';
+              }
+
+              if (type === 'country') {
+                typeString = 'País';
+              }
+
+              html.setAttribute('role', 'option');
+              html.setAttribute('class', "awesomplete__".concat(type));
+              html.insertAdjacentHTML('beforeend', "<span>".concat(suggestion.label.split(':')[0], "<small>").concat(typeString, "</small></span>"));
+              return html;
+            },
+            nChars: 1,
+            maxItems: 5,
+            autoFirst: true,
+            filter: function filter(text, input) {
+              return _fuzzysort.default.single((0, _helpers.removeDiacritics)(input), (0, _helpers.removeDiacritics)(text.label.split(':')[0]));
+            },
+            replace: function replace(suggestion) {
+              var _ref = [suggestion.label.split(':')[0]];
+              this.input.value = _ref[0];
+            }
+          });
+          awesomplete.list = _this3.locales;
+
+          _this3.watchSelection();
         }).then(function () {
           _this3.loadingLocales = false;
           return true;
         });
       },
+      watchSelection: function watchSelection() {
+        var _this4 = this;
+
+        var regionInput = document.querySelector('#myLocation');
+        regionInput.addEventListener('awesomplete-selectcomplete', function (event) {
+          _this4.getLocale(event.text.value);
+        }, false);
+      },
       getYears: function getYears(data) {
+        if (!data.values) {
+          return;
+        }
+
         return data.values.map(function (item) {
           return item.year;
         });
       },
       formatDataToBarsCharts: function formatDataToBarsCharts(items) {
+        if (!items.values) {
+          return;
+        }
+
         var data = [];
         items.values.forEach(function (item) {
           data.push({
@@ -5677,7 +5763,7 @@ if (document.querySelector('#app-history')) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],30:[function(require,module,exports){
+},{"./config":28,"./helpers":29,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}],31:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5752,7 +5838,7 @@ if (document.querySelector('#app-home-about')) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/objectSpread":7,"@babel/runtime/regenerator":10,"dompurify":12,"marked":22}],31:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/objectSpread":7,"@babel/runtime/regenerator":10,"dompurify":12,"marked":22}],32:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5824,7 +5910,7 @@ if (document.querySelector('#app-home-banner')) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/objectSpread":7,"@babel/runtime/regenerator":10,"dompurify":12,"marked":22}],32:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/objectSpread":7,"@babel/runtime/regenerator":10,"dompurify":12,"marked":22}],33:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5924,7 +6010,7 @@ if (document.querySelector('#app-home-indicators')) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],33:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],34:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5957,7 +6043,7 @@ require("./history");
 (0, _searchPlans.default)();
 (0, _menu.default)();
 
-},{"./articles":26,"./axis":27,"./history":29,"./homeAbout":30,"./homeBanner":31,"./homeIndicators":32,"./menu":34,"./news":35,"./plans":36,"./populateData":37,"./search":39,"./search-plans":38,"@babel/runtime/helpers/interopRequireDefault":4}],34:[function(require,module,exports){
+},{"./articles":26,"./axis":27,"./history":30,"./homeAbout":31,"./homeBanner":32,"./homeIndicators":33,"./menu":35,"./news":36,"./plans":37,"./populateData":38,"./search":40,"./search-plans":39,"@babel/runtime/helpers/interopRequireDefault":4}],35:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5978,7 +6064,7 @@ function startMenutoggle() {
   });
 }
 
-},{}],35:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6044,7 +6130,7 @@ if (document.querySelector('#app-news')) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],36:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],37:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6193,7 +6279,7 @@ if (window.location.href.indexOf('plano-para-primeira-infancia') > -1) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],37:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],38:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6461,7 +6547,7 @@ if (window.location.href.indexOf('city') > -1) {
   });
 }
 
-},{"./config":28,"./search":39,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],38:[function(require,module,exports){
+},{"./config":28,"./search":40,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],39:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6612,7 +6698,7 @@ function startPlansSearch() {
   }
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}],39:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}],40:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6758,4 +6844,4 @@ function startSearch() {
   }
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}]},{},[33]);
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}]},{},[34]);

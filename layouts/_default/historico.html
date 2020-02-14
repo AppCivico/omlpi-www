@@ -35,44 +35,46 @@
                 </template>
               </div>
 
-              <h4>Selecione outra localidade</h4>
+              <h4>
+                <label for="myLocation">Selecione outra localidade</label>
+              </h4>
+              <input id="myLocation" />
+              <h4>Selecione outro indicador</h4>
               <select
-                id="location"
-                name="location"
+                id="indicator"
+                name="indicator"
+                v-if="locale && locale.historical.length > 0 && locale.historical[0].indicators"
               >
-                <template v-if="locales">
-                  <option
-                    value=""
-                    v-for="locale_item in locales"
-                    :selected="locale_item.id == locale.historical[0].id"
-                  >
-                    {{ "{{ locale_item.name }}" }}
-                  </option>
-                </template>
                 <option
-                  v-else
+                  v-if="loadingLocale"
                   disabled
                   selected
                 >
                   Carregando...
                 </option>
-              </select>
-
-              <h4>Selecione outro indicador</h4>
-              <select
-                id="location"
-                name="location"
-                v-if="locale && locale.historical.length > 0 && locale.historical[0].indicators"
-                v-model="selectedIndicator"
-              >
                 <option
+                  v-if="indicators.length === 0"
+                  disabled
+                  selected
+                >
+                  Não há indicadores para essa localidade
+                </option>
+                <option
+                  v-else
+                  v-for="(indicator, index) in indicators"
                   :value="indicator"
-                  v-for="indicator in indicators"
+                  :selected="index === 0"
                 >
                   {{ "{{ indicator.description }}" }}
                 </option>
               </select>
-              <button type="submit" class="button">Visualizar</button>
+              <button
+                type="submit"
+                class="button"
+                :disabled="loadingLocale || indicators.length === 0"
+              >
+                Visualizar
+              </button>
             </form>
           </div>
           <div class="history__graphics white-box">
@@ -95,13 +97,37 @@
             <form action="" v-else>
               <h2>Veja a série histórica das desagregações</h2>
               <h4>Selecione outra desagregação</h4>
-              <select id="location" name="location">
-                <option value="">indicador 1</option>
-                <option value="">indicador 2</option>
-                <option value="">indicador 3</option>
-                <option value="">indicador 4</option>
+              <select id="subindicators" name="subindicators">
+                <option
+                  v-if="loadingLocale"
+                  disabled
+                  selected
+                >
+                  Carregando...
+                </option>
+                <option
+                  v-if="!selectedIndicator || selectedIndicator.subindicators === 0"
+                  disabled
+                  selected
+                >
+                  Não há desagregadores para essa localidade
+                </option>
+                <option
+                  v-else
+                  v-for="(subindicator, index) in selectedIndicator.subindicators"
+                  :value="subindicator"
+                  :selected="index === 0"
+                >
+                  {{ "{{ subindicator.classification }}" }}
+                </option>
               </select>
-              <button type="submit" class="button" disabled>Visualizar</button>
+              <button
+                type="submit"
+                class="button"
+                :disabled="loadingLocale || selectedIndicator.subindicators.length === 0"
+              >
+                Visualizar
+              </button>
             </form>
           </div>
           <div

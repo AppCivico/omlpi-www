@@ -1,6 +1,9 @@
 /* global Vue */
 /* global Highcharts */
 
+import Awesomplete from 'awesomplete';
+import fuzzysort from 'fuzzysort';
+import { removeDiacritics } from './helpers';
 import config from './config';
 
 if (document.querySelector('#app-history')) {
@@ -10,7 +13,7 @@ if (document.querySelector('#app-history')) {
       locales: null,
       locale: null,
       selectedArea: 3,
-      selectedIndicator: 5,
+      selectedIndicator: { description: null },
       loadingLocale: false,
       additionalLocaleId: null,
       triggerAnimation: true,
@@ -46,6 +49,12 @@ if (document.querySelector('#app-history')) {
         );
       },
     },
+    watch: {
+      // whenever locale changes, this function will run
+      locale: function (newLocale) {
+        this.selectedIndicator = newLocale.historical[0].indicators[0];
+      },
+    },
     async mounted() {
       await this.getLocales();
       await this.getLocale(this.localeId);
@@ -54,7 +63,7 @@ if (document.querySelector('#app-history')) {
     methods: {
       getLocale(localeId) {
         this.loadingLocale = true;
-        const url = `${config.api.domain}data/historical?locale_id=${localeId || 2803609}`;
+        const url = `${config.api.domain}data/historical?locale_id=${localeId || 1}`;
 
         fetch(url)
           .then(response => response.json())
@@ -72,18 +81,69 @@ if (document.querySelector('#app-history')) {
         fetch(`${config.api.domain}locales`)
           .then(response => response.json())
           .then((response) => {
-            this.locales = response.locales;
+            this.locales = response.locales.map(region => ({
+              label: `${region.name}:${region.type}`,
+              value: region.id,
+            }));
             return true;
+          })
+          .then(() => {
+            const regionInput = document.querySelector('#myLocation');
+            const awesomplete = new Awesomplete(regionInput, {
+              item: (suggestion) => {
+                const html = document.createElement('li');
+                const type = suggestion.label.split(':')[1];
+                let typeString;
+                if (type === 'city') {
+                  typeString = 'Município';
+                }
+                if (type === 'state') {
+                  typeString = 'Estado';
+                }
+                if (type === 'country') {
+                  typeString = 'País';
+                }
+                html.setAttribute('role', 'option');
+                html.setAttribute('class', `awesomplete__${type}`);
+                html.insertAdjacentHTML('beforeend',
+                  `<span>${suggestion.label.split(':')[0]}<small>${typeString}</small></span>`);
+                return html;
+              },
+              nChars: 1,
+              maxItems: 5,
+              autoFirst: true,
+              filter(text, input) {
+                return fuzzysort.single(removeDiacritics(input), removeDiacritics(text.label.split(':')[0]));
+              },
+              replace(suggestion) {
+                [this.input.value] = [suggestion.label.split(':')[0]];
+              },
+            });
+            awesomplete.list = this.locales;
+            this.watchSelection();
           })
           .then(() => {
             this.loadingLocales = false;
             return true;
           });
       },
+      watchSelection() {
+        const regionInput = document.querySelector('#myLocation');
+        regionInput.addEventListener('awesomplete-selectcomplete', (event) => {
+          this.getLocale(event.text.value);
+        }, false);
+      },
       getYears(data) {
+        if (!data.values) {
+          return;
+        }
         return data.values.map(item => item.year);
       },
       formatDataToBarsCharts(items) {
+        if (!items.values) {
+          return;
+        }
+
         const data = [];
         items.values.forEach((item) => {
           data.push({
