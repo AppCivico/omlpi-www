@@ -14,7 +14,7 @@
         </div>
         <div v-else class="container history">
           <div class="history__filters white-box">
-            <form action="" @submit.prevent="generateCharts">
+            <form action="" @submit.prevent="generateIndicatorChart">
               <h4>Selecione outro tema</h4>
               <div class="history__radio-buttons">
                 <template v-for="area in areas">
@@ -43,7 +43,7 @@
               <select
                 id="indicator"
                 name="indicator"
-                v-if="locale && locale.historical.length > 0 && locale.historical[0].indicators"
+                v-if="locale && locale.historical && locale.historical.length > 0 && locale.historical[0].indicators"
               >
                 <option
                   v-if="loadingLocale"
@@ -53,7 +53,7 @@
                   Carregando...
                 </option>
                 <option
-                  v-if="indicators.length === 0"
+                  v-if="indicators && indicators.length === 0"
                   disabled
                   selected
                 >
@@ -94,10 +94,13 @@
             >
               Não há desagregadaores para esse indicador
             </div>
-            <form action="" v-else>
+            <form
+              @submit.prevent="generateSubindicatorChart()"
+              v-else
+            >
               <h2>Veja a série histórica das desagregações</h2>
               <h4>Selecione outra desagregação</h4>
-              <select id="subindicators" name="subindicators">
+              <select id="subindicators" name="subindicators" v-model="selectedSubindicator">
                 <option
                   v-if="loadingLocale"
                   disabled
@@ -136,7 +139,7 @@
               selectedIndicator.subindicators.length === 0"
             class="history__graphics white-box"
           >
-            <div id="js-horizontal-bars"></div>
+            <div id="js-subindicators-chart"></div>
           </div>
         </div>
       </main>

@@ -5525,6 +5525,8 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
+
 var _awesomplete = _interopRequireDefault(require("awesomplete"));
 
 var _fuzzysort = _interopRequireDefault(require("fuzzysort"));
@@ -5541,11 +5543,16 @@ if (document.querySelector('#app-history')) {
     el: '#app-history',
     data: {
       locales: null,
-      locale: null,
+      locale: {
+        historical: [{
+          indicators: []
+        }]
+      },
       selectedArea: 3,
       selectedIndicator: {
         description: null
       },
+      selectedSubindicator: {},
       loadingLocale: false,
       additionalLocaleId: null,
       triggerAnimation: true,
@@ -5580,9 +5587,10 @@ if (document.querySelector('#app-history')) {
       }
     },
     watch: {
-      // whenever locale changes, this function will run
       locale: function locale(newLocale) {
-        this.selectedIndicator = newLocale.historical[0].indicators[0];
+        this.selectedIndicator = (0, _objectSpread2.default)({}, newLocale.historical[0].indicators[0]); // if (this.selectedIndicator && this.selectedIndicator.subindicators) {
+        //   this.selectedSubindicator = { ...this.selectedIndicator.subindicators[0] };
+        // }
       }
     },
     mounted: function () {
@@ -5602,7 +5610,7 @@ if (document.querySelector('#app-history')) {
 
               case 4:
                 _context.next = 6;
-                return this.generateCharts();
+                return this.generateIndicatorChart();
 
               case 6:
               case "end":
@@ -5723,7 +5731,7 @@ if (document.querySelector('#app-history')) {
         });
         return data;
       },
-      generateCharts: function generateCharts() {
+      generateIndicatorChart: function generateIndicatorChart() {
         Highcharts.chart('js-history', {
           chart: {
             type: 'column'
@@ -5757,13 +5765,79 @@ if (document.querySelector('#app-history')) {
             }
           },
           series: this.formatDataToBarsCharts(this.selectedIndicator)
-        }); // end
+        });
+      },
+      generateSubindicatorChart: function generateSubindicatorChart() {
+        Highcharts.chart('js-subindicators-chart', {
+          chart: {
+            type: 'bar'
+          },
+          title: {
+            text: 'Historic World Population by Region'
+          },
+          subtitle: {
+            text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+          },
+          xAxis: {
+            categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+            title: {
+              text: null
+            }
+          },
+          yAxis: {
+            min: 0,
+            title: {
+              text: 'Population (millions)',
+              align: 'high'
+            },
+            labels: {
+              overflow: 'justify'
+            }
+          },
+          tooltip: {
+            valueSuffix: ' millions'
+          },
+          plotOptions: {
+            bar: {
+              dataLabels: {
+                enabled: true
+              }
+            }
+          },
+          legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 80,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+            shadow: true
+          },
+          credits: {
+            enabled: false
+          },
+          series: [{
+            name: 'Year 1800',
+            data: [107, 31, 635, 203, 2]
+          }, {
+            name: 'Year 1900',
+            data: [133, 156, 947, 408, 6]
+          }, {
+            name: 'Year 2000',
+            data: [814, 841, 3714, 727, 31]
+          }, {
+            name: 'Year 2016',
+            data: [1216, 1001, 4436, 738, 40]
+          }]
+        });
       }
     }
   });
 }
 
-},{"./config":28,"./helpers":29,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}],31:[function(require,module,exports){
+},{"./config":28,"./helpers":29,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/objectSpread":7,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}],31:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
