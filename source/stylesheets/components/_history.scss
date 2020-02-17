@@ -53,6 +53,10 @@
   background-color: palette('blue', 'greeny');
 }
 
+.history__radio-buttons input[type='radio']:checked + label {
+  background-color: palette('blue', 'dianne');
+}
+
 .history select {
   width: 100%;
   padding: 0.8rem 0.5rem;

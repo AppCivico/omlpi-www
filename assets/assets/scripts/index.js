@@ -5557,6 +5557,7 @@ if (document.querySelector('#app-history')) {
       additionalLocaleId: null,
       triggerAnimation: true,
       storageDomain: _config.default.storage.domain,
+      firstChartPrint: 1,
       areas: [{
         id: 1,
         name: 'Assistência Social',
@@ -5588,9 +5589,23 @@ if (document.querySelector('#app-history')) {
     },
     watch: {
       locale: function locale(newLocale) {
-        this.selectedIndicator = (0, _objectSpread2.default)({}, newLocale.historical[0].indicators[0]); // if (this.selectedIndicator && this.selectedIndicator.subindicators) {
-        //   this.selectedSubindicator = { ...this.selectedIndicator.subindicators[0] };
-        // }
+        this.selectedIndicator = (0, _objectSpread2.default)({}, newLocale.historical[0].indicators[0]);
+
+        if (this.selectedIndicator && this.selectedIndicator.subindicators) {
+          this.selectedSubindicator = (0, _objectSpread2.default)({}, this.selectedIndicator.subindicators[0]);
+        }
+
+        if (this.firstChartPrint) {
+          this.selectedIndicator = (0, _objectSpread2.default)({}, newLocale.historical[0].indicators[0]);
+          this.generateIndicatorChart();
+        }
+      },
+      selectedSubindicator: function selectedSubindicator() {
+        if (this.firstChartPrint) {
+          this.generateSubindicatorChart();
+        }
+
+        this.firstChartPrint = 0;
       }
     },
     mounted: function () {
@@ -5609,10 +5624,6 @@ if (document.querySelector('#app-history')) {
                 return this.getLocale(this.localeId);
 
               case 4:
-                _context.next = 6;
-                return this.generateIndicatorChart();
-
-              case 6:
               case "end":
                 return _context.stop();
             }
@@ -5709,17 +5720,44 @@ if (document.querySelector('#app-history')) {
         }, false);
       },
       getYears: function getYears(data) {
+        console.log(data);
+
         if (!data.values) {
-          return;
+          return false;
         }
 
         return data.values.map(function (item) {
           return item.year;
         });
       },
+      formatSubindicatorYears: function formatSubindicatorYears(data) {
+        if (!data) {
+          return false;
+        }
+
+        return data[0].values.map(function (internItem) {
+          return internItem.year;
+        });
+      },
+      formatDataToSubindicatorsChart: function formatDataToSubindicatorsChart(items) {
+        if (!items || !items.values) {
+          return false;
+        }
+
+        var data = [];
+        items.forEach(function (item) {
+          data.push({
+            name: item.description,
+            data: item.values.map(function (internItem) {
+              return Number(internItem.value_relative) ? Number(internItem.value_relative) : Number(internItem.value_absolute);
+            })
+          });
+        });
+        return data;
+      },
       formatDataToBarsCharts: function formatDataToBarsCharts(items) {
         if (!items.values) {
-          return;
+          return false;
         }
 
         var data = [];
@@ -5732,7 +5770,7 @@ if (document.querySelector('#app-history')) {
         return data;
       },
       generateIndicatorChart: function generateIndicatorChart() {
-        Highcharts.chart('js-history', {
+        return Highcharts.chart('js-history', {
           chart: {
             type: 'column'
           },
@@ -5768,18 +5806,19 @@ if (document.querySelector('#app-history')) {
         });
       },
       generateSubindicatorChart: function generateSubindicatorChart() {
-        Highcharts.chart('js-subindicators-chart', {
+        return Highcharts.chart('js-subindicators-chart', {
           chart: {
             type: 'bar'
           },
           title: {
-            text: 'Historic World Population by Region'
+            text: this.selectedSubindicator.classification
           },
           subtitle: {
-            text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+            text: null
           },
           xAxis: {
-            categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+            categories: this.formatSubindicatorYears(this.selectedSubindicator.data),
+            // categories: ['2018', '2019'],
             title: {
               text: null
             }
@@ -5787,7 +5826,7 @@ if (document.querySelector('#app-history')) {
           yAxis: {
             min: 0,
             title: {
-              text: 'Population (millions)',
+              text: null,
               align: 'high'
             },
             labels: {
@@ -5795,7 +5834,7 @@ if (document.querySelector('#app-history')) {
             }
           },
           tooltip: {
-            valueSuffix: ' millions'
+            valueSuffix: null
           },
           plotOptions: {
             bar: {
@@ -5804,33 +5843,10 @@ if (document.querySelector('#app-history')) {
               }
             }
           },
-          legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'top',
-            x: -40,
-            y: 80,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
-            shadow: true
-          },
           credits: {
             enabled: false
           },
-          series: [{
-            name: 'Year 1800',
-            data: [107, 31, 635, 203, 2]
-          }, {
-            name: 'Year 1900',
-            data: [133, 156, 947, 408, 6]
-          }, {
-            name: 'Year 2000',
-            data: [814, 841, 3714, 727, 31]
-          }, {
-            name: 'Year 2016',
-            data: [1216, 1001, 4436, 738, 40]
-          }]
+          series: this.formatDataToSubindicatorsChart(this.selectedSubindicator.data)
         });
       }
     }
