@@ -6232,7 +6232,7 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 var _config = _interopRequireDefault(require("./config"));
 
 /* global Vue */
-if (window.location.href.indexOf('plano-para-primeira-infancia') > -1) {
+if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
   window.$vuePlans = new Vue({
     el: '#app',
     data: {
