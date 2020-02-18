@@ -6549,7 +6549,9 @@ if (window.location.href.indexOf('city') > -1) {
         details.forEach(function (detail) {
           detail.addEventListener('transitionend', function () {
             Highcharts.charts.forEach(function (chart) {
-              return chart.reflow();
+              if (chart) {
+                chart.reflow();
+              }
             });
           });
         });
