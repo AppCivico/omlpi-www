@@ -10,6 +10,7 @@ import './homeBanner';
 import './homeAbout';
 import './homeIndicators';
 import './history';
+import './compare';
 
 startSearch();
 startPlansSearch();

@@ -86,29 +86,6 @@ function _nonIterableSpread() {
 
 module.exports = _nonIterableSpread;
 },{}],7:[function(require,module,exports){
-var defineProperty = require("./defineProperty");
-
-function _objectSpread(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-    var ownKeys = Object.keys(Object(source));
-
-    if (typeof Object.getOwnPropertySymbols === 'function') {
-      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-      }));
-    }
-
-    ownKeys.forEach(function (key) {
-      defineProperty(target, key, source[key]);
-    });
-  }
-
-  return target;
-}
-
-module.exports = _objectSpread;
-},{"./defineProperty":3}],8:[function(require,module,exports){
 var arrayWithoutHoles = require("./arrayWithoutHoles");
 
 var iterableToArray = require("./iterableToArray");
@@ -120,7 +97,7 @@ function _toConsumableArray(arr) {
 }
 
 module.exports = _toConsumableArray;
-},{"./arrayWithoutHoles":1,"./iterableToArray":5,"./nonIterableSpread":6}],9:[function(require,module,exports){
+},{"./arrayWithoutHoles":1,"./iterableToArray":5,"./nonIterableSpread":6}],8:[function(require,module,exports){
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -848,10 +825,10 @@ try {
   Function("r", "regeneratorRuntime = r")(runtime);
 }
 
-},{}],10:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 module.exports = require("regenerator-runtime");
 
-},{"regenerator-runtime":9}],11:[function(require,module,exports){
+},{"regenerator-runtime":8}],10:[function(require,module,exports){
 /**
  * Simple, lightweight, usable local autocomplete library for modern browsers
  * Because there weren’t enough autocomplete scripts in the world? Because I’m completely insane and have NIH syndrome? Probably both. :P
@@ -1405,49 +1382,85 @@ return _;
 
 }());
 
-},{}],12:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
 	(global.DOMPurify = factory());
 }(this, (function () { 'use strict';
 
-var freeze$1 = Object.freeze || function (x) {
-  return x;
-};
-
-var html = freeze$1(['a', 'abbr', 'acronym', 'address', 'area', 'article', 'aside', 'audio', 'b', 'bdi', 'bdo', 'big', 'blink', 'blockquote', 'body', 'br', 'button', 'canvas', 'caption', 'center', 'cite', 'code', 'col', 'colgroup', 'content', 'data', 'datalist', 'dd', 'decorator', 'del', 'details', 'dfn', 'dir', 'div', 'dl', 'dt', 'element', 'em', 'fieldset', 'figcaption', 'figure', 'font', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head', 'header', 'hgroup', 'hr', 'html', 'i', 'img', 'input', 'ins', 'kbd', 'label', 'legend', 'li', 'main', 'map', 'mark', 'marquee', 'menu', 'menuitem', 'meter', 'nav', 'nobr', 'ol', 'optgroup', 'option', 'output', 'p', 'pre', 'progress', 'q', 'rp', 'rt', 'ruby', 's', 'samp', 'section', 'select', 'shadow', 'small', 'source', 'spacer', 'span', 'strike', 'strong', 'style', 'sub', 'summary', 'sup', 'table', 'tbody', 'td', 'template', 'textarea', 'tfoot', 'th', 'thead', 'time', 'tr', 'track', 'tt', 'u', 'ul', 'var', 'video', 'wbr']);
-
-// SVG
-var svg = freeze$1(['svg', 'a', 'altglyph', 'altglyphdef', 'altglyphitem', 'animatecolor', 'animatemotion', 'animatetransform', 'audio', 'canvas', 'circle', 'clippath', 'defs', 'desc', 'ellipse', 'filter', 'font', 'g', 'glyph', 'glyphref', 'hkern', 'image', 'line', 'lineargradient', 'marker', 'mask', 'metadata', 'mpath', 'path', 'pattern', 'polygon', 'polyline', 'radialgradient', 'rect', 'stop', 'style', 'switch', 'symbol', 'text', 'textpath', 'title', 'tref', 'tspan', 'video', 'view', 'vkern']);
-
-var svgFilters = freeze$1(['feBlend', 'feColorMatrix', 'feComponentTransfer', 'feComposite', 'feConvolveMatrix', 'feDiffuseLighting', 'feDisplacementMap', 'feDistantLight', 'feFlood', 'feFuncA', 'feFuncB', 'feFuncG', 'feFuncR', 'feGaussianBlur', 'feMerge', 'feMergeNode', 'feMorphology', 'feOffset', 'fePointLight', 'feSpecularLighting', 'feSpotLight', 'feTile', 'feTurbulence']);
-
-var mathMl = freeze$1(['math', 'menclose', 'merror', 'mfenced', 'mfrac', 'mglyph', 'mi', 'mlabeledtr', 'mmultiscripts', 'mn', 'mo', 'mover', 'mpadded', 'mphantom', 'mroot', 'mrow', 'ms', 'mspace', 'msqrt', 'mstyle', 'msub', 'msup', 'msubsup', 'mtable', 'mtd', 'mtext', 'mtr', 'munder', 'munderover']);
-
-var text = freeze$1(['#text']);
-
-var freeze$2 = Object.freeze || function (x) {
-  return x;
-};
-
-var html$1 = freeze$2(['accept', 'action', 'align', 'alt', 'autocomplete', 'background', 'bgcolor', 'border', 'cellpadding', 'cellspacing', 'checked', 'cite', 'class', 'clear', 'color', 'cols', 'colspan', 'controls', 'coords', 'crossorigin', 'datetime', 'default', 'dir', 'disabled', 'download', 'enctype', 'face', 'for', 'headers', 'height', 'hidden', 'high', 'href', 'hreflang', 'id', 'integrity', 'ismap', 'label', 'lang', 'list', 'loop', 'low', 'max', 'maxlength', 'media', 'method', 'min', 'minlength', 'multiple', 'name', 'noshade', 'novalidate', 'nowrap', 'open', 'optimum', 'pattern', 'placeholder', 'poster', 'preload', 'pubdate', 'radiogroup', 'readonly', 'rel', 'required', 'rev', 'reversed', 'role', 'rows', 'rowspan', 'spellcheck', 'scope', 'selected', 'shape', 'size', 'sizes', 'span', 'srclang', 'start', 'src', 'srcset', 'step', 'style', 'summary', 'tabindex', 'title', 'type', 'usemap', 'valign', 'value', 'width', 'xmlns']);
-
-var svg$1 = freeze$2(['accent-height', 'accumulate', 'additive', 'alignment-baseline', 'ascent', 'attributename', 'attributetype', 'azimuth', 'basefrequency', 'baseline-shift', 'begin', 'bias', 'by', 'class', 'clip', 'clip-path', 'clip-rule', 'color', 'color-interpolation', 'color-interpolation-filters', 'color-profile', 'color-rendering', 'cx', 'cy', 'd', 'dx', 'dy', 'diffuseconstant', 'direction', 'display', 'divisor', 'dur', 'edgemode', 'elevation', 'end', 'fill', 'fill-opacity', 'fill-rule', 'filter', 'filterunits', 'flood-color', 'flood-opacity', 'font-family', 'font-size', 'font-size-adjust', 'font-stretch', 'font-style', 'font-variant', 'font-weight', 'fx', 'fy', 'g1', 'g2', 'glyph-name', 'glyphref', 'gradientunits', 'gradienttransform', 'height', 'href', 'id', 'image-rendering', 'in', 'in2', 'k', 'k1', 'k2', 'k3', 'k4', 'kerning', 'keypoints', 'keysplines', 'keytimes', 'lang', 'lengthadjust', 'letter-spacing', 'kernelmatrix', 'kernelunitlength', 'lighting-color', 'local', 'marker-end', 'marker-mid', 'marker-start', 'markerheight', 'markerunits', 'markerwidth', 'maskcontentunits', 'maskunits', 'max', 'mask', 'media', 'method', 'mode', 'min', 'name', 'numoctaves', 'offset', 'operator', 'opacity', 'order', 'orient', 'orientation', 'origin', 'overflow', 'paint-order', 'path', 'pathlength', 'patterncontentunits', 'patterntransform', 'patternunits', 'points', 'preservealpha', 'preserveaspectratio', 'primitiveunits', 'r', 'rx', 'ry', 'radius', 'refx', 'refy', 'repeatcount', 'repeatdur', 'restart', 'result', 'rotate', 'scale', 'seed', 'shape-rendering', 'specularconstant', 'specularexponent', 'spreadmethod', 'stddeviation', 'stitchtiles', 'stop-color', 'stop-opacity', 'stroke-dasharray', 'stroke-dashoffset', 'stroke-linecap', 'stroke-linejoin', 'stroke-miterlimit', 'stroke-opacity', 'stroke', 'stroke-width', 'style', 'surfacescale', 'tabindex', 'targetx', 'targety', 'transform', 'text-anchor', 'text-decoration', 'text-rendering', 'textlength', 'type', 'u1', 'u2', 'unicode', 'values', 'viewbox', 'visibility', 'version', 'vert-adv-y', 'vert-origin-x', 'vert-origin-y', 'width', 'word-spacing', 'wrap', 'writing-mode', 'xchannelselector', 'ychannelselector', 'x', 'x1', 'x2', 'xmlns', 'y', 'y1', 'y2', 'z', 'zoomandpan']);
-
-var mathMl$1 = freeze$2(['accent', 'accentunder', 'align', 'bevelled', 'close', 'columnsalign', 'columnlines', 'columnspan', 'denomalign', 'depth', 'dir', 'display', 'displaystyle', 'encoding', 'fence', 'frame', 'height', 'href', 'id', 'largeop', 'length', 'linethickness', 'lspace', 'lquote', 'mathbackground', 'mathcolor', 'mathsize', 'mathvariant', 'maxsize', 'minsize', 'movablelimits', 'notation', 'numalign', 'open', 'rowalign', 'rowlines', 'rowspacing', 'rowspan', 'rspace', 'rquote', 'scriptlevel', 'scriptminsize', 'scriptsizemultiplier', 'selection', 'separator', 'separators', 'stretchy', 'subscriptshift', 'supscriptshift', 'symmetric', 'voffset', 'width', 'xmlns']);
-
-var xml = freeze$2(['xlink:href', 'xml:id', 'xlink:title', 'xml:space', 'xmlns:xlink']);
+function _toConsumableArray$1(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var hasOwnProperty = Object.hasOwnProperty;
 var setPrototypeOf = Object.setPrototypeOf;
+var isFrozen = Object.isFrozen;
+var objectKeys = Object.keys;
+var freeze = Object.freeze;
+var seal = Object.seal; // eslint-disable-line import/no-mutable-exports
 
-var _ref$1 = typeof Reflect !== 'undefined' && Reflect;
-var apply$1 = _ref$1.apply;
+var _ref = typeof Reflect !== 'undefined' && Reflect;
+var apply = _ref.apply;
+var construct = _ref.construct;
 
-if (!apply$1) {
-  apply$1 = function apply(fun, thisValue, args) {
+if (!apply) {
+  apply = function apply(fun, thisValue, args) {
     return fun.apply(thisValue, args);
+  };
+}
+
+if (!freeze) {
+  freeze = function freeze(x) {
+    return x;
+  };
+}
+
+if (!seal) {
+  seal = function seal(x) {
+    return x;
+  };
+}
+
+if (!construct) {
+  construct = function construct(Func, args) {
+    return new (Function.prototype.bind.apply(Func, [null].concat(_toConsumableArray$1(args))))();
+  };
+}
+
+var arrayForEach = unapply(Array.prototype.forEach);
+var arrayIndexOf = unapply(Array.prototype.indexOf);
+var arrayJoin = unapply(Array.prototype.join);
+var arrayPop = unapply(Array.prototype.pop);
+var arrayPush = unapply(Array.prototype.push);
+var arraySlice = unapply(Array.prototype.slice);
+
+var stringToLowerCase = unapply(String.prototype.toLowerCase);
+var stringMatch = unapply(String.prototype.match);
+var stringReplace = unapply(String.prototype.replace);
+var stringIndexOf = unapply(String.prototype.indexOf);
+var stringTrim = unapply(String.prototype.trim);
+
+var regExpTest = unapply(RegExp.prototype.test);
+var regExpCreate = unconstruct(RegExp);
+
+var typeErrorCreate = unconstruct(TypeError);
+
+function unapply(func) {
+  return function (thisArg) {
+    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    return apply(func, thisArg, args);
+  };
+}
+
+function unconstruct(func) {
+  return function () {
+    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+
+    return construct(func, args);
   };
 }
 
@@ -1464,10 +1477,10 @@ function addToSet(set, array) {
   while (l--) {
     var element = array[l];
     if (typeof element === 'string') {
-      var lcElement = element.toLowerCase();
+      var lcElement = stringToLowerCase(element);
       if (lcElement !== element) {
         // Config presets (e.g. tags.js, attrs.js) are immutable.
-        if (!Object.isFrozen(array)) {
+        if (!isFrozen(array)) {
           array[l] = lcElement;
         }
 
@@ -1487,7 +1500,7 @@ function clone(object) {
 
   var property = void 0;
   for (property in object) {
-    if (apply$1(hasOwnProperty, object, [property])) {
+    if (apply(hasOwnProperty, object, [property])) {
       newObject[property] = object[property];
     }
   }
@@ -1495,9 +1508,24 @@ function clone(object) {
   return newObject;
 }
 
-var seal = Object.seal || function (x) {
-  return x;
-};
+var html = freeze(['a', 'abbr', 'acronym', 'address', 'area', 'article', 'aside', 'audio', 'b', 'bdi', 'bdo', 'big', 'blink', 'blockquote', 'body', 'br', 'button', 'canvas', 'caption', 'center', 'cite', 'code', 'col', 'colgroup', 'content', 'data', 'datalist', 'dd', 'decorator', 'del', 'details', 'dfn', 'dir', 'div', 'dl', 'dt', 'element', 'em', 'fieldset', 'figcaption', 'figure', 'font', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head', 'header', 'hgroup', 'hr', 'html', 'i', 'img', 'input', 'ins', 'kbd', 'label', 'legend', 'li', 'main', 'map', 'mark', 'marquee', 'menu', 'menuitem', 'meter', 'nav', 'nobr', 'ol', 'optgroup', 'option', 'output', 'p', 'picture', 'pre', 'progress', 'q', 'rp', 'rt', 'ruby', 's', 'samp', 'section', 'select', 'shadow', 'small', 'source', 'spacer', 'span', 'strike', 'strong', 'style', 'sub', 'summary', 'sup', 'table', 'tbody', 'td', 'template', 'textarea', 'tfoot', 'th', 'thead', 'time', 'tr', 'track', 'tt', 'u', 'ul', 'var', 'video', 'wbr']);
+
+// SVG
+var svg = freeze(['svg', 'a', 'altglyph', 'altglyphdef', 'altglyphitem', 'animatecolor', 'animatemotion', 'animatetransform', 'audio', 'canvas', 'circle', 'clippath', 'defs', 'desc', 'ellipse', 'filter', 'font', 'g', 'glyph', 'glyphref', 'hkern', 'image', 'line', 'lineargradient', 'marker', 'mask', 'metadata', 'mpath', 'path', 'pattern', 'polygon', 'polyline', 'radialgradient', 'rect', 'stop', 'style', 'switch', 'symbol', 'text', 'textpath', 'title', 'tref', 'tspan', 'video', 'view', 'vkern']);
+
+var svgFilters = freeze(['feBlend', 'feColorMatrix', 'feComponentTransfer', 'feComposite', 'feConvolveMatrix', 'feDiffuseLighting', 'feDisplacementMap', 'feDistantLight', 'feFlood', 'feFuncA', 'feFuncB', 'feFuncG', 'feFuncR', 'feGaussianBlur', 'feMerge', 'feMergeNode', 'feMorphology', 'feOffset', 'fePointLight', 'feSpecularLighting', 'feSpotLight', 'feTile', 'feTurbulence']);
+
+var mathMl = freeze(['math', 'menclose', 'merror', 'mfenced', 'mfrac', 'mglyph', 'mi', 'mlabeledtr', 'mmultiscripts', 'mn', 'mo', 'mover', 'mpadded', 'mphantom', 'mroot', 'mrow', 'ms', 'mspace', 'msqrt', 'mstyle', 'msub', 'msup', 'msubsup', 'mtable', 'mtd', 'mtext', 'mtr', 'munder', 'munderover']);
+
+var text = freeze(['#text']);
+
+var html$1 = freeze(['accept', 'action', 'align', 'alt', 'autocomplete', 'background', 'bgcolor', 'border', 'cellpadding', 'cellspacing', 'checked', 'cite', 'class', 'clear', 'color', 'cols', 'colspan', 'controls', 'coords', 'crossorigin', 'datetime', 'default', 'dir', 'disabled', 'download', 'enctype', 'face', 'for', 'headers', 'height', 'hidden', 'high', 'href', 'hreflang', 'id', 'integrity', 'ismap', 'label', 'lang', 'list', 'loop', 'low', 'max', 'maxlength', 'media', 'method', 'min', 'minlength', 'multiple', 'name', 'noshade', 'novalidate', 'nowrap', 'open', 'optimum', 'pattern', 'placeholder', 'poster', 'preload', 'pubdate', 'radiogroup', 'readonly', 'rel', 'required', 'rev', 'reversed', 'role', 'rows', 'rowspan', 'spellcheck', 'scope', 'selected', 'shape', 'size', 'sizes', 'span', 'srclang', 'start', 'src', 'srcset', 'step', 'style', 'summary', 'tabindex', 'title', 'type', 'usemap', 'valign', 'value', 'width', 'xmlns']);
+
+var svg$1 = freeze(['accent-height', 'accumulate', 'additive', 'alignment-baseline', 'ascent', 'attributename', 'attributetype', 'azimuth', 'basefrequency', 'baseline-shift', 'begin', 'bias', 'by', 'class', 'clip', 'clip-path', 'clip-rule', 'color', 'color-interpolation', 'color-interpolation-filters', 'color-profile', 'color-rendering', 'cx', 'cy', 'd', 'dx', 'dy', 'diffuseconstant', 'direction', 'display', 'divisor', 'dur', 'edgemode', 'elevation', 'end', 'fill', 'fill-opacity', 'fill-rule', 'filter', 'filterunits', 'flood-color', 'flood-opacity', 'font-family', 'font-size', 'font-size-adjust', 'font-stretch', 'font-style', 'font-variant', 'font-weight', 'fx', 'fy', 'g1', 'g2', 'glyph-name', 'glyphref', 'gradientunits', 'gradienttransform', 'height', 'href', 'id', 'image-rendering', 'in', 'in2', 'k', 'k1', 'k2', 'k3', 'k4', 'kerning', 'keypoints', 'keysplines', 'keytimes', 'lang', 'lengthadjust', 'letter-spacing', 'kernelmatrix', 'kernelunitlength', 'lighting-color', 'local', 'marker-end', 'marker-mid', 'marker-start', 'markerheight', 'markerunits', 'markerwidth', 'maskcontentunits', 'maskunits', 'max', 'mask', 'media', 'method', 'mode', 'min', 'name', 'numoctaves', 'offset', 'operator', 'opacity', 'order', 'orient', 'orientation', 'origin', 'overflow', 'paint-order', 'path', 'pathlength', 'patterncontentunits', 'patterntransform', 'patternunits', 'points', 'preservealpha', 'preserveaspectratio', 'primitiveunits', 'r', 'rx', 'ry', 'radius', 'refx', 'refy', 'repeatcount', 'repeatdur', 'restart', 'result', 'rotate', 'scale', 'seed', 'shape-rendering', 'specularconstant', 'specularexponent', 'spreadmethod', 'stddeviation', 'stitchtiles', 'stop-color', 'stop-opacity', 'stroke-dasharray', 'stroke-dashoffset', 'stroke-linecap', 'stroke-linejoin', 'stroke-miterlimit', 'stroke-opacity', 'stroke', 'stroke-width', 'style', 'surfacescale', 'tabindex', 'targetx', 'targety', 'transform', 'text-anchor', 'text-decoration', 'text-rendering', 'textlength', 'type', 'u1', 'u2', 'unicode', 'values', 'viewbox', 'visibility', 'version', 'vert-adv-y', 'vert-origin-x', 'vert-origin-y', 'width', 'word-spacing', 'wrap', 'writing-mode', 'xchannelselector', 'ychannelselector', 'x', 'x1', 'x2', 'xmlns', 'y', 'y1', 'y2', 'z', 'zoomandpan']);
+
+var mathMl$1 = freeze(['accent', 'accentunder', 'align', 'bevelled', 'close', 'columnsalign', 'columnlines', 'columnspan', 'denomalign', 'depth', 'dir', 'display', 'displaystyle', 'encoding', 'fence', 'frame', 'height', 'href', 'id', 'largeop', 'length', 'linethickness', 'lspace', 'lquote', 'mathbackground', 'mathcolor', 'mathsize', 'mathvariant', 'maxsize', 'minsize', 'movablelimits', 'notation', 'numalign', 'open', 'rowalign', 'rowlines', 'rowspacing', 'rowspan', 'rspace', 'rquote', 'scriptlevel', 'scriptminsize', 'scriptsizemultiplier', 'selection', 'separator', 'separators', 'stretchy', 'subscriptshift', 'supscriptshift', 'symmetric', 'voffset', 'width', 'xmlns']);
+
+var xml = freeze(['xlink:href', 'xml:id', 'xlink:title', 'xml:space', 'xmlns:xlink']);
 
 var MUSTACHE_EXPR = seal(/\{\{[\s\S]*|[\s\S]*\}\}/gm); // Specify template detection regex for SAFE_FOR_TEMPLATES mode
 var ERB_EXPR = seal(/<%[\s\S]*|[\s\S]*%>/gm);
@@ -1513,21 +1541,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var _ref = typeof Reflect !== 'undefined' && Reflect;
-var apply = _ref.apply;
-
-var arraySlice = Array.prototype.slice;
-var freeze = Object.freeze;
-
 var getGlobal = function getGlobal() {
   return typeof window === 'undefined' ? null : window;
 };
-
-if (!apply) {
-  apply = function apply(fun, thisValue, args) {
-    return fun.apply(thisValue, args);
-  };
-}
 
 /**
  * Creates a no-op policy for internal use only.
@@ -1579,7 +1595,7 @@ function createDOMPurify() {
    * Version label, exposed for easier checks
    * if DOMPurify is up to date or not
    */
-  DOMPurify.version = '2.0.7';
+  DOMPurify.version = '2.0.8';
 
   /**
    * Array of elements that DOMPurify removed during sanitation.
@@ -1609,7 +1625,7 @@ function createDOMPurify() {
       Text = window.Text,
       Comment = window.Comment,
       DOMParser = window.DOMParser,
-      TrustedTypes = window.TrustedTypes;
+      trustedTypes = window.trustedTypes;
 
   // As per issue #47, the web-components registry is inherited by a
   // new document created via createHTMLDocument. As per the spec
@@ -1625,7 +1641,7 @@ function createDOMPurify() {
     }
   }
 
-  var trustedTypesPolicy = _createTrustedTypesPolicy(TrustedTypes, originalDocument);
+  var trustedTypesPolicy = _createTrustedTypesPolicy(trustedTypes, originalDocument);
   var emptyHTML = trustedTypesPolicy ? trustedTypesPolicy.createHTML('') : '';
 
   var _document = document,
@@ -1786,9 +1802,7 @@ function createDOMPurify() {
     SANITIZE_DOM = cfg.SANITIZE_DOM !== false; // Default true
     KEEP_CONTENT = cfg.KEEP_CONTENT !== false; // Default true
     IN_PLACE = cfg.IN_PLACE || false; // Default false
-
     IS_ALLOWED_URI$$1 = cfg.ALLOWED_URI_REGEXP || IS_ALLOWED_URI$$1;
-
     if (SAFE_FOR_TEMPLATES) {
       ALLOW_DATA_ATTR = false;
     }
@@ -1877,7 +1891,7 @@ function createDOMPurify() {
    * @param  {Node} node a DOM node
    */
   var _forceRemove = function _forceRemove(node) {
-    DOMPurify.removed.push({ element: node });
+    arrayPush(DOMPurify.removed, { element: node });
     try {
       node.parentNode.removeChild(node);
     } catch (error) {
@@ -1893,12 +1907,12 @@ function createDOMPurify() {
    */
   var _removeAttribute = function _removeAttribute(name, node) {
     try {
-      DOMPurify.removed.push({
+      arrayPush(DOMPurify.removed, {
         attribute: node.getAttributeNode(name),
         from: node
       });
     } catch (error) {
-      DOMPurify.removed.push({
+      arrayPush(DOMPurify.removed, {
         attribute: null,
         from: node
       });
@@ -1922,17 +1936,15 @@ function createDOMPurify() {
       dirty = '<remove></remove>' + dirty;
     } else {
       /* If FORCE_BODY isn't used, leading whitespace needs to be preserved manually */
-      var matches = dirty.match(/^[\s]+/);
+      var matches = stringMatch(dirty, /^[\s]+/);
       leadingWhitespace = matches && matches[0];
-      if (leadingWhitespace) {
-        dirty = dirty.slice(leadingWhitespace.length);
-      }
     }
 
+    var dirtyPayload = trustedTypesPolicy ? trustedTypesPolicy.createHTML(dirty) : dirty;
     /* Use DOMParser to workaround Firefox bug (see comment below) */
     if (useDOMParser) {
       try {
-        doc = new DOMParser().parseFromString(dirty, 'text/html');
+        doc = new DOMParser().parseFromString(dirtyPayload, 'text/html');
       } catch (error) {}
     }
 
@@ -1949,7 +1961,7 @@ function createDOMPurify() {
           body = _doc.body;
 
       body.parentNode.removeChild(body.parentNode.firstElementChild);
-      body.outerHTML = trustedTypesPolicy ? trustedTypesPolicy.createHTML(dirty) : dirty;
+      body.outerHTML = dirtyPayload;
     }
 
     if (dirty && leadingWhitespace) {
@@ -1982,7 +1994,7 @@ function createDOMPurify() {
     (function () {
       try {
         var doc = _initDocument('<x/><title>&lt;/title&gt;&lt;img&gt;');
-        if (/<\/title/.test(doc.querySelector('title').innerHTML)) {
+        if (regExpTest(/<\/title/, doc.querySelector('title').innerHTML)) {
           removeTitle = true;
         }
       } catch (error) {}
@@ -2042,7 +2054,7 @@ function createDOMPurify() {
       return;
     }
 
-    hooks[entryPoint].forEach(function (hook) {
+    arrayForEach(hooks[entryPoint], function (hook) {
       hook.call(DOMPurify, currentNode, data, CONFIG);
     });
   };
@@ -2071,7 +2083,7 @@ function createDOMPurify() {
     }
 
     /* Now let's check the element's type and name */
-    var tagName = currentNode.nodeName.toLowerCase();
+    var tagName = stringToLowerCase(currentNode.nodeName);
 
     /* Execute a hook if present */
     _executeHook('uponSanitizeElement', currentNode, {
@@ -2100,23 +2112,23 @@ function createDOMPurify() {
     }
 
     /* Remove in case a noscript/noembed XSS is suspected */
-    if (tagName === 'noscript' && /<\/noscript/i.test(currentNode.innerHTML)) {
+    if (tagName === 'noscript' && regExpTest(/<\/noscript/i, currentNode.innerHTML)) {
       _forceRemove(currentNode);
       return true;
     }
 
-    if (tagName === 'noembed' && /<\/noembed/i.test(currentNode.innerHTML)) {
+    if (tagName === 'noembed' && regExpTest(/<\/noembed/i, currentNode.innerHTML)) {
       _forceRemove(currentNode);
       return true;
     }
 
     /* Convert markup to cover jQuery behavior */
-    if (SAFE_FOR_JQUERY && !currentNode.firstElementChild && (!currentNode.content || !currentNode.content.firstElementChild) && /</g.test(currentNode.textContent)) {
-      DOMPurify.removed.push({ element: currentNode.cloneNode() });
+    if (SAFE_FOR_JQUERY && !currentNode.firstElementChild && (!currentNode.content || !currentNode.content.firstElementChild) && regExpTest(/</g, currentNode.textContent)) {
+      arrayPush(DOMPurify.removed, { element: currentNode.cloneNode() });
       if (currentNode.innerHTML) {
-        currentNode.innerHTML = currentNode.innerHTML.replace(/</g, '&lt;');
+        currentNode.innerHTML = stringReplace(currentNode.innerHTML, /</g, '&lt;');
       } else {
-        currentNode.innerHTML = currentNode.textContent.replace(/</g, '&lt;');
+        currentNode.innerHTML = stringReplace(currentNode.textContent, /</g, '&lt;');
       }
     }
 
@@ -2124,10 +2136,10 @@ function createDOMPurify() {
     if (SAFE_FOR_TEMPLATES && currentNode.nodeType === 3) {
       /* Get the element's text content */
       content = currentNode.textContent;
-      content = content.replace(MUSTACHE_EXPR$$1, ' ');
-      content = content.replace(ERB_EXPR$$1, ' ');
+      content = stringReplace(content, MUSTACHE_EXPR$$1, ' ');
+      content = stringReplace(content, ERB_EXPR$$1, ' ');
       if (currentNode.textContent !== content) {
-        DOMPurify.removed.push({ element: currentNode.cloneNode() });
+        arrayPush(DOMPurify.removed, { element: currentNode.cloneNode() });
         currentNode.textContent = content;
       }
     }
@@ -2157,9 +2169,9 @@ function createDOMPurify() {
         (https://html.spec.whatwg.org/multipage/dom.html#embedding-custom-non-visible-data-with-the-data-*-attributes)
         XML-compatible (https://html.spec.whatwg.org/multipage/infrastructure.html#xml-compatible and http://www.w3.org/TR/xml/#d0e804)
         We don't need to check the value; it's always URI safe. */
-    if (ALLOW_DATA_ATTR && DATA_ATTR$$1.test(lcName)) {
+    if (ALLOW_DATA_ATTR && regExpTest(DATA_ATTR$$1, lcName)) {
       // This attribute is safe
-    } else if (ALLOW_ARIA_ATTR && ARIA_ATTR$$1.test(lcName)) {
+    } else if (ALLOW_ARIA_ATTR && regExpTest(ARIA_ATTR$$1, lcName)) {
       // This attribute is safe
       /* Otherwise, check the name is permitted */
     } else if (!ALLOWED_ATTR[lcName] || FORBID_ATTR[lcName]) {
@@ -2170,16 +2182,16 @@ function createDOMPurify() {
       // This attribute is safe
       /* Check no script, data or unknown possibly unsafe URI
         unless we know URI values are safe for that attribute */
-    } else if (IS_ALLOWED_URI$$1.test(value.replace(ATTR_WHITESPACE$$1, ''))) {
+    } else if (regExpTest(IS_ALLOWED_URI$$1, stringReplace(value, ATTR_WHITESPACE$$1, ''))) {
       // This attribute is safe
       /* Keep image data URIs alive if src/xlink:href is allowed */
       /* Further prevent gadget XSS for dynamically built script tags */
-    } else if ((lcName === 'src' || lcName === 'xlink:href' || lcName === 'href') && lcTag !== 'script' && value.indexOf('data:') === 0 && DATA_URI_TAGS[lcTag]) {
+    } else if ((lcName === 'src' || lcName === 'xlink:href' || lcName === 'href') && lcTag !== 'script' && stringIndexOf(value, 'data:') === 0 && DATA_URI_TAGS[lcTag]) {
       // This attribute is safe
       /* Allow unknown protocols: This provides support for links that
         are handled by protocol handlers which may be unknown ahead of
         time, e.g. fb:, spotify: */
-    } else if (ALLOW_UNKNOWN_PROTOCOLS && !IS_SCRIPT_OR_DATA$$1.test(value.replace(ATTR_WHITESPACE$$1, ''))) {
+    } else if (ALLOW_UNKNOWN_PROTOCOLS && !regExpTest(IS_SCRIPT_OR_DATA$$1, stringReplace(value, ATTR_WHITESPACE$$1, ''))) {
       // This attribute is safe
       /* Check for binary attributes */
       // eslint-disable-next-line no-negated-condition
@@ -2236,15 +2248,20 @@ function createDOMPurify() {
           name = _attr.name,
           namespaceURI = _attr.namespaceURI;
 
-      value = attr.value.trim();
-      lcName = name.toLowerCase();
+      value = stringTrim(attr.value);
+      lcName = stringToLowerCase(name);
 
       /* Execute a hook if present */
       hookEvent.attrName = lcName;
       hookEvent.attrValue = value;
       hookEvent.keepAttr = true;
+      hookEvent.forceKeepAttr = undefined; // Allows developers to see this is a property they can set
       _executeHook('uponSanitizeAttribute', currentNode, hookEvent);
       value = hookEvent.attrValue;
+      /* Did the hooks approve of the attribute? */
+      if (hookEvent.forceKeepAttr) {
+        continue;
+      }
 
       /* Remove attribute */
       // Safari (iOS + Mac), last tested v8.0.5, crashes if you try to
@@ -2252,10 +2269,10 @@ function createDOMPurify() {
       // attribute at the time.
       if (lcName === 'name' && currentNode.nodeName === 'IMG' && attributes.id) {
         idAttr = attributes.id;
-        attributes = apply(arraySlice, attributes, []);
+        attributes = arraySlice(attributes, []);
         _removeAttribute('id', currentNode);
         _removeAttribute(name, currentNode);
-        if (attributes.indexOf(idAttr) > l) {
+        if (arrayIndexOf(attributes, idAttr) > l) {
           currentNode.setAttribute('id', idAttr.value);
         }
       } else if (
@@ -2279,16 +2296,22 @@ function createDOMPurify() {
         continue;
       }
 
+      /* Work around a security issue in jQuery 3.0 */
+      if (SAFE_FOR_JQUERY && regExpTest(/\/>/i, value)) {
+        _removeAttribute(name, currentNode);
+        continue;
+      }
+
       /* Take care of an mXSS pattern using namespace switches */
-      if (/svg|math/i.test(currentNode.namespaceURI) && new RegExp('</(' + Object.keys(FORBID_CONTENTS).join('|') + ')', 'i').test(value)) {
+      if (regExpTest(/svg|math/i, currentNode.namespaceURI) && regExpTest(regExpCreate('</(' + arrayJoin(objectKeys(FORBID_CONTENTS), '|') + ')', 'i'), value)) {
         _removeAttribute(name, currentNode);
         continue;
       }
 
       /* Sanitize attribute content to be template-safe */
       if (SAFE_FOR_TEMPLATES) {
-        value = value.replace(MUSTACHE_EXPR$$1, ' ');
-        value = value.replace(ERB_EXPR$$1, ' ');
+        value = stringReplace(value, MUSTACHE_EXPR$$1, ' ');
+        value = stringReplace(value, ERB_EXPR$$1, ' ');
       }
 
       /* Is `value` valid for this attribute? */
@@ -2306,7 +2329,7 @@ function createDOMPurify() {
           currentNode.setAttribute(name, value);
         }
 
-        DOMPurify.removed.pop();
+        arrayPop(DOMPurify.removed);
       } catch (error) {}
     }
 
@@ -2373,11 +2396,11 @@ function createDOMPurify() {
     if (typeof dirty !== 'string' && !_isNode(dirty)) {
       // eslint-disable-next-line no-negated-condition
       if (typeof dirty.toString !== 'function') {
-        throw new TypeError('toString is not a function');
+        throw typeErrorCreate('toString is not a function');
       } else {
         dirty = dirty.toString();
         if (typeof dirty !== 'string') {
-          throw new TypeError('dirty is not a string, aborting');
+          throw typeErrorCreate('dirty is not a string, aborting');
         }
       }
     }
@@ -2404,6 +2427,11 @@ function createDOMPurify() {
 
     /* Clean up removed elements */
     DOMPurify.removed = [];
+
+    /* Check if dirty is correctly typed for IN_PLACE */
+    if (typeof dirty === 'string') {
+      IN_PLACE = false;
+    }
 
     if (IN_PLACE) {
       /* No special handling necessary for in-place sanitization */
@@ -2503,8 +2531,8 @@ function createDOMPurify() {
 
     /* Sanitize final string template-safe */
     if (SAFE_FOR_TEMPLATES) {
-      serializedHTML = serializedHTML.replace(MUSTACHE_EXPR$$1, ' ');
-      serializedHTML = serializedHTML.replace(ERB_EXPR$$1, ' ');
+      serializedHTML = stringReplace(serializedHTML, MUSTACHE_EXPR$$1, ' ');
+      serializedHTML = stringReplace(serializedHTML, ERB_EXPR$$1, ' ');
     }
 
     return trustedTypesPolicy && RETURN_TRUSTED_TYPE ? trustedTypesPolicy.createHTML(serializedHTML) : serializedHTML;
@@ -2547,8 +2575,8 @@ function createDOMPurify() {
       _parseConfig({});
     }
 
-    var lcTag = tag.toLowerCase();
-    var lcName = attr.toLowerCase();
+    var lcTag = stringToLowerCase(tag);
+    var lcName = stringToLowerCase(attr);
     return _isValidAttribute(lcTag, lcName, value);
   };
 
@@ -2565,7 +2593,7 @@ function createDOMPurify() {
     }
 
     hooks[entryPoint] = hooks[entryPoint] || [];
-    hooks[entryPoint].push(hookFunction);
+    arrayPush(hooks[entryPoint], hookFunction);
   };
 
   /**
@@ -2577,7 +2605,7 @@ function createDOMPurify() {
    */
   DOMPurify.removeHook = function (entryPoint) {
     if (hooks[entryPoint]) {
-      hooks[entryPoint].pop();
+      arrayPop(hooks[entryPoint]);
     }
   };
 
@@ -2612,7 +2640,7 @@ return purify;
 })));
 
 
-},{}],13:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 (function (setImmediate){
 /*
 WHAT: SublimeText-like Fuzzy Search
@@ -3220,7 +3248,7 @@ return fuzzysortNew()
 // TODO: (performance) i have no idea how well optizmied the allowing typos algorithm is
 
 }).call(this,require("timers").setImmediate)
-},{"timers":25}],14:[function(require,module,exports){
+},{"timers":24}],13:[function(require,module,exports){
 const Renderer = require('./Renderer.js');
 const { defaults } = require('./defaults.js');
 const { inline } = require('./rules.js');
@@ -3515,7 +3543,7 @@ module.exports = class InlineLexer {
   }
 };
 
-},{"./Renderer.js":17,"./defaults.js":20,"./helpers.js":21,"./rules.js":23}],15:[function(require,module,exports){
+},{"./Renderer.js":16,"./defaults.js":19,"./helpers.js":20,"./rules.js":22}],14:[function(require,module,exports){
 const { defaults } = require('./defaults.js');
 const { block } = require('./rules.js');
 const {
@@ -3919,7 +3947,7 @@ module.exports = class Lexer {
   };
 };
 
-},{"./defaults.js":20,"./helpers.js":21,"./rules.js":23}],16:[function(require,module,exports){
+},{"./defaults.js":19,"./helpers.js":20,"./rules.js":22}],15:[function(require,module,exports){
 const Renderer = require('./Renderer.js');
 const Slugger = require('./Slugger.js');
 const InlineLexer = require('./InlineLexer.js');
@@ -4127,7 +4155,7 @@ module.exports = class Parser {
   };
 };
 
-},{"./InlineLexer.js":14,"./Renderer.js":17,"./Slugger.js":18,"./TextRenderer.js":19,"./defaults.js":20,"./helpers.js":21}],17:[function(require,module,exports){
+},{"./InlineLexer.js":13,"./Renderer.js":16,"./Slugger.js":17,"./TextRenderer.js":18,"./defaults.js":19,"./helpers.js":20}],16:[function(require,module,exports){
 const { defaults } = require('./defaults.js');
 const {
   cleanUrl,
@@ -4293,7 +4321,7 @@ module.exports = class Renderer {
   };
 };
 
-},{"./defaults.js":20,"./helpers.js":21}],18:[function(require,module,exports){
+},{"./defaults.js":19,"./helpers.js":20}],17:[function(require,module,exports){
 /**
  * Slugger generates header id
  */
@@ -4325,7 +4353,7 @@ module.exports = class Slugger {
   };
 };
 
-},{}],19:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /**
  * TextRenderer
  * returns only the textual part of the token
@@ -4365,7 +4393,7 @@ module.exports = class TextRenderer {
   }
 };
 
-},{}],20:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 function getDefaults() {
   return {
     baseUrl: null,
@@ -4397,7 +4425,7 @@ module.exports = {
   changeDefaults
 };
 
-},{}],21:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 /**
  * Helpers
  */
@@ -4642,7 +4670,7 @@ module.exports = {
   checkSanitizeDeprecation
 };
 
-},{}],22:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 const Lexer = require('./Lexer.js');
 const Parser = require('./Parser.js');
 const Renderer = require('./Renderer.js');
@@ -4794,7 +4822,7 @@ marked.parse = marked;
 
 module.exports = marked;
 
-},{"./InlineLexer.js":14,"./Lexer.js":15,"./Parser.js":16,"./Renderer.js":17,"./Slugger.js":18,"./TextRenderer.js":19,"./defaults.js":20,"./helpers.js":21}],23:[function(require,module,exports){
+},{"./InlineLexer.js":13,"./Lexer.js":14,"./Parser.js":15,"./Renderer.js":16,"./Slugger.js":17,"./TextRenderer.js":18,"./defaults.js":19,"./helpers.js":20}],22:[function(require,module,exports){
 const {
   noopTest,
   edit,
@@ -5036,7 +5064,7 @@ module.exports = {
   inline
 };
 
-},{"./helpers.js":21}],24:[function(require,module,exports){
+},{"./helpers.js":20}],23:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -5222,7 +5250,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],25:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 (function (setImmediate,clearImmediate){
 var nextTick = require('process/browser.js').nextTick;
 var apply = Function.prototype.apply;
@@ -5301,7 +5329,7 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
   delete immediateIds[id];
 };
 }).call(this,require("timers").setImmediate,require("timers").clearImmediate)
-},{"process/browser.js":24,"timers":25}],26:[function(require,module,exports){
+},{"process/browser.js":23,"timers":24}],25:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5331,34 +5359,28 @@ if (window.location.href.indexOf('biblioteca') > -1) {
         return !this.locale;
       }
     },
-    mounted: function () {
-      var _mounted = (0, _asyncToGenerator2.default)(
-      /*#__PURE__*/
-      _regenerator.default.mark(function _callee() {
+    mounted: function mounted() {
+      var _this = this;
+
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.getArticles();
+                return _this.getArticles();
 
               case 2:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this);
-      }));
-
-      function mounted() {
-        return _mounted.apply(this, arguments);
-      }
-
-      return mounted;
-    }(),
+        }, _callee);
+      }))();
+    },
     methods: {
       getArticles: function getArticles(loadMore) {
-        var _this = this;
+        var _this2 = this;
 
         var search = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
@@ -5377,15 +5399,15 @@ if (window.location.href.indexOf('biblioteca') > -1) {
           return response.json();
         }).then(function (response) {
           if (loadMore) {
-            _this.articles = [].concat((0, _toConsumableArray2.default)(_this.articles), (0, _toConsumableArray2.default)(response.results));
+            _this2.articles = [].concat((0, _toConsumableArray2.default)(_this2.articles), (0, _toConsumableArray2.default)(response.results));
           } else {
-            _this.articles = response.results;
+            _this2.articles = response.results;
           }
 
-          _this.has_more = response.hasMore;
+          _this2.has_more = response.hasMore;
         }).then(function () {
-          if (_this.has_more) {
-            _this.pagination_offset = _this.pagination_offset + _this.pagination_limit;
+          if (_this2.has_more) {
+            _this2.pagination_offset = _this2.pagination_offset + _this2.pagination_limit;
           }
 
           if (search) {
@@ -5403,7 +5425,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":8,"@babel/runtime/regenerator":10}],27:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":7,"@babel/runtime/regenerator":9}],26:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -5431,39 +5453,33 @@ if (document.querySelector('#app-axis')) {
         return !this.locale;
       }
     },
-    mounted: function () {
-      var _mounted = (0, _asyncToGenerator2.default)(
-      /*#__PURE__*/
-      _regenerator.default.mark(function _callee() {
+    mounted: function mounted() {
+      var _this = this;
+
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.getAxis();
+                return _this.getAxis();
 
               case 2:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this);
-      }));
-
-      function mounted() {
-        return _mounted.apply(this, arguments);
-      }
-
-      return mounted;
-    }(),
+        }, _callee);
+      }))();
+    },
     methods: {
       getAxis: function getAxis() {
-        var _this = this;
+        var _this2 = this;
 
         fetch("".concat(_config.default.apiCMS.domain, "eixos?_limit=30&_sort=order:ASC")).then(function (response) {
           return response.json();
         }).then(function (response) {
-          _this.axis = response;
+          _this2.axis = response;
         });
       },
       marked: function marked(content) {
@@ -5484,7 +5500,463 @@ if (document.querySelector('#app-axis')) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"dompurify":12,"marked":22}],28:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":9,"dompurify":11,"marked":21}],27:[function(require,module,exports){
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
+var _awesomplete = _interopRequireDefault(require("awesomplete"));
+
+var _fuzzysort = _interopRequireDefault(require("fuzzysort"));
+
+var _helpers = require("./helpers");
+
+var _config = _interopRequireDefault(require("./config"));
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+if (document.querySelector('#app-compare')) {
+  window.$vueCompare = new Vue({
+    el: '#app-compare',
+    data: {
+      locales_list: null,
+      locales: {
+        comparison: [{
+          indicators: []
+        }]
+      },
+      selectedArea: 3,
+      selectedIndicator: {
+        description: null
+      },
+      selectedSubindicator: {},
+      selectedYear: null,
+      loadingLocale: false,
+      additionalLocaleId: null,
+      triggerAnimation: true,
+      storageDomain: _config.default.storage.domain,
+      firstChartPrint: 1,
+      areas: [{
+        id: 1,
+        name: 'Assistência Social',
+        class: 'social-care'
+      }, {
+        id: 2,
+        name: 'Educação',
+        class: 'education'
+      }, {
+        id: 3,
+        name: 'Saúde',
+        class: 'health'
+      }]
+    },
+    computed: {
+      loading: function loading() {
+        return !this.locale;
+      },
+      locale: function locale() {
+        return this.locales.comparison[this.locales.comparison.length - 1];
+      },
+      localesWithIndicator: function localesWithIndicator() {
+        var _this = this;
+
+        return this.locales.comparison.filter(function (item) {
+          return item.indicators.some(function (indicator) {
+            return indicator.id === _this.selectedIndicator.id;
+          });
+        });
+      },
+      localesWithSubindicator: function localesWithSubindicator() {
+        var _this2 = this;
+
+        return this.locales.comparison.filter(function (item) {
+          return item.indicators.forEach(function (indicator) {
+            return indicator.subindicators;
+          }).some(function (indicator) {
+            return indicator.id === _this2.selectedIndicator.id;
+          });
+        });
+      },
+      localeId: function localeId() {
+        return new URL(window.location.href).searchParams.get('location_id');
+      },
+      indicators: function indicators() {
+        var _this3 = this;
+
+        return this.locale.indicators.filter(function (item) {
+          return item.area.id === _this3.selectedArea;
+        });
+      }
+    },
+    watch: {
+      selectedArea: function selectedArea() {
+        var _this$selectedIndicat;
+
+        if (this.indicators) {
+          this.selectedIndicator = _objectSpread({}, this.indicators[0]);
+        }
+
+        if (((_this$selectedIndicat = this.selectedIndicator) === null || _this$selectedIndicat === void 0 ? void 0 : _this$selectedIndicat.subindicators.length) > 0) {
+          this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
+        }
+
+        if (this.selectedSubindicator) {
+          var _this$selectedSubindi, _this$selectedSubindi2, _this$selectedSubindi3;
+
+          this.selectedYear = (_this$selectedSubindi = this.selectedSubindicator) === null || _this$selectedSubindi === void 0 ? void 0 : (_this$selectedSubindi2 = _this$selectedSubindi.data[0]) === null || _this$selectedSubindi2 === void 0 ? void 0 : (_this$selectedSubindi3 = _this$selectedSubindi2.values[0]) === null || _this$selectedSubindi3 === void 0 ? void 0 : _this$selectedSubindi3.year;
+        }
+      },
+      locale: function locale() {
+        var _this$selectedIndicat2;
+
+        if (this.indicators) {
+          this.selectedIndicator = _objectSpread({}, this.indicators[0]);
+        }
+
+        if (((_this$selectedIndicat2 = this.selectedIndicator) === null || _this$selectedIndicat2 === void 0 ? void 0 : _this$selectedIndicat2.subindicators.length) > 0) {
+          this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
+        }
+
+        if (this.selectedSubindicator) {
+          var _this$selectedSubindi4, _this$selectedSubindi5, _this$selectedSubindi6;
+
+          this.selectedYear = (_this$selectedSubindi4 = this.selectedSubindicator) === null || _this$selectedSubindi4 === void 0 ? void 0 : (_this$selectedSubindi5 = _this$selectedSubindi4.data[0]) === null || _this$selectedSubindi5 === void 0 ? void 0 : (_this$selectedSubindi6 = _this$selectedSubindi5.values[0]) === null || _this$selectedSubindi6 === void 0 ? void 0 : _this$selectedSubindi6.year;
+        }
+
+        if (this.firstChartPrint) {
+          this.generateIndicatorChart();
+        }
+      },
+      selectedIndicator: function selectedIndicator() {
+        var _this$selectedIndicat3;
+
+        if (((_this$selectedIndicat3 = this.selectedIndicator) === null || _this$selectedIndicat3 === void 0 ? void 0 : _this$selectedIndicat3.subindicators.length) > 0) {
+          this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
+        }
+
+        if (this.selectedSubindicator) {
+          var _this$selectedSubindi7, _this$selectedSubindi8, _this$selectedSubindi9;
+
+          this.selectedYear = (_this$selectedSubindi7 = this.selectedSubindicator) === null || _this$selectedSubindi7 === void 0 ? void 0 : (_this$selectedSubindi8 = _this$selectedSubindi7.data[0]) === null || _this$selectedSubindi8 === void 0 ? void 0 : (_this$selectedSubindi9 = _this$selectedSubindi8.values[0]) === null || _this$selectedSubindi9 === void 0 ? void 0 : _this$selectedSubindi9.year;
+        }
+      },
+      selectedSubindicator: function selectedSubindicator() {
+        if (this.selectedSubindicator) {
+          var _this$selectedSubindi10, _this$selectedSubindi11, _this$selectedSubindi12;
+
+          this.selectedYear = (_this$selectedSubindi10 = this.selectedSubindicator) === null || _this$selectedSubindi10 === void 0 ? void 0 : (_this$selectedSubindi11 = _this$selectedSubindi10.data[0]) === null || _this$selectedSubindi11 === void 0 ? void 0 : (_this$selectedSubindi12 = _this$selectedSubindi11.values[0]) === null || _this$selectedSubindi12 === void 0 ? void 0 : _this$selectedSubindi12.year;
+        }
+
+        if (this.firstChartPrint) {
+          this.generateSubindicatorChart();
+        }
+
+        this.firstChartPrint = 0;
+      }
+    },
+    mounted: function mounted() {
+      var _this4 = this;
+
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _this4.getLocales();
+
+              case 2:
+                _context.next = 4;
+                return _this4.getLocale(_this4.localeId);
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    methods: {
+      getLocale: function getLocale(localeId) {
+        var _this5 = this;
+
+        this.loadingLocale = true;
+        var url = "".concat(_config.default.api.domain, "data/compare?locale_id=").concat(localeId || _config.default.fisrtCityId);
+        fetch(url).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          _this5.locales = response;
+          return true;
+        }).then(function () {
+          _this5.loadingLocale = false;
+          return true;
+        });
+      },
+      getLocales: function getLocales() {
+        var _this6 = this;
+
+        this.loadingLocale = true;
+        fetch("".concat(_config.default.api.domain, "locales")).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          _this6.locales_list = response.locales.map(function (region) {
+            return {
+              label: "".concat(region.name, ":").concat(region.type),
+              value: region.id
+            };
+          });
+          return true;
+        }).then(function () {
+          var regionInput = document.querySelector('#myLocation');
+          var awesomplete = new _awesomplete.default(regionInput, {
+            item: function item(suggestion) {
+              var html = document.createElement('li');
+              var type = suggestion.label.split(':')[1];
+              var typeString;
+
+              if (type === 'city') {
+                typeString = 'Município';
+              }
+
+              if (type === 'state') {
+                typeString = 'Estado';
+              }
+
+              if (type === 'country') {
+                return false;
+              }
+
+              html.setAttribute('role', 'option');
+              html.setAttribute('class', "awesomplete__".concat(type));
+              html.insertAdjacentHTML('beforeend', "<span>".concat(suggestion.label.split(':')[0], "<small>").concat(typeString, "</small></span>"));
+              return html;
+            },
+            nChars: 1,
+            maxItems: 5,
+            autoFirst: true,
+            filter: function filter(text, input) {
+              return _fuzzysort.default.single((0, _helpers.removeDiacritics)(input), (0, _helpers.removeDiacritics)(text.label.split(':')[0]));
+            },
+            replace: function replace(suggestion) {
+              var _ref = [suggestion.label.split(':')[0]];
+              this.input.value = _ref[0];
+            }
+          });
+          awesomplete.list = _this6.locales_list;
+
+          _this6.watchSelection();
+        }).then(function () {
+          _this6.loadingLocales = false;
+          return true;
+        });
+      },
+      watchSelection: function watchSelection() {
+        var _this7 = this;
+
+        var regionInput = document.querySelector('#myLocation');
+        regionInput.addEventListener('awesomplete-selectcomplete', function (event) {
+          _this7.getLocale(event.text.value);
+        }, false);
+      },
+      getYears: function getYears() {
+        var _this8 = this;
+
+        if (this.localesWithIndicator.length === 0) {
+          return false;
+        }
+
+        return this.locale.indicators.filter(function (indicator) {
+          return indicator.id === _this8.selectedIndicator.id;
+        })[0].values.map(function (item) {
+          return item.year;
+        });
+      },
+      formatCategories: function formatCategories(data) {
+        if (!data) {
+          return false;
+        }
+
+        return data.map(function (internItem) {
+          return internItem.description;
+        });
+      },
+      formatDataToSubindicatorsChart: function formatDataToSubindicatorsChart(items) {
+        var _this9 = this;
+
+        if (!items || !items.values) {
+          return false;
+        }
+
+        var allData = [];
+        var data = [];
+        var descriptions = [];
+        this.locales.comparison.forEach(function (comparison) {
+          var cityName = comparison.name;
+          comparison.indicators.forEach(function (indicator) {
+            if (indicator.id === _this9.selectedIndicator.id) {
+              indicator.subindicators.forEach(function (sub) {
+                if (sub.classification === _this9.selectedSubindicator.classification) {
+                  sub.data.forEach(function (subData) {
+                    var description = _objectSpread({}, subData.description);
+
+                    if (subData.values) {
+                      subData.values.forEach(function (value) {
+                        if (value.year === Number(_this9.selectedYear)) {
+                          descriptions.push(description);
+                          data.push(value.value_relative ? Number(value.value_relative) : Number(value.value_absolute));
+                        }
+                      });
+                    }
+                  });
+                }
+              });
+            }
+          });
+
+          if (data.length !== 0) {
+            allData.push({
+              name: cityName,
+              data: data
+            });
+            data = [];
+          }
+        });
+        return allData;
+      },
+      formatDataToBarsCharts: function formatDataToBarsCharts() {
+        var _this10 = this;
+
+        if (!this.localesWithIndicator) {
+          return false;
+        }
+
+        var data = [];
+        var dataValues = [];
+        this.localesWithIndicator.forEach(function (item) {
+          item.indicators.filter(function (indicator) {
+            return indicator.id === _this10.selectedIndicator.id;
+          }).forEach(function (locale) {
+            return locale.values.forEach(function (i) {
+              if (i.value_relative) {
+                dataValues.push(Number(i.value_relative));
+              } else {
+                dataValues.push(Number(i.value_absolute));
+              }
+            });
+          });
+        });
+        this.localesWithIndicator.forEach(function (item) {
+          data.push({
+            name: item.name,
+            data: item.indicators.filter(function (indicator) {
+              return indicator.id === _this10.selectedIndicator.id;
+            }).map(function (locale) {
+              return locale.values.map(function (i) {
+                if (i.value_relative) {
+                  return Number(i.value_relative);
+                }
+
+                return Number(i.value_absolute);
+              });
+            })[0]
+          });
+        });
+        return data;
+      },
+      generateIndicatorChart: function generateIndicatorChart() {
+        return Highcharts.chart('js-history', {
+          chart: {
+            type: 'column'
+          },
+          title: {
+            text: this.selectedIndicator.description
+          },
+          subtitle: {
+            text: null
+          },
+          xAxis: {
+            categories: this.getYears(this.selectedIndicator.id),
+            crosshair: true
+          },
+          yAxis: {
+            min: 0,
+            title: {
+              text: null
+            }
+          },
+          tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr>' + '<td style="padding:0"><b>{point.y}</b></td></tr>',
+            footerFormat: '</table>',
+            useHTML: true
+          },
+          plotOptions: {
+            column: {
+              pointPadding: 0.2,
+              borderWidth: 0
+            }
+          },
+          series: this.formatDataToBarsCharts(this.locales)
+        });
+      },
+      generateSubindicatorChart: function generateSubindicatorChart() {
+        return Highcharts.chart('js-subindicators-chart', {
+          chart: {
+            type: 'column'
+          },
+          title: {
+            text: this.selectedSubindicator.classification
+          },
+          subtitle: {
+            text: null
+          },
+          xAxis: {
+            categories: this.formatCategories(this.selectedSubindicator.data),
+            // categories: ['2018', '2019'],
+            title: {
+              text: null
+            }
+          },
+          yAxis: {
+            min: 0,
+            title: {
+              text: null,
+              align: 'high'
+            },
+            labels: {
+              overflow: 'justify'
+            }
+          },
+          tooltip: {
+            valueSuffix: null
+          },
+          plotOptions: {
+            bar: {
+              dataLabels: {
+                enabled: true
+              }
+            }
+          },
+          credits: {
+            enabled: false
+          },
+          series: this.formatDataToSubindicatorsChart(this.selectedSubindicator.data)
+        });
+      }
+    }
+  });
+}
+
+},{"./config":28,"./helpers":29,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/defineProperty":3,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":9,"awesomplete":10,"fuzzysort":12}],28:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5500,7 +5972,8 @@ var _default = {
   },
   storage: {
     domain: window.location.hostname.indexOf('observatoriodaprimeirainfancia') !== -1 ? 'https://omlpi-strapi.appcivico.com/' : 'https://dev-omlpi-strapi.appcivico.com/'
-  }
+  },
+  fisrtCityId: 5200050
 };
 exports.default = _default;
 
@@ -5514,7 +5987,7 @@ exports.removeDiacritics = removeDiacritics;
 
 function removeDiacritics(string) {
   return string.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-}
+} // eslint-disable-next-line import/prefer-default-export
 
 },{}],30:[function(require,module,exports){
 "use strict";
@@ -5525,7 +5998,7 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
 var _awesomplete = _interopRequireDefault(require("awesomplete"));
 
@@ -5535,9 +6008,10 @@ var _helpers = require("./helpers");
 
 var _config = _interopRequireDefault(require("./config"));
 
-/* global Vue */
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-/* global Highcharts */
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 if (document.querySelector('#app-history')) {
   window.$vueHistory = new Vue({
     el: '#app-history',
@@ -5589,14 +6063,14 @@ if (document.querySelector('#app-history')) {
     },
     watch: {
       locale: function locale(newLocale) {
-        this.selectedIndicator = (0, _objectSpread2.default)({}, newLocale.historical[0].indicators[0]);
+        this.selectedIndicator = _objectSpread({}, newLocale.historical[0].indicators[0]);
 
         if (this.selectedIndicator && this.selectedIndicator.subindicators) {
-          this.selectedSubindicator = (0, _objectSpread2.default)({}, this.selectedIndicator.subindicators[0]);
+          this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
         }
 
         if (this.firstChartPrint) {
-          this.selectedIndicator = (0, _objectSpread2.default)({}, newLocale.historical[0].indicators[0]);
+          this.selectedIndicator = _objectSpread({}, newLocale.historical[0].indicators[0]);
           this.generateIndicatorChart();
         }
       },
@@ -5608,59 +6082,53 @@ if (document.querySelector('#app-history')) {
         this.firstChartPrint = 0;
       }
     },
-    mounted: function () {
-      var _mounted = (0, _asyncToGenerator2.default)(
-      /*#__PURE__*/
-      _regenerator.default.mark(function _callee() {
+    mounted: function mounted() {
+      var _this2 = this;
+
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.getLocales();
+                return _this2.getLocales();
 
               case 2:
                 _context.next = 4;
-                return this.getLocale(this.localeId);
+                return _this2.getLocale(_this2.localeId);
 
               case 4:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this);
-      }));
-
-      function mounted() {
-        return _mounted.apply(this, arguments);
-      }
-
-      return mounted;
-    }(),
+        }, _callee);
+      }))();
+    },
     methods: {
       getLocale: function getLocale(localeId) {
-        var _this2 = this;
+        var _this3 = this;
 
         this.loadingLocale = true;
         var url = "".concat(_config.default.api.domain, "data/historical?locale_id=").concat(localeId || 1);
         fetch(url).then(function (response) {
           return response.json();
         }).then(function (response) {
-          _this2.locale = response;
+          _this3.locale = response;
           return true;
         }).then(function () {
-          _this2.loadingLocale = false;
+          _this3.loadingLocale = false;
           return true;
         });
       },
       getLocales: function getLocales() {
-        var _this3 = this;
+        var _this4 = this;
 
         this.loadingLocale = true;
         fetch("".concat(_config.default.api.domain, "locales")).then(function (response) {
           return response.json();
         }).then(function (response) {
-          _this3.locales = response.locales.map(function (region) {
+          _this4.locales = response.locales.map(function (region) {
             return {
               label: "".concat(region.name, ":").concat(region.type),
               value: region.id
@@ -5703,25 +6171,23 @@ if (document.querySelector('#app-history')) {
               this.input.value = _ref[0];
             }
           });
-          awesomplete.list = _this3.locales;
+          awesomplete.list = _this4.locales;
 
-          _this3.watchSelection();
+          _this4.watchSelection();
         }).then(function () {
-          _this3.loadingLocales = false;
+          _this4.loadingLocales = false;
           return true;
         });
       },
       watchSelection: function watchSelection() {
-        var _this4 = this;
+        var _this5 = this;
 
         var regionInput = document.querySelector('#myLocation');
         regionInput.addEventListener('awesomplete-selectcomplete', function (event) {
-          _this4.getLocale(event.text.value);
+          _this5.getLocale(event.text.value);
         }, false);
       },
       getYears: function getYears(data) {
-        console.log(data);
-
         if (!data.values) {
           return false;
         }
@@ -5853,12 +6319,12 @@ if (document.querySelector('#app-history')) {
   });
 }
 
-},{"./config":28,"./helpers":29,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/objectSpread":7,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}],31:[function(require,module,exports){
+},{"./config":28,"./helpers":29,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/defineProperty":3,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":9,"awesomplete":10,"fuzzysort":12}],31:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -5870,7 +6336,10 @@ var _dompurify = _interopRequireDefault(require("dompurify"));
 
 var _config = _interopRequireDefault(require("./config"));
 
-/* global Vue */
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 if (document.querySelector('#app-home-about')) {
   window.$vueHomeAbout = new Vue({
     el: '#app-home-about',
@@ -5886,39 +6355,33 @@ if (document.querySelector('#app-home-about')) {
         return window.$vueNews && window.$vueNews.news && window.$vueNews.news.length > 0;
       }
     },
-    mounted: function () {
-      var _mounted = (0, _asyncToGenerator2.default)(
-      /*#__PURE__*/
-      _regenerator.default.mark(function _callee() {
+    mounted: function mounted() {
+      var _this = this;
+
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.getAbout();
+                return _this.getAbout();
 
               case 2:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this);
-      }));
-
-      function mounted() {
-        return _mounted.apply(this, arguments);
-      }
-
-      return mounted;
-    }(),
+        }, _callee);
+      }))();
+    },
     methods: {
       getAbout: function getAbout() {
-        var _this = this;
+        var _this2 = this;
 
         fetch("".concat(_config.default.apiCMS.domain, "sobres?_limit=1")).then(function (response) {
           return response.json();
         }).then(function (response) {
-          _this.about = (0, _objectSpread2.default)({}, response[0]);
+          _this2.about = _objectSpread({}, response[0]);
         });
       },
       marked: function marked(content) {
@@ -5928,12 +6391,12 @@ if (document.querySelector('#app-home-about')) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/objectSpread":7,"@babel/runtime/regenerator":10,"dompurify":12,"marked":22}],32:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/defineProperty":3,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":9,"dompurify":11,"marked":21}],32:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -5945,7 +6408,10 @@ var _dompurify = _interopRequireDefault(require("dompurify"));
 
 var _config = _interopRequireDefault(require("./config"));
 
-/* global Vue */
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 if (document.querySelector('#app-home-banner')) {
   window.$vueHomeBanner = new Vue({
     el: '#app-home-banner',
@@ -5958,39 +6424,33 @@ if (document.querySelector('#app-home-banner')) {
         return !this.locale;
       }
     },
-    mounted: function () {
-      var _mounted = (0, _asyncToGenerator2.default)(
-      /*#__PURE__*/
-      _regenerator.default.mark(function _callee() {
+    mounted: function mounted() {
+      var _this = this;
+
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.getBanner();
+                return _this.getBanner();
 
               case 2:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this);
-      }));
-
-      function mounted() {
-        return _mounted.apply(this, arguments);
-      }
-
-      return mounted;
-    }(),
+        }, _callee);
+      }))();
+    },
     methods: {
       getBanner: function getBanner() {
-        var _this = this;
+        var _this2 = this;
 
         fetch("".concat(_config.default.apiCMS.domain, "banners?_limit=1")).then(function (response) {
           return response.json();
         }).then(function (response) {
-          _this.banner = (0, _objectSpread2.default)({}, response[0]);
+          _this2.banner = _objectSpread({}, response[0]);
         });
       },
       marked: function marked(content) {
@@ -6000,7 +6460,7 @@ if (document.querySelector('#app-home-banner')) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/objectSpread":7,"@babel/runtime/regenerator":10,"dompurify":12,"marked":22}],33:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/defineProperty":3,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":9,"dompurify":11,"marked":21}],33:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6028,44 +6488,38 @@ if (document.querySelector('#app-home-indicators')) {
         return !this.locale;
       }
     },
-    mounted: function () {
-      var _mounted = (0, _asyncToGenerator2.default)(
-      /*#__PURE__*/
-      _regenerator.default.mark(function _callee() {
+    mounted: function mounted() {
+      var _this = this;
+
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.getIndicators();
+                return _this.getIndicators();
 
               case 2:
-                this.startIndicatorsCounter();
+                _this.startIndicatorsCounter();
 
               case 3:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this);
-      }));
-
-      function mounted() {
-        return _mounted.apply(this, arguments);
-      }
-
-      return mounted;
-    }(),
+        }, _callee);
+      }))();
+    },
     methods: {
       startIndicatorsCounter: function startIndicatorsCounter() {
-        var _this = this;
+        var _this2 = this;
 
         setInterval(function () {
-          _this.getIndicators();
+          _this2.getIndicators();
         }, 6000);
       },
       getIndicators: function getIndicators() {
-        var _this2 = this;
+        var _this3 = this;
 
         this.loadingLocales = true;
         var url = "".concat(_config.default.api.domain, "data/random_indicator");
@@ -6077,11 +6531,11 @@ if (document.querySelector('#app-home-indicators')) {
         fetch(url).then(function (response) {
           return response.json();
         }).then(function (response) {
-          _this2.indicators = response;
-          _this2.additionalLocaleId = response.locales[1].id;
+          _this3.indicators = response;
+          _this3.additionalLocaleId = response.locales[1].id;
           return true;
         }).then(function () {
-          _this2.loadingLocales = false;
+          _this3.loadingLocales = false;
           return true;
         });
       },
@@ -6100,7 +6554,7 @@ if (document.querySelector('#app-home-indicators')) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],34:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":9}],34:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6129,11 +6583,13 @@ require("./homeIndicators");
 
 require("./history");
 
+require("./compare");
+
 (0, _search.default)();
 (0, _searchPlans.default)();
 (0, _menu.default)();
 
-},{"./articles":26,"./axis":27,"./history":30,"./homeAbout":31,"./homeBanner":32,"./homeIndicators":33,"./menu":35,"./news":36,"./plans":37,"./populateData":38,"./search":40,"./search-plans":39,"@babel/runtime/helpers/interopRequireDefault":4}],35:[function(require,module,exports){
+},{"./articles":25,"./axis":26,"./compare":27,"./history":30,"./homeAbout":31,"./homeBanner":32,"./homeIndicators":33,"./menu":35,"./news":36,"./plans":37,"./populateData":38,"./search":40,"./search-plans":39,"@babel/runtime/helpers/interopRequireDefault":4}],35:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6178,39 +6634,33 @@ if (document.querySelector('#app-news')) {
         return !this.locale;
       }
     },
-    mounted: function () {
-      var _mounted = (0, _asyncToGenerator2.default)(
-      /*#__PURE__*/
-      _regenerator.default.mark(function _callee() {
+    mounted: function mounted() {
+      var _this = this;
+
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.getNews();
+                return _this.getNews();
 
               case 2:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this);
-      }));
-
-      function mounted() {
-        return _mounted.apply(this, arguments);
-      }
-
-      return mounted;
-    }(),
+        }, _callee);
+      }))();
+    },
     methods: {
       getNews: function getNews() {
-        var _this = this;
+        var _this2 = this;
 
         fetch("".concat(_config.default.apiCMS.domain, "noticias?_limit=30&_sort=date:ASC")).then(function (response) {
           return response.json();
         }).then(function (response) {
-          _this.news = response;
+          _this2.news = response;
         });
       },
       convertDate: function convertDate(date) {
@@ -6220,7 +6670,7 @@ if (document.querySelector('#app-news')) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],37:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":9}],37:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6252,31 +6702,25 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
         return !this.locale;
       }
     },
-    mounted: function () {
-      var _mounted = (0, _asyncToGenerator2.default)(
-      /*#__PURE__*/
-      _regenerator.default.mark(function _callee() {
+    mounted: function mounted() {
+      var _this = this;
+
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.getInfoGraphic();
+                return _this.getInfoGraphic();
 
               case 2:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this);
-      }));
-
-      function mounted() {
-        return _mounted.apply(this, arguments);
-      }
-
-      return mounted;
-    }(),
+        }, _callee);
+      }))();
+    },
     methods: {
       setMapDestak: function setMapDestak(locale) {
         var map = document.querySelector('.js-brazil-map');
@@ -6288,7 +6732,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
         map.querySelector(".".concat(locale)).classList.add('active');
       },
       setLocale: function setLocale(localeId) {
-        var _this = this;
+        var _this2 = this;
 
         this.resetSelectedLocales();
         this.selectedLocale = this.locales.find(function (locale) {
@@ -6297,10 +6741,10 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
 
         if (this.selectedLocale.type === 'state') {
           var cities = this.locales.filter(function (locale) {
-            return locale.type === 'city' && locale.state === _this.selectedLocale.state;
+            return locale.type === 'city' && locale.state === _this2.selectedLocale.state;
           });
           this.capital = this.locales.find(function (locale) {
-            return locale.type === 'city' && locale.state === _this.selectedLocale.state && locale.is_capital;
+            return locale.type === 'city' && locale.state === _this2.selectedLocale.state && locale.is_capital;
           });
           this.relatedLocales = this.getSectionedLocales(cities).sort(function (a, b) {
             return a.title > b.title ? 1 : -1;
@@ -6310,7 +6754,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
 
         if (this.selectedLocale.type === 'region') {
           var states = this.locales.filter(function (locale) {
-            return locale.type === 'state' && locale.region === _this.selectedLocale.region;
+            return locale.type === 'state' && locale.region === _this2.selectedLocale.region;
           });
           this.relatedLocales = this.getSectionedLocales(states).sort(function (a, b) {
             return a.title > b.title ? 1 : -1;
@@ -6345,23 +6789,23 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
         this.capital = null;
       },
       getInfoGraphic: function getInfoGraphic() {
-        var _this2 = this;
+        var _this3 = this;
 
         fetch("".concat(_config.default.apiCMS.domain, "infograficos/1")).then(function (response) {
           return response.json();
         }).then(function (response) {
-          _this2.infographic = {};
+          _this3.infographic = {};
 
           if (response.small && response.small.url) {
-            _this2.infographic.small = "".concat(_config.default.storage.domain).concat(response.small.url);
+            _this3.infographic.small = "".concat(_config.default.storage.domain).concat(response.small.url);
           }
 
           if (response.big && response.big.url) {
-            _this2.infographic.big = "".concat(_config.default.storage.domain).concat(response.big.url);
+            _this3.infographic.big = "".concat(_config.default.storage.domain).concat(response.big.url);
           }
 
           if (response.pdf && response.pdf.url) {
-            _this2.infographic.url = "".concat(_config.default.storage.domain).concat(response.pdf.url);
+            _this3.infographic.url = "".concat(_config.default.storage.domain).concat(response.pdf.url);
           }
         });
       }
@@ -6369,7 +6813,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
   });
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],38:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":9}],38:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6451,20 +6895,20 @@ if (window.location.href.indexOf('city') > -1) {
       }
     },
     created: function created() {},
-    mounted: function () {
-      var _mounted = (0, _asyncToGenerator2.default)(
-      /*#__PURE__*/
-      _regenerator.default.mark(function _callee() {
+    mounted: function mounted() {
+      var _this2 = this;
+
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.getData();
+                return _this2.getData();
 
               case 2:
                 _context.next = 4;
-                return this.generateCharts();
+                return _this2.generateCharts();
 
               case 4:
                 (0, _search.default)();
@@ -6474,27 +6918,21 @@ if (window.location.href.indexOf('city') > -1) {
                 return _context.stop();
             }
           }
-        }, _callee, this);
-      }));
-
-      function mounted() {
-        return _mounted.apply(this, arguments);
-      }
-
-      return mounted;
-    }(),
+        }, _callee);
+      }))();
+    },
     methods: {
-      getData: function () {
-        var _getData = (0, _asyncToGenerator2.default)(
-        /*#__PURE__*/
-        _regenerator.default.mark(function _callee2() {
+      getData: function getData() {
+        var _this3 = this;
+
+        return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
           var response, json;
           return _regenerator.default.wrap(function _callee2$(_context2) {
             while (1) {
               switch (_context2.prev = _context2.next) {
                 case 0:
                   _context2.next = 2;
-                  return fetch("".concat(_config.default.api.domain, "data?locale_id=").concat(this.localeId));
+                  return fetch("".concat(_config.default.api.domain, "data?locale_id=").concat(_this3.localeId));
 
                 case 2:
                   response = _context2.sent;
@@ -6503,22 +6941,16 @@ if (window.location.href.indexOf('city') > -1) {
 
                 case 5:
                   json = _context2.sent;
-                  this.locale = json.locale;
+                  _this3.locale = json.locale;
 
                 case 7:
                 case "end":
                   return _context2.stop();
               }
             }
-          }, _callee2, this);
-        }));
-
-        function getData() {
-          return _getData.apply(this, arguments);
-        }
-
-        return getData;
-      }(),
+          }, _callee2);
+        }))();
+      },
       formatDataToPieCharts: function formatDataToPieCharts(items) {
         var data = [];
         items.data.forEach(function (item) {
@@ -6557,7 +6989,7 @@ if (window.location.href.indexOf('city') > -1) {
         });
       },
       generateCharts: function generateCharts() {
-        var _this2 = this;
+        var _this4 = this;
 
         this.barsData.forEach(function (chart) {
           Highcharts.chart("bar-chart-".concat(chart.indicatorId, "-").concat(chart.id), {
@@ -6567,7 +6999,7 @@ if (window.location.href.indexOf('city') > -1) {
             title: null,
             subtitle: null,
             xAxis: {
-              categories: _this2.getBarChartTitles(chart),
+              categories: _this4.getBarChartTitles(chart),
               crosshair: true
             },
             yAxis: {
@@ -6596,7 +7028,7 @@ if (window.location.href.indexOf('city') > -1) {
                 }
               }
             },
-            series: _this2.formatDataToBarsCharts(chart)
+            series: _this4.formatDataToBarsCharts(chart)
           });
         });
         this.pieData.forEach(function (chart) {
@@ -6630,7 +7062,7 @@ if (window.location.href.indexOf('city') > -1) {
               }
             },
             series: [{
-              data: _this2.formatDataToPieCharts(chart)
+              data: _this4.formatDataToPieCharts(chart)
             }]
           });
         });
@@ -6639,7 +7071,7 @@ if (window.location.href.indexOf('city') > -1) {
   });
 }
 
-},{"./config":28,"./search":40,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10}],39:[function(require,module,exports){
+},{"./config":28,"./search":40,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":9}],39:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6673,9 +7105,7 @@ function startPlansSearch() {
   }
 
   function _getList() {
-    _getList = (0, _asyncToGenerator2.default)(
-    /*#__PURE__*/
-    _regenerator.default.mark(function _callee() {
+    _getList = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
       var response, json;
       return _regenerator.default.wrap(function _callee$(_context) {
         while (1) {
@@ -6698,7 +7128,7 @@ function startPlansSearch() {
               return _context.stop();
           }
         }
-      }, _callee, this);
+      }, _callee);
     }));
     return _getList.apply(this, arguments);
   }
@@ -6708,9 +7138,7 @@ function startPlansSearch() {
   }
 
   function _mountList() {
-    _mountList = (0, _asyncToGenerator2.default)(
-    /*#__PURE__*/
-    _regenerator.default.mark(function _callee2() {
+    _mountList = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
       var list, regionNames, awesomplete;
       return _regenerator.default.wrap(function _callee2$(_context2) {
         while (1) {
@@ -6767,7 +7195,7 @@ function startPlansSearch() {
               return _context2.stop();
           }
         }
-      }, _callee2, this);
+      }, _callee2);
     }));
     return _mountList.apply(this, arguments);
   }
@@ -6790,7 +7218,7 @@ function startPlansSearch() {
   }
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}],40:[function(require,module,exports){
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":9,"awesomplete":10,"fuzzysort":12}],40:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6822,9 +7250,7 @@ function startSearch() {
   }
 
   function _getList() {
-    _getList = (0, _asyncToGenerator2.default)(
-    /*#__PURE__*/
-    _regenerator.default.mark(function _callee() {
+    _getList = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
       var response, json;
       return _regenerator.default.wrap(function _callee$(_context) {
         while (1) {
@@ -6847,7 +7273,7 @@ function startSearch() {
               return _context.stop();
           }
         }
-      }, _callee, this);
+      }, _callee);
     }));
     return _getList.apply(this, arguments);
   }
@@ -6857,9 +7283,7 @@ function startSearch() {
   }
 
   function _mountList() {
-    _mountList = (0, _asyncToGenerator2.default)(
-    /*#__PURE__*/
-    _regenerator.default.mark(function _callee2() {
+    _mountList = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
       var list, regionNames, awesomplete;
       return _regenerator.default.wrap(function _callee2$(_context2) {
         while (1) {
@@ -6919,7 +7343,7 @@ function startSearch() {
               return _context2.stop();
           }
         }
-      }, _callee2, this);
+      }, _callee2);
     }));
     return _mountList.apply(this, arguments);
   }
@@ -6936,4 +7360,4 @@ function startSearch() {
   }
 }
 
-},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":10,"awesomplete":11,"fuzzysort":13}]},{},[34]);
+},{"./config":28,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":9,"awesomplete":10,"fuzzysort":12}]},{},[34]);
