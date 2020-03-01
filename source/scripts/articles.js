@@ -45,7 +45,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
           })
           .then(() => {
             if (this.has_more) {
-              this.pagination_offset = this.pagination_offset + this.pagination_limit;
+              this.pagination_offset += this.pagination_limit;
             }
             if (search) {
               const results = document.querySelector('#js-search-results');

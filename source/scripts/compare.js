@@ -72,7 +72,7 @@ if (document.querySelector('#app-compare')) {
           this.selectedIndicator = { ...this.indicators[0] };
         }
 
-        if (this.selectedIndicator?.subindicators.length > 0) {
+        if (this.selectedIndicator?.subindicators?.length > 0) {
           this.selectedSubindicator = { ...this.selectedIndicator.subindicators[0] };
         }
 
@@ -85,7 +85,7 @@ if (document.querySelector('#app-compare')) {
           this.selectedIndicator = { ...this.indicators[0] };
         }
 
-        if (this.selectedIndicator?.subindicators.length > 0) {
+        if (this.selectedIndicator?.subindicators?.length > 0) {
           this.selectedSubindicator = { ...this.selectedIndicator.subindicators[0] };
         }
 
@@ -98,7 +98,7 @@ if (document.querySelector('#app-compare')) {
         }
       },
       selectedIndicator() {
-        if (this.selectedIndicator?.subindicators.length > 0) {
+        if (this.selectedIndicator?.subindicators?.length > 0) {
           this.selectedSubindicator = { ...this.selectedIndicator.subindicators[0] };
         }
 

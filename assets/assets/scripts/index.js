@@ -5407,7 +5407,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
           _this2.has_more = response.hasMore;
         }).then(function () {
           if (_this2.has_more) {
-            _this2.pagination_offset = _this2.pagination_offset + _this2.pagination_limit;
+            _this2.pagination_offset += _this2.pagination_limit;
           }
 
           if (search) {
@@ -5598,13 +5598,13 @@ if (document.querySelector('#app-compare')) {
     },
     watch: {
       selectedArea: function selectedArea() {
-        var _this$selectedIndicat;
+        var _this$selectedIndicat, _this$selectedIndicat2;
 
         if (this.indicators) {
           this.selectedIndicator = _objectSpread({}, this.indicators[0]);
         }
 
-        if (((_this$selectedIndicat = this.selectedIndicator) === null || _this$selectedIndicat === void 0 ? void 0 : _this$selectedIndicat.subindicators.length) > 0) {
+        if (((_this$selectedIndicat = this.selectedIndicator) === null || _this$selectedIndicat === void 0 ? void 0 : (_this$selectedIndicat2 = _this$selectedIndicat.subindicators) === null || _this$selectedIndicat2 === void 0 ? void 0 : _this$selectedIndicat2.length) > 0) {
           this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
         }
 
@@ -5615,13 +5615,13 @@ if (document.querySelector('#app-compare')) {
         }
       },
       locale: function locale() {
-        var _this$selectedIndicat2;
+        var _this$selectedIndicat3, _this$selectedIndicat4;
 
         if (this.indicators) {
           this.selectedIndicator = _objectSpread({}, this.indicators[0]);
         }
 
-        if (((_this$selectedIndicat2 = this.selectedIndicator) === null || _this$selectedIndicat2 === void 0 ? void 0 : _this$selectedIndicat2.subindicators.length) > 0) {
+        if (((_this$selectedIndicat3 = this.selectedIndicator) === null || _this$selectedIndicat3 === void 0 ? void 0 : (_this$selectedIndicat4 = _this$selectedIndicat3.subindicators) === null || _this$selectedIndicat4 === void 0 ? void 0 : _this$selectedIndicat4.length) > 0) {
           this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
         }
 
@@ -5636,9 +5636,9 @@ if (document.querySelector('#app-compare')) {
         }
       },
       selectedIndicator: function selectedIndicator() {
-        var _this$selectedIndicat3;
+        var _this$selectedIndicat5, _this$selectedIndicat6;
 
-        if (((_this$selectedIndicat3 = this.selectedIndicator) === null || _this$selectedIndicat3 === void 0 ? void 0 : _this$selectedIndicat3.subindicators.length) > 0) {
+        if (((_this$selectedIndicat5 = this.selectedIndicator) === null || _this$selectedIndicat5 === void 0 ? void 0 : (_this$selectedIndicat6 = _this$selectedIndicat5.subindicators) === null || _this$selectedIndicat6 === void 0 ? void 0 : _this$selectedIndicat6.length) > 0) {
           this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
         }
 
