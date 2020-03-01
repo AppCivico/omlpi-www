@@ -58,7 +58,7 @@ if (document.querySelector('#app-compare')) {
         );
       },
       localeId() {
-        return new URL(window.location.href).searchParams.get('location_id');
+        return new URL(window.location.href).searchParams.get('location_id') || 5200050;
       },
       indicators() {
         return this.locale.indicators.filter(
@@ -68,7 +68,7 @@ if (document.querySelector('#app-compare')) {
     },
     watch: {
       selectedArea() {
-        if (this.indicators) {
+        if (this.indicators.length > 0) {
           this.selectedIndicator = { ...this.indicators[0] };
         }
 
@@ -81,7 +81,7 @@ if (document.querySelector('#app-compare')) {
         }
       },
       locale() {
-        if (this.indicators) {
+        if (this.indicators.length > 0) {
           this.selectedIndicator = { ...this.indicators[0] };
         }
 
@@ -89,7 +89,8 @@ if (document.querySelector('#app-compare')) {
           this.selectedSubindicator = { ...this.selectedIndicator.subindicators[0] };
         }
 
-        if (this.selectedSubindicator) {
+        if (Object.entries(this.selectedSubindicator).length !== 0
+            && this.selectedSubindicator.constructor === Object) {
           this.selectedYear = this.selectedSubindicator?.data[0]?.values[0]?.year;
         }
 

@@ -5586,7 +5586,7 @@ if (document.querySelector('#app-compare')) {
         });
       },
       localeId: function localeId() {
-        return new URL(window.location.href).searchParams.get('location_id');
+        return new URL(window.location.href).searchParams.get('location_id') || 5200050;
       },
       indicators: function indicators() {
         var _this3 = this;
@@ -5600,7 +5600,7 @@ if (document.querySelector('#app-compare')) {
       selectedArea: function selectedArea() {
         var _this$selectedIndicat, _this$selectedIndicat2;
 
-        if (this.indicators) {
+        if (this.indicators.length > 0) {
           this.selectedIndicator = _objectSpread({}, this.indicators[0]);
         }
 
@@ -5617,7 +5617,7 @@ if (document.querySelector('#app-compare')) {
       locale: function locale() {
         var _this$selectedIndicat3, _this$selectedIndicat4;
 
-        if (this.indicators) {
+        if (this.indicators.length > 0) {
           this.selectedIndicator = _objectSpread({}, this.indicators[0]);
         }
 
@@ -5625,7 +5625,7 @@ if (document.querySelector('#app-compare')) {
           this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
         }
 
-        if (this.selectedSubindicator) {
+        if (Object.entries(this.selectedSubindicator).length !== 0 && this.selectedSubindicator.constructor === Object) {
           var _this$selectedSubindi4, _this$selectedSubindi5, _this$selectedSubindi6;
 
           this.selectedYear = (_this$selectedSubindi4 = this.selectedSubindicator) === null || _this$selectedSubindi4 === void 0 ? void 0 : (_this$selectedSubindi5 = _this$selectedSubindi4.data[0]) === null || _this$selectedSubindi5 === void 0 ? void 0 : (_this$selectedSubindi6 = _this$selectedSubindi5.values[0]) === null || _this$selectedSubindi6 === void 0 ? void 0 : _this$selectedSubindi6.year;
