@@ -52,20 +52,51 @@ if (document.querySelector('#app-history')) {
       },
     },
     watch: {
-      locale(newLocale) {
-        this.selectedIndicator = { ...newLocale.historical[0].indicators[0] };
-        if (this.selectedIndicator && this.selectedIndicator.subindicators) {
+      selectedArea() {
+        if (this.indicators.length > 0) {
+          this.selectedIndicator = { ...this.indicators[0] };
+        }
+
+        if (this.selectedIndicator?.subindicators?.length > 0) {
           this.selectedSubindicator = { ...this.selectedIndicator.subindicators[0] };
         }
+
+        if (this.selectedSubindicator) {
+          this.selectedYear = this.selectedSubindicator?.data[0]?.values[0]?.year;
+        }
+      },
+      locale() {
+        if (this.indicators.length > 0) {
+          this.selectedIndicator = { ...this.indicators[0] };
+        }
+
+        if (this.selectedIndicator?.subindicators?.length > 0) {
+          this.selectedSubindicator = { ...this.selectedIndicator.subindicators[0] };
+        }
+
+        if (Object.entries(this.selectedSubindicator).length !== 0
+            && this.selectedSubindicator.constructor === Object) {
+          this.selectedYear = this.selectedSubindicator?.data[0]?.values[0]?.year;
+        }
+
         if (this.firstChartPrint) {
-          this.selectedIndicator = { ...newLocale.historical[0].indicators[0] };
           this.generateIndicatorChart();
+        }
+      },
+      selectedIndicator() {
+        if (this.selectedIndicator?.subindicators?.length > 0) {
+          this.selectedSubindicator = { ...this.selectedIndicator.subindicators[0] };
+        }
+
+        if (this.selectedSubindicator) {
+          this.selectedYear = this.selectedSubindicator?.data[0]?.values[0]?.year;
         }
       },
       selectedSubindicator() {
         if (this.firstChartPrint) {
           this.generateSubindicatorChart();
         }
+
         this.firstChartPrint = 0;
       },
     },

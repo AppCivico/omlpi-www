@@ -6062,16 +6062,55 @@ if (document.querySelector('#app-history')) {
       }
     },
     watch: {
-      locale: function locale(newLocale) {
-        this.selectedIndicator = _objectSpread({}, newLocale.historical[0].indicators[0]);
+      selectedArea: function selectedArea() {
+        var _this$selectedIndicat, _this$selectedIndicat2;
 
-        if (this.selectedIndicator && this.selectedIndicator.subindicators) {
+        if (this.indicators.length > 0) {
+          this.selectedIndicator = _objectSpread({}, this.indicators[0]);
+        }
+
+        if (((_this$selectedIndicat = this.selectedIndicator) === null || _this$selectedIndicat === void 0 ? void 0 : (_this$selectedIndicat2 = _this$selectedIndicat.subindicators) === null || _this$selectedIndicat2 === void 0 ? void 0 : _this$selectedIndicat2.length) > 0) {
           this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
         }
 
+        if (this.selectedSubindicator) {
+          var _this$selectedSubindi, _this$selectedSubindi2, _this$selectedSubindi3;
+
+          this.selectedYear = (_this$selectedSubindi = this.selectedSubindicator) === null || _this$selectedSubindi === void 0 ? void 0 : (_this$selectedSubindi2 = _this$selectedSubindi.data[0]) === null || _this$selectedSubindi2 === void 0 ? void 0 : (_this$selectedSubindi3 = _this$selectedSubindi2.values[0]) === null || _this$selectedSubindi3 === void 0 ? void 0 : _this$selectedSubindi3.year;
+        }
+      },
+      locale: function locale() {
+        var _this$selectedIndicat3, _this$selectedIndicat4;
+
+        if (this.indicators.length > 0) {
+          this.selectedIndicator = _objectSpread({}, this.indicators[0]);
+        }
+
+        if (((_this$selectedIndicat3 = this.selectedIndicator) === null || _this$selectedIndicat3 === void 0 ? void 0 : (_this$selectedIndicat4 = _this$selectedIndicat3.subindicators) === null || _this$selectedIndicat4 === void 0 ? void 0 : _this$selectedIndicat4.length) > 0) {
+          this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
+        }
+
+        if (Object.entries(this.selectedSubindicator).length !== 0 && this.selectedSubindicator.constructor === Object) {
+          var _this$selectedSubindi4, _this$selectedSubindi5, _this$selectedSubindi6;
+
+          this.selectedYear = (_this$selectedSubindi4 = this.selectedSubindicator) === null || _this$selectedSubindi4 === void 0 ? void 0 : (_this$selectedSubindi5 = _this$selectedSubindi4.data[0]) === null || _this$selectedSubindi5 === void 0 ? void 0 : (_this$selectedSubindi6 = _this$selectedSubindi5.values[0]) === null || _this$selectedSubindi6 === void 0 ? void 0 : _this$selectedSubindi6.year;
+        }
+
         if (this.firstChartPrint) {
-          this.selectedIndicator = _objectSpread({}, newLocale.historical[0].indicators[0]);
           this.generateIndicatorChart();
+        }
+      },
+      selectedIndicator: function selectedIndicator() {
+        var _this$selectedIndicat5, _this$selectedIndicat6;
+
+        if (((_this$selectedIndicat5 = this.selectedIndicator) === null || _this$selectedIndicat5 === void 0 ? void 0 : (_this$selectedIndicat6 = _this$selectedIndicat5.subindicators) === null || _this$selectedIndicat6 === void 0 ? void 0 : _this$selectedIndicat6.length) > 0) {
+          this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
+        }
+
+        if (this.selectedSubindicator) {
+          var _this$selectedSubindi7, _this$selectedSubindi8, _this$selectedSubindi9;
+
+          this.selectedYear = (_this$selectedSubindi7 = this.selectedSubindicator) === null || _this$selectedSubindi7 === void 0 ? void 0 : (_this$selectedSubindi8 = _this$selectedSubindi7.data[0]) === null || _this$selectedSubindi8 === void 0 ? void 0 : (_this$selectedSubindi9 = _this$selectedSubindi8.values[0]) === null || _this$selectedSubindi9 === void 0 ? void 0 : _this$selectedSubindi9.year;
         }
       },
       selectedSubindicator: function selectedSubindicator() {

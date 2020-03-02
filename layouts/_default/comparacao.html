@@ -83,15 +83,13 @@
 
           <div
             class="history__desagregation white-box"
-            :class="(selectedIndicator &&
-              selectedIndicator.subindicators
-              && selectedIndicator.subindicators?.length === 0) ||
+            :class="locale?.indicators?.length === 0 ||
+              selectedIndicator.subindicators.length === 0 ||
               Object.keys(selectedIndicator)?.length === 0 ? 'history__desagregation--full' : ''"
             >
             <div
-              v-if="(selectedIndicator &&
-                selectedIndicator.subindicators &&
-                selectedIndicator.subindicators?.length === 0) ||
+              v-if="locale?.indicators?.length === 0 ||
+                selectedIndicator.subindicators.length === 0 ||
                 Object.keys(selectedIndicator)?.length === 0"
             >
               Não há desagregadaores para esse indicador
@@ -146,9 +144,8 @@
             </form>
           </div>
           <div
-            :hidden="(selectedIndicator &&
-              selectedIndicator.subindicators &&
-              selectedIndicator.subindicators?.length === 0) ||
+            :hidden="locale?.indicators?.length === 0 ||
+              selectedIndicator.subindicators.length === 0 ||
               Object.keys(selectedIndicator)?.length === 0"
             class="history__graphics white-box"
           >
