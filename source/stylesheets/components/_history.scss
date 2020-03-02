@@ -37,6 +37,14 @@
   color: palette('green');
 }
 
+.history__filters .awesomplete input {
+  width: 100%;
+  padding: 0.8rem 0.5rem;
+  background-color: transparent;
+  border: 2px solid palette('green', 'dark');
+  border-radius: 5px;
+}
+
 .history__radio-buttons {
   display: flex;
   flex-wrap: wrap;
