@@ -23,6 +23,7 @@ if (window.location.href.indexOf('city') > -1) {
       selectedArea: 2,
       localeId: window.location.search.split('id=')[1],
       locale: null,
+      apiUrl: config.api.domain,
     },
     computed: {
       loading() {

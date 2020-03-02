@@ -6846,7 +6846,8 @@ if (window.location.href.indexOf('city') > -1) {
     data: {
       selectedArea: 2,
       localeId: window.location.search.split('id=')[1],
-      locale: null
+      locale: null,
+      apiUrl: _config.default.api.domain
     },
     computed: {
       loading: function loading() {
