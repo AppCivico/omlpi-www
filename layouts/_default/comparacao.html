@@ -3,7 +3,7 @@
     <body>
       {{ partial "header.html" . }}
 
-      <main class="alabaster" id="app-history">
+      <main class="alabaster" id="app-compare">
         <header class="header-text">
           <div class="container">
             <h1>{{ .Title }}</h1>
@@ -40,13 +40,13 @@
               </h4>
               <input
                 id="myLocation"
-                :value="locale.historical[0].name"
+                :value="locale.name"
               >
               <h4>Selecione outro indicador</h4>
               <select
                 id="indicator"
                 name="indicator"
-                v-if="locale && locale.historical && locale.historical.length > 0 && locale.historical[0].indicators"
+                v-if="locale && locale.indicators"
                 v-model="selectedIndicator"
               >
                 <option
@@ -60,17 +60,18 @@
                   v-else
                   v-for="(indicator, index) in indicators"
                   :value="indicator"
+                  :selected="index === 0"
                 >
                   {{ "{{ indicator.description }}" }}
                 </option>
               </select>
-              <span v-if="!indicators.length">
+              <span v-if="!indicators?.length">
                 Não há indicadores para essa localidade
               </span>
               <button
                 type="submit"
                 class="button"
-                :disabled="loadingLocale || indicators.length === 0"
+                :disabled="loadingLocale || indicators?.length === 0"
               >
                 Visualizar
               </button>
@@ -82,14 +83,14 @@
 
           <div
             class="history__desagregation white-box"
-            :class="locale?.historical[0].indicators?.length === 0 ||
+            :class="locale?.indicators?.length === 0 ||
               selectedIndicator.subindicators.length === 0 ||
-              Object.keys(selectedIndicator).length === 0 ? 'history__desagregation--full' : ''"
+              Object.keys(selectedIndicator)?.length === 0 ? 'history__desagregation--full' : ''"
             >
             <div
-              v-if="locale?.historical[0].indicators?.length === 0 ||
+              v-if="locale?.indicators?.length === 0 ||
                 selectedIndicator.subindicators.length === 0 ||
-                Object.keys(selectedIndicator).length === 0"
+                Object.keys(selectedIndicator)?.length === 0"
             >
               Não há desagregadaores para esse indicador
             </div>
@@ -97,7 +98,7 @@
               @submit.prevent="generateSubindicatorChart()"
               v-else
             >
-              <h2>Veja a série histórica das desagregações</h2>
+              <h2>Compare as desagregações</h2>
               <h4>Selecione outra desagregação</h4>
               <select id="subindicators" name="subindicators" v-model="selectedSubindicator">
                 <option
@@ -123,19 +124,29 @@
                   {{ "{{ subindicator.classification }}" }}
                 </option>
               </select>
+              <h4>Selecione outro ano</h4>
+              <select
+                id=""
+                name=""
+                required
+                v-model="selectedYear"
+              >
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+              </select>
               <button
                 type="submit"
                 class="button"
-                :disabled="loadingLocale || selectedSubindicator.length > 0"
+                :disabled="loadingLocale || selectedSubindicator?.length > 0"
               >
                 Visualizar
               </button>
             </form>
           </div>
           <div
-            :hidden="locale?.historical[0].indicators?.length === 0 ||
+            :hidden="locale?.indicators?.length === 0 ||
               selectedIndicator.subindicators.length === 0 ||
-              Object.keys(selectedIndicator).length === 0"
+              Object.keys(selectedIndicator)?.length === 0"
             class="history__graphics white-box"
           >
             <div id="js-subindicators-chart"></div>
@@ -147,73 +158,5 @@
 
       {{ partial "scripts.html" . }}
 
-      <!-- <script> -->
-      <!--   Highcharts.chart('js&#45;horizontal&#45;bars', { -->
-      <!--     chart: { -->
-      <!--       type: 'bar' -->
-      <!--     }, -->
-      <!--     title: { -->
-      <!--       text: 'Historic World Population by Region' -->
-      <!--     }, -->
-      <!--     subtitle: { -->
-      <!--       text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>' -->
-      <!--     }, -->
-      <!--     xAxis: { -->
-      <!--       categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'], -->
-      <!--       title: { -->
-      <!--         text: null -->
-      <!--       } -->
-      <!--     }, -->
-      <!--     yAxis: { -->
-      <!--       min: 0, -->
-      <!--       title: { -->
-      <!--         text: 'Population (millions)', -->
-      <!--         align: 'high' -->
-      <!--       }, -->
-      <!--       labels: { -->
-      <!--         overflow: 'justify' -->
-      <!--       } -->
-      <!--     }, -->
-      <!--     tooltip: { -->
-      <!--       valueSuffix: ' millions' -->
-      <!--     }, -->
-      <!--     plotOptions: { -->
-      <!--       bar: { -->
-      <!--         dataLabels: { -->
-      <!--           enabled: true -->
-      <!--         } -->
-      <!--       } -->
-      <!--     }, -->
-      <!--     legend: { -->
-      <!--       layout: 'vertical', -->
-      <!--       align: 'right', -->
-      <!--       verticalAlign: 'top', -->
-      <!--       x: &#45;40, -->
-      <!--       y: 80, -->
-      <!--       floating: true, -->
-      <!--       borderWidth: 1, -->
-      <!--       backgroundColor: -->
-      <!--       Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF', -->
-      <!--       shadow: true -->
-      <!--     }, -->
-      <!--     credits: { -->
-      <!--       enabled: false -->
-      <!--     }, -->
-      <!--     series: [{ -->
-      <!--       name: 'Year 1800', -->
-      <!--       data: [107, 31, 635, 203, 2] -->
-      <!--     }, { -->
-      <!--       name: 'Year 1900', -->
-      <!--       data: [133, 156, 947, 408, 6] -->
-      <!--     }, { -->
-      <!--       name: 'Year 2000', -->
-      <!--       data: [814, 841, 3714, 727, 31] -->
-      <!--     }, { -->
-      <!--       name: 'Year 2016', -->
-      <!--       data: [1216, 1001, 4436, 738, 40] -->
-      <!--     }] -->
-      <!--   }); -->
-      <!--  -->
-      <!-- </script> -->
     </body>
 </html>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="74" height="84" viewBox="0 0 74 84">
+    <g fill="none" fill-rule="evenodd" transform="translate(-1)">
+        <path stroke="#979797" stroke-linecap="round" stroke-linejoin="round" d="M1 1L13 1" transform="translate(9 3)"/>
+        <path stroke="#979797" stroke-linecap="round" stroke-linejoin="round" d="M1 1L4 1" transform="matrix(-1 0 0 1 15 41)"/>
+        <rect width="56" height="78" x="2" y="5" fill="#EAEAEA" stroke="#205058" stroke-width="2" rx="5"/>
+        <rect width="56" height="78" x="5" y="1" fill="#F9F9F9" stroke="#205058" stroke-width="2" rx="5"/>
+        <circle cx="1" cy="1" r="1" fill="#47B3AF" transform="matrix(-1 0 0 1 75 18)"/>
+        <path fill="#205058" d="M20.5 1.5v10a5 5 0 01-5 5h-10l15-15z"/>
+        <path fill="#205058" d="M22.5 0v13.5a5 5 0 01-5 5H4L22.5 0z"/>
+        <path stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M36.5 5.5L48.5 5.5M52.5 5.5L56.5 5.5"/>
+        <path stroke="#979797" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.981 23.018L41.481 22.518" transform="rotate(1.397 30.981 22.518)"/>
+        <path stroke="#979797" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.243 31.216L49.492 30.326" transform="rotate(1.397 31.243 30.716)"/>
+        <path stroke="#979797" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.12 39.222L49.368 38.332" transform="rotate(1.397 31.12 38.722)"/>
+        <path stroke="#979797" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.12 47.228L49.368 46.338" transform="rotate(1.397 31.12 46.728)"/>
+        <path stroke="#979797" stroke-linecap="round" stroke-linejoin="round" d="M4.25 54.75L11.75 54.25" transform="rotate(4 7.75 54.25)"/>
+        <path stroke="#979797" stroke-linecap="round" stroke-linejoin="round" d="M14.25 54.75L17.75 54.25" transform="rotate(8.13 15.75 54.25)"/>
+        <path fill="#EAEAEA" d="M6 54h24a2 2 0 012 2v10a2 2 0 01-2 2H6V54z"/>
+        <path fill="#205058" d="M5 52L4 53.5 1.5 52.5z"/>
+        <path fill="#205058" d="M4.03 63.497L5.494 68.961 2.347 65.412z" transform="rotate(-120 3.92 66.229)"/>
+        <path fill="#FFF" stroke="#205058" d="M2 53h28a2 2 0 012 2v10a2 2 0 01-2 2H2h0V53z"/>
+        <text fill="#205058" font-family="Lato-Heavy, Lato" font-size="10" font-weight="600">
+            <tspan x="8.018" y="64">CSV</tspan>
+        </text>
+    </g>
+</svg>

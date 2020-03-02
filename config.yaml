@@ -25,9 +25,9 @@ menu:
     name: "Indicadores"
     url: "/indicadores"
     weight: 2
-  - identifier: "plano para primeira infância"
-    name: "plano para primeira infância"
-    url: "/plano-para-primeira-infancia"
+  - identifier: "planos pela primeira infância"
+    name: "planos pela primeira infância"
+    url: "/planos-pela-primeira-infancia"
     weight: 3
   - identifier: "biblioteca"
     name: "biblioteca"

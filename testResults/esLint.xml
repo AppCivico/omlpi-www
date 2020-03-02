@@ -1,48 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <testsuites>
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/articles.js">
-<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/articles.js" />
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/articles.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/articles" />
 </testsuite>
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/axis.js">
-<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/axis.js" />
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/axis.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/axis" />
+</testsuite>
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/compare.js">
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/compare.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/compare" />
 </testsuite>
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/config.js">
-<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/config.js" />
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/config.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/config" />
+</testsuite>
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/helpers.js">
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/helpers.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/helpers" />
 </testsuite>
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/history.js">
-<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/history.js" />
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/history.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/history" />
 </testsuite>
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/homeAbout.js">
-<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/homeAbout.js" />
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/homeAbout.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/homeAbout" />
 </testsuite>
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/homeBanner.js">
-<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/homeBanner.js" />
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/homeBanner.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/homeBanner" />
 </testsuite>
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/homeIndicators.js">
-<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/homeIndicators.js" />
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/homeIndicators.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/homeIndicators" />
 </testsuite>
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/index.js">
-<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/index.js" />
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/index.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/index" />
 </testsuite>
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/menu.js">
-<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/menu.js" />
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/menu.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/menu" />
 </testsuite>
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/news.js">
-<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/news.js" />
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/news.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/news" />
 </testsuite>
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/plans.js">
-<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/plans.js" />
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/plans.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/plans" />
 </testsuite>
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/populateData--vanilla.js">
-<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/populateData--vanilla.js" />
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/populateData--vanilla.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/populateData--vanilla" />
 </testsuite>
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/populateData.js">
-<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/populateData.js" />
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/populateData.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/populateData" />
 </testsuite>
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/search-plans.js">
-<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/search-plans.js" />
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/search-plans.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/search-plans" />
 </testsuite>
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/search.js">
-<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/search.js" />
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/search.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/search" />
 </testsuite>
 </testsuites>

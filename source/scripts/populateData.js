@@ -23,6 +23,7 @@ if (window.location.href.indexOf('city') > -1) {
       selectedArea: 2,
       localeId: window.location.search.split('id=')[1],
       locale: null,
+      apiUrl: config.api.domain,
     },
     computed: {
       loading() {
@@ -112,7 +113,11 @@ if (window.location.href.indexOf('city') > -1) {
 
         details.forEach((detail) => {
           detail.addEventListener('transitionend', () => {
-            Highcharts.charts.forEach(chart => chart.reflow());
+            Highcharts.charts.forEach((chart) => {
+              if (chart) {
+                chart.reflow();
+              }
+            });
           });
         });
       },

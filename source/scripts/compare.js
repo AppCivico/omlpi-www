@@ -6,15 +6,16 @@ import fuzzysort from 'fuzzysort';
 import { removeDiacritics } from './helpers';
 import config from './config';
 
-if (document.querySelector('#app-history')) {
-  window.$vueHistory = new Vue({
-    el: '#app-history',
+if (document.querySelector('#app-compare')) {
+  window.$vueCompare = new Vue({
+    el: '#app-compare',
     data: {
-      locales: null,
-      locale: { historical: [{ indicators: [] }] },
+      locales_list: null,
+      locales: { comparison: [{ indicators: [] }] },
       selectedArea: 3,
       selectedIndicator: { description: null },
       selectedSubindicator: {},
+      selectedYear: null,
       loadingLocale: false,
       additionalLocaleId: null,
       triggerAnimation: true,
@@ -42,11 +43,25 @@ if (document.querySelector('#app-history')) {
       loading() {
         return !this.locale;
       },
+      locale() {
+        return this.locales.comparison[this.locales.comparison.length - 1];
+      },
+      localesWithIndicator() {
+        return this.locales.comparison.filter(
+          item => item.indicators.some(indicator => indicator.id === this.selectedIndicator.id),
+        );
+      },
+      localesWithSubindicator() {
+        return this.locales.comparison.filter(
+          item => item.indicators.forEach(indicator => indicator.subindicators)
+            .some(indicator => indicator.id === this.selectedIndicator.id),
+        );
+      },
       localeId() {
-        return new URL(window.location.href).searchParams.get('location_id');
+        return new URL(window.location.href).searchParams.get('location_id') || 5200050;
       },
       indicators() {
-        return this.locale.historical[0].indicators.filter(
+        return this.locale.indicators.filter(
           item => item.area.id === this.selectedArea,
         );
       },
@@ -93,6 +108,9 @@ if (document.querySelector('#app-history')) {
         }
       },
       selectedSubindicator() {
+        if (this.selectedSubindicator) {
+          this.selectedYear = this.selectedSubindicator?.data[0]?.values[0]?.year;
+        }
         if (this.firstChartPrint) {
           this.generateSubindicatorChart();
         }
@@ -109,11 +127,11 @@ if (document.querySelector('#app-history')) {
     methods: {
       getLocale(localeId) {
         this.loadingLocale = true;
-        const url = `${config.api.domain}data/historical?locale_id=${localeId || 1}`;
+        const url = `${config.api.domain}data/compare?locale_id=${localeId || config.fisrtCityId}`;
         fetch(url)
           .then(response => response.json())
           .then((response) => {
-            this.locale = response;
+            this.locales = response;
             return true;
           })
           .then(() => {
@@ -126,7 +144,7 @@ if (document.querySelector('#app-history')) {
         fetch(`${config.api.domain}locales`)
           .then(response => response.json())
           .then((response) => {
-            this.locales = response.locales.map(region => ({
+            this.locales_list = response.locales.map(region => ({
               label: `${region.name}:${region.type}`,
               value: region.id,
             }));
@@ -146,7 +164,7 @@ if (document.querySelector('#app-history')) {
                   typeString = 'Estado';
                 }
                 if (type === 'country') {
-                  typeString = 'País';
+                  return false;
                 }
                 html.setAttribute('role', 'option');
                 html.setAttribute('class', `awesomplete__${type}`);
@@ -164,7 +182,7 @@ if (document.querySelector('#app-history')) {
                 [this.input.value] = [suggestion.label.split(':')[0]];
               },
             });
-            awesomplete.list = this.locales;
+            awesomplete.list = this.locales_list;
             this.watchSelection();
           })
           .then(() => {
@@ -178,48 +196,97 @@ if (document.querySelector('#app-history')) {
           this.getLocale(event.text.value);
         }, false);
       },
-      getYears(data) {
-        if (!data.values) {
+      getYears() {
+        if (this.localesWithIndicator.length === 0) {
           return false;
         }
-        return data.values.map(item => item.year);
+
+        return this.locale.indicators.filter(
+          indicator => indicator.id === this.selectedIndicator.id,
+        )[0].values.map(item => item.year);
       },
-      formatSubindicatorYears(data) {
+      formatCategories(data) {
         if (!data) {
           return false;
         }
-        return data[0].values.map(internItem => internItem.year);
+        return data.map(internItem => internItem.description);
       },
+
       formatDataToSubindicatorsChart(items) {
         if (!items || !items.values) {
           return false;
         }
 
-        const data = [];
-        items.forEach((item) => {
-          data.push({
-            name: item.description,
-            data: item.values.map(internItem => (Number(internItem.value_relative)
-              ? Number(internItem.value_relative)
-              : Number(internItem.value_absolute))),
+        const allData = [];
+        let data = [];
+        const descriptions = [];
+        this.locales.comparison.forEach((comparison) => {
+          const cityName = comparison.name;
+          comparison.indicators.forEach((indicator) => {
+            if (indicator.id === this.selectedIndicator.id) {
+              indicator.subindicators.forEach((sub) => {
+                if (sub.classification === this.selectedSubindicator.classification) {
+                  sub.data.forEach((subData) => {
+                    const description = { ...subData.description };
+                    if (subData.values) {
+                      subData.values.forEach((value) => {
+                        if (value.year === Number(this.selectedYear)) {
+                          descriptions.push(description);
+                          data.push(value.value_relative
+                            ? Number(value.value_relative)
+                            : Number(value.value_absolute));
+                        }
+                      });
+                    }
+                  });
+                }
+              });
+            }
           });
+          if (data.length !== 0) {
+            allData.push({
+              name: cityName,
+              data,
+            });
+            data = [];
+          }
         });
-        return data;
+        return allData;
       },
-      formatDataToBarsCharts(items) {
-        if (!items.values) {
+
+
+      formatDataToBarsCharts() {
+        if (!this.localesWithIndicator) {
           return false;
         }
 
         const data = [];
-        items.values.forEach((item) => {
+        const dataValues = [];
+
+        this.localesWithIndicator.forEach((item) => {
+          item.indicators.filter(indicator => indicator.id === this.selectedIndicator.id)
+            .forEach(locale => locale.values.forEach((i) => {
+              if (i.value_relative) {
+                dataValues.push(Number(i.value_relative));
+              } else {
+                dataValues.push(Number(i.value_absolute));
+              }
+            }));
+        });
+
+        this.localesWithIndicator.forEach((item) => {
           data.push({
-            name: item.year,
-            data: [Number(item.value_relative)
-              ? Number(item.value_relative)
-              : Number(item.value_absolute)],
+            name: item.name,
+            data: item.indicators.filter(indicator => indicator.id === this.selectedIndicator.id)
+              .map(locale => locale.values.map((i) => {
+                if (i.value_relative) {
+                  return Number(i.value_relative);
+                }
+                return Number(i.value_absolute);
+              }))[0],
           });
         });
+
         return data;
       },
       generateIndicatorChart() {
@@ -234,7 +301,7 @@ if (document.querySelector('#app-history')) {
             text: null,
           },
           xAxis: {
-            categories: this.getYears(this.selectedIndicator),
+            categories: this.getYears(this.selectedIndicator.id),
             crosshair: true,
           },
           yAxis: {
@@ -256,13 +323,13 @@ if (document.querySelector('#app-history')) {
               borderWidth: 0,
             },
           },
-          series: this.formatDataToBarsCharts(this.selectedIndicator),
+          series: this.formatDataToBarsCharts(this.locales),
         });
       },
       generateSubindicatorChart() {
         return Highcharts.chart('js-subindicators-chart', {
           chart: {
-            type: 'bar',
+            type: 'column',
           },
           title: {
             text: this.selectedSubindicator.classification,
@@ -271,7 +338,7 @@ if (document.querySelector('#app-history')) {
             text: null,
           },
           xAxis: {
-            categories: this.formatSubindicatorYears(this.selectedSubindicator.data),
+            categories: this.formatCategories(this.selectedSubindicator.data),
             // categories: ['2018', '2019'],
             title: {
               text: null,
