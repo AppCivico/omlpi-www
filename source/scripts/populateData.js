@@ -1,6 +1,8 @@
 
 /* global Vue */
 /* global Highcharts */
+import print from 'print-js';
+import slugify from 'slugify';
 import config from './config';
 import startSearch from './search';
 
@@ -24,6 +26,7 @@ if (window.location.href.indexOf('city') > -1) {
       localeId: window.location.search.split('id=')[1],
       locale: null,
       apiUrl: config.api.domain,
+      apiDocsUrl: config.api.docs,
     },
     computed: {
       loading() {
@@ -72,6 +75,12 @@ if (window.location.href.indexOf('city') > -1) {
       startSearch();
     },
     methods: {
+      slugify(string) {
+        return slugify(string, { lower: true });
+      },
+      print(divId) {
+        print(divId, 'html');
+      },
       async getData() {
         const response = await fetch(`${config.api.domain}data?locale_id=${this.localeId}`);
         const json = await response.json();

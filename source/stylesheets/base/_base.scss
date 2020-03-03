@@ -214,6 +214,13 @@ details {
   margin-bottom: 1rem;
 }
 
+details[open] > summary {
+  font-weight: bold;
+  font-size: ms(3);
+  color: palette('blue', 'dianne');
+}
+
+
 details summary ~ * {
   animation: sweep 0.5s ease-in-out;
 }

@@ -74,6 +74,8 @@
     "fuzzysort": "^1.1.4",
     "lodash": "^4.17.15",
     "marked": "^0.8.0",
+    "print-js": "^1.0.63",
+    "slugify": "^1.4.0",
     "sweetalert2": "^9.8.2"
   }
 }
