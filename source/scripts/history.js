@@ -80,6 +80,7 @@ if (document.querySelector('#app-history')) {
         }
 
         if (this.firstChartPrint) {
+          document.querySelector('#myLocation').value = this.locale.historical[0].name;
           this.generateIndicatorChart();
         }
       },

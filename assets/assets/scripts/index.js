@@ -5936,9 +5936,9 @@ if (document.querySelector('#app-compare')) {
         }
       },
       locale: function locale() {
-        var _this$selectedIndicat3, _this$selectedIndicat4;
+        var _this$indicators, _this$selectedIndicat3, _this$selectedIndicat4, _Object$entries;
 
-        if (this.indicators.length > 0) {
+        if (((_this$indicators = this.indicators) === null || _this$indicators === void 0 ? void 0 : _this$indicators.length) > 0) {
           this.selectedIndicator = _objectSpread({}, this.indicators[0]);
         }
 
@@ -5946,13 +5946,14 @@ if (document.querySelector('#app-compare')) {
           this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
         }
 
-        if (Object.entries(this.selectedSubindicator).length !== 0 && this.selectedSubindicator.constructor === Object) {
+        if (((_Object$entries = Object.entries(this.selectedSubindicator)) === null || _Object$entries === void 0 ? void 0 : _Object$entries.length) !== 0 && this.selectedSubindicator.constructor === Object) {
           var _this$selectedSubindi4, _this$selectedSubindi5, _this$selectedSubindi6;
 
           this.selectedYear = (_this$selectedSubindi4 = this.selectedSubindicator) === null || _this$selectedSubindi4 === void 0 ? void 0 : (_this$selectedSubindi5 = _this$selectedSubindi4.data[0]) === null || _this$selectedSubindi5 === void 0 ? void 0 : (_this$selectedSubindi6 = _this$selectedSubindi5.values[0]) === null || _this$selectedSubindi6 === void 0 ? void 0 : _this$selectedSubindi6.year;
         }
 
         if (this.firstChartPrint) {
+          document.querySelector('#myLocation').value = this.locale.name;
           this.generateIndicatorChart();
         }
       },
@@ -6072,6 +6073,7 @@ if (document.querySelector('#app-compare')) {
               return _fuzzysort.default.single((0, _helpers.removeDiacritics)(input), (0, _helpers.removeDiacritics)(text.label.split(':')[0]));
             },
             replace: function replace(suggestion) {
+              console.log(suggestion.label);
               var _ref = [suggestion.label.split(':')[0]];
               this.input.value = _ref[0];
             }
@@ -6423,6 +6425,7 @@ if (document.querySelector('#app-history')) {
         }
 
         if (this.firstChartPrint) {
+          document.querySelector('#myLocation').value = this.locale.historical[0].name;
           this.generateIndicatorChart();
         }
       },
