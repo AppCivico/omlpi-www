@@ -72,9 +72,13 @@ if (window.location.href.indexOf('city') > -1) {
     async mounted() {
       await this.getData();
       await this.generateCharts();
+      await this.changeTitle();
       startSearch();
     },
     methods: {
+      changeTitle() {
+        document.title = `Obeserva - ${this.locale.name}`;
+      },
       slugify(string) {
         return slugify(string, { lower: true });
       },

@@ -7289,9 +7289,13 @@ if (window.location.href.indexOf('city') > -1) {
                 return _this2.generateCharts();
 
               case 4:
+                _context.next = 6;
+                return _this2.changeTitle();
+
+              case 6:
                 (0, _search.default)();
 
-              case 5:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -7300,6 +7304,9 @@ if (window.location.href.indexOf('city') > -1) {
       }))();
     },
     methods: {
+      changeTitle: function changeTitle() {
+        document.title = "Obeserva - ".concat(this.locale.name);
+      },
       slugify: function slugify(string) {
         return (0, _slugify2.default)(string, {
           lower: true
