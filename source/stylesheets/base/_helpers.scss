@@ -173,21 +173,6 @@ textarea {
 }
 
 .hide {
+  // sass-lint:disable-block no-important
   display: none !important;
 }
-// * {
-//   @media print {
-//     left: -999rem !important;
-//     position: relative !important;
-//   }
-// }
-//
-// .print-me,
-// .print-me > * {
-//   @media print {
-//     display: block !important;
-//     left: 1007rem !important;
-//     position: fixed;
-//     top: 0;
-//   }
-// }
