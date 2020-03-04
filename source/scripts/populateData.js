@@ -78,8 +78,18 @@ if (window.location.href.indexOf('city') > -1) {
       slugify(string) {
         return slugify(string, { lower: true });
       },
-      print(divId) {
-        print(divId, 'html');
+      async print(divId) {
+        const clone = document.querySelector(`#${divId}`).cloneNode(true);
+        const elems = document.querySelectorAll('body *');
+        Array.prototype.slice.call(elems).forEach((value) => {
+          value.classList.add('hide');
+        });
+        document.body.appendChild(clone);
+        await window.print();
+        Array.prototype.slice.call(elems).forEach((value) => {
+          value.classList.remove('hide');
+        });
+        clone.remove();
       },
       async getData() {
         const response = await fetch(`${config.api.domain}data?locale_id=${this.localeId}`);
