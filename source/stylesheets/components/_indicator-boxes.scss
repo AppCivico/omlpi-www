@@ -87,6 +87,7 @@
 .indicator-boxes-axis {
   display: block;
   font-weight: bold;
+  background-size: contain;
 
   &::before {
     display: inline-block;

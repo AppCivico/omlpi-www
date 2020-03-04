@@ -37,6 +37,9 @@ export default function startSearch() {
         if (type === 'state') {
           typeString = 'Estado';
         }
+        if (type === 'region') {
+          typeString = 'Região';
+        }
         if (type === 'country') {
           typeString = 'País';
         }

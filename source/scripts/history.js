@@ -145,6 +145,9 @@ if (document.querySelector('#app-history')) {
                 if (type === 'state') {
                   typeString = 'Estado';
                 }
+                if (type === 'region') {
+                  typeString = 'Região';
+                }
                 if (type === 'country') {
                   typeString = 'País';
                 }

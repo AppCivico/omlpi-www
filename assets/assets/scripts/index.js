@@ -6052,6 +6052,10 @@ if (document.querySelector('#app-compare')) {
                 typeString = 'Estado';
               }
 
+              if (type === 'region') {
+                typeString = 'Região';
+              }
+
               if (type === 'country') {
                 return false;
               }
@@ -6510,6 +6514,10 @@ if (document.querySelector('#app-history')) {
 
               if (type === 'state') {
                 typeString = 'Estado';
+              }
+
+              if (type === 'region') {
+                typeString = 'Região';
               }
 
               if (type === 'country') {
@@ -7689,6 +7697,10 @@ function startSearch() {
 
                   if (type === 'state') {
                     typeString = 'Estado';
+                  }
+
+                  if (type === 'region') {
+                    typeString = 'Região';
                   }
 
                   if (type === 'country') {

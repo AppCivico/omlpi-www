@@ -163,6 +163,9 @@ if (document.querySelector('#app-compare')) {
                 if (type === 'state') {
                   typeString = 'Estado';
                 }
+                if (type === 'region') {
+                  typeString = 'Região';
+                }
                 if (type === 'country') {
                   return false;
                 }
