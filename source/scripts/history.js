@@ -80,6 +80,7 @@ if (document.querySelector('#app-history')) {
         }
 
         if (this.firstChartPrint) {
+          document.querySelector('#myLocation').value = this.locale.historical[0].name;
           this.generateIndicatorChart();
         }
       },
@@ -144,6 +145,9 @@ if (document.querySelector('#app-history')) {
                 }
                 if (type === 'state') {
                   typeString = 'Estado';
+                }
+                if (type === 'region') {
+                  typeString = 'Região';
                 }
                 if (type === 'country') {
                   typeString = 'País';

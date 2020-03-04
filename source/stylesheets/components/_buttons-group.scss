@@ -1,25 +1,15 @@
 .buttons-group {
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  margin-bottom: 2rem;
-
-
-  @media screen and (min-width: breakpoint('phablet')) {
-    justify-content: flex-start;
-  }
+  justify-content: space-between;
+  max-width: 37.7rem;
+  margin-top: 2rem;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .buttons-group .button-icon {
   margin-bottom: 1rem;
-
-  @media screen and (min-width: breakpoint('phablet')) {
-    margin-left: 2rem;
-
-    &:first-child {
-      margin-left: 0;
-    }
-  }
 }
 
 .buttons-group__normie-links {

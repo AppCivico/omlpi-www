@@ -38,10 +38,7 @@
               <h4>
                 <label for="myLocation">Selecione outra localidade</label>
               </h4>
-              <input
-                id="myLocation"
-                :value="locale.name"
-              >
+              <input id="myLocation">
               <h4>Selecione outro indicador</h4>
               <select
                 id="indicator"
@@ -84,7 +81,7 @@
           <div
             class="history__desagregation white-box"
             :class="locale?.indicators?.length === 0 ||
-              selectedIndicator.subindicators.length === 0 ||
+              selectedIndicator.subindicators?.length === 0 ||
               Object.keys(selectedIndicator)?.length === 0 ? 'history__desagregation--full' : ''"
             >
             <div

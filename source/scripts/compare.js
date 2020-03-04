@@ -81,7 +81,7 @@ if (document.querySelector('#app-compare')) {
         }
       },
       locale() {
-        if (this.indicators.length > 0) {
+        if (this.indicators?.length > 0) {
           this.selectedIndicator = { ...this.indicators[0] };
         }
 
@@ -89,12 +89,13 @@ if (document.querySelector('#app-compare')) {
           this.selectedSubindicator = { ...this.selectedIndicator.subindicators[0] };
         }
 
-        if (Object.entries(this.selectedSubindicator).length !== 0
+        if (Object.entries(this.selectedSubindicator)?.length !== 0
             && this.selectedSubindicator.constructor === Object) {
           this.selectedYear = this.selectedSubindicator?.data[0]?.values[0]?.year;
         }
 
         if (this.firstChartPrint) {
+          document.querySelector('#myLocation').value = this.locale.name;
           this.generateIndicatorChart();
         }
       },
@@ -163,6 +164,9 @@ if (document.querySelector('#app-compare')) {
                 if (type === 'state') {
                   typeString = 'Estado';
                 }
+                if (type === 'region') {
+                  typeString = 'Região';
+                }
                 if (type === 'country') {
                   return false;
                 }
@@ -179,6 +183,7 @@ if (document.querySelector('#app-compare')) {
                 return fuzzysort.single(removeDiacritics(input), removeDiacritics(text.label.split(':')[0]));
               },
               replace(suggestion) {
+                console.log(suggestion.label);
                 [this.input.value] = [suggestion.label.split(':')[0]];
               },
             });

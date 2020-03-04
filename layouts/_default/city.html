@@ -3,7 +3,7 @@
     <body>
       {{ partial "header.html" . }}
 
-      <div id="app">
+      <div id="app" class="bg-gray">
         <div class="loading" v-if="loading">
           Aguarde, carregando as informações...
         </div>
@@ -30,6 +30,34 @@
                 </div>
               </section>
             </div>
+
+            <section>
+              <div class="container">
+                <div class="buttons-group">
+                  <button
+                    @click="selectedArea = 1"
+                    class="button-icon button--icon button--health"
+                    :class="selectedArea === 1 ? 'button-icon--active' : ''"
+                    >
+                    Saúde
+                  </button>
+                    <button
+                      @click="selectedArea = 2"
+                      class="button-icon button--icon button--education"
+                      :class="selectedArea === 2 ? 'button-icon--active' : ''"
+                      >
+                      Educação
+                    </button>
+                    <button
+                      @click="selectedArea = 3"
+                      class="button-icon button--icon button--social-care"
+                      :class="selectedArea === 3 ? 'button-icon--active' : ''"
+                    >
+                      Assistência Social
+                    </button>
+                </div>
+              </div>
+            </section>
           </header>
 
           <section>
@@ -51,37 +79,47 @@
                     <p>Não há desagregadores para esse indicador</p>
                   </div>
                   <div v-else v-for="(subindicator, subIndicatorIndex) in indicator.subindicators">
-                    <div class="big-number" v-if="subindicator.data.length === 2">
+                    <div
+                      :id="slugify(`subindicator-${subindicator.classification}`)"
+                      class="big-number"
+                      v-if="subindicator.data.length === 2"
+                    >
                       <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
-                      <template v-for="(subindicatorData, index) in subindicator.data">
-                        <div class="infobox">
+                      <div class="infobox">
+                        <div class="infobox__item" v-for="(subindicatorData, index) in subindicator.data">
                           <template v-if="subindicatorData.values.value_relative">
                             <strong class="infobox__title">{{ "{{ subindicatorData.values.value_absolute }}" }}</strong>
-                            <h3>{{ "{{ subindicatorData.description }}" }}</h3>
                             <div
                               class="infobox__icons"
                               style="clip-path: url(#svgPath);"
                               :style="`background-image: linear-gradient(90deg, #47b3af ${subindicatorData.values.value_relative}%, #a3a3a3 0);`"
-                            >
+                              >
                             </div>
-                            <progress
-                              class="infobox__progress"
-                              :value="subindicatorData.values.value_relative" max="100"
-                            >
-                            </progress>
-                            <strong class="infobox__percentage">
-                              {{ "{{ subindicatorData.values.value_relative }}" }}%
-                            </strong>
+                              <progress
+                                class="infobox__progress"
+                                :value="subindicatorData.values.value_relative" max="100"
+                                                                                >
+                              </progress>
+                                <strong class="infobox__percentage">
+                                  {{ "{{ subindicatorData.values.value_relative }}" }}%
+                                </strong>
+                                <h3>{{ "{{ subindicatorData.description }}" }}</h3>
                           </template>
 
                           <template v-else>
-                            <h3>{{ "{{ subindicatorData.description }}" }}</h3>
                             <strong class="infobox__title">
                               {{ "{{ subindicatorData.values.value_absolute }}" }}
                             </strong>
+                            <h3>{{ "{{ subindicatorData.description }}" }}</h3>
                           </template>
                         </div>
-                      </template>
+                        <a
+                          @click.prevent="print(slugify(`subindicator-${subindicator.classification}`))"
+                          class="infobox__download"
+                        >
+                          Download
+                        </a>
+                      </div>
                     </div>
 
                     <div class="big-number" v-if="subindicator.data.length > 2 && subindicator.data.length <= 3">
@@ -125,9 +163,19 @@
                 target="_blank"
                 :href="`${apiUrl}data/resume/?locale_id=${localeId}`"
               >
-                  <i></i>Conjunto de dados completos
+                  <i></i>Relatório resumido
               </a>
             </section>
+          </div>
+
+          <div class="container">
+            <span class="open-data">
+              Faça o download dos <a :href="`${apiUrl}data/download`" target="_blank">
+                dados abertos para desenvolvedores
+              </a>
+              ou acesse a
+              <a :href="apiDocsUrl" target="_blank">api para desenvolvedores</a>
+            </span>
           </div>
 
           <svg height="0" width="0">
