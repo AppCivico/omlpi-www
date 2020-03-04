@@ -114,8 +114,6 @@ textarea {
     font-size: 1rem;
 
     pointer-events: none;
-
-    content: 'breakpoint: phone';
   }
 
   &::after {
@@ -172,4 +170,9 @@ textarea {
       content: 'breakpoint: extra-wide';
     }
   }
+}
+
+.hide {
+  // sass-lint:disable-block no-important
+  display: none !important;
 }

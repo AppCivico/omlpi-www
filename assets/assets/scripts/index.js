@@ -7289,9 +7289,13 @@ if (window.location.href.indexOf('city') > -1) {
                 return _this2.generateCharts();
 
               case 4:
+                _context.next = 6;
+                return _this2.changeTitle();
+
+              case 6:
                 (0, _search.default)();
 
-              case 5:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -7300,41 +7304,71 @@ if (window.location.href.indexOf('city') > -1) {
       }))();
     },
     methods: {
+      changeTitle: function changeTitle() {
+        document.title = "Obeserva - ".concat(this.locale.name);
+      },
       slugify: function slugify(string) {
         return (0, _slugify2.default)(string, {
           lower: true
         });
       },
       print: function print(divId) {
-        (0, _printJs.default)(divId, 'html');
-      },
-      getData: function getData() {
-        var _this3 = this;
-
         return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
-          var response, json;
+          var clone, elems;
           return _regenerator.default.wrap(function _callee2$(_context2) {
             while (1) {
               switch (_context2.prev = _context2.next) {
                 case 0:
-                  _context2.next = 2;
-                  return fetch("".concat(_config.default.api.domain, "data?locale_id=").concat(_this3.localeId));
+                  clone = document.querySelector("#".concat(divId)).cloneNode(true);
+                  elems = document.querySelectorAll('body *');
+                  Array.prototype.slice.call(elems).forEach(function (value) {
+                    value.classList.add('hide');
+                  });
+                  document.body.appendChild(clone);
+                  _context2.next = 6;
+                  return window.print();
 
-                case 2:
-                  response = _context2.sent;
-                  _context2.next = 5;
-                  return response.json();
+                case 6:
+                  Array.prototype.slice.call(elems).forEach(function (value) {
+                    value.classList.remove('hide');
+                  });
+                  clone.remove();
 
-                case 5:
-                  json = _context2.sent;
-                  _this3.locale = json.locale;
-
-                case 7:
+                case 8:
                 case "end":
                   return _context2.stop();
               }
             }
           }, _callee2);
+        }))();
+      },
+      getData: function getData() {
+        var _this3 = this;
+
+        return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
+          var response, json;
+          return _regenerator.default.wrap(function _callee3$(_context3) {
+            while (1) {
+              switch (_context3.prev = _context3.next) {
+                case 0:
+                  _context3.next = 2;
+                  return fetch("".concat(_config.default.api.domain, "data?locale_id=").concat(_this3.localeId));
+
+                case 2:
+                  response = _context3.sent;
+                  _context3.next = 5;
+                  return response.json();
+
+                case 5:
+                  json = _context3.sent;
+                  _this3.locale = json.locale;
+
+                case 7:
+                case "end":
+                  return _context3.stop();
+              }
+            }
+          }, _callee3);
         }))();
       },
       formatDataToPieCharts: function formatDataToPieCharts(items) {
