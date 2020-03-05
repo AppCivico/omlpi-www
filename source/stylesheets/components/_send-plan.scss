@@ -41,10 +41,6 @@
   width: 100%;
   font-size: ms(-1);
   text-transform: uppercase;
-
-  @media screen and (min-width: breakpoint('desktop')) {
-    width: 48%;
-  }
 }
 
 .send-plan__fields label[for='plan'] {
@@ -79,9 +75,8 @@
 .send-plan__fields .plan__custom-upload {
   display: inline-flex;
   align-items: center;
-  min-height: 2.438rem;
+  height: 2.438rem;
   white-space: nowrap;
-
 }
 
 .plan__custom-upload-text {
@@ -95,7 +90,7 @@
   align-items: center;
   justify-content: center;
   width: 8.75rem;
-  height: 2.875rem;
+  height: 2.175rem;
   margin-top: -8px;
   margin-right: -8px;
   margin-bottom: -8px;

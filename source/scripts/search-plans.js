@@ -2,7 +2,6 @@
 
 import Awesomplete from 'awesomplete';
 import fuzzysort from 'fuzzysort';
-// import Swal from 'sweetalert2/dist/sweetalert2';
 import config from './config';
 
 export default function startPlansSearch() {

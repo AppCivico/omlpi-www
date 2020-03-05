@@ -19,3 +19,7 @@
   translation: "Ex. Primeira Infancia"
 - id: exploreDataPlaceholder
   translation: "Ex. Estado, Município ou Região"
+
+#buttons
+- id: sending
+  translation: "enviando..."

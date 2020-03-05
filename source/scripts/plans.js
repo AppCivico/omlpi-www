@@ -1,4 +1,5 @@
 /* global Vue */
+import Swal from 'sweetalert2/dist/sweetalert2';
 import config from './config';
 
 if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
@@ -12,8 +13,13 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
       relatedLocales: null,
       capital: null,
       storageDomain: config.storage.domain,
+      formLoading: false,
       form: {
-        plan: null,
+        fileName: null,
+        file: null,
+        name: null,
+        message: null,
+        email: null,
       },
     },
     computed: {
@@ -25,6 +31,53 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
       await this.getInfoGraphic();
     },
     methods: {
+      updateFile(event) {
+        this.form.file = [event.target.files[0]];
+        this.form.fileName = this.form.file[0].name;
+      },
+      resetForm() {
+        document.querySelector('#plan').value = '';
+        this.form = {
+          fileName: null,
+          file: null,
+          name: null,
+          message: null,
+          email: null,
+        };
+      },
+      sendPlan() {
+        const data = new FormData();
+        data.append('file', this.form.file[0]);
+        data.append('name', this.form.name);
+        data.append('message', this.form.message);
+        data.append('email', this.form.email);
+        this.formLoading = true;
+
+        fetch(`${config.api.domain}upload_plan`, {
+          method: 'POST',
+          body: data,
+        })
+          .then((response) => {
+            if (response.status === 200) {
+              Swal.fire({
+                title: 'Tudo Certo!',
+                text: 'Seu plano foi enviado para avaliação',
+                icon: 'success',
+                confirmButtonText: 'Fechar',
+              })
+                .then(this.formLoading = false)
+                .then(this.resetForm());
+            } else {
+              Swal.fire({
+                title: 'Ops! Algo deu errado',
+                text: 'Tivemos um problema no envio, por favor, tente novamente',
+                icon: 'error',
+                confirmButtonText: 'Fechar',
+              })
+                .then(this.formLoading = false);
+            }
+          });
+      },
       setMapDestak(locale) {
         const map = document.querySelector('.js-brazil-map');
 
