@@ -9129,7 +9129,6 @@ if (document.querySelector('#app-compare')) {
               return _fuzzysort.default.single((0, _helpers.removeDiacritics)(input), (0, _helpers.removeDiacritics)(text.label.split(':')[0]));
             },
             replace: function replace(suggestion) {
-              console.log(suggestion.label);
               var _ref = [suggestion.label.split(':')[0]];
               this.input.value = _ref[0];
             }
