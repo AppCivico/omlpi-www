@@ -183,7 +183,6 @@ if (document.querySelector('#app-compare')) {
                 return fuzzysort.single(removeDiacritics(input), removeDiacritics(text.label.split(':')[0]));
               },
               replace(suggestion) {
-                console.log(suggestion.label);
                 [this.input.value] = [suggestion.label.split(':')[0]];
               },
             });

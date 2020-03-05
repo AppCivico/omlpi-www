@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<testsuites>
-<testsuite package="org.eslint" time="0" tests="1" errors="1" name="./source/stylesheets/base/_helpers.scss">
-<testcase time="0" name="org.eslint.no-important"><failure message="!important not allowed"><![CDATA[line 176, col 17, Error - !important not allowed (no-important)]]></failure></testcase>
-</testsuite>
-</testsuites>

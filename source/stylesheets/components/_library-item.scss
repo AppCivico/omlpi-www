@@ -35,6 +35,11 @@
   }
 }
 
+.library-item__description {
+  max-height: 12.5rem;
+  overflow: hidden;
+}
+
 .library-item h2 {
   margin-top: 0;
   font-weight: font-weight('bold');

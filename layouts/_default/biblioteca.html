@@ -64,12 +64,12 @@
                     <a>{{ "{{ tag.name }}" }}</a>
                   </template>
                 </div>
-                <p>
+                <p class="library-item__description">
                   {{ "{{ article.description }}" }}
-                  <!-- <button class="library&#45;item__show&#45;more"> -->
-                  <!--   Continuar lendo… -->
-                  <!-- </button> -->
                 </p>
+                <!-- <button class="library&#45;item__show&#45;more"> -->
+                <!--   Continuar lendo… -->
+                <!-- </button> -->
 
                 <a
                   v-if="article.file && article.file.url"

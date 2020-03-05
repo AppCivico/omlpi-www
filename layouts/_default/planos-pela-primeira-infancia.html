@@ -122,7 +122,12 @@
         </div>
 
         <div class="container">
-          <form class="send-plan" action="" id="enviar-plano">
+          <form
+            class="send-plan"
+            @submit.prevent="sendPlan"
+            id="enviar-plano"
+            method="POST"
+          >
             <div class="send-plan__text">
               <h3>Não encontrou o plano do seu município?</h3>
               <p>Seu município possuí um Plano para a Primeira Infância. </p>
@@ -134,35 +139,59 @@
             <div class="send-plan__fields">
               <label for="name">
                 Nome:
-                <input type="text" name="name">
+                <input
+                  v-model="form.name"
+                  type="text"
+                  name="name"
+                  required
+                >
               </label>
 
               <label for="email">
                 Email:
-                <input type="email" name="email">
+                <input
+                  v-model="form.email"
+                  type="email"
+                  name="email"
+                  required
+                >
               </label>
 
-              <label for="state">
-                Estado:
-                <input type="text" name="state">
-              </label>
-
-              <label for="city">
-                Cidade:
-                <input type="text" name="city">
+              <label for="location">
+                Localidade
+                <input
+                  v-model="form.message"
+                  type="text"
+                  name="location"
+                  required
+                >
               </label>
 
               <label for="plan">
-                Upload: (pdf)
-                <input type="file" id="plan" v-model="form.file" name="plan" accept="application/pdf,application/vnd.ms-excel">
+                Upload (pdf):
+                <input
+                  type="file"
+                  id="plan"
+                  @change="updateFile"
+                  name="plan"
+                  accept="application/pdf,application/vnd.ms-excel"
+                  required
+                >
                 <span class="plan__custom-upload">
                   <span class="plan__custom-upload-text">
-                    {{ "{{ form.file }}" }}
+                    {{ "{{ form.fileName }}" }}
                   </span>
                   <div class="plan__custom-upload-button">Upload</div>
                 </span>
               </label>
-              <button type="submit" class="button button--purple">{{ i18n "send" }}</button>
+              <button
+                type="submit"
+                class="button button--purple"
+                :disabled="formLoading"
+              >
+                <template v-if="formLoading">{{ i18n "sending" }}</template>
+                <template v-else>{{ i18n "send" }}</template>
+              </button>
             </div>
           </form>
         </div>

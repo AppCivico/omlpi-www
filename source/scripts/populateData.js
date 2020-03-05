@@ -1,7 +1,6 @@
 
 /* global Vue */
 /* global Highcharts */
-import print from 'print-js';
 import slugify from 'slugify';
 import config from './config';
 import startSearch from './search';
