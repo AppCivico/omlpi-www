@@ -45,6 +45,14 @@
   border-radius: 5px;
 }
 
+.history__filters--purple h4 {
+  color: palette('purple');
+}
+
+.history__filters--purple .awesomplete input {
+  border-color: palette('purple');
+}
+
 .history__radio-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -61,8 +69,16 @@
   background-color: palette('blue', 'greeny');
 }
 
+.history__radio-buttons .button--purple {
+  background-color: palette('purple');
+}
+
 .history__radio-buttons input[type='radio']:checked + label {
   background-color: palette('blue', 'dianne');
+}
+
+.history__radio-buttons input[type='radio']:checked + .button--purple {
+  background-color: palette('purple', 'dark');
 }
 
 .history select {
@@ -71,6 +87,10 @@
   background-color: transparent;
   border: 2px solid palette('green', 'dark');
   border-radius: 5px;
+}
+
+.history__filters--purple select {
+  border-color: palette('purple');
 }
 
 
@@ -100,6 +120,23 @@
   margin-bottom: 0;
   font-size: ms(4);
   color: palette('green');
+}
+
+.history__desagregation h4 {
+  margin-bottom: 0.5rem;
+}
+
+.history__desagregation--purple h2 {
+  color: palette('purple');
+}
+
+.history__desagregation--purple select {
+  border-color: palette('purple');
+}
+
+.history__filters--purple button,
+.history__desagregation--purple button {
+  background-color: palette('purple');
 }
 
 .history__graphics {

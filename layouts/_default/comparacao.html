@@ -4,7 +4,7 @@
       {{ partial "header.html" . }}
 
       <main class="alabaster" id="app-compare">
-        <header class="header-text">
+        <header class="header-text header-text--purple">
           <div class="container">
             <h1>{{ .Title }}</h1>
           </div>
@@ -13,7 +13,7 @@
           Aguarde, carregando as informações...
         </div>
         <div v-else class="container history">
-          <div class="history__filters white-box">
+          <div class="history__filters history__filters--purple white-box">
             <form action="" @submit.prevent="generateIndicatorChart">
               <h4>Selecione outro tema</h4>
               <div class="history__radio-buttons">
@@ -27,7 +27,7 @@
                   >
                   <label
                     :for="`area-${area.id}`"
-                    class="button--icon"
+                    class="button--icon button--purple"
                     :class="`button--${area.class}`"
                   >
                     {{ "{{ area.name }}" }}
@@ -79,7 +79,7 @@
           </div>
 
           <div
-            class="history__desagregation white-box"
+            class="history__desagregation history__desagregation--purple white-box"
             :class="locale?.indicators?.length === 0 ||
               selectedIndicator.subindicators?.length === 0 ||
               Object.keys(selectedIndicator)?.length === 0 ? 'history__desagregation--full' : ''"
