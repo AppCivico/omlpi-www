@@ -1,11 +1,15 @@
 .buttons-group {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   max-width: 37.7rem;
   margin-top: 2rem;
   margin-right: auto;
   margin-left: auto;
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    justify-content: space-between;
+  }
 }
 
 .buttons-group .button-icon {
