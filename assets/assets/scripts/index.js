@@ -8493,6 +8493,10 @@ if (window.location.href.indexOf('biblioteca') > -1) {
                 return _this.getArticles();
 
               case 2:
+                _context.next = 4;
+                return _this.putHasmoreButtons();
+
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -8501,8 +8505,25 @@ if (window.location.href.indexOf('biblioteca') > -1) {
       }))();
     },
     methods: {
-      getArticles: function getArticles(loadMore) {
+      putHasmoreButtons: function putHasmoreButtons() {
         var _this2 = this;
+
+        Object.keys(this.$refs).forEach(function (item) {
+          var description = _this2.$refs[item][0].querySelector('.library-item__description');
+
+          var button = _this2.$refs[item][0].querySelector('button');
+
+          if (description.scrollHeight > description.offsetHeight) {
+            button.removeAttribute('hidden');
+          }
+        });
+      },
+      showFullDescription: function showFullDescription(event) {
+        event.target.previousElementSibling.classList.add('library-item__description--full');
+        event.target.setAttribute('hidden', true);
+      },
+      getArticles: function getArticles(loadMore) {
+        var _this3 = this;
 
         var search = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
@@ -8517,19 +8538,19 @@ if (window.location.href.indexOf('biblioteca') > -1) {
           url = "".concat(_config.default.apiCMS.domain, "artigos?_q=").concat(this.searchQuery, "&_limit=").concat(this.pagination_limit, "&_offset=").concat(this.pagination_offset);
         }
 
-        fetch(url).then(function (response) {
+        return fetch(url).then(function (response) {
           return response.json();
         }).then(function (response) {
           if (loadMore) {
-            _this2.articles = [].concat((0, _toConsumableArray2.default)(_this2.articles), (0, _toConsumableArray2.default)(response.results));
+            _this3.articles = [].concat((0, _toConsumableArray2.default)(_this3.articles), (0, _toConsumableArray2.default)(response.results));
           } else {
-            _this2.articles = response.results;
+            _this3.articles = response.results;
           }
 
-          _this2.has_more = response.hasMore;
+          _this3.has_more = response.hasMore;
         }).then(function () {
-          if (_this2.has_more) {
-            _this2.pagination_offset += _this2.pagination_limit;
+          if (_this3.has_more) {
+            _this3.pagination_offset += _this3.pagination_limit;
           }
 
           if (search) {
