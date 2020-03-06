@@ -6,8 +6,8 @@
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/axis.js">
 <testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/axis.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/axis" />
 </testsuite>
-<testsuite package="org.eslint" time="0" tests="1" errors="1" name="/home/eduruiz/code/omlpi-www/source/scripts/compare.js">
-<testcase time="0" name="org.eslint.no-console" classname="/home/eduruiz/code/omlpi-www/source/scripts/compare"><failure message="Unexpected console statement."><![CDATA[line 186, col 17, Warning - Unexpected console statement. (no-console)]]></failure></testcase>
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/compare.js">
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/compare.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/compare" />
 </testsuite>
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/config.js">
 <testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/config.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/config" />
@@ -42,8 +42,8 @@
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/populateData--vanilla.js">
 <testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/populateData--vanilla.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/populateData--vanilla" />
 </testsuite>
-<testsuite package="org.eslint" time="0" tests="1" errors="1" name="/home/eduruiz/code/omlpi-www/source/scripts/populateData.js">
-<testcase time="0" name="org.eslint.no-unused-vars" classname="/home/eduruiz/code/omlpi-www/source/scripts/populateData"><failure message="&apos;print&apos; is defined but never used."><![CDATA[line 4, col 8, Error - &apos;print&apos; is defined but never used. (no-unused-vars)]]></failure></testcase>
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/populateData.js">
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/populateData.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/populateData" />
 </testsuite>
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/search-plans.js">
 <testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/search-plans.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/search-plans" />

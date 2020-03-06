@@ -37,7 +37,7 @@
             id="js-search-results"
             v-if="articles && articles.length !== 0"
           >
-            <article class="library-item" v-for="(article, index) in articles">
+            <article class="library-item" v-for="(article, articleIndex) in articles">
               <div
                 class="library-item__image"
                 v-if="article.image && article.image.url"
@@ -47,7 +47,7 @@
                   :alt="article.title"
                 >
               </div>
-              <div class="library-item__content">
+              <div class="library-item__content" :ref="`js-description-${articleIndex}`">
                 <h2>{{ "{{ article.title }}" }}</h2>
                 <span class="library-item__author">
                   Autor: {{ "{{ article.author }}" }}
@@ -59,18 +59,26 @@
                 </span>
                 <!-- <span class="library&#45;item__time"> -->
                 <!-- </span> -->
-                <div class="library-item__tags">
+                <div
+                  v-if="article.tags.length > 0"
+                  class="library-item__tags"
+                >
                   <template v-for="(tag, index) in article.tags">
                     <a>{{ "{{ tag.name }}" }}</a>
                   </template>
                 </div>
-                <p class="library-item__description">
-                  {{ "{{ article.description }}" }}
-                </p>
-                <!-- <button class="library&#45;item__show&#45;more"> -->
-                <!--   Continuar lendo… -->
-                <!-- </button> -->
-
+                <div class="library-item__description-container">
+                  <p class="library-item__description" >
+                    {{ "{{ article.description }}" }}
+                  </p>
+                  <button
+                    hidden
+                    @click="showFullDescription"
+                    class="library-item__show-more"
+                  >
+                    Continuar lendo…
+                  </button>
+                </div>
                 <a
                   v-if="article.file && article.file.url"
                   :href="`${storageDomain}${article.file.url}`"
