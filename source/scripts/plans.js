@@ -76,6 +76,15 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
               })
                 .then(this.formLoading = false);
             }
+          })
+          .catch(() => {
+            Swal.fire({
+              title: 'Ops! Algo deu errado',
+              text: 'Tivemos um problema no envio, por favor, tente novamente',
+              icon: 'error',
+              confirmButtonText: 'Fechar',
+            })
+              .then(this.formLoading = false);
           });
       },
       setMapDestak(locale) {
