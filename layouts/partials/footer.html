@@ -1,83 +1,47 @@
 <footer class="site-footer">
   <div class="container">
     <section class="site-footer__colophon">
-      <nav class="site-footer__nav">
+      <div class="site-footer__logo">
+        <a href="{{ .Site.BaseURL }}" class="logo"></a>
+      </div>
+
+      <div class="site-footer__social">
         <ul>
-          {{ with .Site.Menus.about }}
-            {{ range . }}
 
-            <!--
-              this is a workaround for seting target on hugo menu links
-              there is no official way to do it by now.
-              @see https://github.com/jpescador/hugo-future-imperfect/issues/100
-            -->
-
-            {{ $url := urls.Parse .URL }}
-            {{ $baseurl := urls.Parse $.Site.Params.Baseurl }}
-
-            <li>
-              <a href="{{ .URL }}" {{ if ne $url.Host $baseurl.Host }} target="_blank" {{ end }}>
-                {{ .Name }}
-              </a>
-            </li>
-            {{ end }}
-          {{ end }}
+          <li><a href="" class="facebook">facebook</a></li>
+          <li><a href="" class="twitter">tweeter</a></li>
         </ul>
-      </nav>
-      <nav class="site-footer__nav">
-        <ul>
-          {{ with .Site.Menus.footer }}
-            {{ range . }}
+      </div>
 
-            <!--
-              this is a workaround for seting target on hugo menu links
-              there is no official way to do it by now.
-              @see https://github.com/jpescador/hugo-future-imperfect/issues/100
-            -->
+      <div class="site-footer__logos">
+        <div class="site-footer__logo-group">
+          <h4>Realização</h4>
+          <img src="/assets/images/andi.png" alt="Andi">
+          <img src="/assets/images/rnpi.png" alt="Rede Nacional Primeira Infancia">
+        </div>
 
-            {{ $url := urls.Parse .URL }}
-            {{ $baseurl := urls.Parse $.Site.Params.Baseurl }}
+        <div class="site-footer__logo-group">
+          <h4>Em aliança com</h4>
+          <img src="/assets/images/bernard.png" alt="Bernard van Leer">
+        </div>
 
-            <li>
-              <a href="{{ .URL }}" {{ if ne $url.Host $baseurl.Host }} target="_blank" {{ end }}>
-                {{ .Name }}
-              </a>
-            </li>
-            {{ end }}
-          {{ end }}
+        <div class="site-footer__logo-group site-footer__logo-group--big">
+          <h4>Patrocínio</h4>
+          <img src="/assets/images/petrobras.png" alt="Petrobrás">
+          <img src="/assets/images/brasil.png" alt="Governo Federal" class="site-footer__white-logo">
+        </div>
+      </div>
 
-          <li class="site-footer__social">
-            {{ with $.Site.Data.social }}
-            <ul>
-              {{ range .list }}
-              <li>
-                <a href="{{ .url }}" class="{{ .name }}" target="_blank">{{ .name }}</a>
-              </li>
-              {{ end }}
-            </ul>
-            {{ end }}
-          </li>
-        </ul>
-      </nav>
-      <a href="{{ .Site.BaseURL }}" class="logo"></a>
       <address>
-        {{ with $.Site.Data.contact }}
-          {{ range . }}
-            {{ with .phone }}
-              <a href="tel:{{ . }}">{{ . }}</a>
-            {{ end }}
-            {{ with .addressStreet }}
-              <p>{{ . }}</p>
-            {{ end }}
-            {{ with .addressNeighborhood }}
-              <p>{{ . }}</p>
-            {{ end }}
-            {{ with .addressCEP }}
-              <p>{{ . }}</p>
-            {{ end }}
-            {{ with .email }}
-              <a href="mailto:{{ . }}">{{ . }}</a>
-            {{ end }}
+        {{ with $.Site.Data.footerLinks }}
+          {{ range .list }}
+            <a href="{{ .url }}" title="{{ .name }}" class="{{ .cssClass }}">{{ .value }}</a>
+          {{ end }}
+        {{ end }}
+
+        {{ with $.Site.Data.address }}
+          {{ with .address }}
+            <span>{{ . }}</span>
           {{ end }}
         {{ end }}
       </address>
