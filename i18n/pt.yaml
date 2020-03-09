@@ -19,6 +19,18 @@
   translation: "Ex. Primeira Infancia"
 - id: exploreDataPlaceholder
   translation: "Ex. Estado, Município ou Região"
+- id: cities
+  translation: "Municípios"
+- id: news
+  translation: "Notícias"
+- id: references
+  translation: "Referências"
+- id: axisTitle
+  translation: "Conheça os três eixos do Observa"
+
+# Indicadores
+- id: brazilOverview
+  translation: "Panorama Geral do Brasil"
 
 #buttons
 - id: sending
