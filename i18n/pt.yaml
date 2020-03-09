@@ -28,6 +28,10 @@
 - id: axisTitle
   translation: "Conheça os três eixos do Observa"
 
+# Indicadores
+- id: brazilOverview
+  translation: "Panorama Geral do Brasil"
+
 #buttons
 - id: sending
   translation: "enviando..."
