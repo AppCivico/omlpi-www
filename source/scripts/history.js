@@ -90,7 +90,7 @@ if (document.querySelector('#app-history')) {
         }
 
         if (this.selectedSubindicator) {
-          this.selectedYear = this.selectedSubindicator?.data[0]?.values[0]?.year;
+          this.selectedYear = this.selectedSubindicator?.data?.[0]?.values?.[0]?.year;
         }
       },
       selectedSubindicator() {
