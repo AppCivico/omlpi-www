@@ -34,6 +34,12 @@
   box-shadow: 0 2px 4px 0 palette('shadow');
 }
 
+.card-links a[disabled] {
+  pointer-events: none;
+  background-color: palette('gray', 'light');
+  filter: grayscale(1);
+}
+
 .card-links i {
   display: flex;
   align-items: center;
