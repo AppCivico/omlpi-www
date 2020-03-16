@@ -12,6 +12,15 @@
   }
 }
 
+.buttons-group--intern {
+  justify-content: flex-start;
+  margin: 2rem 0;
+}
+
+.buttons-group--intern button {
+  margin-right: 0.9rem;
+}
+
 .buttons-group .button-icon {
   margin-bottom: 1rem;
 }
@@ -35,3 +44,11 @@
   }
 }
 
+.buttons-group__submit button {
+  pointer-events: none;
+  transition: background-color 0.3s;
+}
+
+.buttons-group__submit .button-icon--active {
+  pointer-events: auto;
+}

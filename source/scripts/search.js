@@ -4,6 +4,7 @@ import config from './config';
 
 export default function startSearch() {
   const regionInput = document.querySelector('#js-region-input');
+  let cityId;
 
   function removeDiacritics(string) {
     return string.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -62,14 +63,64 @@ export default function startSearch() {
     awesomplete.list = regionNames;
   }
 
+  function validateAreas(localeId) {
+    document.querySelector('js-areas-buttons');
+    document.querySelector('.js-areas-buttons').querySelectorAll('button')
+      .forEach(item => item.classList.remove('button-icon--active'));
+
+
+    function activeButton(buttonNumber) {
+      document.querySelector(`#js-area-${buttonNumber}`).classList.add('button-icon--active');
+    }
+
+    fetch(`${config.api.domain}data?locale_id=${localeId}`)
+      .then(response => response.json())
+      .then((response) => {
+        if (response.locale.indicators.some(item => item.area.id === 1)) {
+          activeButton(1);
+        }
+
+        if (response.locale.indicators.some(item => item.area.id === 2)) {
+          activeButton(2);
+        }
+
+        if (response.locale.indicators.some(item => item.area.id === 3)) {
+          activeButton(3);
+        }
+      });
+  }
+
   function watchSelection() {
     regionInput.addEventListener('awesomplete-selectcomplete', (event) => {
-      window.location.href = `/city?id=${event.text.value}`;
+      if (event.srcElement.dataset.intern) {
+        window.location.href = `/city?id=${event.text.value}`;
+      } else {
+        validateAreas(event.text.value);
+        cityId = event.text.value;
+      }
     }, false);
+  }
+
+  function watchForm() {
+    let selectedArea;
+    const areasButtons = document.querySelector('.js-areas-buttons');
+
+    if (areasButtons) {
+      areasButtons.querySelectorAll('button')
+        .forEach(item => item.addEventListener('click', (event) => {
+          selectedArea = [event.target.id.split('-')[2]];
+        }));
+
+      document.querySelector('#js-submit-region').addEventListener('submit', (event) => {
+        event.preventDefault();
+        window.location.href = `/city?id=${cityId}&area=${selectedArea}`;
+      });
+    }
   }
 
   if (regionInput) {
     mountList();
     watchSelection();
+    watchForm();
   }
 }

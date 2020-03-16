@@ -10097,8 +10097,8 @@ if (window.location.href.indexOf('city') > -1) {
   window.$vuePopulateData = new Vue({
     el: '#app',
     data: {
-      selectedArea: 2,
       localeId: window.location.search.split('id=')[1],
+      selectedArea: Number(window.location.search.split('area=')[1]) || 1,
       locale: null,
       apiUrl: _config.default.api.domain,
       apiDocsUrl: _config.default.api.docs
@@ -10536,6 +10536,7 @@ var _config = _interopRequireDefault(require("./config"));
 
 function startSearch() {
   var regionInput = document.querySelector('#js-region-input');
+  var cityId;
 
   function removeDiacritics(string) {
     return string.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -10648,15 +10649,71 @@ function startSearch() {
     return _mountList.apply(this, arguments);
   }
 
+  function validateAreas(localeId) {
+    document.querySelector('js-areas-buttons');
+    document.querySelector('.js-areas-buttons').querySelectorAll('button').forEach(function (item) {
+      return item.classList.remove('button-icon--active');
+    });
+
+    function activeButton(buttonNumber) {
+      document.querySelector("#js-area-".concat(buttonNumber)).classList.add('button-icon--active');
+    }
+
+    fetch("".concat(_config.default.api.domain, "data?locale_id=").concat(localeId)).then(function (response) {
+      return response.json();
+    }).then(function (response) {
+      if (response.locale.indicators.some(function (item) {
+        return item.area.id === 1;
+      })) {
+        activeButton(1);
+      }
+
+      if (response.locale.indicators.some(function (item) {
+        return item.area.id === 2;
+      })) {
+        activeButton(2);
+      }
+
+      if (response.locale.indicators.some(function (item) {
+        return item.area.id === 3;
+      })) {
+        activeButton(3);
+      }
+    });
+  }
+
   function watchSelection() {
     regionInput.addEventListener('awesomplete-selectcomplete', function (event) {
-      window.location.href = "/city?id=".concat(event.text.value);
+      if (event.srcElement.dataset.intern) {
+        window.location.href = "/city?id=".concat(event.text.value);
+      } else {
+        validateAreas(event.text.value);
+        cityId = event.text.value;
+      }
     }, false);
+  }
+
+  function watchForm() {
+    var selectedArea;
+    var areasButtons = document.querySelector('.js-areas-buttons');
+
+    if (areasButtons) {
+      areasButtons.querySelectorAll('button').forEach(function (item) {
+        return item.addEventListener('click', function (event) {
+          selectedArea = [event.target.id.split('-')[2]];
+        });
+      });
+      document.querySelector('#js-submit-region').addEventListener('submit', function (event) {
+        event.preventDefault();
+        window.location.href = "/city?id=".concat(cityId, "&area=").concat(selectedArea);
+      });
+    }
   }
 
   if (regionInput) {
     mountList();
     watchSelection();
+    watchForm();
   }
 }
 
