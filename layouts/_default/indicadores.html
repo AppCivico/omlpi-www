@@ -3,8 +3,13 @@
     <body>
       {{ partial "header.html" . }}
 
-      <section class='search-area'>
+      <section class='search-area search-area--big'>
         <div class="container">
+          <header>
+            <h1>
+              Indicadores referenciados no Marco Legal da Primeira Infância, com foco nas áreas de Assistência Social, Educação e Saúde, desagregados por aspectos socioeconômicos.
+            </h1>
+          </header>
           <form action="" id="js-submit-region">
             <label for="js-region-input">
               {{ i18n "exploreData" }}
@@ -16,6 +21,7 @@
               id="js-region-input"
               placeholder="{{ i18n "exploreDataPlaceholder" }}"
             >
+            <small class="search-area__info">Para os dados nacionais, digite Brasil.</small>
             <section>
               <div class="container">
                 <div class="js-areas-buttons buttons-group buttons-group__submit">
