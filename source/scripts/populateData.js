@@ -35,7 +35,7 @@ if (window.location.href.indexOf('city') > -1) {
           indicator => indicator.area.id === this.selectedArea,
         ).length;
       },
-      pieData() {
+      barsHorizontalData() {
         const data = [];
         if (!this.loading) {
           this.locale.indicators.forEach((indicator) => {
@@ -125,10 +125,6 @@ if (window.location.href.indexOf('city') > -1) {
         return data;
       },
 
-      getBarChartTitles(items) {
-        return items.data.map(item => item.description);
-      },
-
       reflowCharts() {
         const details = document.querySelectorAll('.js-details-with-chart');
 
@@ -151,8 +147,10 @@ if (window.location.href.indexOf('city') > -1) {
             title: null,
             subtitle: null,
             xAxis: {
-              categories: this.getBarChartTitles(chart),
-              crosshair: true,
+              gridLineWidth: 0,
+              labels: {
+                enabled: false,
+              },
             },
             yAxis: {
               min: 0,
@@ -161,11 +159,7 @@ if (window.location.href.indexOf('city') > -1) {
               },
             },
             tooltip: {
-              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-              pointFormat: '<tr>'
-              + '<td style="padding:0"><b>{point.y}</b></td></tr>',
-              footerFormat: '</table>',
-              useHTML: true,
+              enabled: false,
             },
             plotOptions: {
               column: {
@@ -185,26 +179,35 @@ if (window.location.href.indexOf('city') > -1) {
           });
         });
 
-        this.pieData.forEach((chart) => {
-          Highcharts.chart(`pie-chart-${chart.indicatorId}-${chart.id}`, {
+        this.barsHorizontalData.forEach((chart) => {
+          Highcharts.chart(`bar-chart-horizontal-${chart.indicatorId}-${chart.id}`, {
             chart: {
-              plotBackgroundColor: null,
-              plotBorderWidth: null,
-              plotShadow: false,
-              type: 'pie',
+              type: 'bar',
             },
-            title: false,
+            title: null,
+            subtitle: null,
+            xAxis: {
+              title: {
+                text: null,
+              },
+              labels: {
+                enabled: '',
+              },
+            },
+            yAxis: {
+              min: 0,
+              title: {
+                text: false,
+              },
+            },
             tooltip: {
-              pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>',
+              enabled: false,
             },
             plotOptions: {
-              pie: {
-                allowPointSelect: false,
-                cursor: 'pointer',
+              bar: {
                 dataLabels: {
-                  enabled: false,
+                  enabled: true,
                 },
-                showInLegend: true,
               },
             },
             exporting: {
@@ -215,9 +218,7 @@ if (window.location.href.indexOf('city') > -1) {
                 },
               },
             },
-            series: [{
-              data: this.formatDataToPieCharts(chart),
-            }],
+            series: this.formatDataToBarsCharts(chart),
           });
         });
       },

@@ -10113,7 +10113,7 @@ if (window.location.href.indexOf('city') > -1) {
           return indicator.area.id === _this.selectedArea;
         }).length;
       },
-      pieData: function pieData() {
+      barsHorizontalData: function barsHorizontalData() {
         var data = [];
 
         if (!this.loading) {
@@ -10267,11 +10267,6 @@ if (window.location.href.indexOf('city') > -1) {
         });
         return data;
       },
-      getBarChartTitles: function getBarChartTitles(items) {
-        return items.data.map(function (item) {
-          return item.description;
-        });
-      },
       reflowCharts: function reflowCharts() {
         var details = document.querySelectorAll('.js-details-with-chart');
         details.forEach(function (detail) {
@@ -10295,8 +10290,10 @@ if (window.location.href.indexOf('city') > -1) {
             title: null,
             subtitle: null,
             xAxis: {
-              categories: _this4.getBarChartTitles(chart),
-              crosshair: true
+              gridLineWidth: 0,
+              labels: {
+                enabled: false
+              }
             },
             yAxis: {
               min: 0,
@@ -10305,10 +10302,7 @@ if (window.location.href.indexOf('city') > -1) {
               }
             },
             tooltip: {
-              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-              pointFormat: '<tr>' + '<td style="padding:0"><b>{point.y}</b></td></tr>',
-              footerFormat: '</table>',
-              useHTML: true
+              enabled: false
             },
             plotOptions: {
               column: {
@@ -10327,26 +10321,35 @@ if (window.location.href.indexOf('city') > -1) {
             series: _this4.formatDataToBarsCharts(chart)
           });
         });
-        this.pieData.forEach(function (chart) {
-          Highcharts.chart("pie-chart-".concat(chart.indicatorId, "-").concat(chart.id), {
+        this.barsHorizontalData.forEach(function (chart) {
+          Highcharts.chart("bar-chart-horizontal-".concat(chart.indicatorId, "-").concat(chart.id), {
             chart: {
-              plotBackgroundColor: null,
-              plotBorderWidth: null,
-              plotShadow: false,
-              type: 'pie'
+              type: 'bar'
             },
-            title: false,
+            title: null,
+            subtitle: null,
+            xAxis: {
+              title: {
+                text: null
+              },
+              labels: {
+                enabled: ''
+              }
+            },
+            yAxis: {
+              min: 0,
+              title: {
+                text: false
+              }
+            },
             tooltip: {
-              pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+              enabled: false
             },
             plotOptions: {
-              pie: {
-                allowPointSelect: false,
-                cursor: 'pointer',
+              bar: {
                 dataLabels: {
-                  enabled: false
-                },
-                showInLegend: true
+                  enabled: true
+                }
               }
             },
             exporting: {
@@ -10357,9 +10360,7 @@ if (window.location.href.indexOf('city') > -1) {
                 }
               }
             },
-            series: [{
-              data: _this4.formatDataToPieCharts(chart)
-            }]
+            series: _this4.formatDataToBarsCharts(chart)
           });
         });
       }
