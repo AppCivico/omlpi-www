@@ -62,13 +62,13 @@
                   {{ "{{ indicator.description }}" }}
                 </option>
               </select>
-              <span v-if="!indicators?.length">
+              <span v-if="!indicators.length">
                 Não há indicadores para essa localidade
               </span>
               <button
                 type="submit"
                 class="button"
-                :disabled="loadingLocale || indicators?.length === 0"
+                :disabled="loadingLocale || indicators.length === 0"
               >
                 Visualizar
               </button>
@@ -80,14 +80,14 @@
 
           <div
             class="history__desagregation history__desagregation--purple white-box"
-            :class="locale?.indicators?.length === 0 ||
-              selectedIndicator.subindicators?.length === 0 ||
-              Object.keys(selectedIndicator)?.length === 0 ? 'history__desagregation--full' : ''"
+            :class="locale.indicators.length === 0 ||
+              selectedIndicator.subindicators.length === 0 ||
+              Object.keys(selectedIndicator).length === 0 ? 'history__desagregation--full' : ''"
             >
             <div
-              v-if="locale?.indicators?.length === 0 ||
+              v-if="locale.indicators.length === 0 ||
                 selectedIndicator.subindicators.length === 0 ||
-                Object.keys(selectedIndicator)?.length === 0"
+                Object.keys(selectedIndicator).length === 0"
             >
               Não há desagregadaores para esse indicador
             </div>
@@ -134,16 +134,16 @@
               <button
                 type="submit"
                 class="button"
-                :disabled="loadingLocale || selectedSubindicator?.length > 0"
+                :disabled="loadingLocale || selectedSubindicator.length > 0"
               >
                 Visualizar
               </button>
             </form>
           </div>
           <div
-            :hidden="locale?.indicators?.length === 0 ||
+            :hidden="locale.indicators.length === 0 ||
               selectedIndicator.subindicators.length === 0 ||
-              Object.keys(selectedIndicator)?.length === 0"
+              Object.keys(selectedIndicator).length === 0"
             class="history__graphics white-box"
           >
             <div id="js-subindicators-chart"></div>

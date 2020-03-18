@@ -90,34 +90,35 @@
                       <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
                       <div class="infobox">
                         <div class="infobox__item" v-for="(subindicatorData, index) in subindicator.data">
-                          <template v-if="subindicatorData.values.value_relative">
-                            <strong class="infobox__title">{{ "{{ subindicatorData.values.value_absolute }}" }}</strong>
+                          <template v-if="">
+                            <strong
+                              v-if="subindicatorData.values.value_absolute"
+                              class="infobox__title">{{ "{{ subindicatorData.values.value_absolute }}" }}
+                            </strong>
+                            <h3>{{ "{{ subindicatorData.description }}" }}</h3>
                             <div
                               class="infobox__icons"
                               style="clip-path: url(#svgPath);"
                               :style="`background-image: linear-gradient(90deg, #47b3af ${subindicatorData.values.value_relative}%, #a3a3a3 0);`"
-                              >
+                            >
                             </div>
-                              <progress
-                                class="infobox__progress"
-                                :value="subindicatorData.values.value_relative" max="100"
-                                                                                >
-                              </progress>
-                                <strong class="infobox__percentage">
-                                  {{ "{{ subindicatorData.values.value_relative }}" }}%
-                                </strong>
-                                <h3>{{ "{{ subindicatorData.description }}" }}</h3>
-                          </template>
-
-                          <template v-else>
-                            <strong class="infobox__title">
-                              {{ "{{ subindicatorData.values.value_absolute }}" }}
+                            <strong
+                              v-if="subindicatorData.values.value_relative"
+                              class="infobox__percentage"
+                            >
+                              {{ "{{ subindicatorData.values.value_relative }}" }}%
                             </strong>
-                            <h3>{{ "{{ subindicatorData.description }}" }}</h3>
+                            <time
+                              class="infobox__year"
+                              :datetime="subindicatorData.values.year"
+                            >
+                              {{ "{{ subindicatorData.values.year }}" }}
+                            </time>
                           </template>
                         </div>
                         <a
                           @click.prevent="print(slugify(`subindicator-${subindicator.classification}`))"
+                          title="Download"
                           class="infobox__download"
                         >
                           Download
