@@ -215,9 +215,14 @@ details {
 }
 
 details[open] > summary {
+  margin-bottom: 2rem;
   font-weight: bold;
   font-size: ms(3);
   color: palette('blue', 'dianne');
+}
+
+details[open] > summary strong {
+  display: none;
 }
 
 
