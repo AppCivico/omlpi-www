@@ -1,16 +1,32 @@
 .big-banner {
+  display: flex;
   width: 100%;
-  margin: 1rem 0;
-  text-align: center;
+  margin: 2rem 0;
 
   @media screen and (min-width: breakpoint('phablet')) {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin: 4rem 0;
   }
 }
 
-.big-banner a {
-  display: inline-block;
+.big-banner__text {
+  width: 100%;
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    width: 50%;
+  }
+}
+
+.big-banner__text p {
+  font-size: ms(3);
+  color: palette('purple');
+}
+
+.big-banner__image {
+  width: 100%;
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    width: 50%;
+  }
 }
 
 .big-banner img {

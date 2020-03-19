@@ -101,15 +101,24 @@
           </div>
         </section>
 
-        <div class="big-banner">
-          <div class="container">
-            <a
-              v-if="infographic && infographic.url"
-              :href="infographic.url"
-              target="_blank"
-            >
+        <div class="container">
+          <div class="big-banner">
+            <div class="big-banner__text">
+              <p v-if="infographic">
+                {{ "{{ infographic.description }}" }}
+              </p>
+              <a
+                class="button"
+                v-if="infographic && infographic.url"
+                :href="infographic.url"
+                target="_blank"
+              >
+              Clique aqui
+              </a>
+            </div>
+            <div class="big-banner__image">
               <img
-                v-if="infographic.big || infographic.small"
+                v-if="infographic && (infographic.big || infographic.small)"
                 v-bind:srcset="`
                   ${infographic.small} 350w,
                   ${infographic.big} 1059w
@@ -117,7 +126,7 @@
                 :src="infographic.big"
                 alt="O brasil na rota"
               >
-            </a>
+            </div>
           </div>
         </div>
 
