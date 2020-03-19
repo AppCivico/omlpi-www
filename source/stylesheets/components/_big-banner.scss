@@ -1,5 +1,6 @@
 .big-banner {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   margin: 2rem 0;
 
@@ -10,13 +11,16 @@
 
 .big-banner__text {
   width: 100%;
+  margin-bottom: 2rem;
 
-  @media screen and (min-width: breakpoint('desktop')) {
+  @media screen and (min-width: breakpoint('tablet')) {
     width: 50%;
+    padding-right: 1rem;
   }
 }
 
 .big-banner__text p {
+  margin-bottom: 1rem;
   font-size: ms(3);
   color: palette('purple');
 }
@@ -24,7 +28,7 @@
 .big-banner__image {
   width: 100%;
 
-  @media screen and (min-width: breakpoint('desktop')) {
+  @media screen and (min-width: breakpoint('tablet')) {
     width: 50%;
   }
 }
