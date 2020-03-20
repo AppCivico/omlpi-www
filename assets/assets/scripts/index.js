@@ -9261,6 +9261,8 @@ if (document.querySelector('#app-history')) {
 
           this.selectedYear = (_this$selectedSubindi7 = this.selectedSubindicator) === null || _this$selectedSubindi7 === void 0 ? void 0 : (_this$selectedSubindi8 = _this$selectedSubindi7.data) === null || _this$selectedSubindi8 === void 0 ? void 0 : (_this$selectedSubindi9 = _this$selectedSubindi8[0]) === null || _this$selectedSubindi9 === void 0 ? void 0 : (_this$selectedSubindi10 = _this$selectedSubindi9.values) === null || _this$selectedSubindi10 === void 0 ? void 0 : (_this$selectedSubindi11 = _this$selectedSubindi10[0]) === null || _this$selectedSubindi11 === void 0 ? void 0 : _this$selectedSubindi11.year;
         }
+
+        this.generateSubindicatorChart();
       },
       selectedSubindicator: function selectedSubindicator() {
         if (this.firstChartPrint) {
@@ -9384,7 +9386,7 @@ if (document.querySelector('#app-history')) {
           return false;
         }
 
-        return data.values.map(function (item) {
+        return data.values.reverse().map(function (item) {
           return item.year;
         });
       },
@@ -9440,7 +9442,10 @@ if (document.querySelector('#app-history')) {
           },
           xAxis: {
             categories: this.getYears(this.selectedIndicator),
-            crosshair: true
+            gridLineWidth: 0,
+            labels: {
+              enabled: false
+            }
           },
           yAxis: {
             min: 0,
@@ -9449,10 +9454,7 @@ if (document.querySelector('#app-history')) {
             }
           },
           tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr>' + '<td style="padding:0"><b>{point.y}</b></td></tr>',
-            footerFormat: '</table>',
-            useHTML: true
+            headerFormat: ''
           },
           plotOptions: {
             column: {
