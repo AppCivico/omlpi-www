@@ -64,13 +64,6 @@
               <span v-if="!indicators.length">
                 Não há indicadores para essa localidade
               </span>
-              <button
-                type="submit"
-                class="button"
-                :disabled="loadingLocale || indicators.length === 0"
-              >
-                Visualizar
-              </button>
             </form>
           </div>
           <div class="history__graphics white-box">
@@ -120,13 +113,6 @@
                   {{ "{{ subindicator.classification }}" }}
                 </option>
               </select>
-              <button
-                type="submit"
-                class="button"
-                :disabled="loadingLocale || selectedSubindicator.length > 0"
-              >
-                Visualizar
-              </button>
             </form>
           </div>
           <div

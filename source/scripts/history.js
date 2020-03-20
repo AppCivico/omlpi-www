@@ -64,6 +64,8 @@ if (document.querySelector('#app-history')) {
         if (this.selectedSubindicator) {
           this.selectedYear = this.selectedSubindicator?.data[0]?.values[0]?.year;
         }
+
+        this.generateIndicatorChart();
       },
       locale() {
         if (this.indicators.length > 0) {
@@ -79,10 +81,8 @@ if (document.querySelector('#app-history')) {
           this.selectedYear = this.selectedSubindicator?.data[0]?.values[0]?.year;
         }
 
-        if (this.firstChartPrint) {
-          document.querySelector('#myLocation').value = this.locale.historical[0].name;
-          this.generateIndicatorChart();
-        }
+        document.querySelector('#myLocation').value = this.locale.historical[0].name;
+        this.generateIndicatorChart();
       },
       selectedIndicator() {
         if (this.selectedIndicator?.subindicators?.length > 0) {
@@ -95,11 +95,7 @@ if (document.querySelector('#app-history')) {
         this.generateSubindicatorChart();
       },
       selectedSubindicator() {
-        if (this.firstChartPrint) {
-          this.generateSubindicatorChart();
-        }
-
-        this.firstChartPrint = 0;
+        this.generateSubindicatorChart();
       },
     },
     async mounted() {
@@ -228,7 +224,7 @@ if (document.querySelector('#app-history')) {
         return data;
       },
       generateIndicatorChart() {
-        return Highcharts.chart('js-history', {
+        const indicatorChart = Highcharts.chart('js-history', {
           chart: {
             type: 'column',
           },
@@ -262,9 +258,13 @@ if (document.querySelector('#app-history')) {
           },
           series: this.formatDataToBarsCharts(this.selectedIndicator),
         });
+
+        if (this.indicators.length === 0) {
+          indicatorChart.destroy();
+        }
       },
       generateSubindicatorChart() {
-        return Highcharts.chart('js-subindicators-chart', {
+        const subIndicatorChart = Highcharts.chart('js-subindicators-chart', {
           chart: {
             type: 'bar',
           },
@@ -306,6 +306,9 @@ if (document.querySelector('#app-history')) {
           },
           series: this.formatDataToSubindicatorsChart(this.selectedSubindicator.data),
         });
+        if (this.indicators.length === 0) {
+          subIndicatorChart.destroy();
+        }
       },
     },
   });

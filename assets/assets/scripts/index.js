@@ -9237,6 +9237,8 @@ if (document.querySelector('#app-history')) {
 
           this.selectedYear = (_this$selectedSubindi = this.selectedSubindicator) === null || _this$selectedSubindi === void 0 ? void 0 : (_this$selectedSubindi2 = _this$selectedSubindi.data[0]) === null || _this$selectedSubindi2 === void 0 ? void 0 : (_this$selectedSubindi3 = _this$selectedSubindi2.values[0]) === null || _this$selectedSubindi3 === void 0 ? void 0 : _this$selectedSubindi3.year;
         }
+
+        this.generateIndicatorChart();
       },
       locale: function locale() {
         var _this$selectedIndicat3, _this$selectedIndicat4;
@@ -9255,10 +9257,8 @@ if (document.querySelector('#app-history')) {
           this.selectedYear = (_this$selectedSubindi4 = this.selectedSubindicator) === null || _this$selectedSubindi4 === void 0 ? void 0 : (_this$selectedSubindi5 = _this$selectedSubindi4.data[0]) === null || _this$selectedSubindi5 === void 0 ? void 0 : (_this$selectedSubindi6 = _this$selectedSubindi5.values[0]) === null || _this$selectedSubindi6 === void 0 ? void 0 : _this$selectedSubindi6.year;
         }
 
-        if (this.firstChartPrint) {
-          document.querySelector('#myLocation').value = this.locale.historical[0].name;
-          this.generateIndicatorChart();
-        }
+        document.querySelector('#myLocation').value = this.locale.historical[0].name;
+        this.generateIndicatorChart();
       },
       selectedIndicator: function selectedIndicator() {
         var _this$selectedIndicat5, _this$selectedIndicat6;
@@ -9276,11 +9276,7 @@ if (document.querySelector('#app-history')) {
         this.generateSubindicatorChart();
       },
       selectedSubindicator: function selectedSubindicator() {
-        if (this.firstChartPrint) {
-          this.generateSubindicatorChart();
-        }
-
-        this.firstChartPrint = 0;
+        this.generateSubindicatorChart();
       }
     },
     mounted: function mounted() {
@@ -9441,7 +9437,7 @@ if (document.querySelector('#app-history')) {
         return data;
       },
       generateIndicatorChart: function generateIndicatorChart() {
-        return Highcharts.chart('js-history', {
+        var indicatorChart = Highcharts.chart('js-history', {
           chart: {
             type: 'column'
           },
@@ -9475,9 +9471,13 @@ if (document.querySelector('#app-history')) {
           },
           series: this.formatDataToBarsCharts(this.selectedIndicator)
         });
+
+        if (this.indicators.length === 0) {
+          indicatorChart.destroy();
+        }
       },
       generateSubindicatorChart: function generateSubindicatorChart() {
-        return Highcharts.chart('js-subindicators-chart', {
+        var subIndicatorChart = Highcharts.chart('js-subindicators-chart', {
           chart: {
             type: 'bar'
           },
@@ -9519,6 +9519,10 @@ if (document.querySelector('#app-history')) {
           },
           series: this.formatDataToSubindicatorsChart(this.selectedSubindicator.data)
         });
+
+        if (this.indicators.length === 0) {
+          subIndicatorChart.destroy();
+        }
       }
     }
   });
