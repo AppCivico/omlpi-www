@@ -8736,6 +8736,15 @@ if (document.querySelector('#app-compare')) {
         return this.locale.indicators.filter(function (item) {
           return item.area.id === _this3.selectedArea;
         });
+      },
+      years: function years() {
+        var years = [];
+        this.selectedSubindicator.data.forEach(function (item) {
+          item.values.map(function (iitem) {
+            return years.push(iitem.year);
+          });
+        });
+        return new Set(years);
       }
     },
     watch: {
@@ -8755,6 +8764,8 @@ if (document.querySelector('#app-compare')) {
 
           this.selectedYear = (_this$selectedSubindi = this.selectedSubindicator) === null || _this$selectedSubindi === void 0 ? void 0 : (_this$selectedSubindi2 = _this$selectedSubindi.data[0]) === null || _this$selectedSubindi2 === void 0 ? void 0 : (_this$selectedSubindi3 = _this$selectedSubindi2.values[0]) === null || _this$selectedSubindi3 === void 0 ? void 0 : _this$selectedSubindi3.year;
         }
+
+        this.generateIndicatorChart();
       },
       locale: function locale() {
         var _this$indicators, _this$selectedIndicat3, _this$selectedIndicat4, _Object$entries;
@@ -8773,10 +8784,8 @@ if (document.querySelector('#app-compare')) {
           this.selectedYear = (_this$selectedSubindi4 = this.selectedSubindicator) === null || _this$selectedSubindi4 === void 0 ? void 0 : (_this$selectedSubindi5 = _this$selectedSubindi4.data[0]) === null || _this$selectedSubindi5 === void 0 ? void 0 : (_this$selectedSubindi6 = _this$selectedSubindi5.values[0]) === null || _this$selectedSubindi6 === void 0 ? void 0 : _this$selectedSubindi6.year;
         }
 
-        if (this.firstChartPrint) {
-          document.querySelector('#myLocation').value = this.locale.name;
-          this.generateIndicatorChart();
-        }
+        document.querySelector('#myLocation').value = this.locale.name;
+        this.generateIndicatorChart();
       },
       selectedIndicator: function selectedIndicator() {
         var _this$selectedIndicat5, _this$selectedIndicat6;
@@ -8786,23 +8795,25 @@ if (document.querySelector('#app-compare')) {
         }
 
         if (this.selectedSubindicator) {
-          var _this$selectedSubindi7, _this$selectedSubindi8, _this$selectedSubindi9;
+          var _this$selectedSubindi7, _this$selectedSubindi8, _this$selectedSubindi9, _this$selectedSubindi10, _this$selectedSubindi11;
 
-          this.selectedYear = (_this$selectedSubindi7 = this.selectedSubindicator) === null || _this$selectedSubindi7 === void 0 ? void 0 : (_this$selectedSubindi8 = _this$selectedSubindi7.data[0]) === null || _this$selectedSubindi8 === void 0 ? void 0 : (_this$selectedSubindi9 = _this$selectedSubindi8.values[0]) === null || _this$selectedSubindi9 === void 0 ? void 0 : _this$selectedSubindi9.year;
+          this.selectedYear = (_this$selectedSubindi7 = this.selectedSubindicator) === null || _this$selectedSubindi7 === void 0 ? void 0 : (_this$selectedSubindi8 = _this$selectedSubindi7.data) === null || _this$selectedSubindi8 === void 0 ? void 0 : (_this$selectedSubindi9 = _this$selectedSubindi8[0]) === null || _this$selectedSubindi9 === void 0 ? void 0 : (_this$selectedSubindi10 = _this$selectedSubindi9.values) === null || _this$selectedSubindi10 === void 0 ? void 0 : (_this$selectedSubindi11 = _this$selectedSubindi10[0]) === null || _this$selectedSubindi11 === void 0 ? void 0 : _this$selectedSubindi11.year;
         }
+
+        this.generateIndicatorChart();
+        this.generateSubindicatorChart();
       },
       selectedSubindicator: function selectedSubindicator() {
         if (this.selectedSubindicator) {
-          var _this$selectedSubindi10, _this$selectedSubindi11, _this$selectedSubindi12;
+          var _this$selectedSubindi12, _this$selectedSubindi13, _this$selectedSubindi14;
 
-          this.selectedYear = (_this$selectedSubindi10 = this.selectedSubindicator) === null || _this$selectedSubindi10 === void 0 ? void 0 : (_this$selectedSubindi11 = _this$selectedSubindi10.data[0]) === null || _this$selectedSubindi11 === void 0 ? void 0 : (_this$selectedSubindi12 = _this$selectedSubindi11.values[0]) === null || _this$selectedSubindi12 === void 0 ? void 0 : _this$selectedSubindi12.year;
+          this.selectedYear = (_this$selectedSubindi12 = this.selectedSubindicator) === null || _this$selectedSubindi12 === void 0 ? void 0 : (_this$selectedSubindi13 = _this$selectedSubindi12.data[0]) === null || _this$selectedSubindi13 === void 0 ? void 0 : (_this$selectedSubindi14 = _this$selectedSubindi13.values[0]) === null || _this$selectedSubindi14 === void 0 ? void 0 : _this$selectedSubindi14.year;
         }
 
-        if (this.firstChartPrint) {
-          this.generateSubindicatorChart();
-        }
-
-        this.firstChartPrint = 0;
+        this.generateSubindicatorChart();
+      },
+      selectedYear: function selectedYear() {
+        this.generateSubindicatorChart();
       }
     },
     mounted: function mounted() {

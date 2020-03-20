@@ -65,6 +65,13 @@ if (document.querySelector('#app-compare')) {
           item => item.area.id === this.selectedArea,
         );
       },
+      years() {
+        const years = [];
+        this.selectedSubindicator.data.forEach((item) => {
+          item.values.map(iitem => years.push(iitem.year));
+        });
+        return new Set(years);
+      },
     },
     watch: {
       selectedArea() {
@@ -79,6 +86,8 @@ if (document.querySelector('#app-compare')) {
         if (this.selectedSubindicator) {
           this.selectedYear = this.selectedSubindicator?.data[0]?.values[0]?.year;
         }
+
+        this.generateIndicatorChart();
       },
       locale() {
         if (this.indicators?.length > 0) {
@@ -94,10 +103,8 @@ if (document.querySelector('#app-compare')) {
           this.selectedYear = this.selectedSubindicator?.data[0]?.values[0]?.year;
         }
 
-        if (this.firstChartPrint) {
-          document.querySelector('#myLocation').value = this.locale.name;
-          this.generateIndicatorChart();
-        }
+        document.querySelector('#myLocation').value = this.locale.name;
+        this.generateIndicatorChart();
       },
       selectedIndicator() {
         if (this.selectedIndicator?.subindicators?.length > 0) {
@@ -105,18 +112,21 @@ if (document.querySelector('#app-compare')) {
         }
 
         if (this.selectedSubindicator) {
-          this.selectedYear = this.selectedSubindicator?.data[0]?.values[0]?.year;
+          this.selectedYear = this.selectedSubindicator?.data?.[0]?.values?.[0]?.year;
         }
+
+        this.generateIndicatorChart();
+        this.generateSubindicatorChart();
       },
       selectedSubindicator() {
         if (this.selectedSubindicator) {
           this.selectedYear = this.selectedSubindicator?.data[0]?.values[0]?.year;
         }
-        if (this.firstChartPrint) {
-          this.generateSubindicatorChart();
-        }
 
-        this.firstChartPrint = 0;
+        this.generateSubindicatorChart();
+      },
+      selectedYear() {
+        this.generateSubindicatorChart();
       },
     },
     async mounted() {

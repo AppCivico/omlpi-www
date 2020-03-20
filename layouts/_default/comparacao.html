@@ -65,13 +65,6 @@
               <span v-if="!indicators.length">
                 Não há indicadores para essa localidade
               </span>
-              <button
-                type="submit"
-                class="button"
-                :disabled="loadingLocale || indicators.length === 0"
-              >
-                Visualizar
-              </button>
             </form>
           </div>
           <div class="history__graphics white-box">
@@ -128,16 +121,10 @@
                 required
                 v-model="selectedYear"
               >
-                <option value="2018">2018</option>
-                <option value="2019">2019</option>
+              <template v-for="year in years">
+                <option :value="year">{{ "{{ year }}" }}</option>
+              </template>
               </select>
-              <button
-                type="submit"
-                class="button"
-                :disabled="loadingLocale || selectedSubindicator.length > 0"
-              >
-                Visualizar
-              </button>
             </form>
           </div>
           <div
