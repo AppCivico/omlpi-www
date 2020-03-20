@@ -8752,7 +8752,9 @@ if (document.querySelector('#app-compare')) {
         var _this$selectedIndicat, _this$selectedIndicat2;
 
         if (this.indicators.length > 0) {
-          this.selectedIndicator = _objectSpread({}, this.indicators[0]);
+          var _this$indicators;
+
+          this.selectedIndicator = _objectSpread({}, (_this$indicators = this.indicators) === null || _this$indicators === void 0 ? void 0 : _this$indicators[0]);
         }
 
         if (((_this$selectedIndicat = this.selectedIndicator) === null || _this$selectedIndicat === void 0 ? void 0 : (_this$selectedIndicat2 = _this$selectedIndicat.subindicators) === null || _this$selectedIndicat2 === void 0 ? void 0 : _this$selectedIndicat2.length) > 0) {
@@ -8768,9 +8770,9 @@ if (document.querySelector('#app-compare')) {
         this.generateIndicatorChart();
       },
       locale: function locale() {
-        var _this$indicators, _this$selectedIndicat3, _this$selectedIndicat4, _Object$entries;
+        var _this$indicators2, _this$selectedIndicat3, _this$selectedIndicat4, _Object$entries;
 
-        if (((_this$indicators = this.indicators) === null || _this$indicators === void 0 ? void 0 : _this$indicators.length) > 0) {
+        if (((_this$indicators2 = this.indicators) === null || _this$indicators2 === void 0 ? void 0 : _this$indicators2.length) > 0) {
           this.selectedIndicator = _objectSpread({}, this.indicators[0]);
         }
 
@@ -8779,9 +8781,9 @@ if (document.querySelector('#app-compare')) {
         }
 
         if (((_Object$entries = Object.entries(this.selectedSubindicator)) === null || _Object$entries === void 0 ? void 0 : _Object$entries.length) !== 0 && this.selectedSubindicator.constructor === Object) {
-          var _this$selectedSubindi4, _this$selectedSubindi5, _this$selectedSubindi6;
+          var _this$selectedSubindi4, _this$selectedSubindi5, _this$selectedSubindi6, _this$selectedSubindi7;
 
-          this.selectedYear = (_this$selectedSubindi4 = this.selectedSubindicator) === null || _this$selectedSubindi4 === void 0 ? void 0 : (_this$selectedSubindi5 = _this$selectedSubindi4.data[0]) === null || _this$selectedSubindi5 === void 0 ? void 0 : (_this$selectedSubindi6 = _this$selectedSubindi5.values[0]) === null || _this$selectedSubindi6 === void 0 ? void 0 : _this$selectedSubindi6.year;
+          this.selectedYear = (_this$selectedSubindi4 = this.selectedSubindicator) === null || _this$selectedSubindi4 === void 0 ? void 0 : (_this$selectedSubindi5 = _this$selectedSubindi4.data[0]) === null || _this$selectedSubindi5 === void 0 ? void 0 : (_this$selectedSubindi6 = _this$selectedSubindi5.values) === null || _this$selectedSubindi6 === void 0 ? void 0 : (_this$selectedSubindi7 = _this$selectedSubindi6[0]) === null || _this$selectedSubindi7 === void 0 ? void 0 : _this$selectedSubindi7.year;
         }
 
         document.querySelector('#myLocation').value = this.locale.name;
@@ -8795,9 +8797,9 @@ if (document.querySelector('#app-compare')) {
         }
 
         if (this.selectedSubindicator) {
-          var _this$selectedSubindi7, _this$selectedSubindi8, _this$selectedSubindi9, _this$selectedSubindi10, _this$selectedSubindi11;
+          var _this$selectedSubindi8, _this$selectedSubindi9, _this$selectedSubindi10, _this$selectedSubindi11, _this$selectedSubindi12;
 
-          this.selectedYear = (_this$selectedSubindi7 = this.selectedSubindicator) === null || _this$selectedSubindi7 === void 0 ? void 0 : (_this$selectedSubindi8 = _this$selectedSubindi7.data) === null || _this$selectedSubindi8 === void 0 ? void 0 : (_this$selectedSubindi9 = _this$selectedSubindi8[0]) === null || _this$selectedSubindi9 === void 0 ? void 0 : (_this$selectedSubindi10 = _this$selectedSubindi9.values) === null || _this$selectedSubindi10 === void 0 ? void 0 : (_this$selectedSubindi11 = _this$selectedSubindi10[0]) === null || _this$selectedSubindi11 === void 0 ? void 0 : _this$selectedSubindi11.year;
+          this.selectedYear = (_this$selectedSubindi8 = this.selectedSubindicator) === null || _this$selectedSubindi8 === void 0 ? void 0 : (_this$selectedSubindi9 = _this$selectedSubindi8.data) === null || _this$selectedSubindi9 === void 0 ? void 0 : (_this$selectedSubindi10 = _this$selectedSubindi9[0]) === null || _this$selectedSubindi10 === void 0 ? void 0 : (_this$selectedSubindi11 = _this$selectedSubindi10.values) === null || _this$selectedSubindi11 === void 0 ? void 0 : (_this$selectedSubindi12 = _this$selectedSubindi11[0]) === null || _this$selectedSubindi12 === void 0 ? void 0 : _this$selectedSubindi12.year;
         }
 
         this.generateIndicatorChart();
@@ -8805,9 +8807,9 @@ if (document.querySelector('#app-compare')) {
       },
       selectedSubindicator: function selectedSubindicator() {
         if (this.selectedSubindicator) {
-          var _this$selectedSubindi12, _this$selectedSubindi13, _this$selectedSubindi14;
+          var _this$selectedSubindi13, _this$selectedSubindi14, _this$selectedSubindi15;
 
-          this.selectedYear = (_this$selectedSubindi12 = this.selectedSubindicator) === null || _this$selectedSubindi12 === void 0 ? void 0 : (_this$selectedSubindi13 = _this$selectedSubindi12.data[0]) === null || _this$selectedSubindi13 === void 0 ? void 0 : (_this$selectedSubindi14 = _this$selectedSubindi13.values[0]) === null || _this$selectedSubindi14 === void 0 ? void 0 : _this$selectedSubindi14.year;
+          this.selectedYear = (_this$selectedSubindi13 = this.selectedSubindicator) === null || _this$selectedSubindi13 === void 0 ? void 0 : (_this$selectedSubindi14 = _this$selectedSubindi13.data[0]) === null || _this$selectedSubindi14 === void 0 ? void 0 : (_this$selectedSubindi15 = _this$selectedSubindi14.values[0]) === null || _this$selectedSubindi15 === void 0 ? void 0 : _this$selectedSubindi15.year;
         }
 
         this.generateSubindicatorChart();
@@ -8848,7 +8850,30 @@ if (document.querySelector('#app-compare')) {
         fetch(url).then(function (response) {
           return response.json();
         }).then(function (response) {
-          _this5.locales = response;
+          var locales = response;
+          locales.comparison.forEach(function (item) {
+            var myItem = item;
+
+            if (myItem.type === 'city') {
+              myItem.display_order = 0;
+            }
+
+            if (myItem.type === 'state') {
+              myItem.display_order = 1;
+            }
+
+            if (myItem.type === 'region') {
+              myItem.display_order = 2;
+            }
+
+            if (myItem.type === 'country') {
+              myItem.display_order = 3;
+            }
+          });
+          locales.comparison.sort(function (a, b) {
+            return a.display_order < b.display_order ? 1 : -1;
+          });
+          _this5.locales = locales;
           return true;
         }).then(function () {
           _this5.loadingLocale = false;
@@ -9031,7 +9056,7 @@ if (document.querySelector('#app-compare')) {
         return data;
       },
       generateIndicatorChart: function generateIndicatorChart() {
-        return Highcharts.chart('js-history', {
+        var indicatorChart = Highcharts.chart('js-history', {
           chart: {
             type: 'column'
           },
@@ -9065,6 +9090,10 @@ if (document.querySelector('#app-compare')) {
           },
           series: this.formatDataToBarsCharts(this.locales)
         });
+
+        if (this.indicators.length === 0) {
+          indicatorChart.destroy();
+        }
       },
       generateSubindicatorChart: function generateSubindicatorChart() {
         return Highcharts.chart('js-subindicators-chart', {
