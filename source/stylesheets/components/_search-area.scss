@@ -17,6 +17,18 @@
   }
 }
 
+.search-area--children-hands {
+  // sass-lint:disable-block no-color-literals
+  background-image: linear-gradient(
+    to bottom, rgba(0, 0, 2, 0.7),
+    rgba(4, 5, 54, 0.7) 31%,
+    rgba(27, 15, 117, 0.7) 59%,
+    rgba(206, 100, 245, 0.7),
+  ),
+  image('children-hands.jpg');
+  background-size: cover;
+}
+
 .search-area--home {
   padding: 0 0 1.5rem;
   color: palette('white');
@@ -123,7 +135,7 @@
 }
 
 .search-area__intern label {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
   text-align: center;
 }
 
