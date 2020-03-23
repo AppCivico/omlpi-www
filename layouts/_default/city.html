@@ -97,7 +97,7 @@
                       Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur laudantium deleniti dolorum itaque laborum ut illo eaque eius. Magnam officia repudiandae aspernatur nesciunt itaque laborum, esse qui temporibus ducimus nisi.
                     </div>
                     <div class="indicator-header__number">
-                      <h2>7.500</h2>
+                      <h2 v-text="indicator.values.value_absolute || `${indicator.values.value_relative}%`"></h2>
                     </div>
                     <div class="indicator-header__info">
                       {{ "{{ indicator.base }}" }}

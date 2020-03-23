@@ -50,6 +50,11 @@ if (document.querySelector('#app-history')) {
           item => item.area.id === this.selectedArea,
         );
       },
+      emptyIndicator() {
+        return this.locale?.historical[0].indicators?.length === 0
+          || this.selectedIndicator?.subindicators?.length === 0
+          || Object.keys(this.selectedIndicator).length === 0;
+      },
     },
     watch: {
       selectedArea() {

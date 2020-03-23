@@ -9247,17 +9247,22 @@ if (document.querySelector('#app-history')) {
         return this.locale.historical[0].indicators.filter(function (item) {
           return item.area.id === _this.selectedArea;
         });
+      },
+      emptyIndicator: function emptyIndicator() {
+        var _this$locale, _this$locale$historic, _this$selectedIndicat, _this$selectedIndicat2;
+
+        return ((_this$locale = this.locale) === null || _this$locale === void 0 ? void 0 : (_this$locale$historic = _this$locale.historical[0].indicators) === null || _this$locale$historic === void 0 ? void 0 : _this$locale$historic.length) === 0 || ((_this$selectedIndicat = this.selectedIndicator) === null || _this$selectedIndicat === void 0 ? void 0 : (_this$selectedIndicat2 = _this$selectedIndicat.subindicators) === null || _this$selectedIndicat2 === void 0 ? void 0 : _this$selectedIndicat2.length) === 0 || Object.keys(this.selectedIndicator).length === 0;
       }
     },
     watch: {
       selectedArea: function selectedArea() {
-        var _this$selectedIndicat, _this$selectedIndicat2;
+        var _this$selectedIndicat3, _this$selectedIndicat4;
 
         if (this.indicators.length > 0) {
           this.selectedIndicator = _objectSpread({}, this.indicators[0]);
         }
 
-        if (((_this$selectedIndicat = this.selectedIndicator) === null || _this$selectedIndicat === void 0 ? void 0 : (_this$selectedIndicat2 = _this$selectedIndicat.subindicators) === null || _this$selectedIndicat2 === void 0 ? void 0 : _this$selectedIndicat2.length) > 0) {
+        if (((_this$selectedIndicat3 = this.selectedIndicator) === null || _this$selectedIndicat3 === void 0 ? void 0 : (_this$selectedIndicat4 = _this$selectedIndicat3.subindicators) === null || _this$selectedIndicat4 === void 0 ? void 0 : _this$selectedIndicat4.length) > 0) {
           this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
         }
 
@@ -9270,13 +9275,13 @@ if (document.querySelector('#app-history')) {
         this.generateIndicatorChart();
       },
       locale: function locale() {
-        var _this$selectedIndicat3, _this$selectedIndicat4;
+        var _this$selectedIndicat5, _this$selectedIndicat6;
 
         if (this.indicators.length > 0) {
           this.selectedIndicator = _objectSpread({}, this.indicators[0]);
         }
 
-        if (((_this$selectedIndicat3 = this.selectedIndicator) === null || _this$selectedIndicat3 === void 0 ? void 0 : (_this$selectedIndicat4 = _this$selectedIndicat3.subindicators) === null || _this$selectedIndicat4 === void 0 ? void 0 : _this$selectedIndicat4.length) > 0) {
+        if (((_this$selectedIndicat5 = this.selectedIndicator) === null || _this$selectedIndicat5 === void 0 ? void 0 : (_this$selectedIndicat6 = _this$selectedIndicat5.subindicators) === null || _this$selectedIndicat6 === void 0 ? void 0 : _this$selectedIndicat6.length) > 0) {
           this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
         }
 
@@ -9290,9 +9295,9 @@ if (document.querySelector('#app-history')) {
         this.generateIndicatorChart();
       },
       selectedIndicator: function selectedIndicator() {
-        var _this$selectedIndicat5, _this$selectedIndicat6;
+        var _this$selectedIndicat7, _this$selectedIndicat8;
 
-        if (((_this$selectedIndicat5 = this.selectedIndicator) === null || _this$selectedIndicat5 === void 0 ? void 0 : (_this$selectedIndicat6 = _this$selectedIndicat5.subindicators) === null || _this$selectedIndicat6 === void 0 ? void 0 : _this$selectedIndicat6.length) > 0) {
+        if (((_this$selectedIndicat7 = this.selectedIndicator) === null || _this$selectedIndicat7 === void 0 ? void 0 : (_this$selectedIndicat8 = _this$selectedIndicat7.subindicators) === null || _this$selectedIndicat8 === void 0 ? void 0 : _this$selectedIndicat8.length) > 0) {
           this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
         }
 
