@@ -215,7 +215,7 @@ details {
 }
 
 details[open] > summary {
-  margin-bottom: 2rem;
+  margin-bottom: 0;
   font-weight: bold;
   font-size: ms(3);
   color: palette('blue', 'dianne');

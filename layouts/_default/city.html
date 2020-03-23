@@ -79,6 +79,14 @@
                     <strong v-text="indicator.values.value_absolute || `${indicator.values.value_relative}%`"></strong>
                   </summary>
                   <div class="indicator-header">
+                    <a
+                      class="indicator-header__link"
+                      :href="`${apiUrl}data/download_indicator?locale_id=${
+                      locale.id}&indicator_id=${indicator.id}&year=${indicator.values.year}`"
+                      target="_blank"
+                    >
+                      Baixar dados do indicador
+                    </a>
                     <div class="indicartor__ods">
                       <img src="/assets/images/erradicacao-da-probreza.png" alt="Erradicação da probreza">
                       <img src="/assets/images/erradicacao-da-probreza.png" alt="Erradicação da probreza">
