@@ -72,6 +72,11 @@ if (document.querySelector('#app-compare')) {
         });
         return new Set(years);
       },
+      emptyIndicator() {
+        return this.locale?.indicators?.length === 0
+          || this.selectedIndicator?.subindicators?.length === 0
+          || Object.keys(this.selectedIndicator).length === 0;
+      },
     },
     watch: {
       selectedArea() {

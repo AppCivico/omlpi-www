@@ -73,14 +73,10 @@
 
           <div
             class="history__desagregation history__desagregation--purple white-box"
-            :class="locale.indicators.length === 0 ||
-              selectedIndicator.subindicators.length === 0 ||
-              Object.keys(selectedIndicator).length === 0 ? 'history__desagregation--full' : ''"
+            :class="emptyIndicator ? 'history__desagregation--full' : ''"
             >
             <div
-              v-if="locale.indicators.length === 0 ||
-                selectedIndicator.subindicators.length === 0 ||
-                Object.keys(selectedIndicator).length === 0"
+              v-if="emptyIndicator"
             >
               Não há desagregadaores para esse indicador
             </div>
@@ -128,9 +124,7 @@
             </form>
           </div>
           <div
-            :hidden="locale.indicators.length === 0 ||
-              selectedIndicator.subindicators.length === 0 ||
-              Object.keys(selectedIndicator).length === 0"
+            :hidden="emptyIndicator"
             class="history__graphics white-box"
           >
             <div id="js-subindicators-chart"></div>

@@ -8745,11 +8745,16 @@ if (document.querySelector('#app-compare')) {
           });
         });
         return new Set(years);
+      },
+      emptyIndicator: function emptyIndicator() {
+        var _this$locale, _this$locale$indicato, _this$selectedIndicat, _this$selectedIndicat2;
+
+        return ((_this$locale = this.locale) === null || _this$locale === void 0 ? void 0 : (_this$locale$indicato = _this$locale.indicators) === null || _this$locale$indicato === void 0 ? void 0 : _this$locale$indicato.length) === 0 || ((_this$selectedIndicat = this.selectedIndicator) === null || _this$selectedIndicat === void 0 ? void 0 : (_this$selectedIndicat2 = _this$selectedIndicat.subindicators) === null || _this$selectedIndicat2 === void 0 ? void 0 : _this$selectedIndicat2.length) === 0 || Object.keys(this.selectedIndicator).length === 0;
       }
     },
     watch: {
       selectedArea: function selectedArea() {
-        var _this$selectedIndicat, _this$selectedIndicat2;
+        var _this$selectedIndicat3, _this$selectedIndicat4;
 
         if (this.indicators.length > 0) {
           var _this$indicators;
@@ -8757,7 +8762,7 @@ if (document.querySelector('#app-compare')) {
           this.selectedIndicator = _objectSpread({}, (_this$indicators = this.indicators) === null || _this$indicators === void 0 ? void 0 : _this$indicators[0]);
         }
 
-        if (((_this$selectedIndicat = this.selectedIndicator) === null || _this$selectedIndicat === void 0 ? void 0 : (_this$selectedIndicat2 = _this$selectedIndicat.subindicators) === null || _this$selectedIndicat2 === void 0 ? void 0 : _this$selectedIndicat2.length) > 0) {
+        if (((_this$selectedIndicat3 = this.selectedIndicator) === null || _this$selectedIndicat3 === void 0 ? void 0 : (_this$selectedIndicat4 = _this$selectedIndicat3.subindicators) === null || _this$selectedIndicat4 === void 0 ? void 0 : _this$selectedIndicat4.length) > 0) {
           this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
         }
 
@@ -8770,13 +8775,13 @@ if (document.querySelector('#app-compare')) {
         this.generateIndicatorChart();
       },
       locale: function locale() {
-        var _this$indicators2, _this$selectedIndicat3, _this$selectedIndicat4, _Object$entries;
+        var _this$indicators2, _this$selectedIndicat5, _this$selectedIndicat6, _Object$entries;
 
         if (((_this$indicators2 = this.indicators) === null || _this$indicators2 === void 0 ? void 0 : _this$indicators2.length) > 0) {
           this.selectedIndicator = _objectSpread({}, this.indicators[0]);
         }
 
-        if (((_this$selectedIndicat3 = this.selectedIndicator) === null || _this$selectedIndicat3 === void 0 ? void 0 : (_this$selectedIndicat4 = _this$selectedIndicat3.subindicators) === null || _this$selectedIndicat4 === void 0 ? void 0 : _this$selectedIndicat4.length) > 0) {
+        if (((_this$selectedIndicat5 = this.selectedIndicator) === null || _this$selectedIndicat5 === void 0 ? void 0 : (_this$selectedIndicat6 = _this$selectedIndicat5.subindicators) === null || _this$selectedIndicat6 === void 0 ? void 0 : _this$selectedIndicat6.length) > 0) {
           this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
         }
 
@@ -8790,9 +8795,9 @@ if (document.querySelector('#app-compare')) {
         this.generateIndicatorChart();
       },
       selectedIndicator: function selectedIndicator() {
-        var _this$selectedIndicat5, _this$selectedIndicat6;
+        var _this$selectedIndicat7, _this$selectedIndicat8;
 
-        if (((_this$selectedIndicat5 = this.selectedIndicator) === null || _this$selectedIndicat5 === void 0 ? void 0 : (_this$selectedIndicat6 = _this$selectedIndicat5.subindicators) === null || _this$selectedIndicat6 === void 0 ? void 0 : _this$selectedIndicat6.length) > 0) {
+        if (((_this$selectedIndicat7 = this.selectedIndicator) === null || _this$selectedIndicat7 === void 0 ? void 0 : (_this$selectedIndicat8 = _this$selectedIndicat7.subindicators) === null || _this$selectedIndicat8 === void 0 ? void 0 : _this$selectedIndicat8.length) > 0) {
           this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
         }
 
