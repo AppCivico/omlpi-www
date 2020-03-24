@@ -56,14 +56,15 @@
   padding: 0.5rem;
   margin-top: 0.3rem;
   margin-bottom: 1rem;
+  background-color: palette('white');
   border: 2px solid palette('purple');
   border-radius: 5px;
 }
 
 .send-plan__fields button {
   justify-content: center;
-  // min-width: 10.5rem;
   margin: 0 auto;
+  font-size: 1em;
 
   @media screen and (min-width: breakpoint('phablet')) {
     margin-right: 0;
@@ -91,20 +92,21 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 8.75rem;
+  width: 5.9rem;
   height: 2.175rem;
   margin-top: -8px;
   margin-right: -8px;
   margin-bottom: -8px;
   margin-left: auto;
+  font-size: 0.8em;
   text-transform: uppercase;
   color: palette('white');
   background: palette('purple');
 
   &::before {
     display: block;
-    width: 1.062rem;
-    height: 1.062rem;
+    width: 0.862rem;
+    height: 0.862rem;
     margin-right: 5px;
     background-image: image('upload.svg');
     background-size: contain;
