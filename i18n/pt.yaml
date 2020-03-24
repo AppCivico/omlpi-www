@@ -12,7 +12,7 @@
 
 # Home
 - id: exploreData
-  translation: "Explore sobre os dados da Primeira Infância Brasil"
+  translation: "Digite o nome do Município, Unidade da Federação ou Região"
 - id: exploreArticles
   translation: "Pesquise por título, por autor ou por temática"
 - id: exploreArticlesPlaceholder

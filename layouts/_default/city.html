@@ -15,49 +15,51 @@
             <div class="container">
               <h1>{{ "{{ locale.name }}" }}</h1>
 
-              <section class='search-area search-area__intern'>
+              <section class="search-area search-area__intern">
                 <div class="container">
                   <form action="">
+                    <label for="js-region-input">
+                      Pesquise por Brasil, região, estado ou município e selecione uma área de interesse
+                      para vizualizar seus indicadores e seus desagregadores
+                    </label>
                     <input
                       type="text"
                       disabled
                       aria-busy="true"
+                      data-intern="true"
                       id="js-region-input"
                       placeholder="{{ i18n "exploreDataPlaceholder" }}"
-                      >
-                      <button>{{ i18n "search" }}</button>
+                    >
+                    <button class="magnifying-glass">{{ i18n "search" }}</button>
                   </form>
+                  <section>
+                    <div class="buttons-group">
+                      <button
+                        @click="selectedArea = 3"
+                        class="button-icon button--icon button--health"
+                        :class="selectedArea === 3 ? 'button-icon--active' : ''"
+                        >
+                        Saúde
+                      </button>
+                      <button
+                        @click="selectedArea = 2"
+                        class="button-icon button--icon button--education"
+                        :class="selectedArea === 2 ? 'button-icon--active' : ''"
+                      >
+                        Educação
+                      </button>
+                      <button
+                        @click="selectedArea = 1"
+                        class="button-icon button--icon button--social-care"
+                        :class="selectedArea === 1 ? 'button-icon--active' : ''"
+                      >
+                        Assistência Social
+                      </button>
+                    </div>
+                  </section>
                 </div>
               </section>
             </div>
-
-            <section>
-              <div class="container">
-                <div class="buttons-group">
-                  <button
-                    @click="selectedArea = 1"
-                    class="button-icon button--icon button--health"
-                    :class="selectedArea === 1 ? 'button-icon--active' : ''"
-                    >
-                    Saúde
-                  </button>
-                    <button
-                      @click="selectedArea = 2"
-                      class="button-icon button--icon button--education"
-                      :class="selectedArea === 2 ? 'button-icon--active' : ''"
-                      >
-                      Educação
-                    </button>
-                    <button
-                      @click="selectedArea = 3"
-                      class="button-icon button--icon button--social-care"
-                      :class="selectedArea === 3 ? 'button-icon--active' : ''"
-                    >
-                      Assistência Social
-                    </button>
-                </div>
-              </div>
-            </section>
           </header>
 
           <section>
@@ -66,6 +68,7 @@
             </div>
             <div class="container">
               <h1>Indicadores</h1>
+
               <template v-for="(indicator, index) in locale.indicators">
                 <details
                   v-show="indicator.area.id === selectedArea"
@@ -75,6 +78,38 @@
                     {{ "{{ indicator.description }}" }}:
                     <strong v-text="indicator.values.value_absolute || `${indicator.values.value_relative}%`"></strong>
                   </summary>
+                  <div class="indicator-header">
+                    <a
+                      class="indicator-header__link"
+                      :href="`${apiUrl}data/download_indicator?locale_id=${
+                      locale.id}&indicator_id=${indicator.id}&year=${indicator.values.year}`"
+                      target="_blank"
+                    >
+                      Baixar dados do indicador
+                    </a>
+                    <div class="indicartor__ods">
+                      <img src="/assets/images/erradicacao-da-probreza.png" alt="Erradicação da probreza">
+                      <img src="/assets/images/erradicacao-da-probreza.png" alt="Erradicação da probreza">
+                      <img src="/assets/images/erradicacao-da-probreza.png" alt="Erradicação da probreza">
+                      <img src="/assets/images/erradicacao-da-probreza.png" alt="Erradicação da probreza">
+                    </div>
+                    <div class="indicator-header__description">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur laudantium deleniti dolorum itaque laborum ut illo eaque eius. Magnam officia repudiandae aspernatur nesciunt itaque laborum, esse qui temporibus ducimus nisi.
+                    </div>
+                    <div class="indicator-header__number">
+                      <h2 v-text="indicator.values.value_absolute || `${indicator.values.value_relative}%`"></h2>
+                    </div>
+                    <div class="indicator-header__info">
+                      {{ "{{ indicator.base }}" }}
+                      -
+                      <time
+                        class="infobox__year"
+                        :datetime="indicator.values.year"
+                      >
+                        {{ "{{ indicator.values.year }}" }}
+                      </time>
+                    </div>
+                  </div>
                   <div v-if="indicator.subindicators.length === 0" >
                     <p>Não há desagregadores para esse indicador</p>
                   </div>
@@ -87,34 +122,35 @@
                       <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
                       <div class="infobox">
                         <div class="infobox__item" v-for="(subindicatorData, index) in subindicator.data">
-                          <template v-if="subindicatorData.values.value_relative">
-                            <strong class="infobox__title">{{ "{{ subindicatorData.values.value_absolute }}" }}</strong>
+                          <template v-if="">
+                            <strong
+                              v-if="subindicatorData.values.value_absolute"
+                              class="infobox__title">{{ "{{ subindicatorData.values.value_absolute }}" }}
+                            </strong>
+                            <h3>{{ "{{ subindicatorData.description }}" }}</h3>
                             <div
                               class="infobox__icons"
                               style="clip-path: url(#svgPath);"
                               :style="`background-image: linear-gradient(90deg, #47b3af ${subindicatorData.values.value_relative}%, #a3a3a3 0);`"
-                              >
+                            >
                             </div>
-                              <progress
-                                class="infobox__progress"
-                                :value="subindicatorData.values.value_relative" max="100"
-                                                                                >
-                              </progress>
-                                <strong class="infobox__percentage">
-                                  {{ "{{ subindicatorData.values.value_relative }}" }}%
-                                </strong>
-                                <h3>{{ "{{ subindicatorData.description }}" }}</h3>
-                          </template>
-
-                          <template v-else>
-                            <strong class="infobox__title">
-                              {{ "{{ subindicatorData.values.value_absolute }}" }}
+                            <strong
+                              v-if="subindicatorData.values.value_relative"
+                              class="infobox__percentage"
+                            >
+                              {{ "{{ subindicatorData.values.value_relative }}" }}%
                             </strong>
-                            <h3>{{ "{{ subindicatorData.description }}" }}</h3>
+                            <time
+                              class="infobox__year"
+                              :datetime="subindicatorData.values.year"
+                            >
+                              {{ "{{ subindicatorData.values.year }}" }}
+                            </time>
                           </template>
                         </div>
                         <a
                           @click.prevent="print(slugify(`subindicator-${subindicator.classification}`))"
+                          title="Download"
                           class="infobox__download"
                         >
                           Download
@@ -126,7 +162,7 @@
                       <div class="info-chart">
                         <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
                         <div class="infobox">
-                          <div :id="`pie-chart-${indicator.id}-${subindicator.id}`" class="chart"></div>
+                          <div :id="`bar-chart-horizontal-${indicator.id}-${subindicator.id}`" class="chart"></div>
                         </div>
                       </div>
                     </div>

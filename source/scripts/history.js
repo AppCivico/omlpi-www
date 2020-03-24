@@ -50,6 +50,11 @@ if (document.querySelector('#app-history')) {
           item => item.area.id === this.selectedArea,
         );
       },
+      emptyIndicator() {
+        return this.locale?.historical[0].indicators?.length === 0
+          || this.selectedIndicator?.subindicators?.length === 0
+          || Object.keys(this.selectedIndicator).length === 0;
+      },
     },
     watch: {
       selectedArea() {
@@ -64,6 +69,8 @@ if (document.querySelector('#app-history')) {
         if (this.selectedSubindicator) {
           this.selectedYear = this.selectedSubindicator?.data[0]?.values[0]?.year;
         }
+
+        this.generateIndicatorChart();
       },
       locale() {
         if (this.indicators.length > 0) {
@@ -79,10 +86,8 @@ if (document.querySelector('#app-history')) {
           this.selectedYear = this.selectedSubindicator?.data[0]?.values[0]?.year;
         }
 
-        if (this.firstChartPrint) {
-          document.querySelector('#myLocation').value = this.locale.historical[0].name;
-          this.generateIndicatorChart();
-        }
+        document.querySelector('#myLocation').value = this.locale.historical[0].name;
+        this.generateIndicatorChart();
       },
       selectedIndicator() {
         if (this.selectedIndicator?.subindicators?.length > 0) {
@@ -92,13 +97,10 @@ if (document.querySelector('#app-history')) {
         if (this.selectedSubindicator) {
           this.selectedYear = this.selectedSubindicator?.data?.[0]?.values?.[0]?.year;
         }
+        this.generateSubindicatorChart();
       },
       selectedSubindicator() {
-        if (this.firstChartPrint) {
-          this.generateSubindicatorChart();
-        }
-
-        this.firstChartPrint = 0;
+        this.generateSubindicatorChart();
       },
     },
     async mounted() {
@@ -186,7 +188,7 @@ if (document.querySelector('#app-history')) {
         if (!data.values) {
           return false;
         }
-        return data.values.map(item => item.year);
+        return data.values.reverse().map(item => item.year);
       },
       formatSubindicatorYears(data) {
         if (!data) {
@@ -227,7 +229,7 @@ if (document.querySelector('#app-history')) {
         return data;
       },
       generateIndicatorChart() {
-        return Highcharts.chart('js-history', {
+        const indicatorChart = Highcharts.chart('js-history', {
           chart: {
             type: 'column',
           },
@@ -239,7 +241,10 @@ if (document.querySelector('#app-history')) {
           },
           xAxis: {
             categories: this.getYears(this.selectedIndicator),
-            crosshair: true,
+            gridLineWidth: 0,
+            labels: {
+              enabled: false,
+            },
           },
           yAxis: {
             min: 0,
@@ -248,11 +253,7 @@ if (document.querySelector('#app-history')) {
             },
           },
           tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr>'
-            + '<td style="padding:0"><b>{point.y}</b></td></tr>',
-            footerFormat: '</table>',
-            useHTML: true,
+            headerFormat: '',
           },
           plotOptions: {
             column: {
@@ -262,9 +263,13 @@ if (document.querySelector('#app-history')) {
           },
           series: this.formatDataToBarsCharts(this.selectedIndicator),
         });
+
+        if (this.indicators.length === 0) {
+          indicatorChart.destroy();
+        }
       },
       generateSubindicatorChart() {
-        return Highcharts.chart('js-subindicators-chart', {
+        const subIndicatorChart = Highcharts.chart('js-subindicators-chart', {
           chart: {
             type: 'bar',
           },
@@ -306,6 +311,9 @@ if (document.querySelector('#app-history')) {
           },
           series: this.formatDataToSubindicatorsChart(this.selectedSubindicator.data),
         });
+        if (this.indicators.length === 0) {
+          subIndicatorChart.destroy();
+        }
       },
     },
   });

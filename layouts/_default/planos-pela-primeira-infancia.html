@@ -8,33 +8,28 @@
       </div>
 
       <main class="alabaster" id="app">
-        <div class="container">
-          <form class="plans-search">
-            <div class="plans-search__text">
+        <section class='search-area search-area--children-hands search-area--big'>
+          <div class="container">
+            <header>
               <h1>
-                  Se você possuí o Plano de Primeira Infância de alguma localidade do Brasil,
-                  <a href="#enviar-plano" >envie pra nós!</a>
+                Os Planos pela Primeira Infância são importantes ferramentas para promover a eficiência das políticas públicas.
+                Veja aqui os Municípios e Unidades da Federação para os quais você pode baixar o Plano pela Primeira Infância.
               </h1>
-              <h2>
-                <label for="js-plan-search">
-                  Escolha um estado, município ou região para encontrar um plano
-                </label>
-              </h2>
-              <div class="plans-search__input">
-                  <input
-                    id="js-plan-search"
-                    disabled
-                    aria-busy="true"
-                    type="text"
-                    placeholder="Brasília, Goiás, Centro-Oeste"
-                  >
-                <button type="submit">Pesquisar</button>
-              </div>
-            </div>
-
-            {{ partial "svg/brazil-map.svg" (dict "class" "map-books") }}
-          </form>
-        </div>
+            </header>
+            <form action="" id="js-submit-region">
+              <label for="js-plan-search">
+                Digite o nome da Unidade da Federação ou município
+              </label>
+              <input
+                id="js-plan-search"
+                disabled
+                aria-busy="true"
+                type="text"
+                placeholder="Brasília, Goiás, Centro-Oeste"
+              >
+            </form>
+          </div>
+        </section>
 
         <section class="plans-result" v-if="selectedLocale">
           <div class="container">
@@ -101,15 +96,24 @@
           </div>
         </section>
 
-        <div class="big-banner">
-          <div class="container">
-            <a
-              v-if="infographic && infographic.url"
-              :href="infographic.url"
-              target="_blank"
-            >
+        <div class="container">
+          <div class="big-banner">
+            <div class="big-banner__text">
+              <p v-if="infographic">
+                {{ "{{ infographic.description }}" }}
+              </p>
+              <a
+                class="button"
+                v-if="infographic && infographic.url"
+                :href="infographic.url"
+                target="_blank"
+              >
+              Clique aqui
+              </a>
+            </div>
+            <div class="big-banner__image">
               <img
-                v-if="infographic.big || infographic.small"
+                v-if="infographic && (infographic.big || infographic.small)"
                 v-bind:srcset="`
                   ${infographic.small} 350w,
                   ${infographic.big} 1059w
@@ -117,7 +121,7 @@
                 :src="infographic.big"
                 alt="O brasil na rota"
               >
-            </a>
+            </div>
           </div>
         </div>
 

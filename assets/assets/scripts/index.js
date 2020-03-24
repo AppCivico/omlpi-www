@@ -230,7 +230,7 @@ var runtime = (function (exports) {
     return { __await: arg };
   };
 
-  function AsyncIterator(generator) {
+  function AsyncIterator(generator, PromiseImpl) {
     function invoke(method, arg, resolve, reject) {
       var record = tryCatch(generator[method], generator, arg);
       if (record.type === "throw") {
@@ -241,14 +241,14 @@ var runtime = (function (exports) {
         if (value &&
             typeof value === "object" &&
             hasOwn.call(value, "__await")) {
-          return Promise.resolve(value.__await).then(function(value) {
+          return PromiseImpl.resolve(value.__await).then(function(value) {
             invoke("next", value, resolve, reject);
           }, function(err) {
             invoke("throw", err, resolve, reject);
           });
         }
 
-        return Promise.resolve(value).then(function(unwrapped) {
+        return PromiseImpl.resolve(value).then(function(unwrapped) {
           // When a yielded Promise is resolved, its final value becomes
           // the .value of the Promise<{value,done}> result for the
           // current iteration.
@@ -266,7 +266,7 @@ var runtime = (function (exports) {
 
     function enqueue(method, arg) {
       function callInvokeWithMethodAndArg() {
-        return new Promise(function(resolve, reject) {
+        return new PromiseImpl(function(resolve, reject) {
           invoke(method, arg, resolve, reject);
         });
       }
@@ -306,9 +306,12 @@ var runtime = (function (exports) {
   // Note that simple async functions are implemented on top of
   // AsyncIterator objects; they just return a Promise for the value of
   // the final result produced by the iterator.
-  exports.async = function(innerFn, outerFn, self, tryLocsList) {
+  exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+    if (PromiseImpl === void 0) PromiseImpl = Promise;
+
     var iter = new AsyncIterator(
-      wrap(innerFn, outerFn, self, tryLocsList)
+      wrap(innerFn, outerFn, self, tryLocsList),
+      PromiseImpl
     );
 
     return exports.isGeneratorFunction(outerFn)
@@ -5318,7 +5321,7 @@ process.umask = function() { return 0; };
 
 },{}],25:[function(require,module,exports){
 /*!
-* sweetalert2 v9.8.2
+* sweetalert2 v9.10.2
 * Released under the MIT License.
 */
 (function (global, factory) {
@@ -5633,7 +5636,7 @@ process.umask = function() { return 0; };
 
     return result;
   };
-  var swalClasses = prefix(['container', 'shown', 'height-auto', 'iosfix', 'popup', 'modal', 'no-backdrop', 'no-transition', 'toast', 'toast-shown', 'toast-column', 'show', 'hide', 'close', 'title', 'header', 'content', 'html-container', 'actions', 'confirm', 'cancel', 'footer', 'icon', 'icon-content', 'image', 'input', 'file', 'range', 'select', 'radio', 'checkbox', 'label', 'textarea', 'inputerror', 'validation-message', 'progress-steps', 'active-progress-step', 'progress-step', 'progress-step-line', 'loading', 'styled', 'top', 'top-start', 'top-end', 'top-left', 'top-right', 'center', 'center-start', 'center-end', 'center-left', 'center-right', 'bottom', 'bottom-start', 'bottom-end', 'bottom-left', 'bottom-right', 'grow-row', 'grow-column', 'grow-fullscreen', 'rtl', 'timer-progress-bar', 'scrollbar-measure', 'icon-success', 'icon-warning', 'icon-info', 'icon-question', 'icon-error']);
+  var swalClasses = prefix(['container', 'shown', 'height-auto', 'iosfix', 'popup', 'modal', 'no-backdrop', 'no-transition', 'toast', 'toast-shown', 'toast-column', 'show', 'hide', 'close', 'title', 'header', 'content', 'html-container', 'actions', 'confirm', 'cancel', 'footer', 'icon', 'icon-content', 'image', 'input', 'file', 'range', 'select', 'radio', 'checkbox', 'label', 'textarea', 'inputerror', 'validation-message', 'progress-steps', 'active-progress-step', 'progress-step', 'progress-step-line', 'loading', 'styled', 'top', 'top-start', 'top-end', 'top-left', 'top-right', 'center', 'center-start', 'center-end', 'center-left', 'center-right', 'bottom', 'bottom-start', 'bottom-end', 'bottom-left', 'bottom-right', 'grow-row', 'grow-column', 'grow-fullscreen', 'rtl', 'timer-progress-bar', 'timer-progress-bar-container', 'scrollbar-measure', 'icon-success', 'icon-warning', 'icon-info', 'icon-question', 'icon-error']);
   var iconTypes = prefix(['success', 'warning', 'info', 'question', 'error']);
 
   var getContainer = function getContainer() {
@@ -5909,7 +5912,7 @@ process.umask = function() { return 0; };
     return typeof window === 'undefined' || typeof document === 'undefined';
   };
 
-  var sweetHTML = "\n <div aria-labelledby=\"".concat(swalClasses.title, "\" aria-describedby=\"").concat(swalClasses.content, "\" class=\"").concat(swalClasses.popup, "\" tabindex=\"-1\">\n   <div class=\"").concat(swalClasses.header, "\">\n     <ul class=\"").concat(swalClasses['progress-steps'], "\"></ul>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.error, "\"></div>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.question, "\"></div>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.warning, "\"></div>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.info, "\"></div>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.success, "\"></div>\n     <img class=\"").concat(swalClasses.image, "\" />\n     <h2 class=\"").concat(swalClasses.title, "\" id=\"").concat(swalClasses.title, "\"></h2>\n     <button type=\"button\" class=\"").concat(swalClasses.close, "\"></button>\n   </div>\n   <div class=\"").concat(swalClasses.content, "\">\n     <div id=\"").concat(swalClasses.content, "\" class=\"").concat(swalClasses['html-container'], "\"></div>\n     <input class=\"").concat(swalClasses.input, "\" />\n     <input type=\"file\" class=\"").concat(swalClasses.file, "\" />\n     <div class=\"").concat(swalClasses.range, "\">\n       <input type=\"range\" />\n       <output></output>\n     </div>\n     <select class=\"").concat(swalClasses.select, "\"></select>\n     <div class=\"").concat(swalClasses.radio, "\"></div>\n     <label for=\"").concat(swalClasses.checkbox, "\" class=\"").concat(swalClasses.checkbox, "\">\n       <input type=\"checkbox\" />\n       <span class=\"").concat(swalClasses.label, "\"></span>\n     </label>\n     <textarea class=\"").concat(swalClasses.textarea, "\"></textarea>\n     <div class=\"").concat(swalClasses['validation-message'], "\" id=\"").concat(swalClasses['validation-message'], "\"></div>\n   </div>\n   <div class=\"").concat(swalClasses.actions, "\">\n     <button type=\"button\" class=\"").concat(swalClasses.confirm, "\">OK</button>\n     <button type=\"button\" class=\"").concat(swalClasses.cancel, "\">Cancel</button>\n   </div>\n   <div class=\"").concat(swalClasses.footer, "\"></div>\n   <div class=\"").concat(swalClasses['timer-progress-bar'], "\"></div>\n </div>\n").replace(/(^|\n)\s*/g, '');
+  var sweetHTML = "\n <div aria-labelledby=\"".concat(swalClasses.title, "\" aria-describedby=\"").concat(swalClasses.content, "\" class=\"").concat(swalClasses.popup, "\" tabindex=\"-1\">\n   <div class=\"").concat(swalClasses.header, "\">\n     <ul class=\"").concat(swalClasses['progress-steps'], "\"></ul>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.error, "\"></div>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.question, "\"></div>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.warning, "\"></div>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.info, "\"></div>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.success, "\"></div>\n     <img class=\"").concat(swalClasses.image, "\" />\n     <h2 class=\"").concat(swalClasses.title, "\" id=\"").concat(swalClasses.title, "\"></h2>\n     <button type=\"button\" class=\"").concat(swalClasses.close, "\"></button>\n   </div>\n   <div class=\"").concat(swalClasses.content, "\">\n     <div id=\"").concat(swalClasses.content, "\" class=\"").concat(swalClasses['html-container'], "\"></div>\n     <input class=\"").concat(swalClasses.input, "\" />\n     <input type=\"file\" class=\"").concat(swalClasses.file, "\" />\n     <div class=\"").concat(swalClasses.range, "\">\n       <input type=\"range\" />\n       <output></output>\n     </div>\n     <select class=\"").concat(swalClasses.select, "\"></select>\n     <div class=\"").concat(swalClasses.radio, "\"></div>\n     <label for=\"").concat(swalClasses.checkbox, "\" class=\"").concat(swalClasses.checkbox, "\">\n       <input type=\"checkbox\" />\n       <span class=\"").concat(swalClasses.label, "\"></span>\n     </label>\n     <textarea class=\"").concat(swalClasses.textarea, "\"></textarea>\n     <div class=\"").concat(swalClasses['validation-message'], "\" id=\"").concat(swalClasses['validation-message'], "\"></div>\n   </div>\n   <div class=\"").concat(swalClasses.actions, "\">\n     <button type=\"button\" class=\"").concat(swalClasses.confirm, "\">OK</button>\n     <button type=\"button\" class=\"").concat(swalClasses.cancel, "\">Cancel</button>\n   </div>\n   <div class=\"").concat(swalClasses.footer, "\"></div>\n   <div class=\"").concat(swalClasses['timer-progress-bar-container'], "\">\n     <div class=\"").concat(swalClasses['timer-progress-bar'], "\"></div>\n   </div>\n </div>\n").replace(/(^|\n)\s*/g, '');
 
   var resetOldContainer = function resetOldContainer() {
     var oldContainer = getContainer();
@@ -6755,9 +6758,7 @@ process.umask = function() { return 0; };
    * @param mixinParams
    */
   function mixin(mixinParams) {
-    var MixinSwal =
-    /*#__PURE__*/
-    function (_this) {
+    var MixinSwal = /*#__PURE__*/function (_this) {
       _inherits(MixinSwal, _this);
 
       function MixinSwal() {
@@ -6972,7 +6973,7 @@ process.umask = function() { return 0; };
     onDestroy: undefined,
     scrollbarPadding: true
   };
-  var updatableParams = ['title', 'titleText', 'text', 'html', 'icon', 'customClass', 'allowOutsideClick', 'allowEscapeKey', 'showConfirmButton', 'showCancelButton', 'confirmButtonText', 'confirmButtonAriaLabel', 'confirmButtonColor', 'cancelButtonText', 'cancelButtonAriaLabel', 'cancelButtonColor', 'buttonsStyling', 'reverseButtons', 'imageUrl', 'imageWidth', 'imageHeight', 'imageAlt', 'progressSteps', 'currentProgressStep'];
+  var updatableParams = ['title', 'titleText', 'text', 'html', 'icon', 'hideClass', 'customClass', 'allowOutsideClick', 'allowEscapeKey', 'showConfirmButton', 'showCancelButton', 'confirmButtonText', 'confirmButtonAriaLabel', 'confirmButtonColor', 'cancelButtonText', 'cancelButtonAriaLabel', 'cancelButtonColor', 'buttonsStyling', 'reverseButtons', 'imageUrl', 'imageWidth', 'imageHeight', 'imageAlt', 'progressSteps', 'currentProgressStep'];
   var deprecatedParams = {
     animation: 'showClass" and "hideClass'
   };
@@ -7427,9 +7428,7 @@ process.umask = function() { return 0; };
     return domCache.progressSteps;
   }
 
-  var Timer =
-  /*#__PURE__*/
-  function () {
+  var Timer = /*#__PURE__*/function () {
     function Timer(callback, delay) {
       _classCallCheck(this, Timer);
 
@@ -8100,7 +8099,6 @@ process.umask = function() { return 0; };
       };
 
       privateMethods.swalPromiseResolve.set(instance, resolve);
-      setupTimer(globalState, innerParams, dismissWith);
 
       domCache.confirmButton.onclick = function () {
         return handleConfirmButtonClick(instance, innerParams);
@@ -8125,6 +8123,7 @@ process.umask = function() { return 0; };
 
       handleInputOptionsAndValue(instance, innerParams);
       openPopup(innerParams);
+      setupTimer(globalState, innerParams, dismissWith);
       initFocus(domCache, innerParams); // Scroll container to top on open (#1247)
 
       domCache.container.scrollTop = 0;
@@ -8362,7 +8361,7 @@ process.umask = function() { return 0; };
     };
   });
   SweetAlert.DismissReason = DismissReason;
-  SweetAlert.version = '9.8.2';
+  SweetAlert.version = '9.10.2';
 
   var Swal = SweetAlert;
   Swal["default"] = Swal;
@@ -8737,17 +8736,33 @@ if (document.querySelector('#app-compare')) {
         return this.locale.indicators.filter(function (item) {
           return item.area.id === _this3.selectedArea;
         });
+      },
+      years: function years() {
+        var years = [];
+        this.selectedSubindicator.data.forEach(function (item) {
+          item.values.map(function (iitem) {
+            return years.push(iitem.year);
+          });
+        });
+        return new Set(years);
+      },
+      emptyIndicator: function emptyIndicator() {
+        var _this$locale, _this$locale$indicato, _this$selectedIndicat, _this$selectedIndicat2;
+
+        return ((_this$locale = this.locale) === null || _this$locale === void 0 ? void 0 : (_this$locale$indicato = _this$locale.indicators) === null || _this$locale$indicato === void 0 ? void 0 : _this$locale$indicato.length) === 0 || ((_this$selectedIndicat = this.selectedIndicator) === null || _this$selectedIndicat === void 0 ? void 0 : (_this$selectedIndicat2 = _this$selectedIndicat.subindicators) === null || _this$selectedIndicat2 === void 0 ? void 0 : _this$selectedIndicat2.length) === 0 || Object.keys(this.selectedIndicator).length === 0;
       }
     },
     watch: {
       selectedArea: function selectedArea() {
-        var _this$selectedIndicat, _this$selectedIndicat2;
+        var _this$selectedIndicat3, _this$selectedIndicat4;
 
         if (this.indicators.length > 0) {
-          this.selectedIndicator = _objectSpread({}, this.indicators[0]);
+          var _this$indicators;
+
+          this.selectedIndicator = _objectSpread({}, (_this$indicators = this.indicators) === null || _this$indicators === void 0 ? void 0 : _this$indicators[0]);
         }
 
-        if (((_this$selectedIndicat = this.selectedIndicator) === null || _this$selectedIndicat === void 0 ? void 0 : (_this$selectedIndicat2 = _this$selectedIndicat.subindicators) === null || _this$selectedIndicat2 === void 0 ? void 0 : _this$selectedIndicat2.length) > 0) {
+        if (((_this$selectedIndicat3 = this.selectedIndicator) === null || _this$selectedIndicat3 === void 0 ? void 0 : (_this$selectedIndicat4 = _this$selectedIndicat3.subindicators) === null || _this$selectedIndicat4 === void 0 ? void 0 : _this$selectedIndicat4.length) > 0) {
           this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
         }
 
@@ -8756,54 +8771,56 @@ if (document.querySelector('#app-compare')) {
 
           this.selectedYear = (_this$selectedSubindi = this.selectedSubindicator) === null || _this$selectedSubindi === void 0 ? void 0 : (_this$selectedSubindi2 = _this$selectedSubindi.data[0]) === null || _this$selectedSubindi2 === void 0 ? void 0 : (_this$selectedSubindi3 = _this$selectedSubindi2.values[0]) === null || _this$selectedSubindi3 === void 0 ? void 0 : _this$selectedSubindi3.year;
         }
+
+        this.generateIndicatorChart();
       },
       locale: function locale() {
-        var _this$indicators, _this$selectedIndicat3, _this$selectedIndicat4, _Object$entries;
+        var _this$indicators2, _this$selectedIndicat5, _this$selectedIndicat6, _Object$entries;
 
-        if (((_this$indicators = this.indicators) === null || _this$indicators === void 0 ? void 0 : _this$indicators.length) > 0) {
+        if (((_this$indicators2 = this.indicators) === null || _this$indicators2 === void 0 ? void 0 : _this$indicators2.length) > 0) {
           this.selectedIndicator = _objectSpread({}, this.indicators[0]);
         }
-
-        if (((_this$selectedIndicat3 = this.selectedIndicator) === null || _this$selectedIndicat3 === void 0 ? void 0 : (_this$selectedIndicat4 = _this$selectedIndicat3.subindicators) === null || _this$selectedIndicat4 === void 0 ? void 0 : _this$selectedIndicat4.length) > 0) {
-          this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
-        }
-
-        if (((_Object$entries = Object.entries(this.selectedSubindicator)) === null || _Object$entries === void 0 ? void 0 : _Object$entries.length) !== 0 && this.selectedSubindicator.constructor === Object) {
-          var _this$selectedSubindi4, _this$selectedSubindi5, _this$selectedSubindi6;
-
-          this.selectedYear = (_this$selectedSubindi4 = this.selectedSubindicator) === null || _this$selectedSubindi4 === void 0 ? void 0 : (_this$selectedSubindi5 = _this$selectedSubindi4.data[0]) === null || _this$selectedSubindi5 === void 0 ? void 0 : (_this$selectedSubindi6 = _this$selectedSubindi5.values[0]) === null || _this$selectedSubindi6 === void 0 ? void 0 : _this$selectedSubindi6.year;
-        }
-
-        if (this.firstChartPrint) {
-          document.querySelector('#myLocation').value = this.locale.name;
-          this.generateIndicatorChart();
-        }
-      },
-      selectedIndicator: function selectedIndicator() {
-        var _this$selectedIndicat5, _this$selectedIndicat6;
 
         if (((_this$selectedIndicat5 = this.selectedIndicator) === null || _this$selectedIndicat5 === void 0 ? void 0 : (_this$selectedIndicat6 = _this$selectedIndicat5.subindicators) === null || _this$selectedIndicat6 === void 0 ? void 0 : _this$selectedIndicat6.length) > 0) {
           this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
         }
 
-        if (this.selectedSubindicator) {
-          var _this$selectedSubindi7, _this$selectedSubindi8, _this$selectedSubindi9;
+        if (((_Object$entries = Object.entries(this.selectedSubindicator)) === null || _Object$entries === void 0 ? void 0 : _Object$entries.length) !== 0 && this.selectedSubindicator.constructor === Object) {
+          var _this$selectedSubindi4, _this$selectedSubindi5, _this$selectedSubindi6, _this$selectedSubindi7;
 
-          this.selectedYear = (_this$selectedSubindi7 = this.selectedSubindicator) === null || _this$selectedSubindi7 === void 0 ? void 0 : (_this$selectedSubindi8 = _this$selectedSubindi7.data[0]) === null || _this$selectedSubindi8 === void 0 ? void 0 : (_this$selectedSubindi9 = _this$selectedSubindi8.values[0]) === null || _this$selectedSubindi9 === void 0 ? void 0 : _this$selectedSubindi9.year;
+          this.selectedYear = (_this$selectedSubindi4 = this.selectedSubindicator) === null || _this$selectedSubindi4 === void 0 ? void 0 : (_this$selectedSubindi5 = _this$selectedSubindi4.data[0]) === null || _this$selectedSubindi5 === void 0 ? void 0 : (_this$selectedSubindi6 = _this$selectedSubindi5.values) === null || _this$selectedSubindi6 === void 0 ? void 0 : (_this$selectedSubindi7 = _this$selectedSubindi6[0]) === null || _this$selectedSubindi7 === void 0 ? void 0 : _this$selectedSubindi7.year;
         }
+
+        document.querySelector('#myLocation').value = this.locale.name;
+        this.generateIndicatorChart();
+      },
+      selectedIndicator: function selectedIndicator() {
+        var _this$selectedIndicat7, _this$selectedIndicat8;
+
+        if (((_this$selectedIndicat7 = this.selectedIndicator) === null || _this$selectedIndicat7 === void 0 ? void 0 : (_this$selectedIndicat8 = _this$selectedIndicat7.subindicators) === null || _this$selectedIndicat8 === void 0 ? void 0 : _this$selectedIndicat8.length) > 0) {
+          this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
+        }
+
+        if (this.selectedSubindicator) {
+          var _this$selectedSubindi8, _this$selectedSubindi9, _this$selectedSubindi10, _this$selectedSubindi11, _this$selectedSubindi12;
+
+          this.selectedYear = (_this$selectedSubindi8 = this.selectedSubindicator) === null || _this$selectedSubindi8 === void 0 ? void 0 : (_this$selectedSubindi9 = _this$selectedSubindi8.data) === null || _this$selectedSubindi9 === void 0 ? void 0 : (_this$selectedSubindi10 = _this$selectedSubindi9[0]) === null || _this$selectedSubindi10 === void 0 ? void 0 : (_this$selectedSubindi11 = _this$selectedSubindi10.values) === null || _this$selectedSubindi11 === void 0 ? void 0 : (_this$selectedSubindi12 = _this$selectedSubindi11[0]) === null || _this$selectedSubindi12 === void 0 ? void 0 : _this$selectedSubindi12.year;
+        }
+
+        this.generateIndicatorChart();
+        this.generateSubindicatorChart();
       },
       selectedSubindicator: function selectedSubindicator() {
         if (this.selectedSubindicator) {
-          var _this$selectedSubindi10, _this$selectedSubindi11, _this$selectedSubindi12;
+          var _this$selectedSubindi13, _this$selectedSubindi14, _this$selectedSubindi15;
 
-          this.selectedYear = (_this$selectedSubindi10 = this.selectedSubindicator) === null || _this$selectedSubindi10 === void 0 ? void 0 : (_this$selectedSubindi11 = _this$selectedSubindi10.data[0]) === null || _this$selectedSubindi11 === void 0 ? void 0 : (_this$selectedSubindi12 = _this$selectedSubindi11.values[0]) === null || _this$selectedSubindi12 === void 0 ? void 0 : _this$selectedSubindi12.year;
+          this.selectedYear = (_this$selectedSubindi13 = this.selectedSubindicator) === null || _this$selectedSubindi13 === void 0 ? void 0 : (_this$selectedSubindi14 = _this$selectedSubindi13.data[0]) === null || _this$selectedSubindi14 === void 0 ? void 0 : (_this$selectedSubindi15 = _this$selectedSubindi14.values[0]) === null || _this$selectedSubindi15 === void 0 ? void 0 : _this$selectedSubindi15.year;
         }
 
-        if (this.firstChartPrint) {
-          this.generateSubindicatorChart();
-        }
-
-        this.firstChartPrint = 0;
+        this.generateSubindicatorChart();
+      },
+      selectedYear: function selectedYear() {
+        this.generateSubindicatorChart();
       }
     },
     mounted: function mounted() {
@@ -8838,7 +8855,30 @@ if (document.querySelector('#app-compare')) {
         fetch(url).then(function (response) {
           return response.json();
         }).then(function (response) {
-          _this5.locales = response;
+          var locales = response;
+          locales.comparison.forEach(function (item) {
+            var myItem = item;
+
+            if (myItem.type === 'city') {
+              myItem.display_order = 0;
+            }
+
+            if (myItem.type === 'state') {
+              myItem.display_order = 1;
+            }
+
+            if (myItem.type === 'region') {
+              myItem.display_order = 2;
+            }
+
+            if (myItem.type === 'country') {
+              myItem.display_order = 3;
+            }
+          });
+          locales.comparison.sort(function (a, b) {
+            return a.display_order < b.display_order ? 1 : -1;
+          });
+          _this5.locales = locales;
           return true;
         }).then(function () {
           _this5.loadingLocale = false;
@@ -9021,7 +9061,7 @@ if (document.querySelector('#app-compare')) {
         return data;
       },
       generateIndicatorChart: function generateIndicatorChart() {
-        return Highcharts.chart('js-history', {
+        var indicatorChart = Highcharts.chart('js-history', {
           chart: {
             type: 'column'
           },
@@ -9055,6 +9095,10 @@ if (document.querySelector('#app-compare')) {
           },
           series: this.formatDataToBarsCharts(this.locales)
         });
+
+        if (this.indicators.length === 0) {
+          indicatorChart.destroy();
+        }
       },
       generateSubindicatorChart: function generateSubindicatorChart() {
         return Highcharts.chart('js-subindicators-chart', {
@@ -9208,27 +9252,15 @@ if (document.querySelector('#app-history')) {
         return this.locale.historical[0].indicators.filter(function (item) {
           return item.area.id === _this.selectedArea;
         });
+      },
+      emptyIndicator: function emptyIndicator() {
+        var _this$locale, _this$locale$historic, _this$selectedIndicat, _this$selectedIndicat2;
+
+        return ((_this$locale = this.locale) === null || _this$locale === void 0 ? void 0 : (_this$locale$historic = _this$locale.historical[0].indicators) === null || _this$locale$historic === void 0 ? void 0 : _this$locale$historic.length) === 0 || ((_this$selectedIndicat = this.selectedIndicator) === null || _this$selectedIndicat === void 0 ? void 0 : (_this$selectedIndicat2 = _this$selectedIndicat.subindicators) === null || _this$selectedIndicat2 === void 0 ? void 0 : _this$selectedIndicat2.length) === 0 || Object.keys(this.selectedIndicator).length === 0;
       }
     },
     watch: {
       selectedArea: function selectedArea() {
-        var _this$selectedIndicat, _this$selectedIndicat2;
-
-        if (this.indicators.length > 0) {
-          this.selectedIndicator = _objectSpread({}, this.indicators[0]);
-        }
-
-        if (((_this$selectedIndicat = this.selectedIndicator) === null || _this$selectedIndicat === void 0 ? void 0 : (_this$selectedIndicat2 = _this$selectedIndicat.subindicators) === null || _this$selectedIndicat2 === void 0 ? void 0 : _this$selectedIndicat2.length) > 0) {
-          this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
-        }
-
-        if (this.selectedSubindicator) {
-          var _this$selectedSubindi, _this$selectedSubindi2, _this$selectedSubindi3;
-
-          this.selectedYear = (_this$selectedSubindi = this.selectedSubindicator) === null || _this$selectedSubindi === void 0 ? void 0 : (_this$selectedSubindi2 = _this$selectedSubindi.data[0]) === null || _this$selectedSubindi2 === void 0 ? void 0 : (_this$selectedSubindi3 = _this$selectedSubindi2.values[0]) === null || _this$selectedSubindi3 === void 0 ? void 0 : _this$selectedSubindi3.year;
-        }
-      },
-      locale: function locale() {
         var _this$selectedIndicat3, _this$selectedIndicat4;
 
         if (this.indicators.length > 0) {
@@ -9239,21 +9271,38 @@ if (document.querySelector('#app-history')) {
           this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
         }
 
+        if (this.selectedSubindicator) {
+          var _this$selectedSubindi, _this$selectedSubindi2, _this$selectedSubindi3;
+
+          this.selectedYear = (_this$selectedSubindi = this.selectedSubindicator) === null || _this$selectedSubindi === void 0 ? void 0 : (_this$selectedSubindi2 = _this$selectedSubindi.data[0]) === null || _this$selectedSubindi2 === void 0 ? void 0 : (_this$selectedSubindi3 = _this$selectedSubindi2.values[0]) === null || _this$selectedSubindi3 === void 0 ? void 0 : _this$selectedSubindi3.year;
+        }
+
+        this.generateIndicatorChart();
+      },
+      locale: function locale() {
+        var _this$selectedIndicat5, _this$selectedIndicat6;
+
+        if (this.indicators.length > 0) {
+          this.selectedIndicator = _objectSpread({}, this.indicators[0]);
+        }
+
+        if (((_this$selectedIndicat5 = this.selectedIndicator) === null || _this$selectedIndicat5 === void 0 ? void 0 : (_this$selectedIndicat6 = _this$selectedIndicat5.subindicators) === null || _this$selectedIndicat6 === void 0 ? void 0 : _this$selectedIndicat6.length) > 0) {
+          this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
+        }
+
         if (Object.entries(this.selectedSubindicator).length !== 0 && this.selectedSubindicator.constructor === Object) {
           var _this$selectedSubindi4, _this$selectedSubindi5, _this$selectedSubindi6;
 
           this.selectedYear = (_this$selectedSubindi4 = this.selectedSubindicator) === null || _this$selectedSubindi4 === void 0 ? void 0 : (_this$selectedSubindi5 = _this$selectedSubindi4.data[0]) === null || _this$selectedSubindi5 === void 0 ? void 0 : (_this$selectedSubindi6 = _this$selectedSubindi5.values[0]) === null || _this$selectedSubindi6 === void 0 ? void 0 : _this$selectedSubindi6.year;
         }
 
-        if (this.firstChartPrint) {
-          document.querySelector('#myLocation').value = this.locale.historical[0].name;
-          this.generateIndicatorChart();
-        }
+        document.querySelector('#myLocation').value = this.locale.historical[0].name;
+        this.generateIndicatorChart();
       },
       selectedIndicator: function selectedIndicator() {
-        var _this$selectedIndicat5, _this$selectedIndicat6;
+        var _this$selectedIndicat7, _this$selectedIndicat8;
 
-        if (((_this$selectedIndicat5 = this.selectedIndicator) === null || _this$selectedIndicat5 === void 0 ? void 0 : (_this$selectedIndicat6 = _this$selectedIndicat5.subindicators) === null || _this$selectedIndicat6 === void 0 ? void 0 : _this$selectedIndicat6.length) > 0) {
+        if (((_this$selectedIndicat7 = this.selectedIndicator) === null || _this$selectedIndicat7 === void 0 ? void 0 : (_this$selectedIndicat8 = _this$selectedIndicat7.subindicators) === null || _this$selectedIndicat8 === void 0 ? void 0 : _this$selectedIndicat8.length) > 0) {
           this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
         }
 
@@ -9262,13 +9311,11 @@ if (document.querySelector('#app-history')) {
 
           this.selectedYear = (_this$selectedSubindi7 = this.selectedSubindicator) === null || _this$selectedSubindi7 === void 0 ? void 0 : (_this$selectedSubindi8 = _this$selectedSubindi7.data) === null || _this$selectedSubindi8 === void 0 ? void 0 : (_this$selectedSubindi9 = _this$selectedSubindi8[0]) === null || _this$selectedSubindi9 === void 0 ? void 0 : (_this$selectedSubindi10 = _this$selectedSubindi9.values) === null || _this$selectedSubindi10 === void 0 ? void 0 : (_this$selectedSubindi11 = _this$selectedSubindi10[0]) === null || _this$selectedSubindi11 === void 0 ? void 0 : _this$selectedSubindi11.year;
         }
+
+        this.generateSubindicatorChart();
       },
       selectedSubindicator: function selectedSubindicator() {
-        if (this.firstChartPrint) {
-          this.generateSubindicatorChart();
-        }
-
-        this.firstChartPrint = 0;
+        this.generateSubindicatorChart();
       }
     },
     mounted: function mounted() {
@@ -9385,7 +9432,7 @@ if (document.querySelector('#app-history')) {
           return false;
         }
 
-        return data.values.map(function (item) {
+        return data.values.reverse().map(function (item) {
           return item.year;
         });
       },
@@ -9429,7 +9476,7 @@ if (document.querySelector('#app-history')) {
         return data;
       },
       generateIndicatorChart: function generateIndicatorChart() {
-        return Highcharts.chart('js-history', {
+        var indicatorChart = Highcharts.chart('js-history', {
           chart: {
             type: 'column'
           },
@@ -9441,7 +9488,10 @@ if (document.querySelector('#app-history')) {
           },
           xAxis: {
             categories: this.getYears(this.selectedIndicator),
-            crosshair: true
+            gridLineWidth: 0,
+            labels: {
+              enabled: false
+            }
           },
           yAxis: {
             min: 0,
@@ -9450,10 +9500,7 @@ if (document.querySelector('#app-history')) {
             }
           },
           tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr>' + '<td style="padding:0"><b>{point.y}</b></td></tr>',
-            footerFormat: '</table>',
-            useHTML: true
+            headerFormat: ''
           },
           plotOptions: {
             column: {
@@ -9463,9 +9510,13 @@ if (document.querySelector('#app-history')) {
           },
           series: this.formatDataToBarsCharts(this.selectedIndicator)
         });
+
+        if (this.indicators.length === 0) {
+          indicatorChart.destroy();
+        }
       },
       generateSubindicatorChart: function generateSubindicatorChart() {
-        return Highcharts.chart('js-subindicators-chart', {
+        var subIndicatorChart = Highcharts.chart('js-subindicators-chart', {
           chart: {
             type: 'bar'
           },
@@ -9507,6 +9558,10 @@ if (document.querySelector('#app-history')) {
           },
           series: this.formatDataToSubindicatorsChart(this.selectedSubindicator.data)
         });
+
+        if (this.indicators.length === 0) {
+          subIndicatorChart.destroy();
+        }
       }
     }
   });
@@ -10046,6 +10101,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           return response.json();
         }).then(function (response) {
           _this4.infographic = {};
+          _this4.infographic.description = response.description;
 
           if (response.small && response.small.url) {
             _this4.infographic.small = "".concat(_config.default.storage.domain).concat(response.small.url);
@@ -10097,8 +10153,8 @@ if (window.location.href.indexOf('city') > -1) {
   window.$vuePopulateData = new Vue({
     el: '#app',
     data: {
-      selectedArea: 2,
       localeId: window.location.search.split('id=')[1],
+      selectedArea: Number(window.location.search.split('area=')[1]) || 1,
       locale: null,
       apiUrl: _config.default.api.domain,
       apiDocsUrl: _config.default.api.docs
@@ -10114,7 +10170,7 @@ if (window.location.href.indexOf('city') > -1) {
           return indicator.area.id === _this.selectedArea;
         }).length;
       },
-      pieData: function pieData() {
+      barsHorizontalData: function barsHorizontalData() {
         var data = [];
 
         if (!this.loading) {
@@ -10268,11 +10324,6 @@ if (window.location.href.indexOf('city') > -1) {
         });
         return data;
       },
-      getBarChartTitles: function getBarChartTitles(items) {
-        return items.data.map(function (item) {
-          return item.description;
-        });
-      },
       reflowCharts: function reflowCharts() {
         var details = document.querySelectorAll('.js-details-with-chart');
         details.forEach(function (detail) {
@@ -10296,8 +10347,10 @@ if (window.location.href.indexOf('city') > -1) {
             title: null,
             subtitle: null,
             xAxis: {
-              categories: _this4.getBarChartTitles(chart),
-              crosshair: true
+              gridLineWidth: 0,
+              labels: {
+                enabled: false
+              }
             },
             yAxis: {
               min: 0,
@@ -10306,10 +10359,7 @@ if (window.location.href.indexOf('city') > -1) {
               }
             },
             tooltip: {
-              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-              pointFormat: '<tr>' + '<td style="padding:0"><b>{point.y}</b></td></tr>',
-              footerFormat: '</table>',
-              useHTML: true
+              headerFormat: ''
             },
             plotOptions: {
               column: {
@@ -10328,26 +10378,35 @@ if (window.location.href.indexOf('city') > -1) {
             series: _this4.formatDataToBarsCharts(chart)
           });
         });
-        this.pieData.forEach(function (chart) {
-          Highcharts.chart("pie-chart-".concat(chart.indicatorId, "-").concat(chart.id), {
+        this.barsHorizontalData.forEach(function (chart) {
+          Highcharts.chart("bar-chart-horizontal-".concat(chart.indicatorId, "-").concat(chart.id), {
             chart: {
-              plotBackgroundColor: null,
-              plotBorderWidth: null,
-              plotShadow: false,
-              type: 'pie'
+              type: 'bar'
             },
-            title: false,
+            title: null,
+            subtitle: null,
+            xAxis: {
+              title: {
+                text: null
+              },
+              labels: {
+                enabled: ''
+              }
+            },
+            yAxis: {
+              min: 0,
+              title: {
+                text: false
+              }
+            },
             tooltip: {
-              pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+              enabled: false
             },
             plotOptions: {
-              pie: {
-                allowPointSelect: false,
-                cursor: 'pointer',
+              bar: {
                 dataLabels: {
-                  enabled: false
-                },
-                showInLegend: true
+                  enabled: true
+                }
               }
             },
             exporting: {
@@ -10358,9 +10417,7 @@ if (window.location.href.indexOf('city') > -1) {
                 }
               }
             },
-            series: [{
-              data: _this4.formatDataToPieCharts(chart)
-            }]
+            series: _this4.formatDataToBarsCharts(chart)
           });
         });
       }
@@ -10536,6 +10593,7 @@ var _config = _interopRequireDefault(require("./config"));
 
 function startSearch() {
   var regionInput = document.querySelector('#js-region-input');
+  var cityId;
 
   function removeDiacritics(string) {
     return string.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -10648,15 +10706,71 @@ function startSearch() {
     return _mountList.apply(this, arguments);
   }
 
+  function validateAreas(localeId) {
+    document.querySelector('js-areas-buttons');
+    document.querySelector('.js-areas-buttons').querySelectorAll('button').forEach(function (item) {
+      return item.classList.remove('button-icon--active');
+    });
+
+    function activeButton(buttonNumber) {
+      document.querySelector("#js-area-".concat(buttonNumber)).classList.add('button-icon--active');
+    }
+
+    fetch("".concat(_config.default.api.domain, "data?locale_id=").concat(localeId)).then(function (response) {
+      return response.json();
+    }).then(function (response) {
+      if (response.locale.indicators.some(function (item) {
+        return item.area.id === 1;
+      })) {
+        activeButton(1);
+      }
+
+      if (response.locale.indicators.some(function (item) {
+        return item.area.id === 2;
+      })) {
+        activeButton(2);
+      }
+
+      if (response.locale.indicators.some(function (item) {
+        return item.area.id === 3;
+      })) {
+        activeButton(3);
+      }
+    });
+  }
+
   function watchSelection() {
     regionInput.addEventListener('awesomplete-selectcomplete', function (event) {
-      window.location.href = "/city?id=".concat(event.text.value);
+      if (event.srcElement.dataset.intern) {
+        window.location.href = "/city?id=".concat(event.text.value);
+      } else {
+        validateAreas(event.text.value);
+        cityId = event.text.value;
+      }
     }, false);
+  }
+
+  function watchForm() {
+    var selectedArea;
+    var areasButtons = document.querySelector('.js-areas-buttons');
+
+    if (areasButtons) {
+      areasButtons.querySelectorAll('button').forEach(function (item) {
+        return item.addEventListener('click', function (event) {
+          selectedArea = [event.target.id.split('-')[2]];
+        });
+      });
+      document.querySelector('#js-submit-region').addEventListener('submit', function (event) {
+        event.preventDefault();
+        window.location.href = "/city?id=".concat(cityId, "&area=").concat(selectedArea);
+      });
+    }
   }
 
   if (regionInput) {
     mountList();
     watchSelection();
+    watchForm();
   }
 }
 

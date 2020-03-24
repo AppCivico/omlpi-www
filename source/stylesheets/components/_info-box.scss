@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-around;
   text-align: center;
   background-color: palette('white');
@@ -10,24 +11,41 @@
   box-shadow: 0 2px 4px 0 palette('shadow');
 
   @media screen and (min-width: breakpoint('phablet')) {
-    min-width: 34.375rem;
+    flex-wrap: nowrap;
+    width: 40rem;
+    min-width: 14rem;
     min-height: 16.875rem;
+    margin-right: auto;
+    margin-left: auto;
   }
 
   &::before {
     position: absolute;
     top: 10%;
+    display: none;
     width: 1px;  //sass-lint:disable-line property-units
     height: 80%;
     background-color: palette('gray', 'x-light');
     content: '';
+
+    @media screen and (min-width: breakpoint('phablet')) {
+      display: block;
+    }
   }
 }
 
 .infobox__item {
-  width: 50%;
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 3rem 2rem;
   text-align: center;
+  border-bottom: 1px solid palette('gray', 'x-light');
+
+  @media screen and (min-width: breakpoint('phablet')) {
+    width: 50%;
+    border-bottom: 0;
+  }
 }
 
 .infobox__download {
@@ -37,6 +55,7 @@
   width: 1.25rem;
   height: 1.25rem;
   text-indent: -999em;
+  cursor: pointer;
   background-image: image('download-icon.svg');
   background-size: contain;
 }
@@ -86,6 +105,7 @@
 
 .infobox__year {
   align-self: flex-start;
+  font-style: normal;
   font-size: ms(-1);
   color: palette('gray', 'light');
 }
