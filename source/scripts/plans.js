@@ -110,7 +110,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           this.relatedLocales = this.getSectionedLocales(cities)
             .sort((a, b) => ((a.title > b.title) ? 1 : -1));
 
-          this.setMapDestak(this.selectedLocale.state);
+          // this.setMapDestak(this.selectedLocale.state);
         }
 
         if (this.selectedLocale.type === 'region') {
@@ -120,11 +120,11 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           this.relatedLocales = this.getSectionedLocales(states)
             .sort((a, b) => ((a.title > b.title) ? 1 : -1));
 
-          this.setMapDestak(this.selectedLocale.region);
+          // this.setMapDestak(this.selectedLocale.region);
         }
 
         if (this.selectedLocale.type === 'city') {
-          this.setMapDestak(this.selectedLocale.state);
+          // this.setMapDestak(this.selectedLocale.state);
         }
       },
       getSectionedLocales(locales) {

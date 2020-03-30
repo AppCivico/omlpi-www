@@ -25,7 +25,7 @@ export default function startPlansSearch() {
     regionInput.removeAttribute('aria-busy');
 
     const regionNames = list.map(region => ({
-      label: `${region.name}:${region.type}`,
+      label: `${region.name} - ${region.state}:${region.type}`,
       value: region.id,
     }));
 

@@ -10054,8 +10054,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           });
           this.relatedLocales = this.getSectionedLocales(cities).sort(function (a, b) {
             return a.title > b.title ? 1 : -1;
-          });
-          this.setMapDestak(this.selectedLocale.state);
+          }); // this.setMapDestak(this.selectedLocale.state);
         }
 
         if (this.selectedLocale.type === 'region') {
@@ -10064,12 +10063,10 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           });
           this.relatedLocales = this.getSectionedLocales(states).sort(function (a, b) {
             return a.title > b.title ? 1 : -1;
-          });
-          this.setMapDestak(this.selectedLocale.region);
+          }); // this.setMapDestak(this.selectedLocale.region);
         }
 
-        if (this.selectedLocale.type === 'city') {
-          this.setMapDestak(this.selectedLocale.state);
+        if (this.selectedLocale.type === 'city') {// this.setMapDestak(this.selectedLocale.state);
         }
       },
       getSectionedLocales: function getSectionedLocales(locales) {
@@ -10507,7 +10504,7 @@ function startPlansSearch() {
               regionInput.removeAttribute('aria-busy');
               regionNames = list.map(function (region) {
                 return {
-                  label: "".concat(region.name, ":").concat(region.type),
+                  label: "".concat(region.name, " - ").concat(region.state, ":").concat(region.type),
                   value: region.id
                 };
               });
