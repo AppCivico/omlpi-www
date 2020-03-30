@@ -12,7 +12,7 @@
 
 # Home
 - id: exploreData
-  translation: "Digite o nome do Município, Unidade da Federação ou Região"
+  translation: "Digite o nome do Município ou Unidade da Federação"
 - id: exploreArticles
   translation: "Pesquise por título, por autor ou por temática"
 - id: exploreArticlesPlaceholder
