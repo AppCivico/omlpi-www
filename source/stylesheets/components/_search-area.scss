@@ -67,6 +67,11 @@
   color: palette('white');
 }
 
+.search-area--big .search-area__line-break {
+  display: block;
+  margin-top: 1rem;
+}
+
 .search-area--home h1 {
   font-weight: font-weight('light');
   font-size: ms(9);
