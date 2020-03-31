@@ -10054,8 +10054,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           });
           this.relatedLocales = this.getSectionedLocales(cities).sort(function (a, b) {
             return a.title > b.title ? 1 : -1;
-          });
-          this.setMapDestak(this.selectedLocale.state);
+          }); // this.setMapDestak(this.selectedLocale.state);
         }
 
         if (this.selectedLocale.type === 'region') {
@@ -10064,12 +10063,10 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           });
           this.relatedLocales = this.getSectionedLocales(states).sort(function (a, b) {
             return a.title > b.title ? 1 : -1;
-          });
-          this.setMapDestak(this.selectedLocale.region);
+          }); // this.setMapDestak(this.selectedLocale.region);
         }
 
-        if (this.selectedLocale.type === 'city') {
-          this.setMapDestak(this.selectedLocale.state);
+        if (this.selectedLocale.type === 'city') {// this.setMapDestak(this.selectedLocale.state);
         }
       },
       getSectionedLocales: function getSectionedLocales(locales) {
@@ -10506,8 +10503,15 @@ function startPlansSearch() {
               regionInput.removeAttribute('disabled');
               regionInput.removeAttribute('aria-busy');
               regionNames = list.map(function (region) {
+                if (region.type === 'city') {
+                  return {
+                    label: "".concat(region.name, " - ").concat(region.state, ":").concat(region.type, ":").concat(!region.plan ? 'empty' : ''),
+                    value: region.id
+                  };
+                }
+
                 return {
-                  label: "".concat(region.name, ":").concat(region.type),
+                  label: "".concat(region.name, ":").concat(region.type, ":").concat(!region.plan ? 'empty' : ''),
                   value: region.id
                 };
               });
@@ -10515,6 +10519,8 @@ function startPlansSearch() {
                 item: function item(suggestion) {
                   var html = document.createElement('li');
                   var type = suggestion.label.split(':')[1];
+                  var isEmpty = suggestion.label.split(':')[2];
+                  var emptyString = ' - Sem informações';
                   var typeString = 'Município';
 
                   if (type === 'state') {
@@ -10527,7 +10533,12 @@ function startPlansSearch() {
 
                   html.setAttribute('role', 'option');
                   html.setAttribute('class', "awesomplete__".concat(type));
-                  html.insertAdjacentHTML('beforeend', "<span>".concat(suggestion.label.split(':')[0], "<small>").concat(typeString, "</small></span>"));
+
+                  if (type === 'city' && isEmpty) {
+                    html.classList.add('awesomplete__empty');
+                  }
+
+                  html.insertAdjacentHTML('beforeend', "<span>".concat(suggestion.label.split(':')[0], "<small>").concat(typeString).concat(isEmpty && type === 'city' ? emptyString : '', "</small></span>"));
                   return html;
                 },
                 nChars: 1,

@@ -13,19 +13,20 @@
             <header>
               <h1>
                 Os Planos pela Primeira Infância são importantes ferramentas para promover a eficiência das políticas públicas.
+                <br>
                 Veja aqui os Municípios e Unidades da Federação para os quais você pode baixar o Plano pela Primeira Infância.
               </h1>
             </header>
             <form action="" id="js-submit-region">
               <label for="js-plan-search">
-                Digite o nome da Unidade da Federação ou município
+                {{ i18n "exploreData" }}
               </label>
               <input
                 id="js-plan-search"
                 disabled
                 aria-busy="true"
                 type="text"
-                placeholder="Brasília, Goiás, Centro-Oeste"
+                placeholder="Olinda ou Pernambuco"
               >
             </form>
           </div>

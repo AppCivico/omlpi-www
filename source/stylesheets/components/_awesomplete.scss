@@ -26,6 +26,12 @@
   background: palette('gray', 'pale');
 }
 
+.awesomplete > ul > .awesomplete__empty[class] {
+  pointer-events: none;
+  background-color: palette('gray', 'alabaster');
+  filter: grayscale(1);
+}
+
 .awesomplete__country,
 .awesomplete__region,
 .awesomplete__state,
