@@ -10503,8 +10503,15 @@ function startPlansSearch() {
               regionInput.removeAttribute('disabled');
               regionInput.removeAttribute('aria-busy');
               regionNames = list.map(function (region) {
+                if (region.type === 'city') {
+                  return {
+                    label: "".concat(region.name, " - ").concat(region.state, ":").concat(region.type, ":").concat(!region.plan ? 'empty' : ''),
+                    value: region.id
+                  };
+                }
+
                 return {
-                  label: "".concat(region.name, " - ").concat(region.state, ":").concat(region.type, ":").concat(!region.plan ? 'empty' : ''),
+                  label: "".concat(region.name, ":").concat(region.type, ":").concat(!region.plan ? 'empty' : ''),
                   value: region.id
                 };
               });

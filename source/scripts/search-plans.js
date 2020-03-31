@@ -24,10 +24,18 @@ export default function startPlansSearch() {
     regionInput.removeAttribute('disabled');
     regionInput.removeAttribute('aria-busy');
 
-    const regionNames = list.map(region => ({
-      label: `${region.name} - ${region.state}:${region.type}:${!region.plan ? 'empty' : ''}`,
-      value: region.id,
-    }));
+    const regionNames = list.map((region) => {
+      if (region.type === 'city') {
+        return {
+          label: `${region.name} - ${region.state}:${region.type}:${!region.plan ? 'empty' : ''}`,
+          value: region.id,
+        };
+      }
+      return {
+        label: `${region.name}:${region.type}:${!region.plan ? 'empty' : ''}`,
+        value: region.id,
+      };
+    });
 
     const awesomplete = new Awesomplete(regionInput, {
       item: (suggestion) => {
