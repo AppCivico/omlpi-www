@@ -90,15 +90,27 @@ export default function startSearch() {
       });
   }
 
+  function handleInputClass(type) {
+    regionInput.removeAttribute('class');
+    if (type) {
+      regionInput.classList.add(`search-area__input-${type}`);
+    }
+  }
+
   function watchSelection() {
     regionInput.addEventListener('awesomplete-selectcomplete', (event) => {
       if (event.srcElement.dataset.intern) {
         window.location.href = `/city?id=${event.text.value}`;
       } else {
+        handleInputClass(event.text.label.split(':')[1]);
         validateAreas(event.text.value);
         cityId = event.text.value;
       }
     }, false);
+
+    regionInput.addEventListener('awesomplete-open', (event) => {
+      handleInputClass();
+    });
   }
 
   function watchForm() {
