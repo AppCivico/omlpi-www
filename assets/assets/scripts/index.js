@@ -10573,15 +10573,14 @@ function startPlansSearch() {
   }
 
   function watchSelection() {
-    /* eslint-disable no-unused-vars */
+    regionInput.addEventListener('awesomplete-select', function (event) {
+      if (event.text.label.split(':')[2]) {
+        event.preventDefault();
+      }
+    }, false);
     regionInput.addEventListener('awesomplete-selectcomplete', function (event) {
       handleInputClass(event.text.label.split(':')[1]);
-      $vuePlans.setLocale(event.text.value); // Swal.fire({
-      //   icon: 'error',
-      //   title: 'Oops...',
-      //   text: 'Área em desenvolvimento :(',
-      // });
-      // window.location.href = `/city?id=${event.text.value}`;
+      $vuePlans.setLocale(event.text.value);
     }, false);
   }
 
