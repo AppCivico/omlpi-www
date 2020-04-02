@@ -8653,6 +8653,8 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
+var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
+
 var _awesomplete = _interopRequireDefault(require("awesomplete"));
 
 var _fuzzysort = _interopRequireDefault(require("fuzzysort"));
@@ -8744,7 +8746,7 @@ if (document.querySelector('#app-compare')) {
             return years.push(iitem.year);
           });
         });
-        return new Set(years);
+        return (0, _toConsumableArray2.default)(new Set(years));
       },
       emptyIndicator: function emptyIndicator() {
         var _this$locale, _this$locale$indicato, _this$selectedIndicat, _this$selectedIndicat2;
@@ -9148,7 +9150,7 @@ if (document.querySelector('#app-compare')) {
   });
 }
 
-},{"./config":30,"./helpers":31,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/defineProperty":3,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/regenerator":9,"awesomplete":10,"fuzzysort":12}],30:[function(require,module,exports){
+},{"./config":30,"./helpers":31,"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/defineProperty":3,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":7,"@babel/runtime/regenerator":9,"awesomplete":10,"fuzzysort":12}],30:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
