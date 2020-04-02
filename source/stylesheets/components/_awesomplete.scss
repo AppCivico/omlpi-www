@@ -27,9 +27,9 @@
 }
 
 .awesomplete > ul > .awesomplete__empty[class] {
-  pointer-events: none;
+  cursor: not-allowed;
   background-color: palette('gray', 'alabaster');
-  filter: grayscale(1);
+  filter: grayscale(0.5);
 }
 
 .awesomplete__country,

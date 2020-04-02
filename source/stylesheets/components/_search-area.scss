@@ -153,10 +153,35 @@
 
 .search-area input {
   width: 100%;
-  padding: 0.8rem 1.5rem;
+  padding: 0.8rem 2.2rem;
   font-size: ms(-1);
   border: 2px solid palette('perrywinkle');
   border-radius: 3px;
+}
+
+
+.search-area__input-country,
+.search-area__input-region,
+.search-area__input-state,
+.search-area__input-city {
+  background-position: 0.7rem center;
+  background-size: 1.25rem;
+}
+
+.search-area__input-country {
+  background-image: image('brazil.svg');
+}
+
+.search-area__input-region {
+  background-image: image('region.svg');
+}
+
+.search-area__input-state {
+  background-image: image('location-pin.svg');
+}
+
+.search-area__input-city {
+  background-image: image('city.svg');
 }
 
 

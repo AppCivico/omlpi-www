@@ -9106,10 +9106,10 @@ if (document.querySelector('#app-compare')) {
             type: 'column'
           },
           title: {
-            text: this.selectedSubindicator.classification
+            text: this.selectedIndicator.description
           },
           subtitle: {
-            text: null
+            text: this.selectedSubindicator.classification
           },
           xAxis: {
             categories: this.formatCategories(this.selectedSubindicator.data),
@@ -10564,15 +10564,23 @@ function startPlansSearch() {
     return _mountList.apply(this, arguments);
   }
 
+  function handleInputClass(type) {
+    regionInput.removeAttribute('class');
+
+    if (type) {
+      regionInput.classList.add("search-area__input-".concat(type));
+    }
+  }
+
   function watchSelection() {
-    /* eslint-disable no-unused-vars */
+    regionInput.addEventListener('awesomplete-select', function (event) {
+      if (event.text.label.split(':')[2]) {
+        event.preventDefault();
+      }
+    }, false);
     regionInput.addEventListener('awesomplete-selectcomplete', function (event) {
-      $vuePlans.setLocale(event.text.value); // Swal.fire({
-      //   icon: 'error',
-      //   title: 'Oops...',
-      //   text: 'Área em desenvolvimento :(',
-      // });
-      // window.location.href = `/city?id=${event.text.value}`;
+      handleInputClass(event.text.label.split(':')[1]);
+      $vuePlans.setLocale(event.text.value);
     }, false);
   }
 
@@ -10750,15 +10758,27 @@ function startSearch() {
     });
   }
 
+  function handleInputClass(type) {
+    regionInput.removeAttribute('class');
+
+    if (type) {
+      regionInput.classList.add("search-area__input-".concat(type));
+    }
+  }
+
   function watchSelection() {
     regionInput.addEventListener('awesomplete-selectcomplete', function (event) {
       if (event.srcElement.dataset.intern) {
         window.location.href = "/city?id=".concat(event.text.value);
       } else {
+        handleInputClass(event.text.label.split(':')[1]);
         validateAreas(event.text.value);
         cityId = event.text.value;
       }
     }, false);
+    regionInput.addEventListener('awesomplete-open', function () {
+      handleInputClass();
+    });
   }
 
   function watchForm() {

@@ -73,16 +73,23 @@ export default function startPlansSearch() {
     awesomplete.list = regionNames;
   }
 
+  function handleInputClass(type) {
+    regionInput.removeAttribute('class');
+    if (type) {
+      regionInput.classList.add(`search-area__input-${type}`);
+    }
+  }
+
   function watchSelection() {
-    /* eslint-disable no-unused-vars */
+    regionInput.addEventListener('awesomplete-select', (event) => {
+      if (event.text.label.split(':')[2]) {
+        event.preventDefault();
+      }
+    }, false);
+
     regionInput.addEventListener('awesomplete-selectcomplete', (event) => {
+      handleInputClass(event.text.label.split(':')[1]);
       $vuePlans.setLocale(event.text.value);
-      // Swal.fire({
-      //   icon: 'error',
-      //   title: 'Oops...',
-      //   text: 'Área em desenvolvimento :(',
-      // });
-      // window.location.href = `/city?id=${event.text.value}`;
     }, false);
   }
 
