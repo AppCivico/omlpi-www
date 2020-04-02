@@ -10776,7 +10776,7 @@ function startSearch() {
         cityId = event.text.value;
       }
     }, false);
-    regionInput.addEventListener('awesomplete-open', function (event) {
+    regionInput.addEventListener('awesomplete-open', function () {
       handleInputClass();
     });
   }

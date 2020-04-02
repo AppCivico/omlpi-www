@@ -108,7 +108,7 @@ export default function startSearch() {
       }
     }, false);
 
-    regionInput.addEventListener('awesomplete-open', (event) => {
+    regionInput.addEventListener('awesomplete-open', () => {
       handleInputClass();
     });
   }
