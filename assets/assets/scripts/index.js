@@ -10170,6 +10170,17 @@ if (window.location.href.indexOf('city') > -1) {
           return indicator.area.id === _this.selectedArea;
         }).length;
       },
+      mapZoomLevel: function mapZoomLevel() {
+        if (this.locale.type === 'country') {
+          return 4;
+        }
+
+        if (this.locale.type === 'city') {
+          return 14;
+        }
+
+        return 6;
+      },
       barsHorizontalData: function barsHorizontalData() {
         var data = [];
 

@@ -35,6 +35,15 @@ if (window.location.href.indexOf('city') > -1) {
           indicator => indicator.area.id === this.selectedArea,
         ).length;
       },
+      mapZoomLevel() {
+        if (this.locale.type === 'country') {
+          return 4;
+        }
+        if (this.locale.type === 'city') {
+          return 14;
+        }
+        return 6;
+      },
       barsHorizontalData() {
         const data = [];
         if (!this.loading) {
