@@ -70,7 +70,7 @@ if (document.querySelector('#app-compare')) {
         this.selectedSubindicator.data.forEach((item) => {
           item.values.map(iitem => years.push(iitem.year));
         });
-        return new Set(years);
+        return [...new Set(years)];
       },
       emptyIndicator() {
         return this.locale?.indicators?.length === 0
