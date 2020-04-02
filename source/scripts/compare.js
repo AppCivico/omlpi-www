@@ -371,10 +371,10 @@ if (document.querySelector('#app-compare')) {
             type: 'column',
           },
           title: {
-            text: this.selectedSubindicator.classification,
+            text: this.selectedIndicator.description,
           },
           subtitle: {
-            text: null,
+            text: this.selectedSubindicator.classification,
           },
           xAxis: {
             categories: this.formatCategories(this.selectedSubindicator.data),
