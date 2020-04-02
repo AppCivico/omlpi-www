@@ -6,6 +6,10 @@ import fuzzysort from 'fuzzysort';
 import { removeDiacritics } from './helpers';
 import config from './config';
 
+Highcharts.setOptions({
+  colors: ['#C97B84', '#A85751', '#251351', '#114B5F', '#028090', '#E4FDE1', '#040926', '#F45B69', '#91A6FF'],
+});
+
 if (document.querySelector('#app-compare')) {
   window.$vueCompare = new Vue({
     el: '#app-compare',

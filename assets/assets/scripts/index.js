@@ -8667,6 +8667,10 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
+Highcharts.setOptions({
+  colors: ['#C97B84', '#A85751', '#251351', '#114B5F', '#028090', '#E4FDE1', '#040926', '#F45B69', '#91A6FF']
+});
+
 if (document.querySelector('#app-compare')) {
   window.$vueCompare = new Vue({
     el: '#app-compare',
@@ -9767,7 +9771,7 @@ if (document.querySelector('#app-home-indicators')) {
 
         setInterval(function () {
           _this2.getIndicators();
-        }, 6000);
+        }, 8000);
       },
       getIndicators: function getIndicators() {
         var _this3 = this;
