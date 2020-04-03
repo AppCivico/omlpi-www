@@ -87,17 +87,17 @@
                     >
                       Baixar dados do indicador
                     </a>
+                    <div class="indicator-header__number">
+                      <h2 v-text="indicator.values.value_absolute || `${indicator.values.value_relative}%`"></h2>
+                    </div>
+                    <div class="indicator-header__description">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur laudantium deleniti dolorum itaque laborum ut illo eaque eius. Magnam officia repudiandae aspernatur nesciunt itaque laborum, esse qui temporibus ducimus nisi.
+                    </div>
                     <div class="indicartor__ods">
                       <img src="/assets/images/erradicacao-da-probreza.png" alt="Erradicação da probreza">
                       <img src="/assets/images/erradicacao-da-probreza.png" alt="Erradicação da probreza">
                       <img src="/assets/images/erradicacao-da-probreza.png" alt="Erradicação da probreza">
                       <img src="/assets/images/erradicacao-da-probreza.png" alt="Erradicação da probreza">
-                    </div>
-                    <div class="indicator-header__description">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur laudantium deleniti dolorum itaque laborum ut illo eaque eius. Magnam officia repudiandae aspernatur nesciunt itaque laborum, esse qui temporibus ducimus nisi.
-                    </div>
-                    <div class="indicator-header__number">
-                      <h2 v-text="indicator.values.value_absolute || `${indicator.values.value_relative}%`"></h2>
                     </div>
                     <div class="indicator-header__info">
                       {{ "{{ indicator.base }}" }}
