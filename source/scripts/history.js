@@ -275,10 +275,10 @@ if (document.querySelector('#app-history')) {
             type: 'bar',
           },
           title: {
-            text: this.selectedSubindicator.classification,
+            text: this.selectedIndicator.description,
           },
           subtitle: {
-            text: null,
+            text: this.selectedSubindicator.classification,
           },
           xAxis: {
             categories: this.formatSubindicatorYears(this.selectedSubindicator.data),
