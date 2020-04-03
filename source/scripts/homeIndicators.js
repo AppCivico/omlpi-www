@@ -48,7 +48,7 @@ if (document.querySelector('#app-home-indicators')) {
           });
       },
       getAxisClass(area) {
-        if (area === 1) {
+        if (area === 3) {
           return 'health';
         }
         if (area === 2) {
