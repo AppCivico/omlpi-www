@@ -9450,7 +9450,7 @@ if (document.querySelector('#app-history')) {
 
         return data[0].values.map(function (internItem) {
           return internItem.year;
-        });
+        }).reverse();
       },
       formatDataToSubindicatorsChart: function formatDataToSubindicatorsChart(items) {
         if (!items || !items.values) {

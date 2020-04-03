@@ -195,7 +195,7 @@ if (document.querySelector('#app-history')) {
         if (!data) {
           return false;
         }
-        return data[0].values.map(internItem => internItem.year);
+        return data[0].values.map(internItem => internItem.year).reverse();
       },
       formatDataToSubindicatorsChart(items) {
         if (!items || !items.values) {
