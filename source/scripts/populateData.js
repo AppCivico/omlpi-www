@@ -154,7 +154,16 @@ if (window.location.href.indexOf('city') > -1) {
               type: 'column',
             },
             title: null,
-            subtitle: null,
+            subtitle: {
+              text: chart.data[0].values.year,
+              verticalAlign: 'bottom',
+              align: 'left',
+              y: 25,
+              style: {
+                color: '#a3a3a3',
+                fontSize: '.88889rem',
+              },
+            },
             xAxis: {
               gridLineWidth: 0,
               labels: {
@@ -186,7 +195,16 @@ if (window.location.href.indexOf('city') > -1) {
               type: 'bar',
             },
             title: null,
-            subtitle: null,
+            subtitle: {
+              text: chart.data[0].values.year,
+              verticalAlign: 'bottom',
+              align: 'left',
+              y: 25,
+              style: {
+                color: '#a3a3a3',
+                fontSize: '.88889rem',
+              },
+            },
             xAxis: {
               title: {
                 text: null,
