@@ -202,7 +202,7 @@ if (window.location.href.indexOf('city') > -1) {
               },
             },
             tooltip: {
-              enabled: false,
+              headerFormat: '',
             },
             plotOptions: {
               bar: {
