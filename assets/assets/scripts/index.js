@@ -10382,14 +10382,6 @@ if (window.location.href.indexOf('city') > -1) {
                 borderWidth: 0
               }
             },
-            exporting: {
-              buttons: {
-                contextButton: {
-                  // text: 'Download',
-                  menuItems: ['downloadPNG', 'downloadJPG', 'downloadPDF', 'downloadSVG']
-                }
-              }
-            },
             series: _this4.formatDataToBarsCharts(chart)
           });
         });
@@ -10421,14 +10413,6 @@ if (window.location.href.indexOf('city') > -1) {
               bar: {
                 dataLabels: {
                   enabled: true
-                }
-              }
-            },
-            exporting: {
-              buttons: {
-                contextButton: {
-                  // text: 'Download',
-                  menuItems: ['downloadPNG', 'downloadJPG', 'downloadPDF', 'downloadSVG']
                 }
               }
             },
