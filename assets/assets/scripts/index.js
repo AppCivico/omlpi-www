@@ -8692,6 +8692,8 @@ if (document.querySelector('#app-compare')) {
       triggerAnimation: true,
       storageDomain: _config.default.storage.domain,
       firstChartPrint: 1,
+      apiUrl: _config.default.api.domain,
+      apiDocsUrl: _config.default.api.docs,
       areas: [{
         id: 1,
         name: 'Assistência Social',
@@ -9231,6 +9233,8 @@ if (document.querySelector('#app-history')) {
       triggerAnimation: true,
       storageDomain: _config.default.storage.domain,
       firstChartPrint: 1,
+      apiUrl: _config.default.api.domain,
+      apiDocsUrl: _config.default.api.docs,
       areas: [{
         id: 1,
         name: 'Assistência Social',

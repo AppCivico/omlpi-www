@@ -8,10 +8,6 @@
   @media screen and (min-width: breakpoint('tablet')) {
     flex-direction: row;
   }
-
-  @media screen and (min-width: breakpoint('desktop')) {
-    padding-top: 4rem;
-  }
 }
 
 .card-links a {

@@ -116,6 +116,41 @@
             <div id="js-subindicators-chart"></div>
           </div>
         </div>
+
+        <div class="container">
+          <section class="card-links">
+            <a
+              class="card-links__history"
+              :href="`/historico?location_id=${localeId}`"
+            >
+              <i></i>Série Histórica
+            </a>
+            <a
+              class="card-links__comparison"
+              :href="`/comparacao?location_id=${localeId}`"
+              :disabled="locale.id === 1"
+            >
+                <i></i>Comparação
+            </a>
+            <a
+              class="card-links__data"
+              target="_blank"
+              :href="`${apiUrl}data/resume/?locale_id=${localeId}`"
+            >
+                <i></i>Relatório personalizado
+            </a>
+          </section>
+        </div>
+
+        <div class="container">
+          <span class="open-data">
+            Faça o download dos <a :href="`${apiUrl}data/download`" target="_blank">
+              dados abertos para desenvolvedores
+            </a>
+            ou acesse a
+            <a :href="apiDocsUrl" target="_blank">api para desenvolvedores</a>
+          </span>
+        </div>
       </main>
 
       {{ partial "footer.html" . }}

@@ -25,6 +25,8 @@ if (document.querySelector('#app-compare')) {
       triggerAnimation: true,
       storageDomain: config.storage.domain,
       firstChartPrint: 1,
+      apiUrl: config.api.domain,
+      apiDocsUrl: config.api.docs,
       areas: [
         {
           id: 1,
