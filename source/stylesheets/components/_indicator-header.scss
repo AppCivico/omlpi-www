@@ -18,7 +18,7 @@
   text-align: center;
 
   @media screen and (min-width: breakpoint('desktop')) {
-    width: 16%;
+    width: 26%;
     margin-bottom: 0;
   }
 }
@@ -34,7 +34,7 @@
   margin-bottom: 2rem;
 
   @media screen and (min-width: breakpoint('desktop')) {
-    width: 50%;
+    width: 40%;
     padding: 0 1rem;
     margin: 0 1rem;
     border-right: 1px solid palette('gray', 'light');
