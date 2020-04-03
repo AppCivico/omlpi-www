@@ -124,8 +124,8 @@
                         <div class="infobox__item" v-for="(subindicatorData, index) in subindicator.data">
                           <template v-if="">
                             <strong
-                              v-if="subindicatorData.values.value_absolute"
-                              class="infobox__title">{{ "{{ subindicatorData.values.value_absolute }}" }}
+                              v-if="subindicatorData.values.value_relative"
+                              class="infobox__title">{{ "{{ subindicatorData.values.value_relative }}" }}%
                             </strong>
                             <h3>{{ "{{ subindicatorData.description }}" }}</h3>
                             <div
@@ -135,10 +135,10 @@
                             >
                             </div>
                             <strong
-                              v-if="subindicatorData.values.value_relative"
+                              v-if="subindicatorData.values.value_absolute"
                               class="infobox__percentage"
                             >
-                              {{ "{{ subindicatorData.values.value_relative }}" }}%
+                              {{ "{{ subindicatorData.values.value_absolute }}" }}
                             </strong>
                             <time
                               v-if="index === 0"
@@ -164,7 +164,6 @@
                         <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
                         <div class="infobox">
                           <div :id="`bar-chart-horizontal-${indicator.id}-${subindicator.id}`" class="chart"></div>
-                          {{ "{{ indicator }}" }}
                           <time
                             class="infobox__year"
                             :datetime="indicator.values.year"
