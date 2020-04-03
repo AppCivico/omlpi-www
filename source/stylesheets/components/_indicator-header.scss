@@ -46,7 +46,7 @@
   display: inline-block;
   width: 100%;
   margin-bottom: 2rem;
-  text-align: center;
+  text-align: left;
 
   @media screen and (min-width: breakpoint('desktop')) {
     width: 30%;
@@ -55,7 +55,7 @@
 }
 
 .indicartor__ods img {
-  width: 8rem;
+  width: 6.25rem;
 }
 
 .indicator-header__info {
