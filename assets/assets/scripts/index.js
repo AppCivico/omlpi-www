@@ -10402,9 +10402,13 @@ if (window.location.href.indexOf('city') > -1) {
             title: null,
             subtitle: {
               text: chart.data[0].values.year,
-              align: 'left',
               verticalAlign: 'bottom',
-              x: 40
+              align: 'left',
+              y: 25,
+              style: {
+                color: '#a3a3a3',
+                fontSize: '.88889rem'
+              }
             },
             xAxis: {
               title: {
