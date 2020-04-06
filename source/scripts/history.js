@@ -259,7 +259,7 @@ if (document.querySelector('#app-history')) {
             },
           },
           tooltip: {
-            // eslint-disable-next-line object-shorthand
+            /* eslint-disable object-shorthand, func-names, camelcase */
             formatter: function () {
               return window.$vueHistory.selectedIndicator.values[0].value_relative ? `${this.y}%` : this.y;
             },
@@ -303,14 +303,14 @@ if (document.querySelector('#app-history')) {
               align: 'high',
             },
             labels: {
-              format: this.selectedSubindicator.data[0].values[0].value_relative ? '{value}%' : '{value}',
+              format: this.selectedSubindicator.data?.[0].values[0].value_relative ? '{value}%' : '{value}',
               overflow: 'justify',
             },
           },
           tooltip: {
-            // eslint-disable-next-line object-shorthand
+            // eslint-disable-next-line object-shorthand, func-names
             formatter: function () {
-              return window.$vueHistory.selectedSubindicator.data[0].values[0].value_relative ? `${this.y}%` : this.y;
+              return window.$vueHistory.selectedSubindicator.data?.[0].values[0].value_relative ? `${this.y}%` : this.y;
             },
             valueSuffix: null,
           },
@@ -318,7 +318,7 @@ if (document.querySelector('#app-history')) {
             bar: {
               dataLabels: {
                 enabled: true,
-                format: this.selectedSubindicator.data[0].values[0].value_relative ? '{y}%' : '{y}',
+                format: this.selectedSubindicator.data?.[0].values[0].value_relative ? '{y}%' : '{y}',
               },
             },
           },

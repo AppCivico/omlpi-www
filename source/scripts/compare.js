@@ -119,7 +119,7 @@ if (document.querySelector('#app-compare')) {
       },
       selectedIndicator() {
         if (this.selectedIndicator?.subindicators?.length > 0) {
-          this.selectedSubindicator = { ...this.selectedIndicator.subindicators[0] };
+          this.selectedSubindicator = { ...this.selectedIndicator.subindicators?.[0] };
         }
 
         if (this.selectedSubindicator) {
@@ -356,7 +356,7 @@ if (document.querySelector('#app-compare')) {
             },
           },
           tooltip: {
-            // eslint-disable-next-line object-shorthand
+            // eslint-disable-next-line object-shorthand, func-names
             formatter: function () {
               return window.$vueCompare.selectedIndicator.values[0].value_relative ? `${this.y}%` : this.y;
             },
@@ -399,14 +399,15 @@ if (document.querySelector('#app-compare')) {
               align: 'high',
             },
             labels: {
-              format: this.selectedSubindicator.data[0].values[0].value_relative ? '{value}%' : '{value}',
+              /* eslint-disable camelcase */
+              format: this.selectedSubindicator?.data?.[0].values[0].value_relative ? '{value}%' : '{value}',
               overflow: 'justify',
             },
           },
           tooltip: {
-            // eslint-disable-next-line object-shorthand
+            /* eslint-disable object-shorthand, func-names, camelcase */
             formatter: function () {
-              return window.$vueCompare.selectedSubindicator.data[0].values[0].value_relative ? `${this.y}%` : this.y;
+              return window.$vueCompare.selectedSubindicator?.data[0].values[0].value_relative ? `${this.y}%` : this.y;
             },
             valueSuffix: null,
           },
@@ -414,7 +415,7 @@ if (document.querySelector('#app-compare')) {
             bar: {
               dataLabels: {
                 enabled: true,
-                format: this.selectedSubindicator.data[0].values[0].value_relative ? '{y}%' : '{y}',
+                format: this.selectedSubindicator.data?.[0].values[0].value_relative ? '{y}%' : '{y}',
               },
             },
           },

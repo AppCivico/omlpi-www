@@ -8806,7 +8806,9 @@ if (document.querySelector('#app-compare')) {
         var _this$selectedIndicat7, _this$selectedIndicat8;
 
         if (((_this$selectedIndicat7 = this.selectedIndicator) === null || _this$selectedIndicat7 === void 0 ? void 0 : (_this$selectedIndicat8 = _this$selectedIndicat7.subindicators) === null || _this$selectedIndicat8 === void 0 ? void 0 : _this$selectedIndicat8.length) > 0) {
-          this.selectedSubindicator = _objectSpread({}, this.selectedIndicator.subindicators[0]);
+          var _this$selectedIndicat9;
+
+          this.selectedSubindicator = _objectSpread({}, (_this$selectedIndicat9 = this.selectedIndicator.subindicators) === null || _this$selectedIndicat9 === void 0 ? void 0 : _this$selectedIndicat9[0]);
         }
 
         if (this.selectedSubindicator) {
@@ -9093,7 +9095,7 @@ if (document.querySelector('#app-compare')) {
             }
           },
           tooltip: {
-            // eslint-disable-next-line object-shorthand
+            // eslint-disable-next-line object-shorthand, func-names
             formatter: function formatter() {
               return window.$vueCompare.selectedIndicator.values[0].value_relative ? "".concat(this.y, "%") : this.y;
             },
@@ -9113,6 +9115,8 @@ if (document.querySelector('#app-compare')) {
         }
       },
       generateSubindicatorChart: function generateSubindicatorChart() {
+        var _this$selectedSubindi16, _this$selectedSubindi17, _this$selectedSubindi18;
+
         return Highcharts.chart('js-subindicators-chart', {
           chart: {
             type: 'column'
@@ -9137,14 +9141,17 @@ if (document.querySelector('#app-compare')) {
               align: 'high'
             },
             labels: {
-              format: this.selectedSubindicator.data[0].values[0].value_relative ? '{value}%' : '{value}',
+              /* eslint-disable camelcase */
+              format: ((_this$selectedSubindi16 = this.selectedSubindicator) === null || _this$selectedSubindi16 === void 0 ? void 0 : (_this$selectedSubindi17 = _this$selectedSubindi16.data) === null || _this$selectedSubindi17 === void 0 ? void 0 : _this$selectedSubindi17[0].values[0].value_relative) ? '{value}%' : '{value}',
               overflow: 'justify'
             }
           },
           tooltip: {
-            // eslint-disable-next-line object-shorthand
+            /* eslint-disable object-shorthand, func-names, camelcase */
             formatter: function formatter() {
-              return window.$vueCompare.selectedSubindicator.data[0].values[0].value_relative ? "".concat(this.y, "%") : this.y;
+              var _window$$vueCompare$s;
+
+              return ((_window$$vueCompare$s = window.$vueCompare.selectedSubindicator) === null || _window$$vueCompare$s === void 0 ? void 0 : _window$$vueCompare$s.data[0].values[0].value_relative) ? "".concat(this.y, "%") : this.y;
             },
             valueSuffix: null
           },
@@ -9152,7 +9159,7 @@ if (document.querySelector('#app-compare')) {
             bar: {
               dataLabels: {
                 enabled: true,
-                format: this.selectedSubindicator.data[0].values[0].value_relative ? '{y}%' : '{y}'
+                format: ((_this$selectedSubindi18 = this.selectedSubindicator.data) === null || _this$selectedSubindi18 === void 0 ? void 0 : _this$selectedSubindi18[0].values[0].value_relative) ? '{y}%' : '{y}'
               }
             }
           },
@@ -9524,7 +9531,7 @@ if (document.querySelector('#app-history')) {
             }
           },
           tooltip: {
-            // eslint-disable-next-line object-shorthand
+            /* eslint-disable object-shorthand, func-names, camelcase */
             formatter: function formatter() {
               return window.$vueHistory.selectedIndicator.values[0].value_relative ? "".concat(this.y, "%") : this.y;
             },
@@ -9544,6 +9551,8 @@ if (document.querySelector('#app-history')) {
         }
       },
       generateSubindicatorChart: function generateSubindicatorChart() {
+        var _this$selectedSubindi12, _this$selectedSubindi13;
+
         var subIndicatorChart = Highcharts.chart('js-subindicators-chart', {
           chart: {
             type: 'bar'
@@ -9568,14 +9577,16 @@ if (document.querySelector('#app-history')) {
               align: 'high'
             },
             labels: {
-              format: this.selectedSubindicator.data[0].values[0].value_relative ? '{value}%' : '{value}',
+              format: ((_this$selectedSubindi12 = this.selectedSubindicator.data) === null || _this$selectedSubindi12 === void 0 ? void 0 : _this$selectedSubindi12[0].values[0].value_relative) ? '{value}%' : '{value}',
               overflow: 'justify'
             }
           },
           tooltip: {
-            // eslint-disable-next-line object-shorthand
+            // eslint-disable-next-line object-shorthand, func-names
             formatter: function formatter() {
-              return window.$vueHistory.selectedSubindicator.data[0].values[0].value_relative ? "".concat(this.y, "%") : this.y;
+              var _window$$vueHistory$s;
+
+              return ((_window$$vueHistory$s = window.$vueHistory.selectedSubindicator.data) === null || _window$$vueHistory$s === void 0 ? void 0 : _window$$vueHistory$s[0].values[0].value_relative) ? "".concat(this.y, "%") : this.y;
             },
             valueSuffix: null
           },
@@ -9583,7 +9594,7 @@ if (document.querySelector('#app-history')) {
             bar: {
               dataLabels: {
                 enabled: true,
-                format: this.selectedSubindicator.data[0].values[0].value_relative ? '{y}%' : '{y}'
+                format: ((_this$selectedSubindi13 = this.selectedSubindicator.data) === null || _this$selectedSubindi13 === void 0 ? void 0 : _this$selectedSubindi13[0].values[0].value_relative) ? '{y}%' : '{y}'
               }
             }
           },
