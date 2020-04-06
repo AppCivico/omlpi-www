@@ -172,11 +172,18 @@ if (window.location.href.indexOf('city') > -1) {
             },
             yAxis: {
               min: 0,
+              labels: {
+                format: chart.data[0].values.value_relative ? '{value}%' : '{value}',
+              },
               title: {
                 text: false,
               },
             },
             tooltip: {
+              // eslint-disable-next-line object-shorthand
+              formatter: function () {
+                return chart.data[0].values.value_relative ? `${this.y}%` : this.y;
+              },
               headerFormat: '',
             },
             plotOptions: {
