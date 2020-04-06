@@ -251,11 +251,18 @@ if (document.querySelector('#app-history')) {
           },
           yAxis: {
             min: 0,
+            labels: {
+              format: this.selectedIndicator.values[0].value_relative ? '{value}%' : '{value}',
+            },
             title: {
               text: null,
             },
           },
           tooltip: {
+            // eslint-disable-next-line object-shorthand
+            formatter: function () {
+              return window.$vueHistory.selectedIndicator.values[0].value_relative ? `${this.y}%` : this.y;
+            },
             headerFormat: '',
           },
           plotOptions: {
@@ -296,16 +303,22 @@ if (document.querySelector('#app-history')) {
               align: 'high',
             },
             labels: {
+              format: this.selectedSubindicator.data[0].values[0].value_relative ? '{value}%' : '{value}',
               overflow: 'justify',
             },
           },
           tooltip: {
+            // eslint-disable-next-line object-shorthand
+            formatter: function () {
+              return window.$vueHistory.selectedSubindicator.data[0].values[0].value_relative ? `${this.y}%` : this.y;
+            },
             valueSuffix: null,
           },
           plotOptions: {
             bar: {
               dataLabels: {
                 enabled: true,
+                format: this.selectedSubindicator.data[0].values[0].value_relative ? '{y}%' : '{y}',
               },
             },
           },
