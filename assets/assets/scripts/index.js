@@ -8930,7 +8930,7 @@ if (document.querySelector('#app-compare')) {
               }
 
               if (type === 'country') {
-                return false;
+                typeString = 'País';
               }
 
               html.setAttribute('role', 'option');

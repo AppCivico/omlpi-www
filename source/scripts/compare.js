@@ -206,7 +206,7 @@ if (document.querySelector('#app-compare')) {
                   typeString = 'Região';
                 }
                 if (type === 'country') {
-                  return false;
+                  typeString = 'País';
                 }
                 html.setAttribute('role', 'option');
                 html.setAttribute('class', `awesomplete__${type}`);
