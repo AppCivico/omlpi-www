@@ -10675,6 +10675,7 @@ var _fuzzysort = _interopRequireDefault(require("fuzzysort"));
 
 var _config = _interopRequireDefault(require("./config"));
 
+/* global Vue */
 function startSearch() {
   var regionInput = document.querySelector('#js-region-input');
   var cityId;
@@ -10834,7 +10835,8 @@ function startSearch() {
   function watchSelection() {
     regionInput.addEventListener('awesomplete-selectcomplete', function (event) {
       if (event.srcElement.dataset.intern) {
-        window.location.href = "/city?id=".concat(event.text.value);
+        console.log('haaaaaalo');
+        window.location.href = "/city?id=".concat(event.text.value, "&area=").concat(window.$vuePopulateData.selectedArea);
       } else {
         handleInputClass(event.text.label.split(':')[1]);
         validateAreas(event.text.value);

@@ -1,3 +1,5 @@
+/* global Vue */
+
 import Awesomplete from 'awesomplete';
 import fuzzysort from 'fuzzysort';
 import config from './config';
@@ -100,7 +102,8 @@ export default function startSearch() {
   function watchSelection() {
     regionInput.addEventListener('awesomplete-selectcomplete', (event) => {
       if (event.srcElement.dataset.intern) {
-        window.location.href = `/city?id=${event.text.value}`;
+        console.log('haaaaaalo');
+        window.location.href = `/city?id=${event.text.value}&area=${window.$vuePopulateData.selectedArea}`;
       } else {
         handleInputClass(event.text.label.split(':')[1]);
         validateAreas(event.text.value);
