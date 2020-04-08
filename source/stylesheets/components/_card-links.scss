@@ -8,10 +8,6 @@
   @media screen and (min-width: breakpoint('tablet')) {
     flex-direction: row;
   }
-
-  @media screen and (min-width: breakpoint('desktop')) {
-    padding-top: 4rem;
-  }
 }
 
 .card-links a {
@@ -89,5 +85,13 @@
     width: 4.68rem;
     height: 5.18rem;
     background-image: image('csv.svg');
+  }
+}
+
+.card-links__indicators i {
+  &::after {
+    width: 4.68rem;
+    height: 5.18rem;
+    background-image: image('indicator.svg');
   }
 }

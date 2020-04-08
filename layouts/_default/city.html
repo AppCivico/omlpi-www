@@ -10,7 +10,7 @@
         <template v-else>
           <header
             class='map-area'
-            :style="`background-image: linear-gradient(to bottom, rgba(0, 0, 2, 0.8), rgba(4, 5, 54, 0.8) 31%, rgba(27, 15, 117, 0.8) 59%, rgba(206, 100, 245, 0.8)), url('https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyCnb0w8bcw_RK0gAmch08BzC-nt7XRCVMg&center=${locale.latitude},${locale.longitude}&zoom=${locale.type === 'city' ? '14' : 6}&format=png&maptype=roadmap&style=feature:administrative.land_parcel%7Cvisibility:off&style=feature:administrative.neighborhood%7Cvisibility:off&style=feature:poi%7Celement:labels.text%7Cvisibility:off&style=feature:road%7Celement:labels%7Cvisibility:off&style=feature:water%7Celement:labels.text%7Cvisibility:off&size=1200x600');`"
+            :style="`background-image: linear-gradient(to bottom, rgba(0, 0, 2, 0.8), rgba(4, 5, 54, 0.8) 31%, rgba(27, 15, 117, 0.8) 59%, rgba(206, 100, 245, 0.8)), url('https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyCnb0w8bcw_RK0gAmch08BzC-nt7XRCVMg&center=${locale.latitude},${locale.longitude}&zoom=${mapZoomLevel}&format=png&maptype=roadmap&style=feature:administrative.land_parcel%7Cvisibility:off&style=feature:administrative.neighborhood%7Cvisibility:off&style=feature:poi%7Celement:labels.text%7Cvisibility:off&style=feature:road%7Celement:labels%7Cvisibility:off&style=feature:water%7Celement:labels.text%7Cvisibility:off&size=1200x600');`"
           >
             <div class="container">
               <h1>{{ "{{ locale.name }}" }}</h1>
@@ -35,6 +35,13 @@
                   <section>
                     <div class="buttons-group">
                       <button
+                        @click="selectedArea = 1"
+                        class="button-icon button--icon button--social-care"
+                        :class="selectedArea === 1 ? 'button-icon--active' : ''"
+                      >
+                        Assistência Social
+                      </button>
+                      <button
                         @click="selectedArea = 3"
                         class="button-icon button--icon button--health"
                         :class="selectedArea === 3 ? 'button-icon--active' : ''"
@@ -47,13 +54,6 @@
                         :class="selectedArea === 2 ? 'button-icon--active' : ''"
                       >
                         Educação
-                      </button>
-                      <button
-                        @click="selectedArea = 1"
-                        class="button-icon button--icon button--social-care"
-                        :class="selectedArea === 1 ? 'button-icon--active' : ''"
-                      >
-                        Assistência Social
                       </button>
                     </div>
                   </section>
@@ -87,17 +87,17 @@
                     >
                       Baixar dados do indicador
                     </a>
+                    <div class="indicator-header__number">
+                      <h2 v-text="indicator.values.value_absolute || `${indicator.values.value_relative}%`"></h2>
+                    </div>
+                    <div class="indicator-header__description">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur laudantium deleniti dolorum itaque laborum ut illo eaque eius. Magnam officia repudiandae aspernatur nesciunt itaque laborum, esse qui temporibus ducimus nisi.
+                    </div>
                     <div class="indicartor__ods">
                       <img src="/assets/images/erradicacao-da-probreza.png" alt="Erradicação da probreza">
                       <img src="/assets/images/erradicacao-da-probreza.png" alt="Erradicação da probreza">
                       <img src="/assets/images/erradicacao-da-probreza.png" alt="Erradicação da probreza">
                       <img src="/assets/images/erradicacao-da-probreza.png" alt="Erradicação da probreza">
-                    </div>
-                    <div class="indicator-header__description">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur laudantium deleniti dolorum itaque laborum ut illo eaque eius. Magnam officia repudiandae aspernatur nesciunt itaque laborum, esse qui temporibus ducimus nisi.
-                    </div>
-                    <div class="indicator-header__number">
-                      <h2 v-text="indicator.values.value_absolute || `${indicator.values.value_relative}%`"></h2>
                     </div>
                     <div class="indicator-header__info">
                       {{ "{{ indicator.base }}" }}
@@ -124,8 +124,8 @@
                         <div class="infobox__item" v-for="(subindicatorData, index) in subindicator.data">
                           <template v-if="">
                             <strong
-                              v-if="subindicatorData.values.value_absolute"
-                              class="infobox__title">{{ "{{ subindicatorData.values.value_absolute }}" }}
+                              v-if="subindicatorData.values.value_relative"
+                              class="infobox__title">{{ "{{ subindicatorData.values.value_relative }}" }}%
                             </strong>
                             <h3>{{ "{{ subindicatorData.description }}" }}</h3>
                             <div
@@ -135,12 +135,13 @@
                             >
                             </div>
                             <strong
-                              v-if="subindicatorData.values.value_relative"
+                              v-if="subindicatorData.values.value_absolute"
                               class="infobox__percentage"
                             >
-                              {{ "{{ subindicatorData.values.value_relative }}" }}%
+                              {{ "{{ subindicatorData.values.value_absolute }}" }}
                             </strong>
                             <time
+                              v-if="index === 0"
                               class="infobox__year"
                               :datetime="subindicatorData.values.year"
                             >
@@ -163,6 +164,12 @@
                         <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
                         <div class="infobox">
                           <div :id="`bar-chart-horizontal-${indicator.id}-${subindicator.id}`" class="chart"></div>
+                          <time
+                            class="infobox__year"
+                            :datetime="indicator.values.year"
+                          >
+                            {{ "{{ indicator.values.year }}" }}
+                          </time>
                         </div>
                       </div>
                     </div>
@@ -184,13 +191,13 @@
             <section class="card-links">
               <a
                 class="card-links__history"
-                :href="`/historico?location_id=${localeId}`"
+                :href="`/historico?location_id=${localeId}&area=${this.selectedArea}`"
               >
                 <i></i>Série Histórica
               </a>
               <a
                 class="card-links__comparison"
-                :href="`/comparacao?location_id=${localeId}`"
+                :href="`/comparacao?location_id=${localeId}&area=${this.selectedArea}`"
                 :disabled="locale.id === 1"
               >
                   <i></i>Comparação
@@ -214,27 +221,27 @@
               <a :href="apiDocsUrl" target="_blank">api para desenvolvedores</a>
             </span>
           </div>
-
-          <svg height="0" width="0">
-            <defs>
-
-            clip-path: circle(50% at 50% 50%);
-            <clipPath id="svgPath">
-              <path d="M0,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
-              <path d="M18,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
-              <path d="M36,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
-              <path d="M54,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
-              <path d="M72,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
-              <path d="M90,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
-              <path d="M108,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
-              <path d="M126,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
-              <path d="M144,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
-              <path d="M162,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
-            </clipPath>
-            </defs>
-          </svg>
         </template>
       </div>
+
+      <svg height="0" width="0">
+        <defs>
+
+        clip-path: circle(50% at 50% 50%);
+        <clipPath id="svgPath">
+          <path d="M0,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
+          <path d="M18,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
+          <path d="M36,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
+          <path d="M54,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
+          <path d="M72,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
+          <path d="M90,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
+          <path d="M108,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
+          <path d="M126,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
+          <path d="M144,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
+          <path d="M162,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
+        </clipPath>
+        </defs>
+      </svg>
 
         {{ partial "footer.html" . }}
 

@@ -6,13 +6,17 @@ import fuzzysort from 'fuzzysort';
 import { removeDiacritics } from './helpers';
 import config from './config';
 
+Highcharts.setOptions({
+  colors: ['#C97B84', '#A85751', '#251351', '#114B5F', '#028090', '#E4FDE1', '#040926', '#F45B69', '#91A6FF'],
+});
+
 if (document.querySelector('#app-compare')) {
   window.$vueCompare = new Vue({
     el: '#app-compare',
     data: {
       locales_list: null,
       locales: { comparison: [{ indicators: [] }] },
-      selectedArea: 3,
+      selectedArea: Number(new URL(window.location.href).searchParams.get('area')) || 3,
       selectedIndicator: { description: null },
       selectedSubindicator: {},
       selectedYear: null,
@@ -21,6 +25,9 @@ if (document.querySelector('#app-compare')) {
       triggerAnimation: true,
       storageDomain: config.storage.domain,
       firstChartPrint: 1,
+      apiUrl: config.api.domain,
+      apiDocsUrl: config.api.docs,
+      localeId: new URL(window.location.href).searchParams.get('location_id'),
       areas: [
         {
           id: 1,
@@ -57,9 +64,6 @@ if (document.querySelector('#app-compare')) {
             .some(indicator => indicator.id === this.selectedIndicator.id),
         );
       },
-      localeId() {
-        return new URL(window.location.href).searchParams.get('location_id') || 5200050;
-      },
       indicators() {
         return this.locale.indicators.filter(
           item => item.area.id === this.selectedArea,
@@ -67,9 +71,11 @@ if (document.querySelector('#app-compare')) {
       },
       years() {
         const years = [];
-        this.selectedSubindicator.data.forEach((item) => {
-          item.values.map(iitem => years.push(iitem.year));
-        });
+        if (this.selectedSubindicator.data) {
+          this.selectedSubindicator.data.forEach((item) => {
+            item.values.map(iitem => years.push(iitem.year));
+          });
+        }
         return [...new Set(years)];
       },
       emptyIndicator() {
@@ -89,8 +95,10 @@ if (document.querySelector('#app-compare')) {
         }
 
         if (this.selectedSubindicator) {
-          this.selectedYear = this.selectedSubindicator?.data[0]?.values[0]?.year;
+          this.selectedYear = this.selectedSubindicator?.data?.[0]?.values[0]?.year;
         }
+
+        this.updateUrlParams('area', this.selectedArea);
 
         this.generateIndicatorChart();
       },
@@ -108,12 +116,18 @@ if (document.querySelector('#app-compare')) {
           this.selectedYear = this.selectedSubindicator?.data[0]?.values?.[0]?.year;
         }
 
+        if (this.locale.id) {
+          const newId = this.locale.id;
+          this.updateUrlParams('location_id', newId);
+          this.localeId = newId;
+        }
+
         document.querySelector('#myLocation').value = this.locale.name;
         this.generateIndicatorChart();
       },
       selectedIndicator() {
         if (this.selectedIndicator?.subindicators?.length > 0) {
-          this.selectedSubindicator = { ...this.selectedIndicator.subindicators[0] };
+          this.selectedSubindicator = { ...this.selectedIndicator.subindicators?.[0] };
         }
 
         if (this.selectedSubindicator) {
@@ -141,6 +155,12 @@ if (document.querySelector('#app-compare')) {
       // await this.generateSubindicatorChart();
     },
     methods: {
+      updateUrlParams(param, value) {
+        const searchParams = new URLSearchParams(window.location.search);
+        searchParams.set(param, value);
+        const newRelativePathQuery = `${window.location.pathname}?${searchParams.toString()}`;
+        window.history.pushState(null, '', newRelativePathQuery);
+      },
       getLocale(localeId) {
         this.loadingLocale = true;
         const url = `${config.api.domain}data/compare?locale_id=${localeId || config.fisrtCityId}`;
@@ -200,7 +220,7 @@ if (document.querySelector('#app-compare')) {
                   typeString = 'Região';
                 }
                 if (type === 'country') {
-                  return false;
+                  typeString = 'País';
                 }
                 html.setAttribute('role', 'option');
                 html.setAttribute('class', `awesomplete__${type}`);
@@ -326,6 +346,10 @@ if (document.querySelector('#app-compare')) {
         return data;
       },
       generateIndicatorChart() {
+        if (!this.selectedIndicator.id) {
+          return false;
+        }
+
         const indicatorChart = Highcharts.chart('js-history', {
           chart: {
             type: 'column',
@@ -342,16 +366,19 @@ if (document.querySelector('#app-compare')) {
           },
           yAxis: {
             min: 0,
+            labels: {
+              format: this.selectedIndicator.values[0].value_relative ? '{value}%' : '{value}',
+            },
             title: {
               text: null,
             },
           },
           tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr>'
-            + '<td style="padding:0"><b>{point.y}</b></td></tr>',
-            footerFormat: '</table>',
-            useHTML: true,
+            // eslint-disable-next-line object-shorthand, func-names
+            formatter: function () {
+              return window.$vueCompare.selectedIndicator.values[0].value_relative ? `${this.y}%` : this.y;
+            },
+            headerFormat: '',
           },
           plotOptions: {
             column: {
@@ -366,7 +393,7 @@ if (document.querySelector('#app-compare')) {
         }
       },
       generateSubindicatorChart() {
-        return Highcharts.chart('js-subindicators-chart', {
+        const subIndicatorChart = Highcharts.chart('js-subindicators-chart', {
           chart: {
             type: 'column',
           },
@@ -390,16 +417,23 @@ if (document.querySelector('#app-compare')) {
               align: 'high',
             },
             labels: {
+              /* eslint-disable camelcase */
+              format: this.selectedSubindicator?.data?.[0].values[0].value_relative ? '{value}%' : '{value}',
               overflow: 'justify',
             },
           },
           tooltip: {
+            /* eslint-disable object-shorthand, func-names, camelcase */
+            formatter: function () {
+              return window.$vueCompare.selectedSubindicator?.data[0].values[0].value_relative ? `${this.y}%` : this.y;
+            },
             valueSuffix: null,
           },
           plotOptions: {
             bar: {
               dataLabels: {
                 enabled: true,
+                format: this.selectedSubindicator.data?.[0].values[0].value_relative ? '{y}%' : '{y}',
               },
             },
           },
@@ -408,6 +442,9 @@ if (document.querySelector('#app-compare')) {
           },
           series: this.formatDataToSubindicatorsChart(this.selectedSubindicator.data),
         });
+        if (this.indicators.length === 0) {
+          subIndicatorChart.destroy();
+        }
       },
     },
   });

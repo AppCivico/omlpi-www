@@ -20,7 +20,7 @@ if (window.location.href.indexOf('city') > -1) {
   window.$vuePopulateData = new Vue({
     el: '#app',
     data: {
-      localeId: window.location.search.split('id=')[1],
+      localeId: window.location.search.split('id=')[1].split('&')[0],
       selectedArea: Number(window.location.search.split('area=')[1]) || 1,
       locale: null,
       apiUrl: config.api.domain,
@@ -34,6 +34,15 @@ if (window.location.href.indexOf('city') > -1) {
         return this.locale.indicators.filter(
           indicator => indicator.area.id === this.selectedArea,
         ).length;
+      },
+      mapZoomLevel() {
+        if (this.locale.type === 'country') {
+          return 4;
+        }
+        if (this.locale.type === 'city') {
+          return 14;
+        }
+        return 6;
       },
       barsHorizontalData() {
         const data = [];
@@ -145,7 +154,16 @@ if (window.location.href.indexOf('city') > -1) {
               type: 'column',
             },
             title: null,
-            subtitle: null,
+            subtitle: {
+              text: chart.data[0].values.year,
+              verticalAlign: 'bottom',
+              align: 'left',
+              y: 25,
+              style: {
+                color: '#a3a3a3',
+                fontSize: '.88889rem',
+              },
+            },
             xAxis: {
               gridLineWidth: 0,
               labels: {
@@ -154,25 +172,24 @@ if (window.location.href.indexOf('city') > -1) {
             },
             yAxis: {
               min: 0,
+              labels: {
+                format: chart.data[0].values.value_relative ? '{value}%' : '{value}',
+              },
               title: {
                 text: false,
               },
             },
             tooltip: {
+              // eslint-disable-next-line object-shorthand
+              formatter: function () {
+                return chart.data[0].values.value_relative ? `${this.y}%` : this.y;
+              },
               headerFormat: '',
             },
             plotOptions: {
               column: {
                 pointPadding: 0.2,
                 borderWidth: 0,
-              },
-            },
-            exporting: {
-              buttons: {
-                contextButton: {
-                  // text: 'Download',
-                  menuItems: ['downloadPNG', 'downloadJPG', 'downloadPDF', 'downloadSVG'],
-                },
               },
             },
             series: this.formatDataToBarsCharts(chart),
@@ -185,7 +202,16 @@ if (window.location.href.indexOf('city') > -1) {
               type: 'bar',
             },
             title: null,
-            subtitle: null,
+            subtitle: {
+              text: chart.data[0].values.year,
+              verticalAlign: 'bottom',
+              align: 'left',
+              y: 25,
+              style: {
+                color: '#a3a3a3',
+                fontSize: '.88889rem',
+              },
+            },
             xAxis: {
               title: {
                 text: null,
@@ -201,20 +227,12 @@ if (window.location.href.indexOf('city') > -1) {
               },
             },
             tooltip: {
-              enabled: false,
+              headerFormat: '',
             },
             plotOptions: {
               bar: {
                 dataLabels: {
                   enabled: true,
-                },
-              },
-            },
-            exporting: {
-              buttons: {
-                contextButton: {
-                  // text: 'Download',
-                  menuItems: ['downloadPNG', 'downloadJPG', 'downloadPDF', 'downloadSVG'],
                 },
               },
             },
