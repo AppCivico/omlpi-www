@@ -16,7 +16,7 @@ if (document.querySelector('#app-compare')) {
     data: {
       locales_list: null,
       locales: { comparison: [{ indicators: [] }] },
-      selectedArea: 3,
+      selectedArea: Number(new URL(window.location.href).searchParams.get('area')) || 3,
       selectedIndicator: { description: null },
       selectedSubindicator: {},
       selectedYear: null,
@@ -27,6 +27,7 @@ if (document.querySelector('#app-compare')) {
       firstChartPrint: 1,
       apiUrl: config.api.domain,
       apiDocsUrl: config.api.docs,
+      localeId: new URL(window.location.href).searchParams.get('location_id'),
       areas: [
         {
           id: 1,
@@ -63,9 +64,6 @@ if (document.querySelector('#app-compare')) {
             .some(indicator => indicator.id === this.selectedIndicator.id),
         );
       },
-      localeId() {
-        return new URL(window.location.href).searchParams.get('location_id') || 5200050;
-      },
       indicators() {
         return this.locale.indicators.filter(
           item => item.area.id === this.selectedArea,
@@ -73,9 +71,11 @@ if (document.querySelector('#app-compare')) {
       },
       years() {
         const years = [];
-        this.selectedSubindicator.data.forEach((item) => {
-          item.values.map(iitem => years.push(iitem.year));
-        });
+        if (this.selectedSubindicator.data) {
+          this.selectedSubindicator.data.forEach((item) => {
+            item.values.map(iitem => years.push(iitem.year));
+          });
+        }
         return [...new Set(years)];
       },
       emptyIndicator() {
@@ -95,8 +95,10 @@ if (document.querySelector('#app-compare')) {
         }
 
         if (this.selectedSubindicator) {
-          this.selectedYear = this.selectedSubindicator?.data[0]?.values[0]?.year;
+          this.selectedYear = this.selectedSubindicator?.data?.[0]?.values[0]?.year;
         }
+
+        this.updateUrlParams('area', this.selectedArea);
 
         this.generateIndicatorChart();
       },
@@ -112,6 +114,12 @@ if (document.querySelector('#app-compare')) {
         if (Object.entries(this.selectedSubindicator)?.length !== 0
             && this.selectedSubindicator.constructor === Object) {
           this.selectedYear = this.selectedSubindicator?.data[0]?.values?.[0]?.year;
+        }
+
+        if (this.locale.id) {
+          const newId = this.locale.id;
+          this.updateUrlParams('location_id', newId);
+          this.localeId = newId;
         }
 
         document.querySelector('#myLocation').value = this.locale.name;
@@ -147,6 +155,12 @@ if (document.querySelector('#app-compare')) {
       // await this.generateSubindicatorChart();
     },
     methods: {
+      updateUrlParams(param, value) {
+        const searchParams = new URLSearchParams(window.location.search);
+        searchParams.set(param, value);
+        const newRelativePathQuery = `${window.location.pathname}?${searchParams.toString()}`;
+        window.history.pushState(null, '', newRelativePathQuery);
+      },
       getLocale(localeId) {
         this.loadingLocale = true;
         const url = `${config.api.domain}data/compare?locale_id=${localeId || config.fisrtCityId}`;
@@ -332,6 +346,10 @@ if (document.querySelector('#app-compare')) {
         return data;
       },
       generateIndicatorChart() {
+        if (!this.selectedIndicator.id) {
+          return false;
+        }
+
         const indicatorChart = Highcharts.chart('js-history', {
           chart: {
             type: 'column',
@@ -375,7 +393,7 @@ if (document.querySelector('#app-compare')) {
         }
       },
       generateSubindicatorChart() {
-        return Highcharts.chart('js-subindicators-chart', {
+        const subIndicatorChart = Highcharts.chart('js-subindicators-chart', {
           chart: {
             type: 'column',
           },
@@ -424,6 +442,9 @@ if (document.querySelector('#app-compare')) {
           },
           series: this.formatDataToSubindicatorsChart(this.selectedSubindicator.data),
         });
+        if (this.indicators.length === 0) {
+          subIndicatorChart.destroy();
+        }
       },
     },
   });

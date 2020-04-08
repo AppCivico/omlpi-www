@@ -12,7 +12,7 @@ if (document.querySelector('#app-history')) {
     data: {
       locales: null,
       locale: { historical: [{ indicators: [] }] },
-      selectedArea: 3,
+      selectedArea: Number(new URL(window.location.href).searchParams.get('area')) || 3,
       selectedIndicator: { description: null },
       selectedSubindicator: {},
       loadingLocale: false,
@@ -22,6 +22,7 @@ if (document.querySelector('#app-history')) {
       firstChartPrint: 1,
       apiUrl: config.api.domain,
       apiDocsUrl: config.api.docs,
+      localeId: new URL(window.location.href).searchParams.get('location_id'),
       areas: [
         {
           id: 1,
@@ -43,9 +44,6 @@ if (document.querySelector('#app-history')) {
     computed: {
       loading() {
         return !this.locale;
-      },
-      localeId() {
-        return new URL(window.location.href).searchParams.get('location_id');
       },
       indicators() {
         return this.locale.historical[0].indicators.filter(
@@ -69,8 +67,10 @@ if (document.querySelector('#app-history')) {
         }
 
         if (this.selectedSubindicator) {
-          this.selectedYear = this.selectedSubindicator?.data[0]?.values[0]?.year;
+          this.selectedYear = this.selectedSubindicator?.data?.[0]?.values[0]?.year;
         }
+
+        this.updateUrlParams('area', this.selectedArea);
 
         this.generateIndicatorChart();
       },
@@ -85,7 +85,13 @@ if (document.querySelector('#app-history')) {
 
         if (Object.entries(this.selectedSubindicator).length !== 0
             && this.selectedSubindicator.constructor === Object) {
-          this.selectedYear = this.selectedSubindicator?.data[0]?.values[0]?.year;
+          this.selectedYear = this.selectedSubindicator?.data?.[0]?.values[0]?.year;
+        }
+
+        if (this.locale.historical) {
+          const newId = this.locale.historical?.[0].id;
+          this.updateUrlParams('location_id', newId);
+          this.localeId = newId;
         }
 
         document.querySelector('#myLocation').value = this.locale.historical[0].name;
@@ -113,6 +119,12 @@ if (document.querySelector('#app-history')) {
       // await this.generateSubindicatorChart();
     },
     methods: {
+      updateUrlParams(param, value) {
+        const searchParams = new URLSearchParams(window.location.search);
+        searchParams.set(param, value);
+        const newRelativePathQuery = `${window.location.pathname}?${searchParams.toString()}`;
+        window.history.pushState(null, '', newRelativePathQuery);
+      },
       getLocale(localeId) {
         this.loadingLocale = true;
         const url = `${config.api.domain}data/historical?locale_id=${localeId || 1}`;
@@ -232,6 +244,11 @@ if (document.querySelector('#app-history')) {
         return data;
       },
       generateIndicatorChart() {
+        if (!this.selectedIndicator.id) {
+          console.log(!this.selectedIndicator.id);
+          return false;
+        }
+
         const indicatorChart = Highcharts.chart('js-history', {
           chart: {
             type: 'column',
@@ -279,6 +296,9 @@ if (document.querySelector('#app-history')) {
         }
       },
       generateSubindicatorChart() {
+        if (!this.selectedIndicator.id) {
+          return false;
+        }
         const subIndicatorChart = Highcharts.chart('js-subindicators-chart', {
           chart: {
             type: 'bar',

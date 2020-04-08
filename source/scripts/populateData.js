@@ -20,7 +20,7 @@ if (window.location.href.indexOf('city') > -1) {
   window.$vuePopulateData = new Vue({
     el: '#app',
     data: {
-      localeId: window.location.search.split('id=')[1],
+      localeId: window.location.search.split('id=')[1].split('&')[0],
       selectedArea: Number(window.location.search.split('area=')[1]) || 1,
       locale: null,
       apiUrl: config.api.domain,

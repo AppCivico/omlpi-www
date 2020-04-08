@@ -87,3 +87,11 @@
     background-image: image('csv.svg');
   }
 }
+
+.card-links__indicators i {
+  &::after {
+    width: 4.68rem;
+    height: 5.18rem;
+    background-image: image('indicator.svg');
+  }
+}

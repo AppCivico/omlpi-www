@@ -134,14 +134,14 @@
         <div class="container">
           <section class="card-links">
             <a
-              class="card-links__history"
-              :href="`/historico?location_id=${localeId}`"
+              class="card-links__indicators"
+              :href="`/city?location_id=${localeId}&area=${this.selectedArea}`"
             >
-              <i></i>Série Histórica
+              <i></i>Indicadores
             </a>
             <a
               class="card-links__comparison"
-              :href="`/comparacao?location_id=${localeId}`"
+              :href="`/comparacao?location_id=${localeId}&area=${this.selectedArea}`"
               :disabled="locale.id === 1"
             >
                 <i></i>Comparação

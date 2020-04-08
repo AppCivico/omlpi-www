@@ -8681,7 +8681,7 @@ if (document.querySelector('#app-compare')) {
           indicators: []
         }]
       },
-      selectedArea: 3,
+      selectedArea: Number(new URL(window.location.href).searchParams.get('area')) || 3,
       selectedIndicator: {
         description: null
       },
@@ -8694,6 +8694,7 @@ if (document.querySelector('#app-compare')) {
       firstChartPrint: 1,
       apiUrl: _config.default.api.domain,
       apiDocsUrl: _config.default.api.docs,
+      localeId: new URL(window.location.href).searchParams.get('location_id'),
       areas: [{
         id: 1,
         name: 'Assistência Social',
@@ -8735,9 +8736,6 @@ if (document.querySelector('#app-compare')) {
           });
         });
       },
-      localeId: function localeId() {
-        return new URL(window.location.href).searchParams.get('location_id') || 5200050;
-      },
       indicators: function indicators() {
         var _this3 = this;
 
@@ -8747,11 +8745,15 @@ if (document.querySelector('#app-compare')) {
       },
       years: function years() {
         var years = [];
-        this.selectedSubindicator.data.forEach(function (item) {
-          item.values.map(function (iitem) {
-            return years.push(iitem.year);
+
+        if (this.selectedSubindicator.data) {
+          this.selectedSubindicator.data.forEach(function (item) {
+            item.values.map(function (iitem) {
+              return years.push(iitem.year);
+            });
           });
-        });
+        }
+
         return (0, _toConsumableArray2.default)(new Set(years));
       },
       emptyIndicator: function emptyIndicator() {
@@ -8775,11 +8777,12 @@ if (document.querySelector('#app-compare')) {
         }
 
         if (this.selectedSubindicator) {
-          var _this$selectedSubindi, _this$selectedSubindi2, _this$selectedSubindi3;
+          var _this$selectedSubindi, _this$selectedSubindi2, _this$selectedSubindi3, _this$selectedSubindi4;
 
-          this.selectedYear = (_this$selectedSubindi = this.selectedSubindicator) === null || _this$selectedSubindi === void 0 ? void 0 : (_this$selectedSubindi2 = _this$selectedSubindi.data[0]) === null || _this$selectedSubindi2 === void 0 ? void 0 : (_this$selectedSubindi3 = _this$selectedSubindi2.values[0]) === null || _this$selectedSubindi3 === void 0 ? void 0 : _this$selectedSubindi3.year;
+          this.selectedYear = (_this$selectedSubindi = this.selectedSubindicator) === null || _this$selectedSubindi === void 0 ? void 0 : (_this$selectedSubindi2 = _this$selectedSubindi.data) === null || _this$selectedSubindi2 === void 0 ? void 0 : (_this$selectedSubindi3 = _this$selectedSubindi2[0]) === null || _this$selectedSubindi3 === void 0 ? void 0 : (_this$selectedSubindi4 = _this$selectedSubindi3.values[0]) === null || _this$selectedSubindi4 === void 0 ? void 0 : _this$selectedSubindi4.year;
         }
 
+        this.updateUrlParams('area', this.selectedArea);
         this.generateIndicatorChart();
       },
       locale: function locale() {
@@ -8794,9 +8797,15 @@ if (document.querySelector('#app-compare')) {
         }
 
         if (((_Object$entries = Object.entries(this.selectedSubindicator)) === null || _Object$entries === void 0 ? void 0 : _Object$entries.length) !== 0 && this.selectedSubindicator.constructor === Object) {
-          var _this$selectedSubindi4, _this$selectedSubindi5, _this$selectedSubindi6, _this$selectedSubindi7;
+          var _this$selectedSubindi5, _this$selectedSubindi6, _this$selectedSubindi7, _this$selectedSubindi8;
 
-          this.selectedYear = (_this$selectedSubindi4 = this.selectedSubindicator) === null || _this$selectedSubindi4 === void 0 ? void 0 : (_this$selectedSubindi5 = _this$selectedSubindi4.data[0]) === null || _this$selectedSubindi5 === void 0 ? void 0 : (_this$selectedSubindi6 = _this$selectedSubindi5.values) === null || _this$selectedSubindi6 === void 0 ? void 0 : (_this$selectedSubindi7 = _this$selectedSubindi6[0]) === null || _this$selectedSubindi7 === void 0 ? void 0 : _this$selectedSubindi7.year;
+          this.selectedYear = (_this$selectedSubindi5 = this.selectedSubindicator) === null || _this$selectedSubindi5 === void 0 ? void 0 : (_this$selectedSubindi6 = _this$selectedSubindi5.data[0]) === null || _this$selectedSubindi6 === void 0 ? void 0 : (_this$selectedSubindi7 = _this$selectedSubindi6.values) === null || _this$selectedSubindi7 === void 0 ? void 0 : (_this$selectedSubindi8 = _this$selectedSubindi7[0]) === null || _this$selectedSubindi8 === void 0 ? void 0 : _this$selectedSubindi8.year;
+        }
+
+        if (this.locale.id) {
+          var newId = this.locale.id;
+          this.updateUrlParams('location_id', newId);
+          this.localeId = newId;
         }
 
         document.querySelector('#myLocation').value = this.locale.name;
@@ -8812,9 +8821,9 @@ if (document.querySelector('#app-compare')) {
         }
 
         if (this.selectedSubindicator) {
-          var _this$selectedSubindi8, _this$selectedSubindi9, _this$selectedSubindi10, _this$selectedSubindi11, _this$selectedSubindi12;
+          var _this$selectedSubindi9, _this$selectedSubindi10, _this$selectedSubindi11, _this$selectedSubindi12, _this$selectedSubindi13;
 
-          this.selectedYear = (_this$selectedSubindi8 = this.selectedSubindicator) === null || _this$selectedSubindi8 === void 0 ? void 0 : (_this$selectedSubindi9 = _this$selectedSubindi8.data) === null || _this$selectedSubindi9 === void 0 ? void 0 : (_this$selectedSubindi10 = _this$selectedSubindi9[0]) === null || _this$selectedSubindi10 === void 0 ? void 0 : (_this$selectedSubindi11 = _this$selectedSubindi10.values) === null || _this$selectedSubindi11 === void 0 ? void 0 : (_this$selectedSubindi12 = _this$selectedSubindi11[0]) === null || _this$selectedSubindi12 === void 0 ? void 0 : _this$selectedSubindi12.year;
+          this.selectedYear = (_this$selectedSubindi9 = this.selectedSubindicator) === null || _this$selectedSubindi9 === void 0 ? void 0 : (_this$selectedSubindi10 = _this$selectedSubindi9.data) === null || _this$selectedSubindi10 === void 0 ? void 0 : (_this$selectedSubindi11 = _this$selectedSubindi10[0]) === null || _this$selectedSubindi11 === void 0 ? void 0 : (_this$selectedSubindi12 = _this$selectedSubindi11.values) === null || _this$selectedSubindi12 === void 0 ? void 0 : (_this$selectedSubindi13 = _this$selectedSubindi12[0]) === null || _this$selectedSubindi13 === void 0 ? void 0 : _this$selectedSubindi13.year;
         }
 
         this.generateIndicatorChart();
@@ -8822,9 +8831,9 @@ if (document.querySelector('#app-compare')) {
       },
       selectedSubindicator: function selectedSubindicator() {
         if (this.selectedSubindicator) {
-          var _this$selectedSubindi13, _this$selectedSubindi14, _this$selectedSubindi15;
+          var _this$selectedSubindi14, _this$selectedSubindi15, _this$selectedSubindi16;
 
-          this.selectedYear = (_this$selectedSubindi13 = this.selectedSubindicator) === null || _this$selectedSubindi13 === void 0 ? void 0 : (_this$selectedSubindi14 = _this$selectedSubindi13.data[0]) === null || _this$selectedSubindi14 === void 0 ? void 0 : (_this$selectedSubindi15 = _this$selectedSubindi14.values[0]) === null || _this$selectedSubindi15 === void 0 ? void 0 : _this$selectedSubindi15.year;
+          this.selectedYear = (_this$selectedSubindi14 = this.selectedSubindicator) === null || _this$selectedSubindi14 === void 0 ? void 0 : (_this$selectedSubindi15 = _this$selectedSubindi14.data[0]) === null || _this$selectedSubindi15 === void 0 ? void 0 : (_this$selectedSubindi16 = _this$selectedSubindi15.values[0]) === null || _this$selectedSubindi16 === void 0 ? void 0 : _this$selectedSubindi16.year;
         }
 
         this.generateSubindicatorChart();
@@ -8857,6 +8866,12 @@ if (document.querySelector('#app-compare')) {
       }))();
     },
     methods: {
+      updateUrlParams: function updateUrlParams(param, value) {
+        var searchParams = new URLSearchParams(window.location.search);
+        searchParams.set(param, value);
+        var newRelativePathQuery = "".concat(window.location.pathname, "?").concat(searchParams.toString());
+        window.history.pushState(null, '', newRelativePathQuery);
+      },
       getLocale: function getLocale(localeId) {
         var _this5 = this;
 
@@ -9071,6 +9086,10 @@ if (document.querySelector('#app-compare')) {
         return data;
       },
       generateIndicatorChart: function generateIndicatorChart() {
+        if (!this.selectedIndicator.id) {
+          return false;
+        }
+
         var indicatorChart = Highcharts.chart('js-history', {
           chart: {
             type: 'column'
@@ -9115,9 +9134,9 @@ if (document.querySelector('#app-compare')) {
         }
       },
       generateSubindicatorChart: function generateSubindicatorChart() {
-        var _this$selectedSubindi16, _this$selectedSubindi17, _this$selectedSubindi18;
+        var _this$selectedSubindi17, _this$selectedSubindi18, _this$selectedSubindi19;
 
-        return Highcharts.chart('js-subindicators-chart', {
+        var subIndicatorChart = Highcharts.chart('js-subindicators-chart', {
           chart: {
             type: 'column'
           },
@@ -9142,7 +9161,7 @@ if (document.querySelector('#app-compare')) {
             },
             labels: {
               /* eslint-disable camelcase */
-              format: ((_this$selectedSubindi16 = this.selectedSubindicator) === null || _this$selectedSubindi16 === void 0 ? void 0 : (_this$selectedSubindi17 = _this$selectedSubindi16.data) === null || _this$selectedSubindi17 === void 0 ? void 0 : _this$selectedSubindi17[0].values[0].value_relative) ? '{value}%' : '{value}',
+              format: ((_this$selectedSubindi17 = this.selectedSubindicator) === null || _this$selectedSubindi17 === void 0 ? void 0 : (_this$selectedSubindi18 = _this$selectedSubindi17.data) === null || _this$selectedSubindi18 === void 0 ? void 0 : _this$selectedSubindi18[0].values[0].value_relative) ? '{value}%' : '{value}',
               overflow: 'justify'
             }
           },
@@ -9159,7 +9178,7 @@ if (document.querySelector('#app-compare')) {
             bar: {
               dataLabels: {
                 enabled: true,
-                format: ((_this$selectedSubindi18 = this.selectedSubindicator.data) === null || _this$selectedSubindi18 === void 0 ? void 0 : _this$selectedSubindi18[0].values[0].value_relative) ? '{y}%' : '{y}'
+                format: ((_this$selectedSubindi19 = this.selectedSubindicator.data) === null || _this$selectedSubindi19 === void 0 ? void 0 : _this$selectedSubindi19[0].values[0].value_relative) ? '{y}%' : '{y}'
               }
             }
           },
@@ -9168,6 +9187,10 @@ if (document.querySelector('#app-compare')) {
           },
           series: this.formatDataToSubindicatorsChart(this.selectedSubindicator.data)
         });
+
+        if (this.indicators.length === 0) {
+          subIndicatorChart.destroy();
+        }
       }
     }
   });
@@ -9240,7 +9263,7 @@ if (document.querySelector('#app-history')) {
           indicators: []
         }]
       },
-      selectedArea: 3,
+      selectedArea: Number(new URL(window.location.href).searchParams.get('area')) || 3,
       selectedIndicator: {
         description: null
       },
@@ -9252,6 +9275,7 @@ if (document.querySelector('#app-history')) {
       firstChartPrint: 1,
       apiUrl: _config.default.api.domain,
       apiDocsUrl: _config.default.api.docs,
+      localeId: new URL(window.location.href).searchParams.get('location_id'),
       areas: [{
         id: 1,
         name: 'Assistência Social',
@@ -9269,9 +9293,6 @@ if (document.querySelector('#app-history')) {
     computed: {
       loading: function loading() {
         return !this.locale;
-      },
-      localeId: function localeId() {
-        return new URL(window.location.href).searchParams.get('location_id');
       },
       indicators: function indicators() {
         var _this = this;
@@ -9299,11 +9320,12 @@ if (document.querySelector('#app-history')) {
         }
 
         if (this.selectedSubindicator) {
-          var _this$selectedSubindi, _this$selectedSubindi2, _this$selectedSubindi3;
+          var _this$selectedSubindi, _this$selectedSubindi2, _this$selectedSubindi3, _this$selectedSubindi4;
 
-          this.selectedYear = (_this$selectedSubindi = this.selectedSubindicator) === null || _this$selectedSubindi === void 0 ? void 0 : (_this$selectedSubindi2 = _this$selectedSubindi.data[0]) === null || _this$selectedSubindi2 === void 0 ? void 0 : (_this$selectedSubindi3 = _this$selectedSubindi2.values[0]) === null || _this$selectedSubindi3 === void 0 ? void 0 : _this$selectedSubindi3.year;
+          this.selectedYear = (_this$selectedSubindi = this.selectedSubindicator) === null || _this$selectedSubindi === void 0 ? void 0 : (_this$selectedSubindi2 = _this$selectedSubindi.data) === null || _this$selectedSubindi2 === void 0 ? void 0 : (_this$selectedSubindi3 = _this$selectedSubindi2[0]) === null || _this$selectedSubindi3 === void 0 ? void 0 : (_this$selectedSubindi4 = _this$selectedSubindi3.values[0]) === null || _this$selectedSubindi4 === void 0 ? void 0 : _this$selectedSubindi4.year;
         }
 
+        this.updateUrlParams('area', this.selectedArea);
         this.generateIndicatorChart();
       },
       locale: function locale() {
@@ -9318,9 +9340,17 @@ if (document.querySelector('#app-history')) {
         }
 
         if (Object.entries(this.selectedSubindicator).length !== 0 && this.selectedSubindicator.constructor === Object) {
-          var _this$selectedSubindi4, _this$selectedSubindi5, _this$selectedSubindi6;
+          var _this$selectedSubindi5, _this$selectedSubindi6, _this$selectedSubindi7, _this$selectedSubindi8;
 
-          this.selectedYear = (_this$selectedSubindi4 = this.selectedSubindicator) === null || _this$selectedSubindi4 === void 0 ? void 0 : (_this$selectedSubindi5 = _this$selectedSubindi4.data[0]) === null || _this$selectedSubindi5 === void 0 ? void 0 : (_this$selectedSubindi6 = _this$selectedSubindi5.values[0]) === null || _this$selectedSubindi6 === void 0 ? void 0 : _this$selectedSubindi6.year;
+          this.selectedYear = (_this$selectedSubindi5 = this.selectedSubindicator) === null || _this$selectedSubindi5 === void 0 ? void 0 : (_this$selectedSubindi6 = _this$selectedSubindi5.data) === null || _this$selectedSubindi6 === void 0 ? void 0 : (_this$selectedSubindi7 = _this$selectedSubindi6[0]) === null || _this$selectedSubindi7 === void 0 ? void 0 : (_this$selectedSubindi8 = _this$selectedSubindi7.values[0]) === null || _this$selectedSubindi8 === void 0 ? void 0 : _this$selectedSubindi8.year;
+        }
+
+        if (this.locale.historical) {
+          var _this$locale$historic2;
+
+          var newId = (_this$locale$historic2 = this.locale.historical) === null || _this$locale$historic2 === void 0 ? void 0 : _this$locale$historic2[0].id;
+          this.updateUrlParams('location_id', newId);
+          this.localeId = newId;
         }
 
         document.querySelector('#myLocation').value = this.locale.historical[0].name;
@@ -9334,9 +9364,9 @@ if (document.querySelector('#app-history')) {
         }
 
         if (this.selectedSubindicator) {
-          var _this$selectedSubindi7, _this$selectedSubindi8, _this$selectedSubindi9, _this$selectedSubindi10, _this$selectedSubindi11;
+          var _this$selectedSubindi9, _this$selectedSubindi10, _this$selectedSubindi11, _this$selectedSubindi12, _this$selectedSubindi13;
 
-          this.selectedYear = (_this$selectedSubindi7 = this.selectedSubindicator) === null || _this$selectedSubindi7 === void 0 ? void 0 : (_this$selectedSubindi8 = _this$selectedSubindi7.data) === null || _this$selectedSubindi8 === void 0 ? void 0 : (_this$selectedSubindi9 = _this$selectedSubindi8[0]) === null || _this$selectedSubindi9 === void 0 ? void 0 : (_this$selectedSubindi10 = _this$selectedSubindi9.values) === null || _this$selectedSubindi10 === void 0 ? void 0 : (_this$selectedSubindi11 = _this$selectedSubindi10[0]) === null || _this$selectedSubindi11 === void 0 ? void 0 : _this$selectedSubindi11.year;
+          this.selectedYear = (_this$selectedSubindi9 = this.selectedSubindicator) === null || _this$selectedSubindi9 === void 0 ? void 0 : (_this$selectedSubindi10 = _this$selectedSubindi9.data) === null || _this$selectedSubindi10 === void 0 ? void 0 : (_this$selectedSubindi11 = _this$selectedSubindi10[0]) === null || _this$selectedSubindi11 === void 0 ? void 0 : (_this$selectedSubindi12 = _this$selectedSubindi11.values) === null || _this$selectedSubindi12 === void 0 ? void 0 : (_this$selectedSubindi13 = _this$selectedSubindi12[0]) === null || _this$selectedSubindi13 === void 0 ? void 0 : _this$selectedSubindi13.year;
         }
 
         this.generateIndicatorChart();
@@ -9370,6 +9400,12 @@ if (document.querySelector('#app-history')) {
       }))();
     },
     methods: {
+      updateUrlParams: function updateUrlParams(param, value) {
+        var searchParams = new URLSearchParams(window.location.search);
+        searchParams.set(param, value);
+        var newRelativePathQuery = "".concat(window.location.pathname, "?").concat(searchParams.toString());
+        window.history.pushState(null, '', newRelativePathQuery);
+      },
       getLocale: function getLocale(localeId) {
         var _this3 = this;
 
@@ -9504,6 +9540,11 @@ if (document.querySelector('#app-history')) {
         return data;
       },
       generateIndicatorChart: function generateIndicatorChart() {
+        if (!this.selectedIndicator.id) {
+          console.log(!this.selectedIndicator.id);
+          return false;
+        }
+
         var indicatorChart = Highcharts.chart('js-history', {
           chart: {
             type: 'column'
@@ -9551,7 +9592,11 @@ if (document.querySelector('#app-history')) {
         }
       },
       generateSubindicatorChart: function generateSubindicatorChart() {
-        var _this$selectedSubindi12, _this$selectedSubindi13;
+        var _this$selectedSubindi14, _this$selectedSubindi15;
+
+        if (!this.selectedIndicator.id) {
+          return false;
+        }
 
         var subIndicatorChart = Highcharts.chart('js-subindicators-chart', {
           chart: {
@@ -9577,7 +9622,7 @@ if (document.querySelector('#app-history')) {
               align: 'high'
             },
             labels: {
-              format: ((_this$selectedSubindi12 = this.selectedSubindicator.data) === null || _this$selectedSubindi12 === void 0 ? void 0 : _this$selectedSubindi12[0].values[0].value_relative) ? '{value}%' : '{value}',
+              format: ((_this$selectedSubindi14 = this.selectedSubindicator.data) === null || _this$selectedSubindi14 === void 0 ? void 0 : _this$selectedSubindi14[0].values[0].value_relative) ? '{value}%' : '{value}',
               overflow: 'justify'
             }
           },
@@ -9594,7 +9639,7 @@ if (document.querySelector('#app-history')) {
             bar: {
               dataLabels: {
                 enabled: true,
-                format: ((_this$selectedSubindi13 = this.selectedSubindicator.data) === null || _this$selectedSubindi13 === void 0 ? void 0 : _this$selectedSubindi13[0].values[0].value_relative) ? '{y}%' : '{y}'
+                format: ((_this$selectedSubindi15 = this.selectedSubindicator.data) === null || _this$selectedSubindi15 === void 0 ? void 0 : _this$selectedSubindi15[0].values[0].value_relative) ? '{y}%' : '{y}'
               }
             }
           },
@@ -10195,7 +10240,7 @@ if (window.location.href.indexOf('city') > -1) {
   window.$vuePopulateData = new Vue({
     el: '#app',
     data: {
-      localeId: window.location.search.split('id=')[1],
+      localeId: window.location.search.split('id=')[1].split('&')[0],
       selectedArea: Number(window.location.search.split('area=')[1]) || 1,
       locale: null,
       apiUrl: _config.default.api.domain,
@@ -10835,7 +10880,6 @@ function startSearch() {
   function watchSelection() {
     regionInput.addEventListener('awesomplete-selectcomplete', function (event) {
       if (event.srcElement.dataset.intern) {
-        console.log('haaaaaalo');
         window.location.href = "/city?id=".concat(event.text.value, "&area=").concat(window.$vuePopulateData.selectedArea);
       } else {
         handleInputClass(event.text.label.split(':')[1]);
