@@ -391,6 +391,7 @@ if (document.querySelector('#app-compare')) {
         if (this.indicators.length === 0) {
           indicatorChart.destroy();
         }
+        return true;
       },
       generateSubindicatorChart() {
         const subIndicatorChart = Highcharts.chart('js-subindicators-chart', {

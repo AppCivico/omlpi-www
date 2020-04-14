@@ -245,7 +245,6 @@ if (document.querySelector('#app-history')) {
       },
       generateIndicatorChart() {
         if (!this.selectedIndicator.id) {
-          console.log(!this.selectedIndicator.id);
           return false;
         }
 
@@ -294,7 +293,10 @@ if (document.querySelector('#app-history')) {
         if (this.indicators.length === 0) {
           indicatorChart.destroy();
         }
+
+        return true;
       },
+
       generateSubindicatorChart() {
         if (!this.selectedIndicator.id) {
           return false;
@@ -350,6 +352,8 @@ if (document.querySelector('#app-history')) {
         if (this.indicators.length === 0) {
           subIndicatorChart.destroy();
         }
+
+        return true;
       },
     },
   });
