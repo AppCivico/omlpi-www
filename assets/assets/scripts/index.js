@@ -9132,6 +9132,8 @@ if (document.querySelector('#app-compare')) {
         if (this.indicators.length === 0) {
           indicatorChart.destroy();
         }
+
+        return true;
       },
       generateSubindicatorChart: function generateSubindicatorChart() {
         var _this$selectedSubindi17, _this$selectedSubindi18, _this$selectedSubindi19;
@@ -9541,7 +9543,6 @@ if (document.querySelector('#app-history')) {
       },
       generateIndicatorChart: function generateIndicatorChart() {
         if (!this.selectedIndicator.id) {
-          console.log(!this.selectedIndicator.id);
           return false;
         }
 
@@ -9590,6 +9591,8 @@ if (document.querySelector('#app-history')) {
         if (this.indicators.length === 0) {
           indicatorChart.destroy();
         }
+
+        return true;
       },
       generateSubindicatorChart: function generateSubindicatorChart() {
         var _this$selectedSubindi14, _this$selectedSubindi15;
@@ -9652,6 +9655,8 @@ if (document.querySelector('#app-history')) {
         if (this.indicators.length === 0) {
           subIndicatorChart.destroy();
         }
+
+        return true;
       }
     }
   });
@@ -10720,7 +10725,6 @@ var _fuzzysort = _interopRequireDefault(require("fuzzysort"));
 
 var _config = _interopRequireDefault(require("./config"));
 
-/* global Vue */
 function startSearch() {
   var regionInput = document.querySelector('#js-region-input');
   var cityId;

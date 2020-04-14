@@ -1,5 +1,3 @@
-/* global Vue */
-
 import Awesomplete from 'awesomplete';
 import fuzzysort from 'fuzzysort';
 import config from './config';
