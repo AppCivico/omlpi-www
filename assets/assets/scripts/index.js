@@ -10341,7 +10341,7 @@ if (window.location.href.indexOf('city') > -1) {
     },
     methods: {
       changeTitle: function changeTitle() {
-        document.title = "Obeserva - ".concat(this.locale.name);
+        document.title = "Observa - ".concat(this.locale.name);
       },
       slugify: function slugify(string) {
         return (0, _slugify2.default)(string, {

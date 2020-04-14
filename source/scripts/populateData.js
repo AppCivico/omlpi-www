@@ -84,7 +84,7 @@ if (window.location.href.indexOf('city') > -1) {
     },
     methods: {
       changeTitle() {
-        document.title = `Obeserva - ${this.locale.name}`;
+        document.title = `Observa - ${this.locale.name}`;
       },
       slugify(string) {
         return slugify(string, { lower: true });
