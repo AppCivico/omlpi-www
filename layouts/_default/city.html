@@ -76,7 +76,10 @@
                 >
                   <summary @click="reflowCharts">
                     {{ "{{ indicator.description }}" }}:
-                    <strong v-text="indicator.values.value_absolute || `${indicator.values.value_relative}%`"></strong>
+                    <strong
+                      v-text="(+(indicator.values.value_absolute)).toLocaleString('pt-br')
+                      || `${indicator.values.value_relative}%`">
+                    </strong>
                   </summary>
                   <div class="indicator-header">
                     <a
@@ -88,7 +91,8 @@
                       Baixar dados do indicador
                     </a>
                     <div class="indicator-header__number">
-                      <h2 v-text="indicator.values.value_absolute || `${indicator.values.value_relative}%`"></h2>
+                      <h2 v-text="(+(indicator.values.value_absolute)).toLocaleString('pt-br')
+                      || `${indicator.values.value_relative}%`"></h2>
                     </div>
                     <div class="indicator-header__description">
                       Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur laudantium deleniti dolorum itaque laborum ut illo eaque eius. Magnam officia repudiandae aspernatur nesciunt itaque laborum, esse qui temporibus ducimus nisi.
@@ -138,7 +142,7 @@
                               v-if="subindicatorData.values.value_absolute"
                               class="infobox__percentage"
                             >
-                              {{ "{{ subindicatorData.values.value_absolute }}" }}
+                              {{ "{{ Number(subindicatorData.values.value_absolute).toLocaleString('pt-br') }}" }}
                             </strong>
                             <time
                               v-if="index === 0"
