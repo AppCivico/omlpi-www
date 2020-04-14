@@ -399,10 +399,10 @@ if (document.querySelector('#app-compare')) {
             type: 'column',
           },
           title: {
-            text: this.selectedIndicator.description,
+            text: this.selectedSubindicator.classification,
           },
           subtitle: {
-            text: this.selectedSubindicator.classification,
+            text: this.selectedIndicator.description,
           },
           xAxis: {
             categories: this.formatCategories(this.selectedSubindicator.data),
