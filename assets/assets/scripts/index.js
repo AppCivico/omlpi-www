@@ -10474,16 +10474,18 @@ if (window.location.href.indexOf('city') > -1) {
               }
             },
             tooltip: {
-              // eslint-disable-next-line object-shorthand
+              // eslint-disable-next-line object-shorthand, func-names
               formatter: function formatter() {
                 return chart.data[0].values.value_relative ? "".concat(this.y, "%") : this.y;
               },
               headerFormat: ''
             },
             plotOptions: {
-              column: {
-                pointPadding: 0.2,
-                borderWidth: 0
+              series: {
+                borderWidth: 0,
+                dataLabels: {
+                  enabled: true
+                }
               }
             },
             series: _this4.formatDataToBarsCharts(chart)
