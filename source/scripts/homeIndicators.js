@@ -25,7 +25,7 @@ if (document.querySelector('#app-home-indicators')) {
       startIndicatorsCounter() {
         setInterval(() => {
           this.getIndicators();
-        }, 8000);
+        }, 10000);
       },
       getIndicators() {
         this.loadingLocales = true;

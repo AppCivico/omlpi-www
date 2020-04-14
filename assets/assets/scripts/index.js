@@ -9859,7 +9859,7 @@ if (document.querySelector('#app-home-indicators')) {
 
         setInterval(function () {
           _this2.getIndicators();
-        }, 8000);
+        }, 10000);
       },
       getIndicators: function getIndicators() {
         var _this3 = this;
