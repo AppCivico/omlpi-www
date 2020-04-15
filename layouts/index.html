@@ -94,7 +94,7 @@
                       :key="indicator.values.value_relative ? indicator.values.value_relative : indicator.values.value_absolute"
                       :style="`transition-delay: ${(index > 0 ? innerIndex + animationCount : innerIndex)/4}s`"
                     >
-                      {{ "{{ indicator.values.value_relative ? indicator.values.value_relative : indicator.values.value_absolute }}" }}
+                    {{ "{{ indicator.values.value_relative ? `${indicator.values.value_relative}%` : indicator.values.value_absolute }}" }}
                     </h4>
                   </transition>
                 </div>
