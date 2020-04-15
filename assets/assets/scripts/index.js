@@ -8667,10 +8667,6 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-Highcharts.setOptions({
-  colors: ['#C97B84', '#A85751', '#251351', '#114B5F', '#028090', '#E4FDE1', '#040926', '#F45B69', '#91A6FF']
-});
-
 if (document.querySelector('#app-compare')) {
   window.$vueCompare = new Vue({
     el: '#app-compare',
@@ -9120,6 +9116,7 @@ if (document.querySelector('#app-compare')) {
             },
             headerFormat: ''
           },
+          colors: ['#C97B84', '#A85751', '#251351', '#114B5F', '#028090', '#E4FDE1', '#040926', '#F45B69', '#91A6FF'],
           plotOptions: {
             column: {
               pointPadding: 0.2,
@@ -9143,10 +9140,10 @@ if (document.querySelector('#app-compare')) {
             type: 'column'
           },
           title: {
-            text: this.selectedIndicator.description
+            text: this.selectedSubindicator.classification
           },
           subtitle: {
-            text: this.selectedSubindicator.classification
+            text: this.selectedIndicator.description
           },
           xAxis: {
             categories: this.formatCategories(this.selectedSubindicator.data),
@@ -9176,6 +9173,7 @@ if (document.querySelector('#app-compare')) {
             },
             valueSuffix: null
           },
+          colors: ['#C97B84', '#A85751', '#251351', '#114B5F', '#028090', '#E4FDE1', '#040926', '#F45B69', '#91A6FF'],
           plotOptions: {
             bar: {
               dataLabels: {
@@ -9606,10 +9604,10 @@ if (document.querySelector('#app-history')) {
             type: 'bar'
           },
           title: {
-            text: this.selectedIndicator.description
+            text: this.selectedSubindicator.classification
           },
           subtitle: {
-            text: this.selectedSubindicator.classification
+            text: this.selectedIndicator.description
           },
           xAxis: {
             categories: this.formatSubindicatorYears(this.selectedSubindicator.data),
@@ -9859,7 +9857,7 @@ if (document.querySelector('#app-home-indicators')) {
 
         setInterval(function () {
           _this2.getIndicators();
-        }, 8000);
+        }, 10000);
       },
       getIndicators: function getIndicators() {
         var _this3 = this;
@@ -10474,16 +10472,18 @@ if (window.location.href.indexOf('city') > -1) {
               }
             },
             tooltip: {
-              // eslint-disable-next-line object-shorthand
+              // eslint-disable-next-line object-shorthand, func-names
               formatter: function formatter() {
                 return chart.data[0].values.value_relative ? "".concat(this.y, "%") : this.y;
               },
               headerFormat: ''
             },
             plotOptions: {
-              column: {
-                pointPadding: 0.2,
-                borderWidth: 0
+              series: {
+                borderWidth: 0,
+                dataLabels: {
+                  enabled: true
+                }
               }
             },
             series: _this4.formatDataToBarsCharts(chart)

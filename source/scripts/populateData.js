@@ -180,16 +180,18 @@ if (window.location.href.indexOf('city') > -1) {
               },
             },
             tooltip: {
-              // eslint-disable-next-line object-shorthand
+              // eslint-disable-next-line object-shorthand, func-names
               formatter: function () {
                 return chart.data[0].values.value_relative ? `${this.y}%` : this.y;
               },
               headerFormat: '',
             },
             plotOptions: {
-              column: {
-                pointPadding: 0.2,
+              series: {
                 borderWidth: 0,
+                dataLabels: {
+                  enabled: true,
+                },
               },
             },
             series: this.formatDataToBarsCharts(chart),

@@ -306,10 +306,10 @@ if (document.querySelector('#app-history')) {
             type: 'bar',
           },
           title: {
-            text: this.selectedIndicator.description,
+            text: this.selectedSubindicator.classification,
           },
           subtitle: {
-            text: this.selectedSubindicator.classification,
+            text: this.selectedIndicator.description,
           },
           xAxis: {
             categories: this.formatSubindicatorYears(this.selectedSubindicator.data),

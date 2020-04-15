@@ -25,7 +25,7 @@
   text-align: center;
   text-transform: uppercase;
   color: palette('white');
-  background: palette('gradient', 'blue');
+  background-color: palette('blue', 'dianne');
   border-radius: 5px;
   box-shadow: 0 2px 4px 0 palette('shadow');
 }
@@ -48,7 +48,7 @@
   &::before {
     width: 7.4rem;
     height: 7.4rem;
-    background: palette('blue', 'light');
+    background: palette('blue', 'paradiso');
     border-radius: 50%;
     content: '';
   }
