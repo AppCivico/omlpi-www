@@ -77,8 +77,8 @@
                   <summary @click="reflowCharts">
                     {{ "{{ indicator.description }}" }}:
                     <strong
-                      v-text="`${indicator.values.value_relative}%`
-                        || (+(indicator.values.value_absolute)).toLocaleString('pt-br')">
+                      v-text="indicator.values.value_relative ? `${indicator.values.value_relative}%`
+                        : Number(indicator.values.value_absolute).toLocaleString('pt-br')">
                     </strong>
                   </summary>
                   <div class="indicator-header">
@@ -91,8 +91,10 @@
                       Baixar dados do indicador
                     </a>
                     <div class="indicator-header__number">
-                      <h2 v-text="`${indicator.values.value_relative}%`
-                        || (+(indicator.values.value_absolute)).toLocaleString('pt-br')">
+                      <h2
+                      v-text="indicator.values.value_relative
+                        ? `${indicator.values.value_relative}%`
+                        : Number(indicator.values.value_absolute).toLocaleString('pt-br')">
                       </h2>
                     </div>
                     <div class="indicator-header__description">
