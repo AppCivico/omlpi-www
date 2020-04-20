@@ -97,8 +97,11 @@
                         : Number(indicator.values.value_absolute).toLocaleString('pt-br')">
                       </h2>
                     </div>
-                    <div class="indicator-header__description">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur laudantium deleniti dolorum itaque laborum ut illo eaque eius. Magnam officia repudiandae aspernatur nesciunt itaque laborum, esse qui temporibus ducimus nisi.
+                    <div
+                      v-if="indicator.concept"
+                      class="indicator-header__description"
+                    >
+                      {{ "{{ indicator.concept }}" }}
                     </div>
                     <div class="indicartor__ods" v-if="indicator.ods && indicator.ods.length > 0">
                       <template v-for="odsItem in indicator.ods">

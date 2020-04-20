@@ -32,6 +32,7 @@
 
 .indicator-header__description {
   margin-bottom: 2rem;
+  word-break: break-word;
 
   @media screen and (min-width: breakpoint('desktop')) {
     width: 40%;
