@@ -2,6 +2,10 @@
   display: flex;
   flex-wrap: wrap;
 
+  @media screen and (min-width: breakpoint('desktop')) {
+    justify-content: space-between;
+  }
+
   > * {
     box-sizing: border-box;
   }
@@ -20,6 +24,7 @@
   @media screen and (min-width: breakpoint('desktop')) {
     width: 26%;
     margin-bottom: 0;
+    border-right: 1px solid palette('gray', 'light');
   }
 }
 
@@ -39,7 +44,6 @@
     padding: 0 1rem;
     margin: 0 1rem;
     border-right: 1px solid palette('gray', 'light');
-    border-left: 1px solid palette('gray', 'light');
   }
 }
 
