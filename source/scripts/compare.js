@@ -180,6 +180,9 @@ if (document.querySelector('#app-compare')) {
               }
             });
             locales.comparison.sort((a, b) => ((a.display_order < b.display_order) ? 1 : -1));
+            if (Number(this.localeId) === 0) {
+              locales.comparison.reverse();
+            }
             this.locales = locales;
             return true;
           })
