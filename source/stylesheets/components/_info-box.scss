@@ -42,11 +42,27 @@
   text-align: center;
   border-bottom: 1px solid palette('gray', 'x-light');
 
+
   @media screen and (min-width: breakpoint('phablet')) {
     width: 50%;
     border-bottom: 0;
   }
 }
+
+.infobox__item:nth-child(1) .infobox__year {
+  display: none;
+
+  @media screen and (min-width: breakpoint('phablet')) {
+    display: block;
+  }
+}
+
+.infobox__item:nth-child(2) .infobox__year {
+  @media screen and (min-width: breakpoint('phablet')) {
+    display: none;
+  }
+}
+
 
 .infobox__download {
   position: absolute;
