@@ -223,7 +223,7 @@ if (window.location.href.indexOf('city') > -1) {
               },
             },
             yAxis: {
-              min: 0,
+              type: 'logarithmic',
               title: {
                 text: false,
               },
