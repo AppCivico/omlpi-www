@@ -70,6 +70,8 @@ menu:
 metaDataFormat: "yaml"
 title: "Observatório do marco legal da primeira infancia"
 params:
+  developedBy: "appcívico"
+  developedByLink: "https://appcivico.com/"
   siteDescription: "Observatório do marco legal da primeira infancia"
   tagline: ""
   shareImages:
