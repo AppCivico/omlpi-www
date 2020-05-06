@@ -9,6 +9,8 @@
   translation: "Pesquisar"
 - id: send
   translation: "Enviar"
+- id: developedBy
+  translation: "Desenvolvido por:"
 
 # Home
 - id: exploreData
