@@ -1,7 +1,7 @@
 .site-footer {
   font-size: ms(-2);
   color: palette('white');
-  background-color: palette('purple');
+  background-color: palette('dark-blue-grey');
 
   @media screen and (min-width: breakpoint('tablet')) {
     font-size: ms(-1);
@@ -16,6 +16,20 @@
   padding-bottom: 3rem;
 }
 
+.site-footer__first-row {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid palette('black');
+  }
+}
+
 .site-footer__logo {
   width: 10rem;
   height: 2.55rem;
@@ -23,9 +37,28 @@
   background-image: image('logo.svg');
   background-size: contain;
 
+  @media screen and (min-width: breakpoint('tablet')) {
+    margin-top: 0;
+    margin-left: 2rem;
+    background-position: center;
+  }
+
   @media screen and (min-width: breakpoint('phablet')) {
     width: 19rem;
     height: 3.15rem;
+  }
+}
+
+.site-footer__email {
+  font-size: ms(1);
+  color: palette('white');
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    height: 3.15rem;
+    padding-left: 2rem;
+    margin-left: 2rem;
+    line-height: 2.5;
+    border-left: 1px solid palette('black');
   }
 }
 

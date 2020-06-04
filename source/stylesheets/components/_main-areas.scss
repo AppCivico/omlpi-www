@@ -1,17 +1,18 @@
 .main-areas h1 {
-  font-weight: font-weight('light');
-  font-size: ms(6);
+  font-weight: font-weight('text');
+  font-size: ms(4);
   line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
 
   @media screen and (min-width: breakpoint('desktop')) {
-    font-size: ms(11);
+    font-size: ms(8);
   }
 }
 
 .main-area__boxes {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
 
 
   @media screen and (min-width: breakpoint('phablet')) {
@@ -22,10 +23,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-  }
-
-  @media screen and (min-width: breakpoint('desktop')) {
-    padding: 3rem;
   }
 }
 
@@ -42,10 +39,6 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 3rem;
-
-  @media screen and (min-width: breakpoint('phablet')) {
-    text-align: center;
-  }
 
   @media screen and (min-width: breakpoint('tablet')) {
     width: calc(100% / 3 - 1rem);
@@ -64,7 +57,7 @@
 
 .main-area__box h2 {
   line-height: 1.2;
-  text-align: center;
+  text-transform: uppercase;
   color: palette('purple');
 
   @media screen and (min-width: breakpoint('phablet')) {

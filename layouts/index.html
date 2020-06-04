@@ -25,7 +25,7 @@
           v-if="axis"
         >
           <h1>{{ i18n "axisTitle" }}</h1>
-          <div class="white-box main-area__boxes">
+          <div class="main-area__boxes">
             <div
               class="main-area__box"
               v-for="(item, index) in axis"
@@ -46,7 +46,7 @@
 
       <section id="app-home-indicators">
         <div class="container">
-          <h1 class="indicator-title">{{ i18n "references" }}</h1>
+          <h1 class="indicator-title">{{ i18n "referencesTitle" }}</h1>
           <div v-if="indicators" class="indicator-boxes">
             <template v-for="(locale, index) in indicators.locales" >
               <h2

@@ -33,6 +33,7 @@
 
   @media screen and (min-width: breakpoint('tablet')) {
     width: calc(100% / 3 - 1rem);
+    margin-top: 0;
     margin-bottom: 2rem;
   }
 
@@ -46,12 +47,14 @@
 }
 
 .news h1 {
-  font-weight: font-weight('light');
+  font-weight: font-weight('text');
   font-size: ms(7);
+  text-transform: uppercase;
   color: palette('white');
 
   @media screen and (min-width: breakpoint('tablet')) {
     width: 100%;
+    margin-top: 3.5rem;
   }
 }
 
