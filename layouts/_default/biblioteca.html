@@ -70,23 +70,20 @@
                     <time :datetime="article.date">{{ "{{ article.date }}" }}</time>
                     <br>
                   </template>
+                  <span v-if="article.tags.length > 0" class="library-item__tags">
+                    <br>
+                    <strong>Tags:</strong>
+                    <template v-for="(tag, index) in article.tags">
+                      <span>{{ "{{ tag.name }}" }}, </span>
+                    </template>
+                  </span>
                 </span>
-                <!-- <span class="library&#45;item__time"> -->
-                <!-- </span> -->
-                <div
-                  v-if="article.tags.length > 0"
-                  class="library-item__tags"
-                >
-                  <span>Tags:</span>
-                  <template v-for="(tag, index) in article.tags">
-                    <span>{{ "{{ tag.name }}" }}</span>
-                  </template>
-                </div>
                 <div class="library-item__description-container">
+                  <!--
                   <p class="library-item__description" >
                     {{ "{{ article.description }}" }}
                   </p>
-                  <!--
+
                   <button
                     hidden
                     @click="showFullDescription"
