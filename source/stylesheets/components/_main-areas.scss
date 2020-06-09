@@ -60,7 +60,7 @@
 
   @media screen and (min-width: breakpoint('tablet')) {
     width: calc(100% / 3 - 1rem);
-    margin-bottom: 2rem;
+    margin-bottom: 0;
   }
 
   @media screen and (min-width: breakpoint('desktop')) {
@@ -71,6 +71,7 @@
 .main-area__box figure {
   margin: 0;
   overflow: hidden;
+  line-height: 0;
 }
 
 .main-area__box h2 {

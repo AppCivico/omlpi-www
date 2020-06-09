@@ -10477,16 +10477,6 @@ if (window.location.href.indexOf('city') > -1) {
           }, _callee3);
         }))();
       },
-      formatDataToPieCharts: function formatDataToPieCharts(items) {
-        var data = [];
-        items.data.forEach(function (item) {
-          data.push({
-            name: item.description,
-            y: Number(item.values.value_relative) ? Number(item.values.value_relative) : Number(item.values.value_absolute)
-          });
-        });
-        return data;
-      },
       formatDataToBarsCharts: function formatDataToBarsCharts(items) {
         var data = [];
         items.data.forEach(function (item) {

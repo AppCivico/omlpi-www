@@ -1,5 +1,6 @@
 /* global Vue */
 /* global Highcharts */
+
 import slugify from 'slugify';
 import config from './config';
 import startSearch from './search';
@@ -106,19 +107,6 @@ if (window.location.href.indexOf('city') > -1) {
         const response = await fetch(`${config.api.domain}data?locale_id=${this.localeId}`);
         const json = await response.json();
         this.locale = json.locale;
-      },
-
-      formatDataToPieCharts(items) {
-        const data = [];
-        items.data.forEach((item) => {
-          data.push({
-            name: item.description,
-            y: Number(item.values.value_relative)
-              ? Number(item.values.value_relative)
-              : Number(item.values.value_absolute),
-          });
-        });
-        return data;
       },
 
       formatDataToBarsCharts(items) {

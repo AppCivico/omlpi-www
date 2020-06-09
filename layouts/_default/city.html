@@ -77,7 +77,7 @@
                   <summary @click="reflowCharts">
                     {{ "{{ indicator.description }}" }}:
                     <strong
-                      v-text="indicator.values.value_relative ? `${indicator.values.value_relative}%`
+                      v-text="indicator.values.value_relative ? `${Math.round(indicator.values.value_relative)}%`
                         : Number(indicator.values.value_absolute).toLocaleString('pt-br')">
                     </strong>
                   </summary>
@@ -134,13 +134,13 @@
                           <template v-if="">
                             <strong
                               v-if="subindicatorData.values.value_relative"
-                              class="infobox__title">{{ "{{ subindicatorData.values.value_relative }}" }}%
+                              class="infobox__title">{{ "{{ Math.round(subindicatorData.values.value_relative) }}" }}%
                             </strong>
                             <h3>{{ "{{ subindicatorData.description }}" }}</h3>
                             <div
                               class="infobox__icons"
                               style="clip-path: url(#svgPath);"
-                              :style="`background-image: linear-gradient(90deg, #47b3af ${subindicatorData.values.value_relative}%, #a3a3a3 0);`"
+                              :style="`background-image: linear-gradient(90deg, #47b3af ${Math.round(subindicatorData.values.value_relative)}%, #a3a3a3 0);`"
                             >
                             </div>
                             <strong
