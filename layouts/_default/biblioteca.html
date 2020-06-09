@@ -45,6 +45,7 @@
             Resultados de busca para: {{ "{{ searchQuery }}" }}
           </span>
           <div
+            class="library-container"
             id="js-search-results"
             v-if="articles && articles.length !== 0"
           >
@@ -61,12 +62,14 @@
               <div class="library-item__content" :ref="`js-description-${articleIndex}`">
                 <h2>{{ "{{ article.title }}" }}</h2>
                 <span class="library-item__author">
-                  Autor: {{ "{{ article.author }}" }}
-                  |
-                  Data de publicação
-                  <time :datetime="article.date">{{ "{{ article.date }}" }}</time>
-                  |
-                  Organização: {{ "{{ article.organization }}" }}
+                  <strong>Autor: </strong>{{ "{{ article.author }}" }}
+                  <br>
+                  <strong>Organização:</strong> {{ "{{ article.organization }}" }}
+                  <template v-if="article.date">
+                    <strong>Ano:</strong>
+                    <time :datetime="article.date">{{ "{{ article.date }}" }}</time>
+                    <br>
+                  </template>
                 </span>
                 <!-- <span class="library&#45;item__time"> -->
                 <!-- </span> -->
@@ -74,14 +77,16 @@
                   v-if="article.tags.length > 0"
                   class="library-item__tags"
                 >
+                  <span>Tags:</span>
                   <template v-for="(tag, index) in article.tags">
-                    <a>{{ "{{ tag.name }}" }}</a>
+                    <span>{{ "{{ tag.name }}" }}</span>
                   </template>
                 </div>
                 <div class="library-item__description-container">
                   <p class="library-item__description" >
                     {{ "{{ article.description }}" }}
                   </p>
+                  <!--
                   <button
                     hidden
                     @click="showFullDescription"
@@ -89,15 +94,16 @@
                   >
                     Continuar lendo…
                   </button>
+                  -->
                 </div>
                 <a
                   v-if="article.file && article.file.url"
                   :href="`${storageDomain}${article.file.url}`"
-                  class="button"
+                  class="button button--purple button-download button--icon"
                   target="_blank"
                   download
                 >
-                  baixar
+                  Download
                 </a>
               </div>
             </article>

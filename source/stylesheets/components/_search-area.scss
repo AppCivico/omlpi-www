@@ -311,6 +311,8 @@
   background-position: center;
   background-size: 50%;
   background-color: palette('blue', 'greeny');
+  border-style: solid;
+  border-color: palette('perrywinkle');
   border-radius: 0 5px 5px 0;
 
   @media screen and (min-width: breakpoint('phablet')) {
