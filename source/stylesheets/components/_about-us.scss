@@ -3,17 +3,28 @@
   flex-direction: column;
   margin-right: auto;
   margin-left: auto;
-  background-color: palette('dark-blue-grey');
+  background-position: bottom left;
+  background-color: palette('purple');
 
   @media screen and (min-width: breakpoint('tablet')) {
     flex-direction: row;
   }
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    background-image: image('about-us-ornament.png'), image('about-us.jpg');
+    background-position: left bottom, center;
+    background-size: 250px, cover;
+  }
+}
+
+.about-us--no-bg {
+  background-image: none;
+  background-color: transparent;
 }
 
 .about-us--container {
   margin-right: 0;
   margin-left: 0;
-  background-color: palette('dark-blue-grey');
 
   @media screen and (min-width: breakpoint('wide')) {
     padding-right: 1.875rem;
@@ -22,7 +33,8 @@
 }
 
 .about-us--container .about-us {
-  max-width: 75rem;
+  justify-content: flex-end;
+  width: 100%;
 }
 
 .about-us--boxed {
@@ -73,16 +85,27 @@
   color: palette('white');
 
   @media screen and (min-width: breakpoint('tablet')) {
-    max-width: 37.5rem;
+    max-width: 45.5rem;
+  }
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    text-shadow: 1px 1px 10px palette('black');
   }
 
   @media screen and (min-width: breakpoint('wide')) {
     padding-right: 3rem;
     padding-left: 3rem;
+    margin-left: auto;
+    text-shadow: none;
   }
 }
 
 .about-us__text h1 {
   font-weight: font-weight('light');
   color: palette('white');
+}
+
+.about-us__text .button {
+  margin-right: 1rem;
+  text-shadow: none;
 }

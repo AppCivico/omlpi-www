@@ -10262,6 +10262,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           return response.json();
         }).then(function (response) {
           _this4.infographic = {};
+          _this4.infographic.title = response.title;
           _this4.infographic.description = response.description;
 
           if (response.small && response.small.url) {
@@ -10475,16 +10476,6 @@ if (window.location.href.indexOf('city') > -1) {
             }
           }, _callee3);
         }))();
-      },
-      formatDataToPieCharts: function formatDataToPieCharts(items) {
-        var data = [];
-        items.data.forEach(function (item) {
-          data.push({
-            name: item.description,
-            y: Number(item.values.value_relative) ? Number(item.values.value_relative) : Number(item.values.value_absolute)
-          });
-        });
-        return data;
       },
       formatDataToBarsCharts: function formatDataToBarsCharts(items) {
         var data = [];

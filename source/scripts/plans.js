@@ -151,6 +151,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           .then(response => response.json())
           .then((response) => {
             this.infographic = {};
+            this.infographic.title = response.title;
             this.infographic.description = response.description;
 
             if (response.small && response.small.url) {

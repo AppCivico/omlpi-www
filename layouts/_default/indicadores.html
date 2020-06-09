@@ -3,13 +3,18 @@
     <body>
       {{ partial "header.html" . }}
 
-      <section class='search-area search-area--big'>
+      <section class="search-area search-area--alternative search-area--indicators">
         <div class="container">
           <header>
             <h1>
-              Indicadores referenciados no Marco Legal da Primeira Infância, com foco nas áreas de Assistência Social, Educação e Saúde, desagregados por aspectos socioeconômicos.
+              Indicadores referenciados no marco legal da primeira infância, desagregados por aspectos socioeconômicos.
             </h1>
           </header>
+        </div>
+      </section>
+
+      <div class="search-area search-area--no-image search-area--gradient">
+        <div class="container">
           <form action="" id="js-submit-region">
             <label for="js-region-input">
               {{ i18n "exploreData" }}
@@ -33,7 +38,7 @@
             </section>
           </form>
         </div>
-      </section>
+      </div>
 
       <section>
         <div class="container">

@@ -5,7 +5,7 @@
 
       <section
         id="app-home-banner"
-        class='search-area search-area--home'
+        class='search-area search-area--alternative search-area--home'
       >
         <template v-if="banner">
           <div class="container">
@@ -25,7 +25,26 @@
           v-if="axis"
         >
           <h1>{{ i18n "axisTitle" }}</h1>
-          <div class="white-box main-area__boxes">
+          <div class="main-area__boxes main-area__boxes--images">
+            <div
+              class="main-area__box"
+              v-for="(item, index) in axis"
+            >
+              <figure>
+                <img
+                  :src="`${storageDomain}${item.image.url}`"
+                  :alt="item.title"
+                >
+              </figure>
+            </div>
+          </div>
+        </div>
+        <div
+          class="main-areas bg-gray"
+          v-if="axis"
+        >
+        <div class="container">
+          <div class="main-area__boxes">
             <div
               class="main-area__box"
               v-for="(item, index) in axis"
@@ -46,7 +65,7 @@
 
       <section id="app-home-indicators">
         <div class="container">
-          <h1 class="indicator-title">{{ i18n "references" }}</h1>
+          <h1 class="indicator-title">{{ i18n "referencesTitle" }}</h1>
           <div v-if="indicators" class="indicator-boxes">
             <template v-for="(locale, index) in indicators.locales" >
               <h2
@@ -146,18 +165,12 @@
       >
         <div
           v-if="about"
-          :class="hasNews ? 'about-us' : 'container'"
+          :class="hasNews ? 'about-us about-us--no-bg' : 'container'"
         >
-          <figure class="about-us__image">
-            <img
-              :src="`${storageDomain}${about.image.url}`"
-              :alt="about.title"
-            >
-          </figure>
-          <div class="about-us__text">
-            <div
-              :class="hasNews ? 'container' : ''"
-            >
+          <div
+            :class="hasNews ? 'container' : ''"
+          >
+            <div class="about-us__text">
               <h1>{{ "{{ about.title }}" }}</h1>
               <div v-html="marked(about.text)"></div>
               <a
@@ -167,6 +180,15 @@
               >
                 {{ "{{ about.link_title }}" }}
               </a>
+              <a
+                v-if="about.link2"
+                target="_blank"
+                class="button"
+                :href="about.link2"
+              >
+                {{ "{{ about.link2_title }}" }}
+              </a>
+
             </div>
           </div>
         </div>

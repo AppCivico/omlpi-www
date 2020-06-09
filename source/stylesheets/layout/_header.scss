@@ -75,13 +75,17 @@
   }
 
   @media screen and (min-width: breakpoint('desktop')) {
-    margin-left: 4rem;
+    margin-left: 2.8rem;
     font-size: ms(0);
+  }
+
+  @media screen and (min-width: breakpoint('wide')) {
+    margin-left: 4rem;
   }
 }
 
 .menu .active a {
-  border-bottom: 1px solid palette('white');
+  border-bottom: 2px solid palette('blue', 'greeny');
 }
 
 .menu__toggle {
@@ -122,10 +126,18 @@
   background-size: contain;
 
   @media screen and (min-width: breakpoint('tablet')) {
-    width: 20rem;
+    width: 12rem;
     height: 3.2rem;
     margin-right: auto;
     margin-left: 0;
+  }
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    width: 18rem;
+  }
+
+  @media screen and (min-width: breakpoint('wide')) {
+    width: 20rem;
   }
 }
 

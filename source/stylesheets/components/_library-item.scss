@@ -1,14 +1,24 @@
+.library-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    justify-content: space-between;
+  }
+}
+
 .library-item {
   display: flex;
   flex-direction: column;
   padding-bottom: 2.5rem;
   margin-bottom: 2.5rem;
-  border-bottom: 1px solid palette('gray', 'x-light');
 
   @media screen and (min-width: breakpoint('desktop')) {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    width: 49%;
   }
 }
 
@@ -22,7 +32,10 @@
 
   @media screen and (min-width: breakpoint('phablet')) {
     max-width: 15rem;
-    padding-right: 3rem;
+  }
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    padding-right: 1rem;
   }
 }
 
@@ -61,12 +74,11 @@
   font-weight: font-weight('bold');
   font-size: ms(3);
   line-height: 1.2;
-  color: palette('purple');
+  color: palette('black');
 }
 
 .library-item__author {
   margin-bottom: 1rem;
-  color: palette('gray');
 }
 
 .library-item__time {
@@ -74,7 +86,6 @@
   padding: 0 0 1.5rem;
   font-size: ms(-1);
   text-transform: uppercase;
-  color: palette('gray');
 }
 
 .library-item__time time {
@@ -83,23 +94,24 @@
 }
 
 .library-item__tags {
-  margin-bottom: 0.5rem;
-  margin-left: -0.5rem;
+  color: palette('blue', 'greeny');
+  // margin-bottom: 0.5rem;
+  // margin-left: -0.5rem;
 }
 
 .library-item__tags a {
-  display: inline-block;
-  padding: 0.2rem 0.5rem;
-  margin-right: 0.5rem;
-  margin-bottom: 0.5rem;
-  margin-left: 0.5rem;
-  font-size: ms(-3);
-  text-decoration: none;
-  text-transform: uppercase;
+  // display: inline-block;
+  // padding: 0.2rem 0.5rem;
+  // margin-right: 0.5rem;
+  // margin-bottom: 0.5rem;
+  // margin-left: 0.5rem;
+  // font-size: ms(-3);
+  // text-decoration: none;
+  // text-transform: uppercase;
   // cursor: pointer;
-  color: palette('white');
-  background: palette('purple');
-  border-radius: 2px;
+  // color: palette('white');
+  // background: palette('purple');
+  // border-radius: 2px;
   // box-shadow: 0 2px 4px 0 palette('black', 'opacity');
 }
 
@@ -117,7 +129,7 @@
   align-self: center;
 
   @media screen and (min-width: breakpoint('desktop')) {
-    align-self: flex-end;
+    align-self: flex-start;
   }
 }
 

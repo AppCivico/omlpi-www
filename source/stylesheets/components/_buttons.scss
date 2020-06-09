@@ -7,7 +7,7 @@
   color: palette('white');
   background-color: palette('blue', 'greeny');
   border: 0;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .button {
@@ -32,6 +32,16 @@
     margin-bottom: auto;
     background-size: contain;
     content: '';
+  }
+}
+
+.button-download {
+  background-color: palette('purple');
+
+  &::before {
+    width: 0.95rem;
+    height: 0.95rem;
+    background-image: image('arrow-down.svg');
   }
 }
 

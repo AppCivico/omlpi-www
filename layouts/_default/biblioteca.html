@@ -4,29 +4,40 @@
       {{ partial "header.html" . }}
 
       <main class="alabaster" id="app">
-        <header class="header-text--library">
-          <div class="container">
-            <h1>
-              BIBLIOTECA PARA UM SISTEMA DE GARANTIA
-              <span>PARA PRIMEIRA INFÂNCIA</span>
-            </h1>
-          </div>
-        </header>
-        <div class="container">
-          <section class='search-area search-area__library'>
-            <form action="" @submit.prevent="getArticles(false, true)">
-              <label for="js-articles-search">
-                {{ i18n "exploreArticles" }}
-              </label>
-              <input
-                id="js-articles-search"
-                type="text"
-                v-model="searchQuery"
-                placeholder="{{ i18n "exploreArticlesPlaceholder" }}"
-              >
-              <button class="search-area__search-text-button">{{ i18n "search" }}</button>
-            </form>
+        <section class='search-area search-area--alternative search-area--library'>
+            <div class="container">
+              <header>
+                <h1>
+                  Um repositório de materiais de referência sobre a garantia dos direitos da primeira infância
+                </h1>
+              </header>
+              <p>
+                Marcos legais, documentos governamentais, estudos de organizações da sociedade civil, fundações empresariais e instituições de cooperação internacional.
+              </p>
+            </div>
+        </section>
+        <div class="search-area--gradient">
+          <section class="search-area search-area--no-image">
+            <div class="container">
+              <section class='search-area search-area__library'>
+                <form action="" @submit.prevent="getArticles(false, true)">
+                  <label for="js-articles-search">
+                    {{ i18n "exploreArticles" }}
+                  </label>
+                  <input
+                    id="js-articles-search"
+                    type="text"
+                    v-model="searchQuery"
+                    placeholder="{{ i18n "exploreArticlesPlaceholder" }}"
+                  >
+                    <button class="search-area__search-text-button">{{ i18n "search" }}</button>
+                </form>
+              </section>
+            </div>
           </section>
+        </div>
+
+        <div class="container">
           <span
             v-if="searchQuery && 1 !== 1"
             class="search-area__informative"
@@ -34,6 +45,7 @@
             Resultados de busca para: {{ "{{ searchQuery }}" }}
           </span>
           <div
+            class="library-container"
             id="js-search-results"
             v-if="articles && articles.length !== 0"
           >
@@ -50,27 +62,28 @@
               <div class="library-item__content" :ref="`js-description-${articleIndex}`">
                 <h2>{{ "{{ article.title }}" }}</h2>
                 <span class="library-item__author">
-                  Autor: {{ "{{ article.author }}" }}
-                  |
-                  Data de publicação
-                  <time :datetime="article.date">{{ "{{ article.date }}" }}</time>
-                  |
-                  Organização: {{ "{{ article.organization }}" }}
-                </span>
-                <!-- <span class="library&#45;item__time"> -->
-                <!-- </span> -->
-                <div
-                  v-if="article.tags.length > 0"
-                  class="library-item__tags"
-                >
-                  <template v-for="(tag, index) in article.tags">
-                    <a>{{ "{{ tag.name }}" }}</a>
+                  <strong>Autor: </strong>{{ "{{ article.author }}" }}
+                  <br>
+                  <strong>Organização:</strong> {{ "{{ article.organization }}" }}
+                  <template v-if="article.date">
+                    <strong>Ano:</strong>
+                    <time :datetime="article.date">{{ "{{ article.date }}" }}</time>
+                    <br>
                   </template>
-                </div>
+                  <span v-if="article.tags.length > 0" class="library-item__tags">
+                    <br>
+                    <strong>Tags:</strong>
+                    <template v-for="(tag, index) in article.tags">
+                      <span>{{ "{{ tag.name }}" }}, </span>
+                    </template>
+                  </span>
+                </span>
                 <div class="library-item__description-container">
+                  <!--
                   <p class="library-item__description" >
                     {{ "{{ article.description }}" }}
                   </p>
+
                   <button
                     hidden
                     @click="showFullDescription"
@@ -78,15 +91,16 @@
                   >
                     Continuar lendo…
                   </button>
+                  -->
                 </div>
                 <a
                   v-if="article.file && article.file.url"
                   :href="`${storageDomain}${article.file.url}`"
-                  class="button"
+                  class="button button--purple button-download button--icon"
                   target="_blank"
                   download
                 >
-                  baixar
+                  Download
                 </a>
               </div>
             </article>
