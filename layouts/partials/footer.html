@@ -10,37 +10,28 @@
       </div>
 
       <div class="site-footer__logos">
-        <div class="site-footer__logo-group">
-          <h4>Realização</h4>
-          <img src="/assets/images/andi.png" alt="Andi">
-          <img src="/assets/images/rnpi.png" alt="Rede Nacional Primeira Infancia">
+        <div class="site-footer__logo-group site-footer__first-logo">
+          <img src="/assets/images/rnpi.svg" alt="Rede Nacional Primeira Infancia">
         </div>
 
         <div class="site-footer__logo-group">
-          <h4>Em aliança com</h4>
-          <img src="/assets/images/bernard.png" alt="Bernard van Leer">
+          <h4>Realização:</h4>
+          <img src="/assets/images/rnpi.svg" alt="Rede Nacional Primeira Infancia">
+          <img src="/assets/images/andi.svg" alt="Andi">
+        </div>
+
+        <div class="site-footer__logo-group">
+          <h4>Em parceria com:</h4>
+          <img src="/assets/images/bvl.svg" alt="Bernard van Leer">
+          <img src="/assets/images/bvl.svg" alt="Bernard van Leer">
         </div>
 
         <div class="site-footer__logo-group site-footer__logo-group--big">
           <h4>Patrocínio</h4>
-          <img src="/assets/images/petrobras.png" alt="Petrobrás">
-          <img src="/assets/images/brasil.png" alt="Governo Federal" class="site-footer__white-logo">
+          <img src="/assets/images/petrobras.svg" alt="Petrobrás">
+          <img src="/assets/images/governo-federal.svg" alt="Governo Federal">
         </div>
       </div>
-
-      <address>
-        {{ with $.Site.Data.footerLinks }}
-          {{ range .list }}
-            <a href="{{ .url }}" title="{{ .name }}" class="{{ .cssClass }}">{{ .value }}</a>
-          {{ end }}
-        {{ end }}
-
-        {{ with $.Site.Data.address }}
-          {{ with .address }}
-            <span>{{ . }}</span>
-          {{ end }}
-        {{ end }}
-      </address>
     </section>
   </div>
   <div class="footer__developed-by">

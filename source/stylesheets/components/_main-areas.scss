@@ -14,7 +14,6 @@
   display: flex;
   flex-direction: column;
 
-
   @media screen and (min-width: breakpoint('phablet')) {
     margin-bottom: 3rem;
   }
@@ -24,6 +23,25 @@
     flex-wrap: wrap;
     justify-content: space-between;
   }
+}
+
+.main-area__boxes figure {
+  @media screen and (min-width: breakpoint('tablet')) {
+    display: none;
+  }
+}
+
+.main-area__boxes--images {
+  display: none;
+  margin-bottom: 0;
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    display: flex;
+  }
+}
+
+.main-area__boxes--images figure {
+  display: block;
 }
 
 .main-area__boxes .button {

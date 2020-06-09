@@ -19,11 +19,12 @@
   }
 }
 
-.big-banner__text p {
+.big-banner__text h1 {
   margin-bottom: 1rem;
-  font-weight: bold;
+  font-weight: font-weight('normal');
   font-size: ms(6);
   line-height: 1.3;
+  text-transform: uppercase;
   color: palette('purple');
 }
 

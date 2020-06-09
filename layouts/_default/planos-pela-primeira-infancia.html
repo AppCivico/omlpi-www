@@ -8,198 +8,213 @@
       </div>
 
       <main class="alabaster" id="app">
-        <section class='search-area search-area--children-hands search-area--big'>
+        <section class="search-area search-area--alternative search-area--children-hands">
           <div class="container">
             <header>
               <h1>
-                Os Planos pela Primeira Infância são importantes ferramentas para promover a eficiência das políticas públicas.
-                <span class="search-area__line-break">
-                  Veja aqui os Municípios e Unidades da Federação para os quais você pode baixar o Plano pela Primeira Infância.
-                </span>
+                Os planos pela primeira infância são importantes ferramentas para promover as políticas públicas.
               </h1>
-            </header>
-            <form action="" id="js-submit-region">
-              <label for="js-plan-search">
-                {{ i18n "exploreData" }}
-              </label>
-              <input
-                id="js-plan-search"
-                disabled
-                aria-busy="true"
-                type="text"
-                placeholder="Olinda ou Pernambuco"
+              <a
+                v-if="infographic && infographic.url"
+                :href="infographic.url"
+                target="_blank"
               >
-            </form>
+                Veja aqui os planos disponibilizados.
+              </a>
+            </header>
           </div>
         </section>
+        <div class="search-area--gradient search-area--clip-path">
+          <section class="search-area search-area--no-image">
+            <div class="container">
+              <form action="" id="js-submit-region">
+                <label for="js-plan-search">
+                  {{ i18n "exploreData" }}
+                </label>
+                <input
+                  id="js-plan-search"
+                  disabled
+                  aria-busy="true"
+                  type="text"
+                  placeholder="Olinda ou Pernambuco"
+                >
+              </form>
+            </div>
+          </section>
 
-        <section class="plans-result" v-if="selectedLocale">
-          <div class="container">
-            <a href="#enviar-plano" class="plans-result__send-plan">Não encontrou o plano do seu estado? Envie para nós.</a>
-            <header class="plans-result__header">
-              <span
-                class="plans-result__location"
-                :class="selectedLocale.plan ? 'plans-result__location--with-plan' : ''"
-                >
+          <section class="plans-result" v-if="selectedLocale">
+            <div class="container">
+              <a href="#enviar-plano" class="plans-result__send-plan">Não encontrou o plano do seu estado? Envie para nós.</a>
+              <header class="plans-result__header">
                 <span
-                  class="plans-result__first-letter"
-                  :class="selectedLocale.type === 'region' ? 'plans-result__first-letter--region' : ''"
-                >
-                  {{ "{{ selectedLocale.type === 'region' ? '' : selectedLocale.name.split('')[0].toUpperCase() }}" }}
-                </span>
-                  {{ "{{ selectedLocale.name }}" }} -
-                  <a
-                    v-if="selectedLocale.plan"
-                    :href="`${storageDomain}${selectedLocale.plan.url}`"
-                    target="_blank"
+                  class="plans-result__location"
+                  :class="selectedLocale.plan ? 'plans-result__location--with-plan' : ''"
                   >
-                    Download do plano
-                  </a>
-                  <template v-else>sem informações</template>
-              </span>
-              <span
-                v-if="capital"
-                class="plans-result__capital-icon"
-              >
-                {{ "{{ capital.name }}" }} -
-                <a
-                  v-if="capital.plan"
-                  :href="`${storageDomain}${capital.plan.url}`"
-                  target="_blank"
-                >
-                  Download do plano
-                </a>
-                <template v-else>sem informações</template>
-              </span>
-            </header>
-            <template v-if="relatedLocales">
-              <ul
-                v-for="relatedLocale in relatedLocales"
-                class="plans-result__list"
-              >
-                <li class="plans-result__list-first-letter">{{ "{{ relatedLocale.title }}" }}</li>
-                <template v-for="locale in relatedLocale.data">
-                  <li
-                    :class="locale.plan ? 'plans-result__has-plan' : ''"
+                  <span
+                    class="plans-result__first-letter"
+                    :class="selectedLocale.type === 'region' ? 'plans-result__first-letter--region' : ''"
                   >
-                    {{ "{{ locale.name }}" }} -
+                    {{ "{{ selectedLocale.type === 'region' ? '' : selectedLocale.name.split('')[0].toUpperCase() }}" }}
+                  </span>
+                    {{ "{{ selectedLocale.name }}" }} -
                     <a
-                      v-if="locale.plan"
-                      :href="`${storageDomain}${locale.plan.url}`"
+                      v-if="selectedLocale.plan"
+                      :href="`${storageDomain}${selectedLocale.plan.url}`"
                       target="_blank"
                     >
                       Download do plano
                     </a>
                     <template v-else>sem informações</template>
-                  </li>
-                </template>
-              </ul>
-            </template>
-          </div>
-        </section>
-
-        <div class="container">
-          <div class="big-banner">
-            <div class="big-banner__text">
-              <p v-if="infographic">
-                {{ "{{ infographic.description }}" }}
-              </p>
-              <a
-                class="button"
-                v-if="infographic && infographic.url"
-                :href="infographic.url"
-                target="_blank"
-              >
-              Clique aqui
-              </a>
+                </span>
+                <span
+                  v-if="capital"
+                  class="plans-result__capital-icon"
+                >
+                  {{ "{{ capital.name }}" }} -
+                  <a
+                    v-if="capital.plan"
+                    :href="`${storageDomain}${capital.plan.url}`"
+                    target="_blank"
+                  >
+                    Download do plano
+                  </a>
+                  <template v-else>sem informações</template>
+                </span>
+              </header>
+              <template v-if="relatedLocales">
+                <ul
+                  v-for="relatedLocale in relatedLocales"
+                  class="plans-result__list"
+                >
+                  <li class="plans-result__list-first-letter">{{ "{{ relatedLocale.title }}" }}</li>
+                  <template v-for="locale in relatedLocale.data">
+                    <li
+                      :class="locale.plan ? 'plans-result__has-plan' : ''"
+                    >
+                      {{ "{{ locale.name }}" }} -
+                      <a
+                        v-if="locale.plan"
+                        :href="`${storageDomain}${locale.plan.url}`"
+                        target="_blank"
+                      >
+                        Download do plano
+                      </a>
+                      <template v-else>sem informações</template>
+                    </li>
+                  </template>
+                </ul>
+              </template>
             </div>
-            <div class="big-banner__image">
-              <img
-                v-if="infographic && (infographic.big || infographic.small)"
-                v-bind:srcset="`
-                  ${infographic.small} 350w,
-                  ${infographic.big} 1059w
-                `"
-                :src="infographic.big"
-                alt="O brasil na rota"
-              >
+          </section>
+
+          <div class="container">
+            <div class="big-banner">
+              <div class="big-banner__text">
+                <template v-if="infographic">
+                  <h1>{{ "{{ infographic.title }}" }}</h1>
+                  <p>
+                    {{ "{{ infographic.description }}" }}
+                  </p>
+                </template>
+                <a
+                  class="button button--purple"
+                  v-if="infographic && infographic.url"
+                  :href="infographic.url"
+                  target="_blank"
+                >
+                Clique aqui
+                </a>
+              </div>
+              <div class="big-banner__image">
+                <img
+                  v-if="infographic && (infographic.big || infographic.small)"
+                  v-bind:srcset="`
+                    ${infographic.small} 350w,
+                    ${infographic.big} 1059w
+                  `"
+                  :src="infographic.big"
+                  alt="O brasil na rota"
+                >
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="container">
-          <form
-            class="send-plan"
-            @submit.prevent="sendPlan"
-            id="enviar-plano"
-            method="POST"
-          >
-            <div class="send-plan__text">
-              <h3>Não encontrou o plano do seu município?</h3>
-              <p>Seu município possuí um Plano para a Primeira Infância. </p>
+        <div class="send-plan-bg">
+          <div class="container">
+            <form
+              class="send-plan"
+              @submit.prevent="sendPlan"
+              id="enviar-plano"
+              method="POST"
+            >
+              <div class="send-plan__text">
+                <h3>Não encontrou o plano do seu município?</h3>
+                <p>Seu município possuí um Plano para a Primeira Infância. </p>
 
-              <p>Envie para o Observatório para que ele seja disponibilizado aqui, preenchendo o formulário.</p>
+                <p>Envie para o Observatório para que ele seja disponibilizado aqui, preenchendo o formulário.</p>
 
-              <p>Faça parte do Observatório!</p>
-            </div>
-            <div class="send-plan__fields">
-              <label for="name">
-                Nome
-                <input
-                  v-model="form.name"
-                  type="text"
-                  name="name"
-                  required
-                >
-              </label>
+                <p>Faça parte do Observatório!</p>
+              </div>
+              <div class="send-plan__fields">
+                <label for="name">
+                  Nome
+                  <input
+                    v-model="form.name"
+                    type="text"
+                    name="name"
+                    required
+                  >
+                </label>
 
-              <label for="email">
-                Email
-                <input
-                  v-model="form.email"
-                  type="email"
-                  name="email"
-                  required
-                >
-              </label>
+                <label for="email">
+                  Email
+                  <input
+                    v-model="form.email"
+                    type="email"
+                    name="email"
+                    required
+                  >
+                </label>
 
-              <label for="location">
-                Localidade
-                <input
-                  v-model="form.message"
-                  type="text"
-                  name="location"
-                  required
-                >
-              </label>
+                <label for="location">
+                  Localidade
+                  <input
+                    v-model="form.message"
+                    type="text"
+                    name="location"
+                    required
+                  >
+                </label>
 
-              <label for="plan">
-                Upload (pdf)
-                <input
-                  type="file"
-                  id="plan"
-                  @change="updateFile"
-                  name="plan"
-                  accept="application/pdf,application/vnd.ms-excel"
-                  required
-                >
-                <span class="plan__custom-upload">
-                  <span class="plan__custom-upload-text">
-                    {{ "{{ form.fileName }}" }}
+                <label for="plan">
+                  Upload (pdf)
+                  <input
+                    type="file"
+                    id="plan"
+                    @change="updateFile"
+                    name="plan"
+                    accept="application/pdf,application/vnd.ms-excel"
+                    required
+                  >
+                  <span class="plan__custom-upload">
+                    <span class="plan__custom-upload-text">
+                      {{ "{{ form.fileName }}" }}
+                    </span>
+                    <div class="plan__custom-upload-button">Upload</div>
                   </span>
-                  <div class="plan__custom-upload-button">Upload</div>
-                </span>
-              </label>
-              <button
-                type="submit"
-                class="button button--purple"
-                :disabled="formLoading"
-              >
-                <template v-if="formLoading">{{ i18n "sending" }}</template>
-                <template v-else>{{ i18n "send" }}</template>
-              </button>
-            </div>
-          </form>
+                </label>
+                <button
+                  type="submit"
+                  class="button button--purple"
+                  :disabled="formLoading"
+                >
+                  <template v-if="formLoading">{{ i18n "sending" }}</template>
+                  <template v-else>{{ i18n "send" }}</template>
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </main>
 

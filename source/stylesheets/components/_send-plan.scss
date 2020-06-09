@@ -1,9 +1,15 @@
 .send-plan {
-  margin-bottom: 3rem;
+  padding-bottom: 3rem;
 
   @media screen and (min-width: breakpoint('tablet')) {
     display: flex;
   }
+}
+
+.send-plan-bg {
+  background-image: image('plans-ornament.png');
+  background-position: left bottom;
+  background-size: 30%;
 }
 
 .send-plan__text {
@@ -15,15 +21,15 @@
 
 .send-plan__text h3 {
   margin-top: 0;
-  font-weight: bold;
+  font-weight: font-weight('text');
   font-size: ms(6);
   line-height: 1.3;
+  text-transform: uppercase;
   color: palette('purple');
 }
 
 .send-plan__text p {
   font-size: ms(1);
-  color: palette('purple');
 }
 
 .send-plan__fields {

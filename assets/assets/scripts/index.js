@@ -10262,6 +10262,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           return response.json();
         }).then(function (response) {
           _this4.infographic = {};
+          _this4.infographic.title = response.title;
           _this4.infographic.description = response.description;
 
           if (response.small && response.small.url) {
