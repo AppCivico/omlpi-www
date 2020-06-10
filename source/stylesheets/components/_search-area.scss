@@ -76,12 +76,19 @@
 }
 
 .search-area.search-area--alternative .container {
+  max-width: 100%;
+  margin-right: 0;
+  margin-left: 0;
+
   @media screen and (min-width: breakpoint('phablet')) {
     text-shadow: 1px 1px 10px palette('black');
   }
 
   @media screen and (min-width: breakpoint('desktop')) {
+    width: 100%;
     max-width: 74rem;
+    margin-right: auto;
+    margin-left: auto;
     text-shadow: 1px 1px 10px palette('black');
   }
 }
@@ -316,9 +323,9 @@
   background-image: image('search-white.svg');
   background-position: center;
   background-size: 50%;
-  background-color: palette('blue', 'greeny');
+  background-color: palette('purple');
   border: 0;
-  border-radius: 0 5px 5px 0;
+  border-radius: 13px;
 
   @media screen and (min-width: breakpoint('phablet')) {
     text-indent: 0;

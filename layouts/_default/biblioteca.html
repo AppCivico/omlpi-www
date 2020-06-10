@@ -74,7 +74,8 @@
                     <br>
                     <strong>Tags:</strong>
                     <template v-for="(tag, index) in article.tags">
-                      <span>{{ "{{ tag.name }}" }}, </span>
+                      <span>
+                        {{ "{{ tag.name }}" }}<template v-if="index !== article.tags.length - 1">, </template></span>
                     </template>
                   </span>
                 </span>

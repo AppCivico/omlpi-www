@@ -4,18 +4,28 @@
   @media screen and (min-width: breakpoint('tablet')) {
     display: flex;
   }
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    margin-top: -3rem;
+  }
+
 }
 
 .send-plan-bg {
   background-image: image('plans-ornament.png');
   background-position: left bottom;
-  background-size: 30%;
+  background-size: 45%;
 }
 
 .send-plan__text {
   @media screen and (min-width: breakpoint('tablet')) {
     max-width: 50%;
     padding-right: 3rem;
+    margin-top: -3rem;
+  }
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    margin-top: -5rem;
   }
 }
 
@@ -59,12 +69,12 @@
 .send-plan__fields input,
 .send-plan__fields .plan__custom-upload {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.8rem;
   margin-top: 0.3rem;
   margin-bottom: 1rem;
   background-color: palette('white');
-  border: 2px solid palette('purple');
-  border-radius: 5px;
+  border: 1.3px solid palette('purple');
+  border-radius: 9px;
 }
 
 .send-plan__fields button {
@@ -84,7 +94,7 @@
 .send-plan__fields .plan__custom-upload {
   display: inline-flex;
   align-items: center;
-  height: 2.438rem;
+  height: 2.95rem;
   white-space: nowrap;
 }
 
@@ -99,15 +109,16 @@
   align-items: center;
   justify-content: center;
   width: 5.9rem;
-  height: 2.175rem;
+  height: 2.8rem;
   margin-top: -8px;
-  margin-right: -8px;
+  margin-right: -15px;
   margin-bottom: -8px;
   margin-left: auto;
   font-size: 0.8em;
   text-transform: uppercase;
   color: palette('white');
   background: palette('purple');
+  border-radius: 0 9px 9px 0;
 
   &::before {
     display: block;
