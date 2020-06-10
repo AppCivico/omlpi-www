@@ -277,7 +277,9 @@ if (document.querySelector('#app-history')) {
           tooltip: {
             /* eslint-disable object-shorthand, func-names, camelcase */
             formatter: function () {
-              return window.$vueHistory.selectedIndicator.values[0].value_relative ? `${this.y}%` : this.y;
+              return window.$vueHistory.selectedIndicator.values[0].value_relative
+                ? `${Math.round(Number(this.y))}%`
+                : Number(this.y).toLocaleString('pt-BR');
             },
             headerFormat: '',
           },
@@ -332,7 +334,9 @@ if (document.querySelector('#app-history')) {
           tooltip: {
             // eslint-disable-next-line object-shorthand, func-names
             formatter: function () {
-              return window.$vueHistory.selectedSubindicator.data?.[0].values[0].value_relative ? `${this.y}%` : this.y;
+              return window.$vueHistory.selectedSubindicator.data?.[0].values[0].value_relative
+                ? `${Math.round(Number(this.y))}%`
+                : Number(this.y).toLocaleString('pt-BR');
             },
             valueSuffix: null,
           },
@@ -340,7 +344,11 @@ if (document.querySelector('#app-history')) {
             bar: {
               dataLabels: {
                 enabled: true,
-                format: this.selectedSubindicator.data?.[0].values[0].value_relative ? '{y}%' : '{y}',
+                formatter: function () {
+                  return window.$vueHistory.selectedSubindicator.data?.[0].values[0].value_relative
+                    ? `${Math.round(Number(this.y))}%`
+                    : Number(this.y).toLocaleString('pt-BR');
+                },
               },
             },
           },
