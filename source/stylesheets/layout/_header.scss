@@ -9,7 +9,7 @@
   justify-content: center;
   padding: 1rem 0;
   margin-top: 0;
-  background-color: palette('purple');
+  background-color: palette('dark-blue-grey');
   box-shadow: 0 4px 20px 0 palette('shadow');
 
   @media screen and (min-width: breakpoint('tablet')) {
@@ -42,7 +42,7 @@
   margin: 0;
   text-align: center;
   list-style: none;
-  background-color: palette('purple');
+  background-color: palette('dark-blue-grey');
   transition: top 0.3s;
 
   @media screen and (min-width: breakpoint('tablet')) {
@@ -85,7 +85,9 @@
 }
 
 .menu .active a {
-  border-bottom: 2px solid palette('blue', 'greeny');
+  @media screen and (min-width: breakpoint('desktop')) {
+    border-bottom: 2px solid palette('blue', 'greeny');
+  }
 }
 
 .menu__toggle {

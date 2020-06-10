@@ -1,6 +1,8 @@
 .about-us {
   display: flex;
   flex-direction: column;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   margin-right: auto;
   margin-left: auto;
   background-position: bottom left;
@@ -101,11 +103,17 @@
 }
 
 .about-us__text h1 {
-  font-weight: font-weight('light');
+  font-weight: font-weight('text');
+  text-transform: uppercase;
   color: palette('white');
 }
 
 .about-us__text .button {
   margin-right: 1rem;
+  margin-bottom: 1rem;
   text-shadow: none;
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    margin-bottom: 0;
+  }
 }

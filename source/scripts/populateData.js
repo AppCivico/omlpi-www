@@ -7,6 +7,7 @@ import startSearch from './search';
 
 Highcharts.setOptions({
   lang: {
+    thousandsSep: '.',
     printChart: 'Imprimir Gráfico',
     viewFullscreen: 'Ver em tela cheia',
 

@@ -8570,25 +8570,22 @@ if (window.location.href.indexOf('biblioteca') > -1) {
       }))();
     },
     methods: {
-      putHasmoreButtons: function putHasmoreButtons() {
-        var _this2 = this;
-
-        Object.keys(this.$refs).forEach(function (item) {
-          var description = _this2.$refs[item][0].querySelector('.library-item__description');
-
-          var button = _this2.$refs[item][0].querySelector('button');
-
-          if (description.scrollHeight > description.offsetHeight) {
-            button.removeAttribute('hidden');
-          }
-        });
-      },
-      showFullDescription: function showFullDescription(event) {
-        event.target.previousElementSibling.classList.add('library-item__description--full');
-        event.target.setAttribute('hidden', true);
-      },
+      // putHasmoreButtons() {
+      //   Object.keys(this.$refs).forEach((item) => {
+      //     const description = this.$refs[item][0].querySelector('.library-item__description');
+      //     const button = this.$refs[item][0].querySelector('button');
+      //     if (description.scrollHeight
+      //       > description.offsetHeight) {
+      //       button.removeAttribute('hidden');
+      //     }
+      //   });
+      // },
+      // showFullDescription(event) {
+      //   event.target.previousElementSibling.classList.add('library-item__description--full');
+      //   event.target.setAttribute('hidden', true);
+      // },
       getArticles: function getArticles(loadMore) {
-        var _this3 = this;
+        var _this2 = this;
 
         var search = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
@@ -8607,15 +8604,15 @@ if (window.location.href.indexOf('biblioteca') > -1) {
           return response.json();
         }).then(function (response) {
           if (loadMore) {
-            _this3.articles = [].concat((0, _toConsumableArray2.default)(_this3.articles), (0, _toConsumableArray2.default)(response.results));
+            _this2.articles = [].concat((0, _toConsumableArray2.default)(_this2.articles), (0, _toConsumableArray2.default)(response.results));
           } else {
-            _this3.articles = response.results;
+            _this2.articles = response.results;
           }
 
-          _this3.has_more = response.hasMore;
+          _this2.has_more = response.hasMore;
         }).then(function () {
-          if (_this3.has_more) {
-            _this3.pagination_offset += _this3.pagination_limit;
+          if (_this2.has_more) {
+            _this2.pagination_offset += _this2.pagination_limit;
           }
 
           if (search) {
@@ -9183,7 +9180,7 @@ if (document.querySelector('#app-compare')) {
           tooltip: {
             // eslint-disable-next-line object-shorthand, func-names
             formatter: function formatter() {
-              return window.$vueCompare.selectedIndicator.values[0].value_relative ? "".concat(this.y, "%") : this.y;
+              return window.$vueCompare.selectedIndicator.values[0].value_relative ? "".concat(Math.round(Number(this.y)), "%") : Number(this.y).toLocaleString('pt-BR');
             },
             headerFormat: ''
           },
@@ -9240,7 +9237,7 @@ if (document.querySelector('#app-compare')) {
             formatter: function formatter() {
               var _window$$vueCompare$s;
 
-              return ((_window$$vueCompare$s = window.$vueCompare.selectedSubindicator) === null || _window$$vueCompare$s === void 0 ? void 0 : _window$$vueCompare$s.data[0].values[0].value_relative) ? "".concat(this.y, "%") : this.y;
+              return ((_window$$vueCompare$s = window.$vueCompare.selectedSubindicator.data) === null || _window$$vueCompare$s === void 0 ? void 0 : _window$$vueCompare$s[0].values[0].value_relative) ? "".concat(Math.round(Number(this.y)), "%") : Number(this.y).toLocaleString('pt-BR');
             },
             valueSuffix: null
           },
@@ -9644,7 +9641,7 @@ if (document.querySelector('#app-history')) {
           tooltip: {
             /* eslint-disable object-shorthand, func-names, camelcase */
             formatter: function formatter() {
-              return window.$vueHistory.selectedIndicator.values[0].value_relative ? "".concat(this.y, "%") : this.y;
+              return window.$vueHistory.selectedIndicator.values[0].value_relative ? "".concat(Math.round(Number(this.y)), "%") : Number(this.y).toLocaleString('pt-BR');
             },
             headerFormat: ''
           },
@@ -9664,7 +9661,7 @@ if (document.querySelector('#app-history')) {
         return true;
       },
       generateSubindicatorChart: function generateSubindicatorChart() {
-        var _this$selectedSubindi14, _this$selectedSubindi15;
+        var _this$selectedSubindi14;
 
         if (!this.selectedIndicator.id) {
           return false;
@@ -9703,7 +9700,7 @@ if (document.querySelector('#app-history')) {
             formatter: function formatter() {
               var _window$$vueHistory$s;
 
-              return ((_window$$vueHistory$s = window.$vueHistory.selectedSubindicator.data) === null || _window$$vueHistory$s === void 0 ? void 0 : _window$$vueHistory$s[0].values[0].value_relative) ? "".concat(this.y, "%") : this.y;
+              return ((_window$$vueHistory$s = window.$vueHistory.selectedSubindicator.data) === null || _window$$vueHistory$s === void 0 ? void 0 : _window$$vueHistory$s[0].values[0].value_relative) ? "".concat(Math.round(Number(this.y)), "%") : Number(this.y).toLocaleString('pt-BR');
             },
             valueSuffix: null
           },
@@ -9711,7 +9708,11 @@ if (document.querySelector('#app-history')) {
             bar: {
               dataLabels: {
                 enabled: true,
-                format: ((_this$selectedSubindi15 = this.selectedSubindicator.data) === null || _this$selectedSubindi15 === void 0 ? void 0 : _this$selectedSubindi15[0].values[0].value_relative) ? '{y}%' : '{y}'
+                formatter: function formatter() {
+                  var _window$$vueHistory$s2;
+
+                  return ((_window$$vueHistory$s2 = window.$vueHistory.selectedSubindicator.data) === null || _window$$vueHistory$s2 === void 0 ? void 0 : _window$$vueHistory$s2[0].values[0].value_relative) ? "".concat(Math.round(Number(this.y)), "%") : Number(this.y).toLocaleString('pt-BR');
+                }
               }
             }
           },
@@ -10302,6 +10303,7 @@ var _search = _interopRequireDefault(require("./search"));
 /* global Highcharts */
 Highcharts.setOptions({
   lang: {
+    thousandsSep: '.',
     printChart: 'Imprimir Gráfico',
     viewFullscreen: 'Ver em tela cheia',
     downloadPNG: 'Baixar PNG',

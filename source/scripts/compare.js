@@ -375,7 +375,9 @@ if (document.querySelector('#app-compare')) {
           tooltip: {
             // eslint-disable-next-line object-shorthand, func-names
             formatter: function () {
-              return window.$vueCompare.selectedIndicator.values[0].value_relative ? `${this.y}%` : this.y;
+              return window.$vueCompare.selectedIndicator.values[0].value_relative
+                ? `${Math.round(Number(this.y))}%`
+                : Number(this.y).toLocaleString('pt-BR');
             },
             headerFormat: '',
           },
@@ -426,7 +428,9 @@ if (document.querySelector('#app-compare')) {
           tooltip: {
             /* eslint-disable object-shorthand, func-names, camelcase */
             formatter: function () {
-              return window.$vueCompare.selectedSubindicator?.data[0].values[0].value_relative ? `${this.y}%` : this.y;
+              return window.$vueCompare.selectedSubindicator.data?.[0].values[0].value_relative
+                ? `${Math.round(Number(this.y))}%`
+                : Number(this.y).toLocaleString('pt-BR');
             },
             valueSuffix: null,
           },

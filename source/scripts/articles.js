@@ -20,23 +20,22 @@ if (window.location.href.indexOf('biblioteca') > -1) {
     async mounted() {
       await this.getArticles();
       await this.putHasmoreButtons();
-      // console.log(this.$refs)
     },
     methods: {
-      putHasmoreButtons() {
-        Object.keys(this.$refs).forEach((item) => {
-          const description = this.$refs[item][0].querySelector('.library-item__description');
-          const button = this.$refs[item][0].querySelector('button');
-          if (description.scrollHeight
-            > description.offsetHeight) {
-            button.removeAttribute('hidden');
-          }
-        });
-      },
-      showFullDescription(event) {
-        event.target.previousElementSibling.classList.add('library-item__description--full');
-        event.target.setAttribute('hidden', true);
-      },
+      // putHasmoreButtons() {
+      //   Object.keys(this.$refs).forEach((item) => {
+      //     const description = this.$refs[item][0].querySelector('.library-item__description');
+      //     const button = this.$refs[item][0].querySelector('button');
+      //     if (description.scrollHeight
+      //       > description.offsetHeight) {
+      //       button.removeAttribute('hidden');
+      //     }
+      //   });
+      // },
+      // showFullDescription(event) {
+      //   event.target.previousElementSibling.classList.add('library-item__description--full');
+      //   event.target.setAttribute('hidden', true);
+      // },
       getArticles(loadMore, search = false) {
         if (search) {
           this.pagination_offset = 0;
