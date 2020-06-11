@@ -66,12 +66,11 @@
                   <br>
                   <strong>Organização:</strong> {{ "{{ article.organization }}" }}
                   <template v-if="article.date">
+                    <br>
                     <strong>Ano:</strong>
                     <time :datetime="article.date">{{ "{{ article.date }}" }}</time>
-                    <br>
                   </template>
                   <span v-if="article.tags.length > 0" class="library-item__tags">
-                    <br>
                     <strong>Tags:</strong>
                     <template v-for="(tag, index) in article.tags">
                       <span>

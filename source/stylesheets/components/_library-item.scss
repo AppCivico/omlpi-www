@@ -81,11 +81,8 @@
   margin-bottom: 1rem;
 }
 
-.library-item__time {
-  display: block;
-  padding: 0 0 1.5rem;
-  font-size: ms(-1);
-  text-transform: uppercase;
+.library-item time {
+  font-style: normal;
 }
 
 .library-item__time time {
