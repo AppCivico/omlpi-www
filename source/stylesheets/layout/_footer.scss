@@ -20,6 +20,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-bottom: 1.5rem;
 
   @media screen and (min-width: breakpoint('tablet')) {
     align-items: center;
@@ -28,6 +29,10 @@
     padding-top: 2rem;
     padding-bottom: 2rem;
     border-bottom: 1px solid palette('black');
+  }
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    margin-bottom: auto;
   }
 }
 
@@ -115,104 +120,6 @@
   background: image('github.svg');
 }
 
-.site-footer__logos {
-  @media screen and (min-width: breakpoint('desktop')) {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  @media screen and (min-width: breakpoint('desktop')) {
-    flex-wrap: wrap;
-    max-width: 56rem;
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  @media screen and (min-width: breakpoint('wide')) {
-  }
-}
-
-.site-footer__logo-group.site-footer__first-logo {
-  padding-top: 1rem;
-
-  @media screen and (min-width: breakpoint('desktop')) {
-    align-self: center;
-    width: 12.5rem;
-    height: 6rem;
-    padding-top: 1rem;
-    border-right: 1px solid palette('black');
-  }
-}
-
-
-.site-footer__logos h4 {
-  width: 100%;
-  margin-top: 1.8rem;
-  margin-bottom: 0.7rem;
-  font-size: ms(0);
-  color: palette('white');
-}
-
-.site-footer__logo-group {
-  display: flex;
-  flex-wrap: wrap;
-
-  @media screen and (min-width: breakpoint('desktop')) {
-    justify-content: space-evenly;
-  }
-}
-
-.site-footer__logo-group img {
-  max-width: 9.5rem;
-  min-width: 9rem;
-  margin-right: 0.8rem;
-  margin-bottom: 1rem;
-
-  @media screen and (min-width: breakpoint('tablet')) {
-    padding-right: 1rem;
-    margin-right: 1rem;
-  }
-
-  &:last-child {
-    margin-right: 0;
-  }
-}
-
-.site-footer__logo-group--partnership {
-  justify-content: flex-start;
-}
-
-.site-footer__logo-group--partnership img {
-  min-height: 0;
-}
-
-.site-footer__logo-group--big {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-between;
-
-  @media screen and (min-width: breakpoint('desktop')) {
-    width: 26.25rem;
-    margin-right: auto;
-    margin-left: auto;
-  }
-}
-
-.site-footer__logo-group--big img {
-  min-width: 12.5rem;
-
-  @media screen and (min-width: breakpoint('desktop')) {
-    padding-right: 0;
-    padding-left: 0;
-  }
-}
-
-.site-footer__white-logo {
-  padding: 0.5rem;
-  background: palette('white');
-}
 
 .site-footer address {
   display: flex;
