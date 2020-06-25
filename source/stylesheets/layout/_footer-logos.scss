@@ -88,14 +88,14 @@
   margin-bottom: 1rem;
 
   @media screen and (min-width: breakpoint('desktop')) {
-    margin-bottom: 1.5rem;
+    margin-top: -0.6rem;
   }
 }
 
 .footer-logos__bvl img {
   align-self: flex-end;
   width: 5.062rem;
-  margin-bottom: -0.5rem;
+  margin-bottom: -0.2rem;
 }
 
 .footer-logos__petrobras-gov-fed {
