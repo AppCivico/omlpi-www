@@ -20,13 +20,14 @@
 
 .footer-logos__primeira-infancia {
   position: relative;
+  display: flex;
   width: 7.688rem;
   margin-right: 1.375rem;
 
   &::after {
     position: absolute;
-    top: 0;
     right: -1.375rem;
+    bottom: 0;
     display: block;
     width: 0.062rem;
     height: 4.625rem;
