@@ -34,6 +34,12 @@
   }
 }
 
+.infobox--single {
+  &::before {
+    display: none;
+  }
+}
+
 .infobox__item {
   display: flex;
   flex-direction: column;
@@ -124,4 +130,9 @@
   font-style: normal;
   font-size: ms(-1);
   color: palette('gray', 'light');
+}
+
+.infobox--single .infobox__percentage,
+.infobox--single .infobox__year {
+  align-self: auto;
 }

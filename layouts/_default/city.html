@@ -124,10 +124,10 @@
                     <div
                       :id="slugify(`subindicator-${subindicator.classification}`)"
                       class="big-number"
-                      v-if="subindicator.data.length === 2"
+                      v-if="subindicator.data.length <= 2"
                     >
                       <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
-                      <div class="infobox">
+                      <div class="infobox" :class="subindicator.data.length === 1 ? 'infobox--single' : ''">
                         <div class="infobox__item" v-for="(subindicatorData, index) in subindicator.data">
                           <template v-if="">
                             <strong
@@ -165,7 +165,7 @@
                       </div>
                     </div>
 
-                    <div class="big-number" v-if="subindicator.data.length > 2 && subindicator.data.length <= 3">
+                    <div class="big-number" v-if="subindicator.data.length === 3">
                       <div class="info-chart">
                         <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
                         <div class="infobox">

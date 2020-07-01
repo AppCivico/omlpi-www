@@ -10351,7 +10351,7 @@ if (window.location.href.indexOf('city') > -1) {
         if (!this.loading) {
           this.locale.indicators.forEach(function (indicator) {
             indicator.subindicators.forEach(function (subindicator) {
-              if (subindicator.data.length > 2 && subindicator.data.length <= 3) {
+              if (subindicator.data.length === 3) {
                 var updatedSubindicator = subindicator;
                 updatedSubindicator.indicatorId = indicator.id;
                 data.push(updatedSubindicator);
