@@ -16,3 +16,4 @@
 [[redirects]]
   from = "/pt/*"
   to = "/:splat"
+

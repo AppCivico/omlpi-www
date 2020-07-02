@@ -20,13 +20,14 @@
 
 .footer-logos__primeira-infancia {
   position: relative;
+  display: flex;
   width: 7.688rem;
   margin-right: 1.375rem;
 
   &::after {
     position: absolute;
-    top: 0;
     right: -1.375rem;
+    bottom: 0;
     display: block;
     width: 0.062rem;
     height: 4.625rem;
@@ -88,13 +89,14 @@
   margin-bottom: 1rem;
 
   @media screen and (min-width: breakpoint('desktop')) {
-    margin-bottom: auto;
+    margin-top: -0.6rem;
   }
 }
 
 .footer-logos__bvl img {
+  align-self: flex-end;
   width: 5.062rem;
-  margin-bottom: -0.5rem;
+  margin-bottom: -0.25rem;
 }
 
 .footer-logos__petrobras-gov-fed {

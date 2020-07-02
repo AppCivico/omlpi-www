@@ -37,7 +37,7 @@
   // transition: none;
 
   @media screen and (min-width: breakpoint('desktop')) {
-    width: calc(20% - 0.5rem);
+    width: calc(21.5%);
   }
 }
 
@@ -52,6 +52,7 @@
   position: relative;
   display: block;
   margin-top: 0.5rem;
+  font-size: ms(-3);
   text-transform: uppercase;
 
   &::before {
@@ -64,6 +65,11 @@
     background-size: 200%;
     content: '';
   }
+
+  @media screen and (min-width: breakpoint('wide')) {
+    font-size: ms(-2);
+  }
+
 }
 
 @keyframes gradient-animation {
