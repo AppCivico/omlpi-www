@@ -50,9 +50,14 @@ if (window.location.href.indexOf('city') > -1) {
         const data = [];
         if (!this.loading) {
           this.locale.indicators.forEach((indicator) => {
+            const indicatorYear = indicator.values.year;
+
             indicator.subindicators.forEach((subindicator) => {
+              const subindicatorData = subindicator.data.filter(item => item.values.year === indicatorYear);
+
               if (subindicator.data.length === 3) {
                 const updatedSubindicator = subindicator;
+                updatedSubindicator.data = subindicatorData;
                 updatedSubindicator.indicatorId = indicator.id;
                 data.push(updatedSubindicator);
               }
@@ -63,11 +68,17 @@ if (window.location.href.indexOf('city') > -1) {
       },
       barsData() {
         const data = [];
+
         if (!this.loading) {
           this.locale.indicators.forEach((indicator) => {
+            const indicatorYear = indicator.values.year;
+
             indicator.subindicators.forEach((subindicator) => {
-              if (subindicator.data.length > 3) {
+              const subindicatorData = subindicator.data.filter(item => item.values.year === indicatorYear);
+
+              if (subindicatorData.length > 3) {
                 const updatedSubindicator = subindicator;
+                updatedSubindicator.data = subindicatorData;
                 updatedSubindicator.indicatorId = indicator.id;
                 data.push(updatedSubindicator);
               }
