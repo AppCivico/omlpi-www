@@ -75,7 +75,8 @@ if (window.location.href.indexOf('city') > -1) {
             const indicatorYear = indicator.values.year;
 
             indicator.subindicators.forEach((subindicator) => {
-              const subindicatorData = subindicator.data.filter(item => item.values.year === indicatorYear);
+              const subindicatorData = subindicator.data
+                .filter(item => item.values.year === indicatorYear);
 
               if (subindicatorData.length > 3) {
                 const updatedSubindicator = subindicator;
