@@ -10350,9 +10350,15 @@ if (window.location.href.indexOf('city') > -1) {
 
         if (!this.loading) {
           this.locale.indicators.forEach(function (indicator) {
+            var indicatorYear = indicator.values.year;
             indicator.subindicators.forEach(function (subindicator) {
+              var subindicatorData = subindicator.data.filter(function (item) {
+                return item.values.year === indicatorYear;
+              });
+
               if (subindicator.data.length === 3) {
                 var updatedSubindicator = subindicator;
+                updatedSubindicator.data = subindicatorData;
                 updatedSubindicator.indicatorId = indicator.id;
                 data.push(updatedSubindicator);
               }
@@ -10367,9 +10373,15 @@ if (window.location.href.indexOf('city') > -1) {
 
         if (!this.loading) {
           this.locale.indicators.forEach(function (indicator) {
+            var indicatorYear = indicator.values.year;
             indicator.subindicators.forEach(function (subindicator) {
-              if (subindicator.data.length > 3) {
+              var subindicatorData = subindicator.data.filter(function (item) {
+                return item.values.year === indicatorYear;
+              });
+
+              if (subindicatorData.length > 3) {
                 var updatedSubindicator = subindicator;
+                updatedSubindicator.data = subindicatorData;
                 updatedSubindicator.indicatorId = indicator.id;
                 data.push(updatedSubindicator);
               }
