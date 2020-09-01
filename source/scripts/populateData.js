@@ -98,6 +98,12 @@ if (window.location.href.indexOf('city') > -1) {
       startSearch();
     },
     methods: {
+      checkIsBigNumber(items) {
+        if (items.every(item => item.is_big_number)) {
+          return true;
+        }
+        return false;
+      },
       changeTitle() {
         document.title = `Observa - ${this.locale.name}`;
       },
@@ -126,12 +132,14 @@ if (window.location.href.indexOf('city') > -1) {
       formatDataToBarsCharts(items) {
         const data = [];
         items.data.forEach((item) => {
-          data.push({
-            name: item.description,
-            data: [Number(item.values.value_relative)
-              ? Number(item.values.value_relative)
-              : Number(item.values.value_absolute)],
-          });
+          if (Number(item.values.value_relative) || Number(item.values.value_absolute)) {
+            data.push({
+              name: item.description,
+              data: [Number(item.values.value_relative)
+                ? Number(item.values.value_relative)
+                : Number(item.values.value_absolute)],
+            });
+          }
         });
         return data;
       },
