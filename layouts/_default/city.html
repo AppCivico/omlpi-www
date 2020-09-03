@@ -74,10 +74,8 @@
                 >
                   <summary @click="reflowCharts">
                     {{ "{{ indicator.description }}" }}:
-                    <strong
-                      v-text="indicator.is_percentage || indicator.values.value_relative
-                        ? `${Math.round(indicator.values.value_relative)}%`
-                        : Number(indicator.values.value_absolute).toLocaleString('pt-br')">
+                    <strong>
+                      {{ "{{ indicator.values.value_relative === null ? 'Sem informações' : Math.round(indicator.values.value_relative) }}" }}
                     </strong>
                   </summary>
                   <div class="indicator-header">
@@ -90,9 +88,14 @@
                       Baixar dados do indicador
                     </a>
                     <div class="indicator-header__number">
+                      <h3
+                        v-if="indicator.values.value_relative === null">
+                        Sem informações
+                      </h3>
                       <h2
-                      v-text="indicator.values.value_relative
-                        ? `${indicator.values.value_relative}%`
+                        v-else
+                        v-text="indicator.values.value_relative
+                        ? `${indicator.values.value_relative}${indicator.is_percentage ? '%' : '' }`
                         : Number(indicator.values.value_absolute).toLocaleString('pt-br')">
                       </h2>
                     </div>
@@ -121,47 +124,48 @@
                   <div v-if="indicator.subindicators.length === 0" >
                     <p>Não há desagregadores para esse indicador</p>
                   </div>
-                  <div v-else v-for="(subindicator, subIndicatorIndex) in indicator.subindicators">
+                  <div
+                    v-else
+                    v-for="(subindicator, subIndicatorIndex) in indicator.subindicators">
                     <div
+                      v-if="showAsBigNumber(subindicator.data)"
                       :id="slugify(`subindicator-${subindicator.classification}`)"
-                      class="big-number"
-                      v-if="checkIsBigNumber(subindicator.data) || subindicator.data.length <= 2"
-                    >
+                      class="big-number">
+
                       <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
                       <div class="infobox" :class="subindicator.data.length === 1 ? 'infobox--single' : ''">
                         <div class="infobox__item" v-for="(subindicatorData, index) in subindicator.data">
-                          <template v-if="">
-                            <strong
-                              v-if="subindicatorData.is_percentage || subindicatorData.values.value_relative"
-                              class="infobox__title">{{ "{{ Math.round(subindicatorData.values.value_relative) }}" }}%
-                            </strong>
-                            <strong
-                              v-else-if="subindicatorData.values.value_absolute"
-                              class="infobox__title">
-                              {{ "{{ Number(subindicatorData.values.value_absolute).toLocaleString('pt-br') }}" }}
-                            </strong>
-                            <h3>{{ "{{ subindicatorData.description }}" }}</h3>
-                            <div
-                              v-if="subindicatorData.is_percentage || subindicatorData.values.value_relative"
-                              class="infobox__icons"
-                              style="clip-path: url(#svgPath);"
-                              :style="`background-image: linear-gradient(90deg, #47b3af ${Math.round(subindicatorData.values.value_relative)}%, #a3a3a3 0);`"
+                          <strong
+                            v-if="subindicatorData.values.value_relative"
+                            class="infobox__title">
+                            {{ "{{ subindicatorData.values.value_relative === null ? 'Sem informações' : Math.round(subindicatorData.values.value_relative) }}" }}
+                          </strong>
+                          <strong
+                            v-else-if="subindicatorData.values.value_absolute"
+                            class="infobox__title">
+                            {{ "{{ subindicatorData.values.value_absolute === null ? 'Sem informações' : Number(subindicatorData.values.value_absolute).toLocaleString('pt-br') }}" }}
+                          </strong>
+                          <h3>{{ "{{ subindicatorData.description }}" }}</h3>
+                          <div
+                            v-if="subindicatorData.is_percentage || subindicatorData.values.value_relative"
+                            class="infobox__icons"
+                            style="clip-path: url(#svgPath);"
+                            :style="`background-image: linear-gradient(90deg, #47b3af ${Math.round(subindicatorData.values.value_relative)}%, #a3a3a3 0);`"
                             >
-                            </div>
+                          </div>
                             <strong
                               v-if="(subindicatorData.is_percentage || subindicatorData.values.value_relative)
-                                    && subindicatorData.values.value_absolute"
+                              && subindicatorData.values.value_absolute"
                               class="infobox__percentage"
-                            >
+                              >
                               {{ "{{ Number(subindicatorData.values.value_absolute).toLocaleString('pt-br') }}" }}
                             </strong>
-                            <time
-                              class="infobox__year"
-                              :datetime="subindicatorData.values.year"
-                            >
-                              {{ "{{ subindicatorData.values.year }}" }}
-                            </time>
-                          </template>
+                              <time
+                                class="infobox__year"
+                                :datetime="subindicatorData.values.year"
+                                >
+                                {{ "{{ subindicatorData.values.year }}" }}
+                              </time>
                         </div>
                         <a
                           @click.prevent="print(slugify(`subindicator-${subindicator.classification}`))"
@@ -173,7 +177,9 @@
                       </div>
                     </div>
 
-                    <div class="big-number" v-if="subindicator.data.length === 3">
+                    <div
+                      v-if="showAsHorizontalBarChart(subindicator.data)"
+                      class="big-number">
                       <div class="info-chart">
                         <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
                         <div class="infobox">
@@ -182,7 +188,9 @@
                       </div>
                     </div>
 
-                    <div class="big-number" v-if="subindicator.data.length > 3">
+                    <div
+                      v-if="showAsBarChart(subindicator.data)"
+                      class="big-number">
                       <div class="info-chart">
                         <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
                         <div class="infobox">

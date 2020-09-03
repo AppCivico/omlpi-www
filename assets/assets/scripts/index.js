@@ -10346,6 +10346,8 @@ if (window.location.href.indexOf('city') > -1) {
         return 6;
       },
       barsHorizontalData: function barsHorizontalData() {
+        var _this2 = this;
+
         var data = [];
 
         if (!this.loading) {
@@ -10356,7 +10358,7 @@ if (window.location.href.indexOf('city') > -1) {
                 return item.values.year === indicatorYear;
               });
 
-              if (subindicator.data.length === 3) {
+              if (_this2.showAsHorizontalBarChart(subindicatorData)) {
                 var updatedSubindicator = subindicator;
                 updatedSubindicator.data = subindicatorData;
                 updatedSubindicator.indicatorId = indicator.id;
@@ -10369,6 +10371,8 @@ if (window.location.href.indexOf('city') > -1) {
         return data;
       },
       barsData: function barsData() {
+        var _this3 = this;
+
         var data = [];
 
         if (!this.loading) {
@@ -10379,7 +10383,7 @@ if (window.location.href.indexOf('city') > -1) {
                 return item.values.year === indicatorYear;
               });
 
-              if (subindicatorData.length > 3) {
+              if (_this3.showAsBarChart(subindicatorData)) {
                 var updatedSubindicator = subindicator;
                 updatedSubindicator.data = subindicatorData;
                 updatedSubindicator.indicatorId = indicator.id;
@@ -10394,7 +10398,7 @@ if (window.location.href.indexOf('city') > -1) {
     },
     created: function created() {},
     mounted: function mounted() {
-      var _this2 = this;
+      var _this4 = this;
 
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
         return _regenerator.default.wrap(function _callee$(_context) {
@@ -10402,15 +10406,15 @@ if (window.location.href.indexOf('city') > -1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this2.getData();
+                return _this4.getData();
 
               case 2:
                 _context.next = 4;
-                return _this2.generateCharts();
+                return _this4.generateCharts();
 
               case 4:
                 _context.next = 6;
-                return _this2.changeTitle();
+                return _this4.changeTitle();
 
               case 6:
                 (0, _search.default)();
@@ -10424,12 +10428,34 @@ if (window.location.href.indexOf('city') > -1) {
       }))();
     },
     methods: {
-      checkIsBigNumber: function checkIsBigNumber(items) {
+      showAsBigNumber: function showAsBigNumber(items) {
         if (items.every(function (item) {
           return item.is_big_number;
-        })) {
+        }) && items.length <= 2) {
+          return true;
+        } // if (items.length <= 2) {
+        //   return true;
+        // }
+
+
+        return false;
+      },
+      showAsHorizontalBarChart: function showAsHorizontalBarChart(items) {
+        if (items.length === 3) {
           return true;
         }
+
+        return false;
+      },
+      showAsBarChart: function showAsBarChart(items) {
+        if (items.some(function (item) {
+          return !item.is_big_number;
+        })) {
+          return true;
+        } // if (items.length > 3) {
+        //   return true;
+        // }
+
 
         return false;
       },
@@ -10472,7 +10498,7 @@ if (window.location.href.indexOf('city') > -1) {
         }))();
       },
       getData: function getData() {
-        var _this3 = this;
+        var _this5 = this;
 
         return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
           var response, json;
@@ -10481,7 +10507,7 @@ if (window.location.href.indexOf('city') > -1) {
               switch (_context3.prev = _context3.next) {
                 case 0:
                   _context3.next = 2;
-                  return fetch("".concat(_config.default.api.domain, "data?locale_id=").concat(_this3.localeId));
+                  return fetch("".concat(_config.default.api.domain, "data?locale_id=").concat(_this5.localeId));
 
                 case 2:
                   response = _context3.sent;
@@ -10490,9 +10516,10 @@ if (window.location.href.indexOf('city') > -1) {
 
                 case 5:
                   json = _context3.sent;
-                  _this3.locale = json.locale;
+                  _this5.locale = json.locale;
+                  return _context3.abrupt("return", true);
 
-                case 7:
+                case 8:
                 case "end":
                   return _context3.stop();
               }
@@ -10503,12 +10530,12 @@ if (window.location.href.indexOf('city') > -1) {
       formatDataToBarsCharts: function formatDataToBarsCharts(items) {
         var data = [];
         items.data.forEach(function (item) {
-          if (Number(item.values.value_relative) || Number(item.values.value_absolute)) {
-            data.push({
-              name: item.description,
-              data: [Number(item.values.value_relative) ? Number(item.values.value_relative) : Number(item.values.value_absolute)]
-            });
-          }
+          // make null become zero and add legend with (no data)
+          data.push({
+            name: item.description,
+            is_null: item.values.value_relative === null && item.values.value_absolute === null,
+            data: [Number(item.values.value_relative) ? Number(item.values.value_relative) : Number(item.values.value_absolute)]
+          });
         });
         return data;
       },
@@ -10525,7 +10552,7 @@ if (window.location.href.indexOf('city') > -1) {
         });
       },
       generateCharts: function generateCharts() {
-        var _this4 = this;
+        var _this6 = this;
 
         this.barsData.forEach(function (chart) {
           Highcharts.chart("bar-chart-".concat(chart.indicatorId, "-").concat(chart.id), {
@@ -10566,17 +10593,28 @@ if (window.location.href.indexOf('city') > -1) {
               headerFormat: ''
             },
             plotOptions: {
+              column: {
+                minPointLength: 3
+              },
               series: {
                 borderWidth: 0,
                 dataLabels: {
+                  // eslint-disable-next-line object-shorthand, func-names
+                  formatter: function formatter() {
+                    return this.series.userOptions.is_null ? 'Sem informações' : this.y;
+                  },
+                  useHTML: true,
                   enabled: true
                 }
               }
             },
-            series: _this4.formatDataToBarsCharts(chart)
+            series: _this6.formatDataToBarsCharts(chart)
           });
         });
         this.barsHorizontalData.forEach(function (chart) {
+          // if (chart.indicatorId === 311 && chart.id === 124) {
+          //   console.log(document.querySelector('#bar-chart-horizontal-311-124'));
+          // }
           Highcharts.chart("bar-chart-horizontal-".concat(chart.indicatorId, "-").concat(chart.id), {
             chart: {
               type: 'bar'
@@ -10617,9 +10655,10 @@ if (window.location.href.indexOf('city') > -1) {
                 }
               }
             },
-            series: _this4.formatDataToBarsCharts(chart)
+            series: _this6.formatDataToBarsCharts(chart)
           });
         });
+        return true;
       }
     }
   });
