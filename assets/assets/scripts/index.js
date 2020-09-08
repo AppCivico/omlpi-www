@@ -9573,7 +9573,6 @@ if (document.querySelector('#app-history')) {
           return false;
         }
 
-        console.log(data[0].values);
         return data[0].values.map(function (internItem) {
           return internItem.year;
         });

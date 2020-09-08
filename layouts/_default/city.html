@@ -75,7 +75,7 @@
                   <summary @click="reflowCharts">
                     {{ "{{ indicator.description }}" }}:
                     <strong>
-                      {{ "{{ indicator.values.value_relative === null ? 'Sem informações' : Math.round(indicator.values.value_relative) }}" }}
+                      {{ "{{ indicator.values.value_relative === null ? 'Sem informações' : Math.round(indicator.values.value_relative) + (indicator.is_percentage ? '%' : '')  }}" }}
                     </strong>
                   </summary>
                   <div class="indicator-header">
@@ -95,7 +95,7 @@
                       <h2
                         v-else
                         v-text="indicator.values.value_relative
-                        ? `${indicator.values.value_relative}${indicator.is_percentage ? '%' : '' }`
+                        ? `${Math.round(indicator.values.value_relative)}${indicator.is_percentage ? '%' : '' }`
                         : Number(indicator.values.value_absolute).toLocaleString('pt-br')">
                       </h2>
                     </div>
