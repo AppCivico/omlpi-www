@@ -10443,6 +10443,21 @@ if (window.location.href.indexOf('city') > -1) {
 
         return true;
       },
+      formatIndicatorHeaderValue: function formatIndicatorHeaderValue(values) {
+        if (values.value_relative === null && values.value_absolute === null) {
+          return 'Sem informações';
+        }
+
+        if (values.value_relative) {
+          return "".concat(values.value_relative, "%");
+        }
+
+        if (values.value_absolute) {
+          return Number(values.value_absolute).toLocaleString('pt-br');
+        }
+
+        return true;
+      },
       showAsBigNumber: function showAsBigNumber(items) {
         if (items.every(function (item) {
           return item.is_big_number;
