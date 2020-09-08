@@ -209,7 +209,8 @@ if (document.querySelector('#app-history')) {
         if (!data) {
           return false;
         }
-        return data[0].values.map(internItem => internItem.year).reverse();
+        console.log(data[0].values);
+        return data[0].values.map(internItem => internItem.year);
       },
       formatDataToSubindicatorsChart(items) {
         if (!items || !items.values) {
