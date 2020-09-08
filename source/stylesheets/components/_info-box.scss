@@ -1,7 +1,7 @@
 .infobox {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -43,6 +43,7 @@
 .infobox__item {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 100%;
   padding: 3rem 2rem;
   text-align: center;
@@ -125,8 +126,9 @@
 }
 
 .infobox__year {
-  align-self: flex-start;
-  margin-bottom: -1rem;
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
   font-style: normal;
   font-size: ms(-1);
   color: palette('gray', 'light');

@@ -56,7 +56,7 @@ if (window.location.href.indexOf('city') > -1) {
               const subindicatorData = subindicator.data
                 .filter(item => item.values.year === indicatorYear);
 
-              if (subindicator.data.length === 3) {
+              if (this.showAsHorizontalBarChart(subindicatorData)) {
                 const updatedSubindicator = subindicator;
                 updatedSubindicator.data = subindicatorData;
                 updatedSubindicator.indicatorId = indicator.id;
@@ -78,7 +78,7 @@ if (window.location.href.indexOf('city') > -1) {
               const subindicatorData = subindicator.data
                 .filter(item => item.values.year === indicatorYear);
 
-              if (subindicatorData.length > 3) {
+              if (this.showAsBarChart(subindicatorData)) {
                 const updatedSubindicator = subindicator;
                 updatedSubindicator.data = subindicatorData;
                 updatedSubindicator.indicatorId = indicator.id;
@@ -98,6 +98,30 @@ if (window.location.href.indexOf('city') > -1) {
       startSearch();
     },
     methods: {
+      showAsBigNumber(items) {
+        if (items.every(item => item.is_big_number) && items.length <= 2) {
+          return true;
+        }
+        // if (items.length <= 2) {
+        //   return true;
+        // }
+        return false;
+      },
+      showAsHorizontalBarChart(items) {
+        if (items.length === 3) {
+          return true;
+        }
+        return false;
+      },
+      showAsBarChart(items) {
+        if (items.some(item => !item.is_big_number)) {
+          return true;
+        }
+        // if (items.length > 3) {
+        //   return true;
+        // }
+        return false;
+      },
       changeTitle() {
         document.title = `Observa - ${this.locale.name}`;
       },
@@ -121,13 +145,16 @@ if (window.location.href.indexOf('city') > -1) {
         const response = await fetch(`${config.api.domain}data?locale_id=${this.localeId}`);
         const json = await response.json();
         this.locale = json.locale;
+        return true;
       },
 
       formatDataToBarsCharts(items) {
         const data = [];
         items.data.forEach((item) => {
+          // make null become zero and add legend with (no data)
           data.push({
             name: item.description,
+            is_null: item.values.value_relative === null && item.values.value_absolute === null,
             data: [Number(item.values.value_relative)
               ? Number(item.values.value_relative)
               : Number(item.values.value_absolute)],
@@ -189,9 +216,17 @@ if (window.location.href.indexOf('city') > -1) {
               headerFormat: '',
             },
             plotOptions: {
+              column: {
+                minPointLength: 3,
+              },
               series: {
                 borderWidth: 0,
                 dataLabels: {
+                  // eslint-disable-next-line object-shorthand, func-names
+                  formatter: function () {
+                    return this.series.userOptions.is_null ? 'Sem informações' : this.y;
+                  },
+                  useHTML: true,
                   enabled: true,
                 },
               },
@@ -201,6 +236,9 @@ if (window.location.href.indexOf('city') > -1) {
         });
 
         this.barsHorizontalData.forEach((chart) => {
+          // if (chart.indicatorId === 311 && chart.id === 124) {
+          //   console.log(document.querySelector('#bar-chart-horizontal-311-124'));
+          // }
           Highcharts.chart(`bar-chart-horizontal-${chart.indicatorId}-${chart.id}`, {
             chart: {
               type: 'bar',
@@ -244,6 +282,7 @@ if (window.location.href.indexOf('city') > -1) {
             series: this.formatDataToBarsCharts(chart),
           });
         });
+        return true;
       },
     },
   });
