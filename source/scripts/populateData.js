@@ -98,6 +98,18 @@ if (window.location.href.indexOf('city') > -1) {
       startSearch();
     },
     methods: {
+      formatIndicatorValue(values, isPercentage) {
+        if (values.value_relative === null && values.value_absolute === null) {
+          return 'Sem informações';
+        }
+        if (values.value_relative) {
+          return Math.round(values.value_relative) + (isPercentage ? '%' : '');
+        }
+        if (values.value_absolute) {
+          return Number(values.value_absolute).toLocaleString('pt-br');
+        }
+        return true;
+      },
       showAsBigNumber(items) {
         if (items.every(item => item.is_big_number) && items.length <= 2) {
           return true;
