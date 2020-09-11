@@ -7,8 +7,25 @@
 
   @media screen and (min-width: breakpoint('desktop')) {
     flex-direction: row;
+    max-width: 53.438rem;
     margin: 2.188rem auto 0;
   }
+}
+
+.footer-logos__first-row {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 38.188rem;
+  margin-right: auto;
+  margin-bottom: 3rem;
+  margin-left: auto;
+}
+
+
+.footer-logos__second-row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .footer-logos h4 {
@@ -21,18 +38,21 @@
 .footer-logos__primeira-infancia {
   position: relative;
   display: flex;
-  width: 7.688rem;
   margin-right: 1.375rem;
 
-  &::after {
-    position: absolute;
-    right: -1.375rem;
-    bottom: 0;
-    display: block;
-    width: 0.062rem;
-    height: 4.625rem;
-    background-color: palette('black');
-    content: '';
+  @media screen and (min-width: breakpoint('desktop')) {
+    margin-right: 0;
+
+    &::after {
+      position: absolute;
+      right: -72px;
+      bottom: 0;
+      display: block;
+      width: 0.125em;
+      height: 8.188rem;
+      background-color: palette('blue-footer-border');
+      content: '';
+    }
   }
 }
 
@@ -45,9 +65,10 @@
 
   @media screen and (min-width: breakpoint('desktop')) {
     align-self: flex-end;
+    width: 20.75rem;
     margin-top: auto;
     margin-bottom: 0;
-    margin-left: 1.688rem;
+    margin-left: 8.225rem;
   }
 }
 
@@ -57,31 +78,42 @@
   margin-bottom: 0.5rem;
 
   @media screen and (min-width: breakpoint('desktop')) {
-    width: auto;
-    margin-top: -0.7rem;
-    margin-bottom: auto;
+    margin-bottom: 1rem;
   }
 }
 
 .footer-logos__primeira-infancia img {
-  width: 7.688rem;
+  width: 9.188rem;
 }
 
 .footer-logos__rnpi {
-  width: 4.062rem;
-  margin-right: 1.12rem;
+  width: 6.062rem;
+  margin-right: 1.6rem;
+  margin-bottom: 1rem;
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    margin-bottom: 0;
+  }
 }
 
 .footer-logos__andi {
   align-self: flex-end;
-  width: 8.625rem;
+  width: 13.062rem;
   margin-right: 2rem;
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    margin-right: 0;
+  }
 }
 
 .footer-logos__bvl {
   display: flex;
   flex-wrap: wrap;
-  width: 7rem;
+  width: 10rem;
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    margin-right: 6.75rem;
+  }
 }
 
 .footer-logos__bvl h4 {
@@ -89,13 +121,13 @@
   margin-bottom: 1rem;
 
   @media screen and (min-width: breakpoint('desktop')) {
-    margin-top: -0.6rem;
+    margin-bottom: 1.562rem;
   }
 }
 
 .footer-logos__bvl img {
   align-self: flex-end;
-  width: 5.062rem;
+  width: 9.938rem;
   margin-bottom: -0.25rem;
 }
 
@@ -105,11 +137,12 @@
   flex-wrap: wrap;
   margin-top: 2.875rem;
   margin-right: auto;
-  margin-left: auto;
 
   @media screen and (min-width: breakpoint('desktop')) {
-    justify-content: flex-end;
-    width: 22.4rem;
+    justify-content: flex-start;
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
   }
 }
 
@@ -118,7 +151,7 @@
   margin-bottom: 0.5rem;
 
   @media screen and (min-width: breakpoint('desktop')) {
-    margin-bottom: 0.688rem;
+    margin-bottom: 2.375rem;
   }
 }
 
@@ -131,10 +164,10 @@
 }
 
 .footer-logos__petrobras {
-  width: 10.375rem;
-  margin-right: 1.5rem;
+  width: 16.812rem;
+  margin-right: 2.562rem;
 }
 
 .footer-logos__governo-federal {
-  width: 10.438rem;
+  width: 17.688em;
 }

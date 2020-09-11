@@ -105,14 +105,14 @@
                 </a>
               </div>
             </article>
-            <a
-              class="button library-item__load-more"
-              v-if="has_more"
-              @click.prevent="getArticles(true)"
-            >
-              Carregar mais
-            </a>
           </div>
+          <a
+            class="button library-item__load-more"
+            v-if="has_more"
+            @click.prevent="getArticles(true)"
+          >
+            Carregar mais
+          </a>
           <div v-else>
             <p>Nenhum resultado para sua busca</p>
           </div>
