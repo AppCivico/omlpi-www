@@ -28,7 +28,7 @@
     justify-content: center;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    border-bottom: 1px solid palette('black');
+    border-bottom: 2px solid palette('blue-footer-border');
   }
 
   @media screen and (min-width: breakpoint('desktop')) {
@@ -45,7 +45,6 @@
 
   @media screen and (min-width: breakpoint('tablet')) {
     margin-top: 0;
-    margin-left: 2rem;
     background-position: center;
   }
 
@@ -64,7 +63,7 @@
     padding-left: 2rem;
     margin-left: 2rem;
     line-height: 2.5;
-    border-left: 1px solid palette('black');
+    border-left: 2px solid palette('blue-footer-border');
   }
 }
 
@@ -150,7 +149,7 @@
   justify-content: center;
   padding-top: 1em;
   padding-bottom: 1em;
-  background-color: palette('purple', 'dark');
+  background-color: palette('dark-blue-grey');
 }
 
 .footer__developed-by a {
