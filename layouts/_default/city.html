@@ -125,7 +125,7 @@
                     v-for="(subindicator, subIndicatorIndex) in indicator.subindicators">
                     <div
                       v-if="showAsBigNumber(subindicator.data)"
-                      :id="slugify(`subindicator-${subindicator.classification}`)"
+                      :id="slugify(`subindicator-${subindicator.classification}-${indicator.id}-${subindicator.id}`)"
                       class="big-number">
 
                       <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
@@ -156,7 +156,7 @@
                               </time>
                         </div>
                         <a
-                          @click.prevent="print(slugify(`subindicator-${subindicator.classification}`))"
+                          @click.prevent="print(slugify(`subindicator-${subindicator.classification}-${indicator.id}-${subindicator.id}`))"
                           title="Download"
                           class="infobox__download"
                         >

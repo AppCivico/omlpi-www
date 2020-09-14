@@ -164,6 +164,7 @@ if (window.location.href.indexOf('city') > -1) {
           value.classList.remove('hide');
         });
         clone.remove();
+        document.querySelector(`#${divId}`).scrollIntoView();
       },
       async getData() {
         const response = await fetch(`${config.api.domain}data?locale_id=${this.localeId}`);
