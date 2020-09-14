@@ -10518,8 +10518,9 @@ if (window.location.href.indexOf('city') > -1) {
                     value.classList.remove('hide');
                   });
                   clone.remove();
+                  document.querySelector("#".concat(divId)).scrollIntoView();
 
-                case 8:
+                case 9:
                 case "end":
                   return _context2.stop();
               }
