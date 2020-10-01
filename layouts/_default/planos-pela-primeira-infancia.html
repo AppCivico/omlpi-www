@@ -124,6 +124,23 @@
                 >
                 Clique aqui
                 </a>
+
+                <div class="big-banner__text--small">
+                  <template v-if="plansList">
+                    <h1>{{ "{{ plansList.title }}" }}</h1>
+                    <p>
+                      {{ "{{ plansList.description }}" }}
+                    </p>
+                  </template>
+                  <a
+                    class="button button--small button--purple"
+                    v-if="plansList && plansList.file.url"
+                    :href="`${storageDomain}${plansList.file.url}`"
+                    target="_blank"
+                  >
+                    Clique aqui
+                  </a>
+                </div>
               </div>
               <div class="big-banner__image">
                 <img

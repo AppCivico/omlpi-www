@@ -19,6 +19,18 @@
   }
 }
 
+.big-banner__text--small {
+  margin-top: 2rem;
+
+  @media screen and (min-width: breakpoint('tablet')) {
+    margin-bottom: 6rem;
+  }
+
+  @media screen and (min-width: breakpoint('desktop')) {
+    margin-bottom: 10rem;
+  }
+}
+
 .big-banner__text h1 {
   margin-bottom: 1rem;
   font-weight: font-weight('normal');
@@ -26,6 +38,10 @@
   line-height: 1.3;
   text-transform: uppercase;
   color: palette('purple');
+}
+
+.big-banner__text--small h1 {
+  font-size: ms(3);
 }
 
 .big-banner__image {
