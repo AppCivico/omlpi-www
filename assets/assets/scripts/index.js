@@ -10494,7 +10494,7 @@ if (window.location.href.indexOf('city') > -1) {
       showAsBarChart: function showAsBarChart(items) {
         if (items.some(function (item) {
           return !item.is_big_number;
-        })) {
+        }) && items.length > 3) {
           return true;
         } // if (items.length > 3) {
         //   return true;
