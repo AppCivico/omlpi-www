@@ -140,6 +140,7 @@
 
   @media screen and (min-width: breakpoint('desktop')) {
     justify-content: flex-start;
+    width: calc(100% - 16.875rem);
     margin-top: 0;
     margin-right: 0;
     margin-left: 0;
@@ -169,5 +170,5 @@
 }
 
 .footer-logos__governo-federal {
-  width: 17.688em;
+  width: 16.812rem;
 }
