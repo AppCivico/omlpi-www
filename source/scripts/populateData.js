@@ -138,7 +138,7 @@ if (window.location.href.indexOf('city') > -1) {
         return false;
       },
       showAsBarChart(items) {
-        if (items.some(item => !item.is_big_number)) {
+        if (items.some(item => !item.is_big_number) && items.length > 3) {
           return true;
         }
         // if (items.length > 3) {

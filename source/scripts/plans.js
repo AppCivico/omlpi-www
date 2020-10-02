@@ -7,6 +7,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
     el: '#app',
     data: {
       infographic: null,
+      plansList: null,
       locales: null,
       selectedLocale: null,
       selectedLocaleId: null,
@@ -29,6 +30,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
     },
     async mounted() {
       await this.getInfoGraphic();
+      await this.getPlansList();
     },
     methods: {
       updateFile(event) {
@@ -165,6 +167,13 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
             if (response.pdf && response.pdf.url) {
               this.infographic.url = `${config.storage.domain}${response.pdf.url}`;
             }
+          });
+      },
+      getPlansList() {
+        fetch(`${config.apiCMS.domain}listaplanos/1`)
+          .then(response => response.json())
+          .then((response) => {
+            this.plansList = response;
           });
       },
     },

@@ -85,5 +85,8 @@
 }
 
 .indicator-header__info time {
+  position: relative;
+  bottom: auto;
+  left: auto;
   color: palette('black');
 }

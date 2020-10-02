@@ -10102,6 +10102,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
     el: '#app',
     data: {
       infographic: null,
+      plansList: null,
       locales: null,
       selectedLocale: null,
       selectedLocaleId: null,
@@ -10134,6 +10135,10 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                 return _this.getInfoGraphic();
 
               case 2:
+                _context.next = 4;
+                return _this.getPlansList();
+
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -10277,6 +10282,15 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           if (response.pdf && response.pdf.url) {
             _this4.infographic.url = "".concat(_config.default.storage.domain).concat(response.pdf.url);
           }
+        });
+      },
+      getPlansList: function getPlansList() {
+        var _this5 = this;
+
+        fetch("".concat(_config.default.apiCMS.domain, "listaplanos/1")).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          _this5.plansList = response;
         });
       }
     }
@@ -10480,7 +10494,7 @@ if (window.location.href.indexOf('city') > -1) {
       showAsBarChart: function showAsBarChart(items) {
         if (items.some(function (item) {
           return !item.is_big_number;
-        })) {
+        }) && items.length > 3) {
           return true;
         } // if (items.length > 3) {
         //   return true;
