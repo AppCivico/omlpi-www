@@ -9587,7 +9587,7 @@ if (document.querySelector('#app-history')) {
           data.push({
             name: item.description,
             data: item.values.map(function (internItem) {
-              return Number(internItem.value_relative) ? Number(internItem.value_relative) : Number(internItem.value_absolute);
+              return internItem.value_relative !== null ? Number(internItem.value_relative) : Number(internItem.value_absolute);
             })
           });
         });
@@ -9602,7 +9602,7 @@ if (document.querySelector('#app-history')) {
         items.values.forEach(function (item) {
           data.push({
             name: item.year,
-            data: [Number(item.value_relative) ? Number(item.value_relative) : Number(item.value_absolute)]
+            data: [item.value_relative !== null ? Number(item.value_relative) : Number(item.value_absolute)]
           });
         });
         return data.reverse();
