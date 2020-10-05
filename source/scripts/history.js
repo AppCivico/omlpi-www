@@ -241,7 +241,7 @@ if (document.querySelector('#app-history')) {
               : Number(item.value_absolute)],
           });
         });
-        return data;
+        return data.reverse();
       },
       generateIndicatorChart() {
         if (!this.selectedIndicator.id) {

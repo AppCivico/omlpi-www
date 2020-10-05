@@ -9605,7 +9605,7 @@ if (document.querySelector('#app-history')) {
             data: [Number(item.value_relative) ? Number(item.value_relative) : Number(item.value_absolute)]
           });
         });
-        return data;
+        return data.reverse();
       },
       generateIndicatorChart: function generateIndicatorChart() {
         if (!this.selectedIndicator.id) {
