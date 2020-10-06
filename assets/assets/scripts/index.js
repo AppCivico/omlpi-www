@@ -9271,16 +9271,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+var productionDomains = ['rnpiobserva.org.br', 'inspiring-heisenberg-e2220d.netlify.app'];
 var _default = {
   api: {
-    domain: window.location.hostname.indexOf('observatoriodaprimeirainfancia') !== -1 ? 'https://omlpi-api.appcivico.com/v1/' : 'https://dev-omlpi-api.appcivico.com/v1/',
-    docs: window.location.hostname.indexOf('observatoriodaprimeirainfancia') !== -1 ? 'https://omlpi-docs.appcivico.com/' : 'https://dev-omlpi-docs.appcivico.com/'
+    domain: productionDomains.indexOf(window.location.hostname) > -1 ? 'https://omlpi-api.appcivico.com/v1/' : 'https://dev-omlpi-api.appcivico.com/v1/',
+    docs: productionDomains.indexOf(window.location.hostname) > -1 ? 'https://omlpi-docs.appcivico.com/' : 'https://dev-omlpi-docs.appcivico.com/'
   },
   apiCMS: {
-    domain: window.location.hostname.indexOf('observatoriodaprimeirainfancia') !== -1 ? 'https://omlpi-strapi.appcivico.com/' : 'https://dev-omlpi-strapi.appcivico.com/'
+    domain: productionDomains.indexOf(window.location.hostname) > -1 ? 'https://omlpi-strapi.appcivico.com/' : 'https://dev-omlpi-strapi.appcivico.com/'
   },
   storage: {
-    domain: window.location.hostname.indexOf('observatoriodaprimeirainfancia') !== -1 ? 'https://omlpi-strapi.appcivico.com/' : 'https://dev-omlpi-strapi.appcivico.com/'
+    domain: productionDomains.indexOf(window.location.hostname) > -1 ? 'https://omlpi-strapi.appcivico.com/' : 'https://dev-omlpi-strapi.appcivico.com/'
   },
   fisrtCityId: 5200050
 };
@@ -9587,7 +9588,7 @@ if (document.querySelector('#app-history')) {
           data.push({
             name: item.description,
             data: item.values.map(function (internItem) {
-              return Number(internItem.value_relative) ? Number(internItem.value_relative) : Number(internItem.value_absolute);
+              return internItem.value_relative !== null ? Number(internItem.value_relative) : Number(internItem.value_absolute);
             })
           });
         });
@@ -9602,10 +9603,10 @@ if (document.querySelector('#app-history')) {
         items.values.forEach(function (item) {
           data.push({
             name: item.year,
-            data: [Number(item.value_relative) ? Number(item.value_relative) : Number(item.value_absolute)]
+            data: [item.value_relative !== null ? Number(item.value_relative) : Number(item.value_absolute)]
           });
         });
-        return data;
+        return data.reverse();
       },
       generateIndicatorChart: function generateIndicatorChart() {
         if (!this.selectedIndicator.id) {
@@ -10444,7 +10445,7 @@ if (window.location.href.indexOf('city') > -1) {
     methods: {
       formatIndicatorValue: function formatIndicatorValue(values, isPercentage) {
         if (values.value_relative === null && values.value_absolute === null) {
-          return 'Sem informações';
+          return 'Não disponível';
         }
 
         if (values.value_relative) {

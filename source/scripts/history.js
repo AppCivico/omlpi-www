@@ -220,7 +220,7 @@ if (document.querySelector('#app-history')) {
         items.forEach((item) => {
           data.push({
             name: item.description,
-            data: item.values.map(internItem => (Number(internItem.value_relative)
+            data: item.values.map(internItem => (internItem.value_relative !== null
               ? Number(internItem.value_relative)
               : Number(internItem.value_absolute))),
           });
@@ -236,12 +236,12 @@ if (document.querySelector('#app-history')) {
         items.values.forEach((item) => {
           data.push({
             name: item.year,
-            data: [Number(item.value_relative)
+            data: [item.value_relative !== null
               ? Number(item.value_relative)
               : Number(item.value_absolute)],
           });
         });
-        return data;
+        return data.reverse();
       },
       generateIndicatorChart() {
         if (!this.selectedIndicator.id) {
