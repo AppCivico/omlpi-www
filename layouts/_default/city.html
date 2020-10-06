@@ -89,10 +89,10 @@
                     </a>
                     <div class="indicator-header__number">
                       <h3 v-if="indicator.values.value_relative === null && indicator.values.value_absolute === null">
-                        {{ "{{ formatIndicatorHeaderValue(indicator.values) }}" }}
+                        {{ "{{ formatIndicatorHeaderValue(indicator.values, false) }}" }}
                       </h3>
                       <h2 v-else>
-                        {{ "{{ formatIndicatorHeaderValue(indicator.values) }}" }}
+                        {{ "{{ formatIndicatorHeaderValue(indicator.values, false) }}" }}
                       </h2>
                     </div>
                     <div
