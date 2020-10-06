@@ -110,12 +110,12 @@ if (window.location.href.indexOf('city') > -1) {
         }
         return true;
       },
-      formatIndicatorHeaderValue(values) {
+      formatIndicatorHeaderValue(values, isPercentage) {
         if (values.value_relative === null && values.value_absolute === null) {
-          return 'Sem informações';
+          return 'Não disponível';
         }
         if (values.value_relative) {
-          return `${values.value_relative}%`;
+          return `${values.value_relative}${isPercentage ? '%' : ''}`;
         }
         if (values.value_absolute) {
           return Number(values.value_absolute).toLocaleString('pt-br');
@@ -176,11 +176,10 @@ if (window.location.href.indexOf('city') > -1) {
       formatDataToBarsCharts(items) {
         const data = [];
         items.data.forEach((item) => {
-          // make null become zero and add legend with (no data)
           data.push({
             name: item.description,
             is_null: item.values.value_relative === null && item.values.value_absolute === null,
-            data: [Number(item.values.value_relative)
+            data: [item.values.value_relative !== null
               ? Number(item.values.value_relative)
               : Number(item.values.value_absolute)],
           });
@@ -227,7 +226,7 @@ if (window.location.href.indexOf('city') > -1) {
             yAxis: {
               min: 0,
               labels: {
-                format: chart.data[0].values.value_relative ? '{value}%' : '{value}',
+                format: chart.data[0].values.value_relative,
               },
               title: {
                 text: false,
@@ -236,7 +235,7 @@ if (window.location.href.indexOf('city') > -1) {
             tooltip: {
               // eslint-disable-next-line object-shorthand, func-names
               formatter: function () {
-                return chart.data[0].values.value_relative ? `${this.y}%` : this.y;
+                return chart.data[0].values.value_relative ? `${this.y}` : this.y;
               },
               headerFormat: '',
             },
@@ -249,7 +248,7 @@ if (window.location.href.indexOf('city') > -1) {
                 dataLabels: {
                   // eslint-disable-next-line object-shorthand, func-names
                   formatter: function () {
-                    return this.series.userOptions.is_null ? 'Sem informações' : this.y;
+                    return this.series.userOptions.is_null ? 'Não disponível' : this.y;
                   },
                   useHTML: true,
                   enabled: true,

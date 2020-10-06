@@ -10458,13 +10458,13 @@ if (window.location.href.indexOf('city') > -1) {
 
         return true;
       },
-      formatIndicatorHeaderValue: function formatIndicatorHeaderValue(values) {
+      formatIndicatorHeaderValue: function formatIndicatorHeaderValue(values, isPercentage) {
         if (values.value_relative === null && values.value_absolute === null) {
-          return 'Sem informações';
+          return 'Não disponível';
         }
 
         if (values.value_relative) {
-          return "".concat(values.value_relative, "%");
+          return "".concat(values.value_relative).concat(isPercentage ? '%' : '');
         }
 
         if (values.value_absolute) {
@@ -10576,11 +10576,10 @@ if (window.location.href.indexOf('city') > -1) {
       formatDataToBarsCharts: function formatDataToBarsCharts(items) {
         var data = [];
         items.data.forEach(function (item) {
-          // make null become zero and add legend with (no data)
           data.push({
             name: item.description,
             is_null: item.values.value_relative === null && item.values.value_absolute === null,
-            data: [Number(item.values.value_relative) ? Number(item.values.value_relative) : Number(item.values.value_absolute)]
+            data: [item.values.value_relative !== null ? Number(item.values.value_relative) : Number(item.values.value_absolute)]
           });
         });
         return data;
@@ -10625,7 +10624,7 @@ if (window.location.href.indexOf('city') > -1) {
             yAxis: {
               min: 0,
               labels: {
-                format: chart.data[0].values.value_relative ? '{value}%' : '{value}'
+                format: chart.data[0].values.value_relative
               },
               title: {
                 text: false
@@ -10634,7 +10633,7 @@ if (window.location.href.indexOf('city') > -1) {
             tooltip: {
               // eslint-disable-next-line object-shorthand, func-names
               formatter: function formatter() {
-                return chart.data[0].values.value_relative ? "".concat(this.y, "%") : this.y;
+                return chart.data[0].values.value_relative ? "".concat(this.y) : this.y;
               },
               headerFormat: ''
             },
@@ -10647,7 +10646,7 @@ if (window.location.href.indexOf('city') > -1) {
                 dataLabels: {
                   // eslint-disable-next-line object-shorthand, func-names
                   formatter: function formatter() {
-                    return this.series.userOptions.is_null ? 'Sem informações' : this.y;
+                    return this.series.userOptions.is_null ? 'Não disponível' : this.y;
                   },
                   useHTML: true,
                   enabled: true
