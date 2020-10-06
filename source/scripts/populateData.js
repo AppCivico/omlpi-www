@@ -100,7 +100,7 @@ if (window.location.href.indexOf('city') > -1) {
     methods: {
       formatIndicatorValue(values, isPercentage) {
         if (values.value_relative === null && values.value_absolute === null) {
-          return 'Sem informações';
+          return 'Não disponível';
         }
         if (values.value_relative) {
           return Math.round(values.value_relative) + (isPercentage ? '%' : '');
