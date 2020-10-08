@@ -42,7 +42,6 @@ if (document.querySelector('#app-home-indicators')) {
         }
 
         fetch(url)
-          .then(this.startIndicatorsCounter(true))
           .then(response => response.json())
           .then((response) => {
             this.indicators = response;
@@ -51,7 +50,6 @@ if (document.querySelector('#app-home-indicators')) {
           })
           .then(() => {
             this.loadingLocales = false;
-            this.startIndicatorsCounter();
             return true;
           });
       },
