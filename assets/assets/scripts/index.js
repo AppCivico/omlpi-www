@@ -9895,7 +9895,9 @@ if (document.querySelector('#app-home-indicators')) {
       loadingLocales: false,
       additionalLocaleId: null,
       triggerAnimation: true,
-      storageDomain: _config.default.storage.domain
+      storageDomain: _config.default.storage.domain,
+      interval: null,
+      intervalTime: 10000
     },
     computed: {
       loading: function loading() {
@@ -9925,12 +9927,16 @@ if (document.querySelector('#app-home-indicators')) {
       }))();
     },
     methods: {
-      startIndicatorsCounter: function startIndicatorsCounter() {
+      startIndicatorsCounter: function startIndicatorsCounter(stop) {
         var _this2 = this;
 
-        setInterval(function () {
-          _this2.getIndicators();
-        }, 10000);
+        if (stop) {
+          clearInterval(this.interval);
+        } else {
+          this.interval = setInterval(function () {
+            _this2.getIndicators();
+          }, this.intervalTime);
+        }
       },
       getIndicators: function getIndicators() {
         var _this3 = this;
@@ -9942,7 +9948,7 @@ if (document.querySelector('#app-home-indicators')) {
           url = "".concat(_config.default.api.domain, "data/random_indicator?locale_id_ne=").concat(this.additionalLocaleId);
         }
 
-        fetch(url).then(function (response) {
+        fetch(url).then(this.startIndicatorsCounter(true)).then(function (response) {
           return response.json();
         }).then(function (response) {
           _this3.indicators = response;
@@ -9950,6 +9956,9 @@ if (document.querySelector('#app-home-indicators')) {
           return true;
         }).then(function () {
           _this3.loadingLocales = false;
+
+          _this3.startIndicatorsCounter();
+
           return true;
         });
       },
