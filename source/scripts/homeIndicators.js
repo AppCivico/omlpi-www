@@ -11,6 +11,8 @@ if (document.querySelector('#app-home-indicators')) {
       additionalLocaleId: null,
       triggerAnimation: true,
       storageDomain: config.storage.domain,
+      interval: null,
+      intervalTime: 10000,
     },
     computed: {
       loading() {
@@ -22,10 +24,14 @@ if (document.querySelector('#app-home-indicators')) {
       this.startIndicatorsCounter();
     },
     methods: {
-      startIndicatorsCounter() {
-        setInterval(() => {
-          this.getIndicators();
-        }, 10000);
+      startIndicatorsCounter(stop) {
+        if (stop) {
+          clearInterval(this.interval);
+        } else {
+          this.interval = setInterval(() => {
+            this.getIndicators();
+          }, this.intervalTime);
+        }
       },
       getIndicators() {
         this.loadingLocales = true;
@@ -36,6 +42,7 @@ if (document.querySelector('#app-home-indicators')) {
         }
 
         fetch(url)
+          .then(this.startIndicatorsCounter(true))
           .then(response => response.json())
           .then((response) => {
             this.indicators = response;
@@ -44,6 +51,7 @@ if (document.querySelector('#app-home-indicators')) {
           })
           .then(() => {
             this.loadingLocales = false;
+            this.startIndicatorsCounter();
             return true;
           });
       },
