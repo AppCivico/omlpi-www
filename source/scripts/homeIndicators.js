@@ -21,7 +21,7 @@ if (document.querySelector('#app-home-indicators')) {
     },
     async mounted() {
       await this.getIndicators();
-      this.startIndicatorsCounter();
+      // this.startIndicatorsCounter();
     },
     methods: {
       startIndicatorsCounter(stop) {
