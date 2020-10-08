@@ -9274,7 +9274,7 @@ exports.default = void 0;
 var productionDomains = ['rnpiobserva.org.br', 'inspiring-heisenberg-e2220d.netlify.app'];
 var _default = {
   api: {
-    domain: productionDomains.indexOf(window.location.hostname) > -1 ? 'https://omlpi-api.appcivico.com/v1/' : 'https://dev-omlpi-api.appcivico.com/v1/',
+    domain: productionDomains.indexOf(window.location.hostname) > -1 ? 'https://omlpi-api.appcivico.com/v2/' : 'https://dev-omlpi-api.appcivico.com/v2/',
     docs: productionDomains.indexOf(window.location.hostname) > -1 ? 'https://omlpi-docs.appcivico.com/' : 'https://dev-omlpi-docs.appcivico.com/'
   },
   apiCMS: {
@@ -9916,9 +9916,6 @@ if (document.querySelector('#app-home-indicators')) {
                 return _this.getIndicators();
 
               case 2:
-                _this.startIndicatorsCounter();
-
-              case 3:
               case "end":
                 return _context.stop();
             }

@@ -21,7 +21,7 @@ if (document.querySelector('#app-home-indicators')) {
     },
     async mounted() {
       await this.getIndicators();
-      this.startIndicatorsCounter();
+      // this.startIndicatorsCounter();
     },
     methods: {
       startIndicatorsCounter(stop) {
@@ -42,7 +42,6 @@ if (document.querySelector('#app-home-indicators')) {
         }
 
         fetch(url)
-          .then(this.startIndicatorsCounter(true))
           .then(response => response.json())
           .then((response) => {
             this.indicators = response;
@@ -51,7 +50,6 @@ if (document.querySelector('#app-home-indicators')) {
           })
           .then(() => {
             this.loadingLocales = false;
-            this.startIndicatorsCounter();
             return true;
           });
       },
