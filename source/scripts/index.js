@@ -11,6 +11,7 @@ import './homeAbout';
 import './homeIndicators';
 import './history';
 import './compare';
+import './indicatorsText';
 
 startSearch();
 startPlansSearch();

@@ -40,20 +40,13 @@
         </div>
       </div>
 
-      <section>
-        <div class="container">
-          <h1>{{ .Title }}</h1>
-          <div class="chart-text">
-            {{ $content_parts := split .Content "||||||||||" }}
-
-            <div class="chart-text__content">
-              {{ index $content_parts 0 | safeHTML }}
-            </div>
-            <div class="chart-text__content">
-              {{ index $content_parts 1 | safeHTML }}
-            </div>
+      <section id="app-indicators-text" class="chart-text">
+        <div class="container" v-if="text">
+          <h1>{{ "{{ text.titulo }}" }}</h1>
+          <div v-html="marked(text.texto)">
           </div>
         </div>
+        <div class="container" v-else>Carregando...</div>
       </section>
 
       {{ partial "footer.html" . }}

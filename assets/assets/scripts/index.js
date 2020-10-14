@@ -9945,7 +9945,7 @@ if (document.querySelector('#app-home-indicators')) {
           url = "".concat(_config.default.api.domain, "data/random_indicator?locale_id_ne=").concat(this.additionalLocaleId);
         }
 
-        fetch(url).then(this.startIndicatorsCounter(true)).then(function (response) {
+        fetch(url).then(function (response) {
           return response.json();
         }).then(function (response) {
           _this3.indicators = response;
@@ -9953,9 +9953,6 @@ if (document.querySelector('#app-home-indicators')) {
           return true;
         }).then(function () {
           _this3.loadingLocales = false;
-
-          _this3.startIndicatorsCounter();
-
           return true;
         });
       },
@@ -10005,11 +10002,76 @@ require("./history");
 
 require("./compare");
 
+require("./indicatorsText");
+
 (0, _search.default)();
 (0, _searchPlans.default)();
 (0, _menu.default)();
 
-},{"./articles":29,"./axis":30,"./compare":31,"./history":34,"./homeAbout":35,"./homeBanner":36,"./homeIndicators":37,"./menu":39,"./news":40,"./plans":41,"./populateData":42,"./search":44,"./search-plans":43,"@babel/runtime/helpers/interopRequireDefault":5}],39:[function(require,module,exports){
+},{"./articles":29,"./axis":30,"./compare":31,"./history":34,"./homeAbout":35,"./homeBanner":36,"./homeIndicators":37,"./indicatorsText":39,"./menu":40,"./news":41,"./plans":42,"./populateData":43,"./search":45,"./search-plans":44,"@babel/runtime/helpers/interopRequireDefault":5}],39:[function(require,module,exports){
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
+var _marked2 = _interopRequireDefault(require("marked"));
+
+var _dompurify = _interopRequireDefault(require("dompurify"));
+
+var _config = _interopRequireDefault(require("./config"));
+
+/* global Vue */
+if (document.querySelector('#app-indicators-text')) {
+  window.$vueHomeBanner = new Vue({
+    el: '#app-indicators-text',
+    data: {
+      text: null
+    },
+    computed: {
+      loading: function loading() {
+        return !this.text;
+      }
+    },
+    mounted: function mounted() {
+      var _this = this;
+
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _this.getText();
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    methods: {
+      getText: function getText() {
+        var _this2 = this;
+
+        fetch("".concat(_config.default.apiCMS.domain, "textoindicadors/1")).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          _this2.text = response;
+        });
+      },
+      marked: function marked(content) {
+        return _dompurify.default.sanitize((0, _marked2.default)(content));
+      }
+    }
+  });
+}
+
+},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"dompurify":13,"marked":23}],40:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10030,7 +10092,7 @@ function startMenutoggle() {
   });
 }
 
-},{}],40:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10090,7 +10152,7 @@ if (document.querySelector('#app-news')) {
   });
 }
 
-},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11}],41:[function(require,module,exports){
+},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11}],42:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10304,7 +10366,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
   });
 }
 
-},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"sweetalert2/dist/sweetalert2":27}],42:[function(require,module,exports){
+},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"sweetalert2/dist/sweetalert2":27}],43:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10715,7 +10777,7 @@ if (window.location.href.indexOf('city') > -1) {
   });
 }
 
-},{"./config":32,"./search":44,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"slugify":26}],43:[function(require,module,exports){
+},{"./config":32,"./search":45,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"slugify":26}],44:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10883,7 +10945,7 @@ function startPlansSearch() {
   }
 }
 
-},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"awesomplete":12,"fuzzysort":14}],44:[function(require,module,exports){
+},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"awesomplete":12,"fuzzysort":14}],45:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
