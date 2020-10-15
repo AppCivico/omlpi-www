@@ -9191,6 +9191,9 @@ if (document.querySelector('#app-compare')) {
               borderWidth: 0
             }
           },
+          // exporting: {
+          //   filename: `Observa_${this.locale.name}_${this.selectedIndicator.id}_Comparação`,
+          // },
           series: this.formatDataToBarsCharts(this.locales)
         });
 
