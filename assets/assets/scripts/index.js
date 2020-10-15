@@ -10432,24 +10432,18 @@ if (window.location.href.indexOf('city') > -1) {
         return 6;
       },
       barsHorizontalData: function barsHorizontalData() {
-        var _this2 = this;
-
         var data = [];
 
         if (!this.loading) {
           this.locale.indicators.forEach(function (indicator) {
-            var indicatorYear = indicator.values.year;
-            indicator.subindicators.forEach(function (subindicator) {
-              var subindicatorData = subindicator.data.filter(function (item) {
-                return item.values.year === indicatorYear;
-              });
-
-              if (_this2.showAsHorizontalBarChart(subindicatorData)) {
+            indicator.subindicators.filter(function (subindicator) {
+              if (subindicator.showAs === 'horizontalBarChart') {
                 var updatedSubindicator = subindicator;
-                updatedSubindicator.data = subindicatorData;
                 updatedSubindicator.indicatorId = indicator.id;
                 data.push(updatedSubindicator);
               }
+
+              return true;
             });
           });
         }
@@ -10457,21 +10451,13 @@ if (window.location.href.indexOf('city') > -1) {
         return data;
       },
       barsData: function barsData() {
-        var _this3 = this;
-
         var data = [];
 
         if (!this.loading) {
           this.locale.indicators.forEach(function (indicator) {
-            var indicatorYear = indicator.values.year;
             indicator.subindicators.forEach(function (subindicator) {
-              var subindicatorData = subindicator.data.filter(function (item) {
-                return item.values.year === indicatorYear;
-              });
-
-              if (_this3.showAsBarChart(subindicatorData)) {
+              if (subindicator.showAs === 'barsChart') {
                 var updatedSubindicator = subindicator;
-                updatedSubindicator.data = subindicatorData;
                 updatedSubindicator.indicatorId = indicator.id;
                 data.push(updatedSubindicator);
               }
@@ -10484,7 +10470,7 @@ if (window.location.href.indexOf('city') > -1) {
     },
     created: function created() {},
     mounted: function mounted() {
-      var _this4 = this;
+      var _this2 = this;
 
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
         return _regenerator.default.wrap(function _callee$(_context) {
@@ -10492,15 +10478,15 @@ if (window.location.href.indexOf('city') > -1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this4.getData();
+                return _this2.getData();
 
               case 2:
                 _context.next = 4;
-                return _this4.generateCharts();
+                return _this2.generateCharts();
 
               case 4:
                 _context.next = 6;
-                return _this4.changeTitle();
+                return _this2.changeTitle();
 
               case 6:
                 (0, _search.default)();
@@ -10615,7 +10601,7 @@ if (window.location.href.indexOf('city') > -1) {
         }))();
       },
       getData: function getData() {
-        var _this5 = this;
+        var _this3 = this;
 
         return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
           var response, json;
@@ -10624,7 +10610,7 @@ if (window.location.href.indexOf('city') > -1) {
               switch (_context3.prev = _context3.next) {
                 case 0:
                   _context3.next = 2;
-                  return fetch("".concat(_config.default.api.domain, "data?locale_id=").concat(_this5.localeId));
+                  return fetch("".concat(_config.default.api.domain, "data?locale_id=").concat(_this3.localeId));
 
                 case 2:
                   response = _context3.sent;
@@ -10633,7 +10619,7 @@ if (window.location.href.indexOf('city') > -1) {
 
                 case 5:
                   json = _context3.sent;
-                  _this5.locale = json.locale;
+                  _this3.locale = _this3.formatLocale(json.locale);
                   return _context3.abrupt("return", true);
 
                 case 8:
@@ -10643,6 +10629,41 @@ if (window.location.href.indexOf('city') > -1) {
             }
           }, _callee3);
         }))();
+      },
+      formatLocale: function formatLocale(data) {
+        var _this4 = this;
+
+        // JSON.parse and stringify are being used
+        // to deep clone a simple object
+        var updatedLocale = JSON.parse(JSON.stringify(data));
+        updatedLocale.indicators = [];
+        data.indicators.forEach(function (indicator) {
+          var newIndicator = JSON.parse(JSON.stringify(indicator));
+          newIndicator.subindicators = [];
+          var indicatorYear = indicator.values.year;
+          indicator.subindicators.forEach(function (subindicator) {
+            var subindicatorData = subindicator.data.filter(function (item) {
+              return item.values.year === indicatorYear;
+            });
+            var updatedSubindicator = subindicator;
+            updatedSubindicator.data = subindicatorData;
+            updatedSubindicator.indicatorId = indicator.id;
+
+            if (subindicatorData.length > 0) {
+              if (_this4.showAsBarChart(subindicatorData)) {
+                updatedSubindicator.showAs = 'barsChart';
+              } else if (_this4.showAsHorizontalBarChart(subindicatorData)) {
+                updatedSubindicator.showAs = 'horizontalBarChart';
+              } else {
+                updatedSubindicator.showAs = 'bigNumber';
+              }
+
+              newIndicator.subindicators.push(updatedSubindicator);
+            }
+          });
+          updatedLocale.indicators.push(newIndicator);
+        });
+        return updatedLocale;
       },
       formatDataToBarsCharts: function formatDataToBarsCharts(items) {
         var data = [];
@@ -10668,7 +10689,7 @@ if (window.location.href.indexOf('city') > -1) {
         });
       },
       generateCharts: function generateCharts() {
-        var _this6 = this;
+        var _this5 = this;
 
         this.barsData.forEach(function (chart) {
           Highcharts.chart("bar-chart-".concat(chart.indicatorId, "-").concat(chart.id), {
@@ -10724,7 +10745,7 @@ if (window.location.href.indexOf('city') > -1) {
                 }
               }
             },
-            series: _this6.formatDataToBarsCharts(chart)
+            series: _this5.formatDataToBarsCharts(chart)
           });
         });
         this.barsHorizontalData.forEach(function (chart) {
@@ -10771,7 +10792,7 @@ if (window.location.href.indexOf('city') > -1) {
                 }
               }
             },
-            series: _this6.formatDataToBarsCharts(chart)
+            series: _this5.formatDataToBarsCharts(chart)
           });
         });
         return true;

@@ -50,18 +50,13 @@ if (window.location.href.indexOf('city') > -1) {
         const data = [];
         if (!this.loading) {
           this.locale.indicators.forEach((indicator) => {
-            const indicatorYear = indicator.values.year;
-
-            indicator.subindicators.forEach((subindicator) => {
-              const subindicatorData = subindicator.data
-                .filter(item => item.values.year === indicatorYear);
-
-              if (this.showAsHorizontalBarChart(subindicatorData)) {
+            indicator.subindicators.filter((subindicator) => {
+              if (subindicator.showAs === 'horizontalBarChart') {
                 const updatedSubindicator = subindicator;
-                updatedSubindicator.data = subindicatorData;
                 updatedSubindicator.indicatorId = indicator.id;
                 data.push(updatedSubindicator);
               }
+              return true;
             });
           });
         }
@@ -72,15 +67,9 @@ if (window.location.href.indexOf('city') > -1) {
 
         if (!this.loading) {
           this.locale.indicators.forEach((indicator) => {
-            const indicatorYear = indicator.values.year;
-
             indicator.subindicators.forEach((subindicator) => {
-              const subindicatorData = subindicator.data
-                .filter(item => item.values.year === indicatorYear);
-
-              if (this.showAsBarChart(subindicatorData)) {
+              if (subindicator.showAs === 'barsChart') {
                 const updatedSubindicator = subindicator;
-                updatedSubindicator.data = subindicatorData;
                 updatedSubindicator.indicatorId = indicator.id;
                 data.push(updatedSubindicator);
               }
@@ -169,8 +158,44 @@ if (window.location.href.indexOf('city') > -1) {
       async getData() {
         const response = await fetch(`${config.api.domain}data?locale_id=${this.localeId}`);
         const json = await response.json();
-        this.locale = json.locale;
+        this.locale = this.formatLocale(json.locale);
         return true;
+      },
+
+      formatLocale(data) {
+        // JSON.parse and stringify are being used
+        // to deep clone a simple object
+        const updatedLocale = JSON.parse(JSON.stringify(data));
+        updatedLocale.indicators = [];
+
+        data.indicators.forEach((indicator) => {
+          const newIndicator = JSON.parse(JSON.stringify(indicator));
+          newIndicator.subindicators = [];
+          const indicatorYear = indicator.values.year;
+
+
+          indicator.subindicators.forEach((subindicator) => {
+            const subindicatorData = subindicator.data
+              .filter(item => item.values.year === indicatorYear);
+
+            const updatedSubindicator = subindicator;
+            updatedSubindicator.data = subindicatorData;
+            updatedSubindicator.indicatorId = indicator.id;
+
+            if (subindicatorData.length > 0) {
+              if (this.showAsBarChart(subindicatorData)) {
+                updatedSubindicator.showAs = 'barsChart';
+              } else if (this.showAsHorizontalBarChart(subindicatorData)) {
+                updatedSubindicator.showAs = 'horizontalBarChart';
+              } else {
+                updatedSubindicator.showAs = 'bigNumber';
+              }
+              newIndicator.subindicators.push(updatedSubindicator);
+            }
+          });
+          updatedLocale.indicators.push(newIndicator);
+        });
+        return updatedLocale;
       },
 
       formatDataToBarsCharts(items) {

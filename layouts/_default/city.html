@@ -124,7 +124,7 @@
                     v-else
                     v-for="(subindicator, subIndicatorIndex) in indicator.subindicators">
                     <div
-                      v-if="showAsBigNumber(subindicator.data)"
+                      v-if="subindicator.showAs === 'bigNumber'"
                       :id="slugify(`subindicator-${subindicator.classification}-${indicator.id}-${subindicator.id}`)"
                       class="big-number">
 
@@ -166,7 +166,7 @@
                     </div>
 
                     <div
-                      v-if="showAsHorizontalBarChart(subindicator.data)"
+                      v-else-if="subindicator.showAs === 'horizontalBarChart'"
                       class="big-number">
                       <div class="info-chart">
                         <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
@@ -177,7 +177,7 @@
                     </div>
 
                     <div
-                      v-if="showAsBarChart(subindicator.data)"
+                      v-else-if="subindicator.showAs === 'barsChart'"
                       class="big-number">
                       <div class="info-chart">
                         <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
