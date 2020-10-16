@@ -9971,6 +9971,7 @@ if (document.querySelector('#app-home-indicators')) {
         var _this3 = this;
 
         this.loadingLocales = true;
+        this.startIndicatorsCounter(true);
         var url = "".concat(_config.default.api.domain, "data/random_indicator");
 
         if (this.additionalLocaleId) {
@@ -9985,6 +9986,10 @@ if (document.querySelector('#app-home-indicators')) {
           return true;
         }).then(function () {
           _this3.loadingLocales = false;
+          return true;
+        }).then(function () {
+          _this3.startIndicatorsCounter();
+
           return true;
         });
       },

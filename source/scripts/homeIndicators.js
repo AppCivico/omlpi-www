@@ -37,6 +37,7 @@ if (document.querySelector('#app-home-indicators')) {
       },
       getIndicators() {
         this.loadingLocales = true;
+        this.startIndicatorsCounter(true);
         let url = `${config.api.domain}data/random_indicator`;
 
         if (this.additionalLocaleId) {
@@ -52,6 +53,10 @@ if (document.querySelector('#app-home-indicators')) {
           })
           .then(() => {
             this.loadingLocales = false;
+            return true;
+          })
+          .then(() => {
+            this.startIndicatorsCounter();
             return true;
           });
       },
