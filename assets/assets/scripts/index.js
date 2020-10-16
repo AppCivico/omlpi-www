@@ -9297,10 +9297,33 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.removeDiacritics = removeDiacritics;
+exports.formatterMixing = void 0;
 
 function removeDiacritics(string) {
   return string.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-} // eslint-disable-next-line import/prefer-default-export
+}
+
+var formatterMixing = {
+  methods: {
+    formatIndicatorValue: function formatIndicatorValue(values, isPercentage) {
+      if (values.value_relative === null && values.value_absolute === null) {
+        return 'Não disponível';
+      }
+
+      if (values.value_relative) {
+        return Math.round(values.value_relative) + (isPercentage ? '%' : '');
+      }
+
+      if (values.value_absolute) {
+        return Number(values.value_absolute).toLocaleString('pt-br');
+      }
+
+      return true;
+    }
+  }
+}; // eslint-disable-next-line import/prefer-default-export
+
+exports.formatterMixing = formatterMixing;
 
 },{}],34:[function(require,module,exports){
 "use strict";
@@ -9888,10 +9911,13 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _config = _interopRequireDefault(require("./config"));
 
+var _helpers = require("./helpers");
+
 /* global Vue */
 if (document.querySelector('#app-home-indicators')) {
   window.$vueHomeIndicators = new Vue({
     el: '#app-home-indicators',
+    mixins: [_helpers.formatterMixing],
     data: {
       indicators: null,
       animationCount: 3,
@@ -9919,6 +9945,9 @@ if (document.querySelector('#app-home-indicators')) {
                 return _this.getIndicators();
 
               case 2:
+                _this.startIndicatorsCounter();
+
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -9974,7 +10003,7 @@ if (document.querySelector('#app-home-indicators')) {
   });
 }
 
-},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11}],38:[function(require,module,exports){
+},{"./config":32,"./helpers":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11}],38:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10384,6 +10413,8 @@ var _config = _interopRequireDefault(require("./config"));
 
 var _search = _interopRequireDefault(require("./search"));
 
+var _helpers = require("./helpers");
+
 /* global Vue */
 
 /* global Highcharts */
@@ -10402,6 +10433,7 @@ Highcharts.setOptions({
 if (window.location.href.indexOf('city') > -1) {
   window.$vuePopulateData = new Vue({
     el: '#app',
+    mixins: [_helpers.formatterMixing],
     data: {
       localeId: window.location.search.split('id=')[1].split('&')[0],
       selectedArea: Number(window.location.search.split('area=')[1]) || 1,
@@ -10500,21 +10532,6 @@ if (window.location.href.indexOf('city') > -1) {
       }))();
     },
     methods: {
-      formatIndicatorValue: function formatIndicatorValue(values, isPercentage) {
-        if (values.value_relative === null && values.value_absolute === null) {
-          return 'Não disponível';
-        }
-
-        if (values.value_relative) {
-          return Math.round(values.value_relative) + (isPercentage ? '%' : '');
-        }
-
-        if (values.value_absolute) {
-          return Number(values.value_absolute).toLocaleString('pt-br');
-        }
-
-        return true;
-      },
       formatIndicatorHeaderValue: function formatIndicatorHeaderValue(values, isPercentage) {
         if (values.value_relative === null && values.value_absolute === null) {
           return 'Não disponível';
@@ -10801,7 +10818,7 @@ if (window.location.href.indexOf('city') > -1) {
   });
 }
 
-},{"./config":32,"./search":45,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"slugify":26}],44:[function(require,module,exports){
+},{"./config":32,"./helpers":33,"./search":45,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"slugify":26}],44:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");

@@ -1,9 +1,11 @@
 /* global Vue */
 import config from './config';
+import { formatterMixing } from './helpers';
 
 if (document.querySelector('#app-home-indicators')) {
   window.$vueHomeIndicators = new Vue({
     el: '#app-home-indicators',
+    mixins: [formatterMixing],
     data: {
       indicators: null,
       animationCount: 3,
@@ -21,7 +23,7 @@ if (document.querySelector('#app-home-indicators')) {
     },
     async mounted() {
       await this.getIndicators();
-      // this.startIndicatorsCounter();
+      this.startIndicatorsCounter();
     },
     methods: {
       startIndicatorsCounter(stop) {

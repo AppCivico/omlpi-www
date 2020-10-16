@@ -4,6 +4,7 @@
 import slugify from 'slugify';
 import config from './config';
 import startSearch from './search';
+import { formatterMixing } from './helpers';
 
 Highcharts.setOptions({
   lang: {
@@ -21,6 +22,7 @@ Highcharts.setOptions({
 if (window.location.href.indexOf('city') > -1) {
   window.$vuePopulateData = new Vue({
     el: '#app',
+    mixins: [formatterMixing],
     data: {
       localeId: window.location.search.split('id=')[1].split('&')[0],
       selectedArea: Number(window.location.search.split('area=')[1]) || 1,
@@ -87,18 +89,6 @@ if (window.location.href.indexOf('city') > -1) {
       startSearch();
     },
     methods: {
-      formatIndicatorValue(values, isPercentage) {
-        if (values.value_relative === null && values.value_absolute === null) {
-          return 'Não disponível';
-        }
-        if (values.value_relative) {
-          return Math.round(values.value_relative) + (isPercentage ? '%' : '');
-        }
-        if (values.value_absolute) {
-          return Number(values.value_absolute).toLocaleString('pt-br');
-        }
-        return true;
-      },
       formatIndicatorHeaderValue(values, isPercentage) {
         if (values.value_relative === null && values.value_absolute === null) {
           return 'Não disponível';

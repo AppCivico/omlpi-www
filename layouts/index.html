@@ -113,8 +113,12 @@
                       :key="indicator.values.value_relative ? indicator.values.value_relative : indicator.values.value_absolute"
                       :style="`transition-delay: ${(index > 0 ? innerIndex + animationCount : innerIndex)/4}s`"
                     >
-
-                    {{ "{{ indicator.values.value_relative ? `${Math.round(indicator.values.value_relative)}%` : Number(indicator.values.value_absolute).toLocaleString('pt-br') }}" }}
+                    <small v-if="indicator.values.value_relative === null && indicator.values.value_absolute === null">
+                      {{ "{{ formatIndicatorValue(indicator.values, indicator.is_percentage) }}" }}
+                    </small>
+                    <template v-else>
+                      {{ "{{ formatIndicatorValue(indicator.values, indicator.is_percentage) }}" }}
+                    </template>
                     </h4>
                   </transition>
                 </div>
