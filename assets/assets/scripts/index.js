@@ -10336,7 +10336,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
 
         if (this.selectedLocale.type === 'state') {
           var cities = this.locales.filter(function (locale) {
-            return locale.type === 'city' && locale.state === _this3.selectedLocale.state;
+            return locale.type === 'city' && locale.state === _this3.selectedLocale.state && locale.plan;
           });
           this.capital = this.locales.find(function (locale) {
             return locale.type === 'city' && locale.state === _this3.selectedLocale.state && locale.is_capital;
@@ -10925,7 +10925,7 @@ function startPlansSearch() {
                 }
 
                 return {
-                  label: "".concat(region.name, ":").concat(region.type, ":").concat(!region.plan ? 'empty' : ''),
+                  label: "".concat(region.name, ":").concat(region.type),
                   value: region.id
                 };
               });
