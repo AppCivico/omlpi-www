@@ -289,6 +289,9 @@ if (document.querySelector('#app-history')) {
               borderWidth: 0,
             },
           },
+          exporting: {
+            filename: `Observa_${this.locale.historical[0].name}_Indicador_${this.selectedIndicator.id}_Série_Histórica`,
+          },
           series: this.formatDataToBarsCharts(this.selectedIndicator),
         });
 
@@ -354,6 +357,10 @@ if (document.querySelector('#app-history')) {
           },
           credits: {
             enabled: false,
+          },
+          exporting: {
+            filename: `Observa_${this.locale.historical[0].name}_Indicador_${this.selectedIndicator.id}_Desagregador_${
+              this.selectedSubindicator.id}_Série_Histórica`,
           },
           series: this.formatDataToSubindicatorsChart(this.selectedSubindicator.data),
         });

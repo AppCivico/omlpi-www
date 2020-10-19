@@ -9191,9 +9191,9 @@ if (document.querySelector('#app-compare')) {
               borderWidth: 0
             }
           },
-          // exporting: {
-          //   filename: `Observa_${this.locale.name}_${this.selectedIndicator.id}_Comparação`,
-          // },
+          exporting: {
+            filename: "Observa_".concat(this.locale.name, "_Indicador_").concat(this.selectedIndicator.id, "_Compara\xE7\xE3o")
+          },
           series: this.formatDataToBarsCharts(this.locales)
         });
 
@@ -9254,7 +9254,10 @@ if (document.querySelector('#app-compare')) {
             }
           },
           credits: {
-            enabled: false
+            enabled: true
+          },
+          exporting: {
+            filename: "Observa_".concat(this.locale.name, "_Indicador_").concat(this.selectedIndicator.id, "_Desagregador_").concat(this.selectedSubindicator.id, "_Compara\xE7\xE3o")
           },
           series: this.formatDataToSubindicatorsChart(this.selectedSubindicator.data)
         });
@@ -9678,6 +9681,9 @@ if (document.querySelector('#app-history')) {
               borderWidth: 0
             }
           },
+          exporting: {
+            filename: "Observa_".concat(this.locale.historical[0].name, "_Indicador_").concat(this.selectedIndicator.id, "_S\xE9rie_Hist\xF3rica")
+          },
           series: this.formatDataToBarsCharts(this.selectedIndicator)
         });
 
@@ -9745,6 +9751,9 @@ if (document.querySelector('#app-history')) {
           },
           credits: {
             enabled: false
+          },
+          exporting: {
+            filename: "Observa_".concat(this.locale.historical[0].name, "_Indicador_").concat(this.selectedIndicator.id, "_Desagregador_").concat(this.selectedSubindicator.id, "_S\xE9rie_Hist\xF3rica")
           },
           series: this.formatDataToSubindicatorsChart(this.selectedSubindicator.data)
         });

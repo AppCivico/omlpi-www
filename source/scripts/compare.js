@@ -388,9 +388,9 @@ if (document.querySelector('#app-compare')) {
               borderWidth: 0,
             },
           },
-          // exporting: {
-          //   filename: `Observa_${this.locale.name}_${this.selectedIndicator.id}_Comparação`,
-          // },
+          exporting: {
+            filename: `Observa_${this.locale.name}_Indicador_${this.selectedIndicator.id}_Comparação`,
+          },
           series: this.formatDataToBarsCharts(this.locales),
         });
         if (this.indicators.length === 0) {
@@ -447,7 +447,11 @@ if (document.querySelector('#app-compare')) {
             },
           },
           credits: {
-            enabled: false,
+            enabled: true,
+          },
+          exporting: {
+            filename: `Observa_${this.locale.name}_Indicador_${this.selectedIndicator.id}_Desagregador_${
+              this.selectedSubindicator.id}_Comparação`,
           },
           series: this.formatDataToSubindicatorsChart(this.selectedSubindicator.data),
         });
