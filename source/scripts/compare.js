@@ -112,7 +112,7 @@ if (document.querySelector('#app-compare')) {
           this.selectedYear = this.selectedSubindicator?.data[0]?.values?.[0]?.year;
         }
 
-        if (this.locale.id) {
+        if (this.locale.id || this.locale.id === 0) {
           const newId = this.locale.id;
           this.updateUrlParams('location_id', newId);
           this.localeId = newId;
@@ -159,7 +159,7 @@ if (document.querySelector('#app-compare')) {
       },
       getLocale(localeId) {
         this.loadingLocale = true;
-        const url = `${config.api.domain}data/compare?locale_id=${localeId || config.fisrtCityId}`;
+        const url = `${config.api.domain}data/compare?locale_id=${localeId || localeId === 0 ? localeId : config.fisrtCityId}`;
         fetch(url)
           .then(response => response.json())
           .then((response) => {
@@ -180,7 +180,7 @@ if (document.querySelector('#app-compare')) {
               }
             });
             locales.comparison.sort((a, b) => ((a.display_order < b.display_order) ? 1 : -1));
-            if (Number(this.localeId) === 0) {
+            if (Number(localeId) === 0) {
               locales.comparison.reverse();
             }
             this.locales = locales;

@@ -44,21 +44,27 @@ if (document.querySelector('#app-home-indicators')) {
           url = `${config.api.domain}data/random_indicator?locale_id_ne=${this.additionalLocaleId}`;
         }
 
-        fetch(url)
-          .then(response => response.json())
-          .then((response) => {
-            this.indicators = response;
-            this.additionalLocaleId = response.locales[1].id;
-            return true;
-          })
-          .then(() => {
-            this.loadingLocales = false;
-            return true;
-          })
-          .then(() => {
-            this.startIndicatorsCounter();
-            return true;
-          });
+        return new Promise((resolve, reject) => {
+          fetch(url)
+            .then(response => response.json())
+            .then((response) => {
+              this.indicators = response;
+              this.additionalLocaleId = response.locales[1].id;
+              return true;
+            })
+            .then(() => {
+              this.loadingLocales = false;
+              return true;
+            })
+            .then(() => {
+              this.startIndicatorsCounter();
+
+              resolve(true);
+            })
+            .catch((err) => {
+              reject(err);
+            });
+        });
       },
       getAxisClass(area) {
         if (area === 3) {

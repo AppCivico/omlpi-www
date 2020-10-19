@@ -8861,7 +8861,7 @@ if (document.querySelector('#app-compare')) {
           this.selectedYear = (_this$selectedSubindi5 = this.selectedSubindicator) === null || _this$selectedSubindi5 === void 0 ? void 0 : (_this$selectedSubindi6 = _this$selectedSubindi5.data[0]) === null || _this$selectedSubindi6 === void 0 ? void 0 : (_this$selectedSubindi7 = _this$selectedSubindi6.values) === null || _this$selectedSubindi7 === void 0 ? void 0 : (_this$selectedSubindi8 = _this$selectedSubindi7[0]) === null || _this$selectedSubindi8 === void 0 ? void 0 : _this$selectedSubindi8.year;
         }
 
-        if (this.locale.id) {
+        if (this.locale.id || this.locale.id === 0) {
           var newId = this.locale.id;
           this.updateUrlParams('location_id', newId);
           this.localeId = newId;
@@ -8935,7 +8935,7 @@ if (document.querySelector('#app-compare')) {
         var _this5 = this;
 
         this.loadingLocale = true;
-        var url = "".concat(_config.default.api.domain, "data/compare?locale_id=").concat(localeId || _config.default.fisrtCityId);
+        var url = "".concat(_config.default.api.domain, "data/compare?locale_id=").concat(localeId || localeId === 0 ? localeId : _config.default.fisrtCityId);
         fetch(url).then(function (response) {
           return response.json();
         }).then(function (response) {
@@ -8963,7 +8963,7 @@ if (document.querySelector('#app-compare')) {
             return a.display_order < b.display_order ? 1 : -1;
           });
 
-          if (Number(_this5.localeId) === 0) {
+          if (Number(localeId) === 0) {
             locales.comparison.reverse();
           }
 
@@ -9505,7 +9505,7 @@ if (document.querySelector('#app-history')) {
         var _this3 = this;
 
         this.loadingLocale = true;
-        var url = "".concat(_config.default.api.domain, "data/historical?locale_id=").concat(localeId || 1);
+        var url = "".concat(_config.default.api.domain, "data/historical?locale_id=").concat(localeId || localeId === 0 ? localeId : 1);
         fetch(url).then(function (response) {
           return response.json();
         }).then(function (response) {
@@ -9978,19 +9978,23 @@ if (document.querySelector('#app-home-indicators')) {
           url = "".concat(_config.default.api.domain, "data/random_indicator?locale_id_ne=").concat(this.additionalLocaleId);
         }
 
-        fetch(url).then(function (response) {
-          return response.json();
-        }).then(function (response) {
-          _this3.indicators = response;
-          _this3.additionalLocaleId = response.locales[1].id;
-          return true;
-        }).then(function () {
-          _this3.loadingLocales = false;
-          return true;
-        }).then(function () {
-          _this3.startIndicatorsCounter();
+        return new Promise(function (resolve, reject) {
+          fetch(url).then(function (response) {
+            return response.json();
+          }).then(function (response) {
+            _this3.indicators = response;
+            _this3.additionalLocaleId = response.locales[1].id;
+            return true;
+          }).then(function () {
+            _this3.loadingLocales = false;
+            return true;
+          }).then(function () {
+            _this3.startIndicatorsCounter();
 
-          return true;
+            resolve(true);
+          }).catch(function (err) {
+            reject(err);
+          });
         });
       },
       getAxisClass: function getAxisClass(area) {

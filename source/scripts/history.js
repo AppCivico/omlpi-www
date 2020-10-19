@@ -127,7 +127,7 @@ if (document.querySelector('#app-history')) {
       },
       getLocale(localeId) {
         this.loadingLocale = true;
-        const url = `${config.api.domain}data/historical?locale_id=${localeId || 1}`;
+        const url = `${config.api.domain}data/historical?locale_id=${localeId || localeId === 0 ? localeId : 1}`;
         fetch(url)
           .then(response => response.json())
           .then((response) => {
