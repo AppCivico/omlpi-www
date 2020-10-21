@@ -10676,8 +10676,9 @@ if (window.location.href.indexOf('city') > -1) {
         updatedLocale.indicators = [];
         data.indicators.forEach(function (indicator) {
           var newIndicator = JSON.parse(JSON.stringify(indicator));
-          newIndicator.subindicators = [];
+          var indicatorDescription = indicator.description;
           var indicatorYear = indicator.values.year;
+          newIndicator.subindicators = [];
           indicator.subindicators.forEach(function (subindicator) {
             var subindicatorData = subindicator.data.filter(function (item) {
               return item.values.year === indicatorYear;
@@ -10685,6 +10686,7 @@ if (window.location.href.indexOf('city') > -1) {
             var updatedSubindicator = subindicator;
             updatedSubindicator.data = subindicatorData;
             updatedSubindicator.indicatorId = indicator.id;
+            updatedSubindicator.indicatorDescription = indicatorDescription;
 
             if (subindicatorData.length > 0) {
               if (_this4.showAsBarChart(subindicatorData)) {
@@ -10733,15 +10735,22 @@ if (window.location.href.indexOf('city') > -1) {
             chart: {
               type: 'column'
             },
-            title: null,
+            title: {
+              text: chart.classification,
+              style: {
+                width: '100%',
+                wordWrap: 'break-word'
+              }
+            },
             subtitle: {
+              text: chart.indicatorDescription
+            },
+            caption: {
               text: chart.data[0].values.year,
-              verticalAlign: 'bottom',
-              align: 'left',
               y: 25,
               style: {
                 color: '#a3a3a3',
-                fontSize: '.88889rem'
+                fontsize: '.88889rem'
               }
             },
             xAxis: {
@@ -10793,15 +10802,18 @@ if (window.location.href.indexOf('city') > -1) {
             chart: {
               type: 'bar'
             },
-            title: null,
+            title: {
+              text: chart.classification
+            },
             subtitle: {
+              text: chart.indicatorDescription
+            },
+            caption: {
               text: chart.data[0].values.year,
-              verticalAlign: 'bottom',
-              align: 'left',
               y: 25,
               style: {
                 color: '#a3a3a3',
-                fontSize: '.88889rem'
+                fontsize: '.88889rem'
               }
             },
             xAxis: {

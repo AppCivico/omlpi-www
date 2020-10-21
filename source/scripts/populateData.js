@@ -160,8 +160,9 @@ if (window.location.href.indexOf('city') > -1) {
 
         data.indicators.forEach((indicator) => {
           const newIndicator = JSON.parse(JSON.stringify(indicator));
-          newIndicator.subindicators = [];
+          const indicatorDescription = indicator.description;
           const indicatorYear = indicator.values.year;
+          newIndicator.subindicators = [];
 
 
           indicator.subindicators.forEach((subindicator) => {
@@ -171,6 +172,7 @@ if (window.location.href.indexOf('city') > -1) {
             const updatedSubindicator = subindicator;
             updatedSubindicator.data = subindicatorData;
             updatedSubindicator.indicatorId = indicator.id;
+            updatedSubindicator.indicatorDescription = indicatorDescription;
 
             if (subindicatorData.length > 0) {
               if (this.showAsBarChart(subindicatorData)) {
@@ -221,15 +223,22 @@ if (window.location.href.indexOf('city') > -1) {
             chart: {
               type: 'column',
             },
-            title: null,
+            title: {
+              text: chart.classification,
+              style: {
+                width: '100%',
+                wordWrap: 'break-word',
+              },
+            },
             subtitle: {
+              text: chart.indicatorDescription,
+            },
+            caption: {
               text: chart.data[0].values.year,
-              verticalAlign: 'bottom',
-              align: 'left',
               y: 25,
               style: {
                 color: '#a3a3a3',
-                fontSize: '.88889rem',
+                fontsize: '.88889rem',
               },
             },
             xAxis: {
@@ -282,15 +291,18 @@ if (window.location.href.indexOf('city') > -1) {
             chart: {
               type: 'bar',
             },
-            title: null,
+            title: {
+              text: chart.classification,
+            },
             subtitle: {
+              text: chart.indicatorDescription,
+            },
+            caption: {
               text: chart.data[0].values.year,
-              verticalAlign: 'bottom',
-              align: 'left',
               y: 25,
               style: {
                 color: '#a3a3a3',
-                fontSize: '.88889rem',
+                fontsize: '.88889rem',
               },
             },
             xAxis: {
