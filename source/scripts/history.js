@@ -203,7 +203,7 @@ if (document.querySelector('#app-history')) {
         if (!data.values) {
           return false;
         }
-        return data.values.reverse().map(item => item.year);
+        return data.values.map(item => item.year);
       },
       formatSubindicatorYears(data) {
         if (!data) {

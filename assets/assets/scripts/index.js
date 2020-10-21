@@ -9137,7 +9137,9 @@ if (document.querySelector('#app-compare')) {
             data: item.indicators.filter(function (indicator) {
               return indicator.id === _this10.selectedIndicator.id;
             }).map(function (locale) {
-              return locale.values.map(function (i) {
+              return locale.values.sort(function (a, b) {
+                return a.year > b.year ? 1 : -1;
+              }).map(function (i) {
                 if (i.value_relative) {
                   return Number(i.value_relative);
                 }
@@ -9594,7 +9596,7 @@ if (document.querySelector('#app-history')) {
           return false;
         }
 
-        return data.values.reverse().map(function (item) {
+        return data.values.map(function (item) {
           return item.year;
         });
       },

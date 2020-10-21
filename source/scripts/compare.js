@@ -333,12 +333,14 @@ if (document.querySelector('#app-compare')) {
           data.push({
             name: item.name,
             data: item.indicators.filter(indicator => indicator.id === this.selectedIndicator.id)
-              .map(locale => locale.values.map((i) => {
-                if (i.value_relative) {
-                  return Number(i.value_relative);
-                }
-                return Number(i.value_absolute);
-              }))[0],
+              .map(locale => locale.values
+                .sort((a, b) => (a.year > b.year ? 1 : -1))
+                .map((i) => {
+                  if (i.value_relative) {
+                    return Number(i.value_relative);
+                  }
+                  return Number(i.value_absolute);
+                }))[0],
           });
         });
 
