@@ -383,7 +383,7 @@ if (document.querySelector('#app-compare')) {
             },
             headerFormat: '',
           },
-          colors: ['#C97B84', '#A85751', '#251351', '#114B5F', '#028090', '#E4FDE1', '#040926', '#F45B69', '#91A6FF'],
+          colors: ['#C97B84', '#A85751', '#251351', '#114B5F', '#028090', '#040926', '#F45B69', '#91A6FF'],
           plotOptions: {
             column: {
               pointPadding: 0.2,
@@ -439,7 +439,7 @@ if (document.querySelector('#app-compare')) {
             },
             valueSuffix: null,
           },
-          colors: ['#C97B84', '#A85751', '#251351', '#114B5F', '#028090', '#E4FDE1', '#040926', '#F45B69', '#91A6FF'],
+          colors: ['#C97B84', '#A85751', '#251351', '#114B5F', '#028090', '#040926', '#F45B69', '#91A6FF'],
           plotOptions: {
             bar: {
               dataLabels: {

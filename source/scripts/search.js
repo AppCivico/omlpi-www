@@ -70,7 +70,7 @@ export default function startSearch() {
 
 
     function activeButton(buttonNumber) {
-      document.querySelector(`#js-area-${buttonNumber}`).classList.add('button-icon--active');
+      document.querySelector(`#js-area-${buttonNumber}`).disabled = false;
     }
 
     fetch(`${config.api.domain}data?locale_id=${localeId}`)

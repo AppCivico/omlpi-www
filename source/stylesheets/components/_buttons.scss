@@ -1,6 +1,7 @@
 %button {
   display: inline-flex;
   padding: 0.6rem 1.2rem;
+  font-weight: font-weight('bold');
   text-decoration: none;
   text-transform: uppercase;
   cursor: pointer;
@@ -8,6 +9,11 @@
   background-color: palette('blue', 'greeny');
   border: 0;
   border-radius: 10px;
+
+  &[disabled] {
+    cursor: not-allowed;
+    background-color: palette('gray', 'light');
+  }
 }
 
 .button {
@@ -27,7 +33,23 @@
 
 .button--icon {
   @extend %button;
-  background-color: palette('gray', 'light');
+  color: palette('purple');
+  background-color: palette('white');
+  border-width: 2px;
+  border-style: solid;
+  border-color: palette('purple');
+
+  &[disabled] {
+    color: palette('black', 'lighter');
+    background-color: palette('white');
+    border-color: palette('white');
+    opacity: 0.6;
+    box-shadow: 0;
+
+    &::before {
+      filter: grayscale(1);
+    }
+  }
 
   &::before {
     width: 1.25rem;
@@ -54,7 +76,7 @@
   &::before {
     // width: 1.25rem;
     // height: 1.25rem;
-    background-image: image('health.svg');
+    background-image: image('health--purple.svg');
   }
 }
 
@@ -62,7 +84,7 @@
   &::before {
     // width: 1.125rem;
     // height: 1.312rem;
-    background-image: image('education.svg');
+    background-image: image('education--purple.svg');
   }
 }
 
@@ -70,12 +92,18 @@
   &::before {
     // width: 1.4rem;
     // height: 1rem;
-    background-image: image('social-assistance.svg');
+    background-image: image('social-assistance--purple.svg');
   }
 }
 
 .button-icon--active {
+  color: palette('white');
   background-color: palette('purple');
+  box-shadow: 0 2px 6px palette('shadow');
+
+  &::before {
+    filter: brightness(10);
+  }
 }
 
 .button-like-text {
