@@ -8809,7 +8809,7 @@ if (document.querySelector('#app-compare')) {
           this.selectedSubindicator.data.forEach(function (item) {
             item.values.map(function (iitem) {
               return years.push(iitem.year);
-            });
+            }).sort().reverse();
           });
         }
 
@@ -8940,6 +8940,7 @@ if (document.querySelector('#app-compare')) {
           return response.json();
         }).then(function (response) {
           var locales = response;
+          console.log(locales);
           locales.comparison.forEach(function (item) {
             var myItem = item;
 

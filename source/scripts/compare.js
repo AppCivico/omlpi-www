@@ -69,7 +69,7 @@ if (document.querySelector('#app-compare')) {
         const years = [];
         if (this.selectedSubindicator.data) {
           this.selectedSubindicator.data.forEach((item) => {
-            item.values.map(iitem => years.push(iitem.year));
+            item.values.map(iitem => years.push(iitem.year)).sort().reverse();
           });
         }
         return [...new Set(years)];
