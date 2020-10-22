@@ -94,7 +94,7 @@ if (window.location.href.indexOf('city') > -1) {
           return 'Não disponível';
         }
         if (values.value_relative) {
-          return `${values.value_relative}${isPercentage ? '%' : ''}`;
+          return `${Number(values.value_relative).toLocaleString('pt-br')}${isPercentage ? '%' : ''}`;
         }
         if (values.value_absolute) {
           return Number(values.value_absolute).toLocaleString('pt-br');
@@ -272,7 +272,7 @@ if (window.location.href.indexOf('city') > -1) {
                 dataLabels: {
                   // eslint-disable-next-line object-shorthand, func-names
                   formatter: function () {
-                    return this.series.userOptions.is_null ? 'Não disponível' : this.y;
+                    return this.series.userOptions.is_null ? 'Não disponível' : Number(this.y).toLocaleString('pt-br');
                   },
                   useHTML: true,
                   enabled: true,
@@ -326,6 +326,11 @@ if (window.location.href.indexOf('city') > -1) {
             plotOptions: {
               bar: {
                 dataLabels: {
+                  // eslint-disable-next-line object-shorthand, func-names
+                  formatter: function () {
+                    return this.series.userOptions.is_null ? 'Não disponível' : Number(this.y).toLocaleString('pt-br');
+                  },
+                  useHTML: true,
                   enabled: true,
                 },
               },
