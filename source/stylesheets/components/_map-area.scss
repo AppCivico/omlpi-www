@@ -1,17 +1,18 @@
 .map-area {
-  padding: 6rem 0;
+  padding: 3.4rem 0;
   margin-bottom: 2rem;
   // sass-lint:disable-block no-color-literals
   background-position: center;
   background-size: cover;
 
   @media screen and (min-width: breakpoint('desktop')) {
-    min-height: 30rem;
+    // min-height: 30rem;
   }
 }
 
 .map-area h1 {
   margin-top: 0;
+  margin-bottom: 1rem;
   font-weight: font-weight('light');
   font-size: ms(6);
   text-align: center;
