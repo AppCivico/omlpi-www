@@ -8940,7 +8940,6 @@ if (document.querySelector('#app-compare')) {
           return response.json();
         }).then(function (response) {
           var locales = response;
-          console.log(locales);
           locales.comparison.forEach(function (item) {
             var myItem = item;
 
@@ -10792,6 +10791,9 @@ if (window.location.href.indexOf('city') > -1) {
                 }
               }
             },
+            exporting: {
+              filename: "Observa_".concat(_this5.locale.name, "_Indicador_").concat(chart.indicatorId, "_").concat(chart.classification)
+            },
             series: _this5.formatDataToBarsCharts(chart)
           });
         });
@@ -10846,6 +10848,9 @@ if (window.location.href.indexOf('city') > -1) {
                   enabled: true
                 }
               }
+            },
+            exporting: {
+              filename: "Observa_".concat(_this5.locale.name, "_Indicador_").concat(chart.indicatorId, "_").concat(chart.classification)
             },
             series: _this5.formatDataToBarsCharts(chart)
           });

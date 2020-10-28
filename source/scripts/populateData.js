@@ -279,6 +279,9 @@ if (window.location.href.indexOf('city') > -1) {
                 },
               },
             },
+            exporting: {
+              filename: `Observa_${this.locale.name}_Indicador_${chart.indicatorId}_${chart.classification}`,
+            },
             series: this.formatDataToBarsCharts(chart),
           });
         });
@@ -334,6 +337,9 @@ if (window.location.href.indexOf('city') > -1) {
                   enabled: true,
                 },
               },
+            },
+            exporting: {
+              filename: `Observa_${this.locale.name}_Indicador_${chart.indicatorId}_${chart.classification}`,
             },
             series: this.formatDataToBarsCharts(chart),
           });
