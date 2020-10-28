@@ -180,6 +180,11 @@ if (document.querySelector('#app-compare')) {
               }
             });
             locales.comparison.sort((a, b) => ((a.display_order < b.display_order) ? 1 : -1));
+            locales.comparison.forEach((locale) => {
+              locale.indicators.forEach((indicator) => {
+                indicator.values.sort((a, b) => ((a.year > b.year) ? 1 : -1));
+              });
+            });
             if (Number(localeId) === 0) {
               locales.comparison.reverse();
             }

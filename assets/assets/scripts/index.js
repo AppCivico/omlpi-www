@@ -8962,6 +8962,13 @@ if (document.querySelector('#app-compare')) {
           locales.comparison.sort(function (a, b) {
             return a.display_order < b.display_order ? 1 : -1;
           });
+          locales.comparison.forEach(function (locale) {
+            locale.indicators.forEach(function (indicator) {
+              indicator.values.sort(function (a, b) {
+                return a.year > b.year ? 1 : -1;
+              });
+            });
+          });
 
           if (Number(localeId) === 0) {
             locales.comparison.reverse();
