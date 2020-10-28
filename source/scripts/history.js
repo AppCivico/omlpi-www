@@ -3,12 +3,13 @@
 
 import Awesomplete from 'awesomplete';
 import fuzzysort from 'fuzzysort';
-import { removeDiacritics } from './helpers';
+import { removeDiacritics, formatterMixing } from './helpers';
 import config from './config';
 
 if (document.querySelector('#app-history')) {
   window.$vueHistory = new Vue({
     el: '#app-history',
+    mixins: [formatterMixing],
     data: {
       locales: null,
       locale: { historical: [{ indicators: [] }] },

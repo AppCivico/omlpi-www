@@ -9356,6 +9356,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 if (document.querySelector('#app-history')) {
   window.$vueHistory = new Vue({
     el: '#app-history',
+    mixins: [_helpers.formatterMixing],
     data: {
       locales: null,
       locale: {
