@@ -8733,6 +8733,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 if (document.querySelector('#app-compare')) {
   window.$vueCompare = new Vue({
     el: '#app-compare',
+    mixins: [_helpers.formatterMixing],
     data: {
       locales_list: null,
       locales: {
@@ -9083,6 +9084,7 @@ if (document.querySelector('#app-compare')) {
         var allData = [];
         var data = [];
         var descriptions = [];
+        var tooltip = '';
         this.locales.comparison.forEach(function (comparison) {
           var cityName = comparison.name;
           comparison.indicators.forEach(function (indicator) {
@@ -9095,6 +9097,7 @@ if (document.querySelector('#app-compare')) {
                     if (subData.values) {
                       subData.values.forEach(function (value) {
                         if (value.year === Number(_this9.selectedYear)) {
+                          tooltip = _this9.formatIndicatorValue(value, subData.is_percentage);
                           descriptions.push(description);
                           data.push(value.value_relative ? Number(value.value_relative) : Number(value.value_absolute));
                         }
@@ -9109,7 +9112,8 @@ if (document.querySelector('#app-compare')) {
           if (data.length !== 0) {
             allData.push({
               name: cityName,
-              data: data
+              data: data,
+              tooltip: tooltip
             });
             data = [];
           }
@@ -9139,6 +9143,7 @@ if (document.querySelector('#app-compare')) {
           });
         });
         this.localesWithIndicator.forEach(function (item) {
+          var tooltip = '';
           data.push({
             name: item.name,
             data: item.indicators.filter(function (indicator) {
@@ -9147,13 +9152,16 @@ if (document.querySelector('#app-compare')) {
               return locale.values.sort(function (a, b) {
                 return a.year > b.year ? 1 : -1;
               }).map(function (i) {
+                tooltip = _this10.formatIndicatorValue(i, locale.is_percentage);
+
                 if (i.value_relative) {
                   return Number(i.value_relative);
                 }
 
                 return Number(i.value_absolute);
               });
-            })[0]
+            })[0],
+            tooltip: tooltip
           });
         });
         return data;
@@ -9189,7 +9197,8 @@ if (document.querySelector('#app-compare')) {
           tooltip: {
             // eslint-disable-next-line object-shorthand, func-names
             formatter: function formatter() {
-              return window.$vueCompare.selectedIndicator.values[0].value_relative ? "".concat(Math.round(Number(this.y)), "%") : Number(this.y).toLocaleString('pt-BR');
+              console.log(this);
+              return this.series.userOptions.tooltip;
             },
             headerFormat: ''
           },
@@ -9247,9 +9256,7 @@ if (document.querySelector('#app-compare')) {
           tooltip: {
             /* eslint-disable object-shorthand, func-names, camelcase */
             formatter: function formatter() {
-              var _window$$vueCompare$s;
-
-              return ((_window$$vueCompare$s = window.$vueCompare.selectedSubindicator.data) === null || _window$$vueCompare$s === void 0 ? void 0 : _window$$vueCompare$s[0].values[0].value_relative) ? "".concat(Math.round(Number(this.y)), "%") : Number(this.y).toLocaleString('pt-BR');
+              return this.series.userOptions.tooltip;
             },
             valueSuffix: null
           },

@@ -3,12 +3,13 @@
 
 import Awesomplete from 'awesomplete';
 import fuzzysort from 'fuzzysort';
-import { removeDiacritics } from './helpers';
+import { removeDiacritics, formatterMixing } from './helpers';
 import config from './config';
 
 if (document.querySelector('#app-compare')) {
   window.$vueCompare = new Vue({
     el: '#app-compare',
+    mixins: [formatterMixing],
     data: {
       locales_list: null,
       locales: { comparison: [{ indicators: [] }] },
@@ -280,6 +281,8 @@ if (document.querySelector('#app-compare')) {
         const allData = [];
         let data = [];
         const descriptions = [];
+        let tooltip = '';
+
         this.locales.comparison.forEach((comparison) => {
           const cityName = comparison.name;
           comparison.indicators.forEach((indicator) => {
@@ -291,6 +294,7 @@ if (document.querySelector('#app-compare')) {
                     if (subData.values) {
                       subData.values.forEach((value) => {
                         if (value.year === Number(this.selectedYear)) {
+                          tooltip = this.formatIndicatorValue(value, subData.is_percentage);
                           descriptions.push(description);
                           data.push(value.value_relative
                             ? Number(value.value_relative)
@@ -307,6 +311,7 @@ if (document.querySelector('#app-compare')) {
             allData.push({
               name: cityName,
               data,
+              tooltip,
             });
             data = [];
           }
@@ -335,17 +340,20 @@ if (document.querySelector('#app-compare')) {
         });
 
         this.localesWithIndicator.forEach((item) => {
+          let tooltip = '';
           data.push({
             name: item.name,
             data: item.indicators.filter(indicator => indicator.id === this.selectedIndicator.id)
               .map(locale => locale.values
                 .sort((a, b) => (a.year > b.year ? 1 : -1))
                 .map((i) => {
+                  tooltip = this.formatIndicatorValue(i, locale.is_percentage);
                   if (i.value_relative) {
                     return Number(i.value_relative);
                   }
                   return Number(i.value_absolute);
                 }))[0],
+            tooltip,
           });
         });
 
@@ -382,9 +390,8 @@ if (document.querySelector('#app-compare')) {
           tooltip: {
             // eslint-disable-next-line object-shorthand, func-names
             formatter: function () {
-              return window.$vueCompare.selectedIndicator.values[0].value_relative
-                ? `${Math.round(Number(this.y))}%`
-                : Number(this.y).toLocaleString('pt-BR');
+              console.log(this)
+              return this.series.userOptions.tooltip;
             },
             headerFormat: '',
           },
@@ -438,9 +445,7 @@ if (document.querySelector('#app-compare')) {
           tooltip: {
             /* eslint-disable object-shorthand, func-names, camelcase */
             formatter: function () {
-              return window.$vueCompare.selectedSubindicator.data?.[0].values[0].value_relative
-                ? `${Math.round(Number(this.y))}%`
-                : Number(this.y).toLocaleString('pt-BR');
+              return this.series.userOptions.tooltip;
             },
             valueSuffix: null,
           },
