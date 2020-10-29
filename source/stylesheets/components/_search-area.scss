@@ -105,6 +105,15 @@
   color: palette('blue', 'greeny');
 }
 
+.search-area h2 {
+  margin-bottom: 0.5rem;
+  font-weight: font-weight('bold');
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+  color: palette('blue', 'greeny');
+}
+
 .search-area--big h1 {
   margin-bottom: 3.5rem;
   font-weight: 300;
