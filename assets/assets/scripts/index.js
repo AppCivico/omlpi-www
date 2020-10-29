@@ -8810,11 +8810,11 @@ if (document.querySelector('#app-compare')) {
           this.selectedSubindicator.data.forEach(function (item) {
             item.values.map(function (iitem) {
               return years.push(iitem.year);
-            }).sort().reverse();
+            });
           });
         }
 
-        return (0, _toConsumableArray2.default)(new Set(years));
+        return (0, _toConsumableArray2.default)(new Set(years)).sort().reverse();
       },
       emptyIndicator: function emptyIndicator() {
         var _this$locale, _this$locale$indicato, _this$selectedIndicat, _this$selectedIndicat2;

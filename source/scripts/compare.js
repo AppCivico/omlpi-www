@@ -70,10 +70,10 @@ if (document.querySelector('#app-compare')) {
         const years = [];
         if (this.selectedSubindicator.data) {
           this.selectedSubindicator.data.forEach((item) => {
-            item.values.map(iitem => years.push(iitem.year)).sort().reverse();
+            item.values.map(iitem => years.push(iitem.year));
           });
         }
-        return [...new Set(years)];
+        return [...new Set(years)].sort().reverse();
       },
       emptyIndicator() {
         return this.locale?.indicators?.length === 0
@@ -390,7 +390,6 @@ if (document.querySelector('#app-compare')) {
           tooltip: {
             // eslint-disable-next-line object-shorthand, func-names
             formatter: function () {
-              console.log(this)
               return this.series.userOptions.tooltip;
             },
             headerFormat: '',
