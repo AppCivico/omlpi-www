@@ -156,7 +156,11 @@
                               </time>
                         </div>
                         <a
-                          @click.prevent="print(slugify(`subindicator-${subindicator.classification}-${indicator.id}-${subindicator.id}`))"
+                          @click.prevent="print(
+                            slugify(`subindicator-${subindicator.classification}-${indicator.id}-${subindicator.id}`),
+                            indicator.id,
+                            subindicator.classification
+                          )"
                           title="Download"
                           class="infobox__download"
                         >

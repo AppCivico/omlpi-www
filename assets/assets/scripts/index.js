@@ -10621,30 +10621,35 @@ if (window.location.href.indexOf('city') > -1) {
           lower: true
         });
       },
-      print: function print(divId) {
+      print: function print(divId, indicatorId, subindicatorDescription) {
+        var _this3 = this;
+
         return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
-          var clone, elems;
+          var clone, elems, documentTitle;
           return _regenerator.default.wrap(function _callee2$(_context2) {
             while (1) {
               switch (_context2.prev = _context2.next) {
                 case 0:
                   clone = document.querySelector("#".concat(divId)).cloneNode(true);
                   elems = document.querySelectorAll('body *');
+                  documentTitle = document.title;
                   Array.prototype.slice.call(elems).forEach(function (value) {
                     value.classList.add('hide');
                   });
                   document.body.appendChild(clone);
-                  _context2.next = 6;
+                  document.title = "Observa_".concat(_this3.locale.name, "_Indicador_").concat(indicatorId, "_").concat(subindicatorDescription);
+                  _context2.next = 8;
                   return window.print();
 
-                case 6:
+                case 8:
                   Array.prototype.slice.call(elems).forEach(function (value) {
                     value.classList.remove('hide');
                   });
+                  document.title = documentTitle;
                   clone.remove();
                   document.querySelector("#".concat(divId)).scrollIntoView();
 
-                case 9:
+                case 12:
                 case "end":
                   return _context2.stop();
               }
@@ -10653,7 +10658,7 @@ if (window.location.href.indexOf('city') > -1) {
         }))();
       },
       getData: function getData() {
-        var _this3 = this;
+        var _this4 = this;
 
         return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
           var response, json;
@@ -10662,7 +10667,7 @@ if (window.location.href.indexOf('city') > -1) {
               switch (_context3.prev = _context3.next) {
                 case 0:
                   _context3.next = 2;
-                  return fetch("".concat(_config.default.api.domain, "data?locale_id=").concat(_this3.localeId));
+                  return fetch("".concat(_config.default.api.domain, "data?locale_id=").concat(_this4.localeId));
 
                 case 2:
                   response = _context3.sent;
@@ -10671,7 +10676,7 @@ if (window.location.href.indexOf('city') > -1) {
 
                 case 5:
                   json = _context3.sent;
-                  _this3.locale = _this3.formatLocale(json.locale);
+                  _this4.locale = _this4.formatLocale(json.locale);
                   return _context3.abrupt("return", true);
 
                 case 8:
@@ -10683,7 +10688,7 @@ if (window.location.href.indexOf('city') > -1) {
         }))();
       },
       formatLocale: function formatLocale(data) {
-        var _this4 = this;
+        var _this5 = this;
 
         // JSON.parse and stringify are being used
         // to deep clone a simple object
@@ -10704,9 +10709,9 @@ if (window.location.href.indexOf('city') > -1) {
             updatedSubindicator.indicatorDescription = indicatorDescription;
 
             if (subindicatorData.length > 0) {
-              if (_this4.showAsBarChart(subindicatorData)) {
+              if (_this5.showAsBarChart(subindicatorData)) {
                 updatedSubindicator.showAs = 'barsChart';
-              } else if (_this4.showAsHorizontalBarChart(subindicatorData)) {
+              } else if (_this5.showAsHorizontalBarChart(subindicatorData)) {
                 updatedSubindicator.showAs = 'horizontalBarChart';
               } else {
                 updatedSubindicator.showAs = 'bigNumber';
@@ -10743,7 +10748,7 @@ if (window.location.href.indexOf('city') > -1) {
         });
       },
       generateCharts: function generateCharts() {
-        var _this5 = this;
+        var _this6 = this;
 
         this.barsData.forEach(function (chart) {
           Highcharts.chart("bar-chart-".concat(chart.indicatorId, "-").concat(chart.id), {
@@ -10807,9 +10812,9 @@ if (window.location.href.indexOf('city') > -1) {
               }
             },
             exporting: {
-              filename: "Observa_".concat(_this5.locale.name, "_Indicador_").concat(chart.indicatorId, "_").concat(chart.classification)
+              filename: "Observa_".concat(_this6.locale.name, "_Indicador_").concat(chart.indicatorId, "_").concat(chart.classification)
             },
-            series: _this5.formatDataToBarsCharts(chart)
+            series: _this6.formatDataToBarsCharts(chart)
           });
         });
         this.barsHorizontalData.forEach(function (chart) {
@@ -10865,9 +10870,9 @@ if (window.location.href.indexOf('city') > -1) {
               }
             },
             exporting: {
-              filename: "Observa_".concat(_this5.locale.name, "_Indicador_").concat(chart.indicatorId, "_").concat(chart.classification)
+              filename: "Observa_".concat(_this6.locale.name, "_Indicador_").concat(chart.indicatorId, "_").concat(chart.classification)
             },
-            series: _this5.formatDataToBarsCharts(chart)
+            series: _this6.formatDataToBarsCharts(chart)
           });
         });
         return true;

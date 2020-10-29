@@ -131,17 +131,20 @@ if (window.location.href.indexOf('city') > -1) {
       slugify(string) {
         return slugify(string, { lower: true });
       },
-      async print(divId) {
+      async print(divId, indicatorId, subindicatorDescription) {
         const clone = document.querySelector(`#${divId}`).cloneNode(true);
         const elems = document.querySelectorAll('body *');
+        const documentTitle = document.title;
         Array.prototype.slice.call(elems).forEach((value) => {
           value.classList.add('hide');
         });
         document.body.appendChild(clone);
+        document.title = `Observa_${this.locale.name}_Indicador_${indicatorId}_${subindicatorDescription}`;
         await window.print();
         Array.prototype.slice.call(elems).forEach((value) => {
           value.classList.remove('hide');
         });
+        document.title = documentTitle;
         clone.remove();
         document.querySelector(`#${divId}`).scrollIntoView();
       },
