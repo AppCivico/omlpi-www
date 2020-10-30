@@ -222,9 +222,12 @@ if (document.querySelector('#app-history')) {
           data.push({
             name: item.description,
             isPercentage: item.is_percentage,
-            data: item.values.map(internItem => (internItem.value_relative !== null
-              ? Number(internItem.value_relative)
-              : Number(internItem.value_absolute))),
+            data: item.values.map(internItem => ({
+              isPercentage: item.is_percentage,
+              y: internItem.value_relative !== null
+                ? Number(internItem.value_relative)
+                : Number(internItem.value_absolute),
+            })),
           });
         });
         return data;
@@ -239,9 +242,12 @@ if (document.querySelector('#app-history')) {
           data.push({
             name: item.year,
             isPercentage: items.is_percentage,
-            data: [item.value_relative !== null
-              ? Number(item.value_relative)
-              : Number(item.value_absolute)],
+            data: [{
+              isPercentage: items.is_percentage,
+              y: item.value_relative !== null
+                ? Number(item.value_relative)
+                : Number(item.value_absolute),
+            }],
           });
         });
         return data.reverse();
@@ -289,6 +295,18 @@ if (document.querySelector('#app-history')) {
             column: {
               pointPadding: 0.2,
               borderWidth: 0,
+            },
+            series: {
+              borderWidth: 0,
+              dataLabels: {
+                // eslint-disable-next-line object-shorthand, func-names
+                formatter: function () {
+                  return window.$vueHistory
+                    .formatSingleIndicatorValue(this.y, this.point.isPercentage);
+                },
+                // useHTML: true,
+                enabled: true,
+              },
             },
           },
           exporting: {
@@ -349,9 +367,8 @@ if (document.querySelector('#app-history')) {
               dataLabels: {
                 enabled: true,
                 formatter: function () {
-                  return window.$vueHistory.selectedSubindicator.data?.[0].values[0].value_relative
-                    ? `${Math.round(Number(this.y))}%`
-                    : Number(this.y).toLocaleString('pt-BR');
+                  return window.$vueHistory
+                    .formatSingleIndicatorValue(this.y, this.point.isPercentage);
                 },
               },
             },
