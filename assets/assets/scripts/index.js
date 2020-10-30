@@ -9084,7 +9084,7 @@ if (document.querySelector('#app-compare')) {
         var allData = [];
         var data = [];
         var descriptions = [];
-        var tooltip = '';
+        var isPercentage = '';
         this.locales.comparison.forEach(function (comparison) {
           var cityName = comparison.name;
           comparison.indicators.forEach(function (indicator) {
@@ -9097,7 +9097,7 @@ if (document.querySelector('#app-compare')) {
                     if (subData.values) {
                       subData.values.forEach(function (value) {
                         if (value.year === Number(_this9.selectedYear)) {
-                          tooltip = _this9.formatIndicatorValue(value, subData.is_percentage);
+                          isPercentage = subData.is_percentage;
                           descriptions.push(description);
                           data.push(value.value_relative ? Number(value.value_relative) : Number(value.value_absolute));
                         }
@@ -9113,7 +9113,7 @@ if (document.querySelector('#app-compare')) {
             allData.push({
               name: cityName,
               data: data,
-              tooltip: tooltip
+              isPercentage: isPercentage
             });
             data = [];
           }
@@ -9143,7 +9143,7 @@ if (document.querySelector('#app-compare')) {
           });
         });
         this.localesWithIndicator.forEach(function (item) {
-          var tooltip = '';
+          var isPercentage = '';
           data.push({
             name: item.name,
             data: item.indicators.filter(function (indicator) {
@@ -9152,7 +9152,7 @@ if (document.querySelector('#app-compare')) {
               return locale.values.sort(function (a, b) {
                 return a.year > b.year ? 1 : -1;
               }).map(function (i) {
-                tooltip = _this10.formatIndicatorValue(i, locale.is_percentage);
+                isPercentage = locale.is_percentage;
 
                 if (i.value_relative) {
                   return Number(i.value_relative);
@@ -9161,7 +9161,7 @@ if (document.querySelector('#app-compare')) {
                 return Number(i.value_absolute);
               });
             })[0],
-            tooltip: tooltip
+            isPercentage: isPercentage
           });
         });
         return data;
@@ -9197,8 +9197,7 @@ if (document.querySelector('#app-compare')) {
           tooltip: {
             // eslint-disable-next-line object-shorthand, func-names
             formatter: function formatter() {
-              console.log(this);
-              return this.series.userOptions.tooltip;
+              return window.$vueCompare.formatSingleIndicatorValue(this.y, this.series.userOptions.isPercentage);
             },
             headerFormat: ''
           },
@@ -9256,7 +9255,7 @@ if (document.querySelector('#app-compare')) {
           tooltip: {
             /* eslint-disable object-shorthand, func-names, camelcase */
             formatter: function formatter() {
-              return this.series.userOptions.tooltip;
+              return window.$vueCompare.formatSingleIndicatorValue(this.y, this.series.userOptions.isPercentage);
             },
             valueSuffix: null
           },
@@ -9337,7 +9336,22 @@ var formatterMixing = {
         return Number(values.value_absolute).toLocaleString('pt-br');
       }
 
-      return true;
+      return 'invalid indicator format';
+    },
+    formatSingleIndicatorValue: function formatSingleIndicatorValue(value, isPercentage) {
+      if (value === null) {
+        return 'Não disponível';
+      }
+
+      if (value && isPercentage) {
+        return "".concat(Math.round(value), "% ");
+      }
+
+      if (value && !isPercentage) {
+        return Number(value).toLocaleString('pt-br');
+      }
+
+      return 'invalid indicator format';
     }
   }
 }; // eslint-disable-next-line import/prefer-default-export
@@ -9633,6 +9647,7 @@ if (document.querySelector('#app-history')) {
         items.forEach(function (item) {
           data.push({
             name: item.description,
+            isPercentage: item.is_percentage,
             data: item.values.map(function (internItem) {
               return internItem.value_relative !== null ? Number(internItem.value_relative) : Number(internItem.value_absolute);
             })
@@ -9649,6 +9664,7 @@ if (document.querySelector('#app-history')) {
         items.values.forEach(function (item) {
           data.push({
             name: item.year,
+            isPercentage: items.is_percentage,
             data: [item.value_relative !== null ? Number(item.value_relative) : Number(item.value_absolute)]
           });
         });
@@ -9688,7 +9704,7 @@ if (document.querySelector('#app-history')) {
           tooltip: {
             /* eslint-disable object-shorthand, func-names, camelcase */
             formatter: function formatter() {
-              return window.$vueHistory.selectedIndicator.values[0].value_relative ? "".concat(Math.round(Number(this.y)), "%") : Number(this.y).toLocaleString('pt-BR');
+              return window.$vueHistory.formatSingleIndicatorValue(this.y, this.series.userOptions.isPercentage);
             },
             headerFormat: ''
           },
@@ -9748,9 +9764,7 @@ if (document.querySelector('#app-history')) {
           tooltip: {
             // eslint-disable-next-line object-shorthand, func-names
             formatter: function formatter() {
-              var _window$$vueHistory$s;
-
-              return ((_window$$vueHistory$s = window.$vueHistory.selectedSubindicator.data) === null || _window$$vueHistory$s === void 0 ? void 0 : _window$$vueHistory$s[0].values[0].value_relative) ? "".concat(Math.round(Number(this.y)), "%") : Number(this.y).toLocaleString('pt-BR');
+              return window.$vueHistory.formatSingleIndicatorValue(this.y, this.series.userOptions.isPercentage);
             },
             valueSuffix: null
           },
@@ -9759,9 +9773,9 @@ if (document.querySelector('#app-history')) {
               dataLabels: {
                 enabled: true,
                 formatter: function formatter() {
-                  var _window$$vueHistory$s2;
+                  var _window$$vueHistory$s;
 
-                  return ((_window$$vueHistory$s2 = window.$vueHistory.selectedSubindicator.data) === null || _window$$vueHistory$s2 === void 0 ? void 0 : _window$$vueHistory$s2[0].values[0].value_relative) ? "".concat(Math.round(Number(this.y)), "%") : Number(this.y).toLocaleString('pt-BR');
+                  return ((_window$$vueHistory$s = window.$vueHistory.selectedSubindicator.data) === null || _window$$vueHistory$s === void 0 ? void 0 : _window$$vueHistory$s[0].values[0].value_relative) ? "".concat(Math.round(Number(this.y)), "%") : Number(this.y).toLocaleString('pt-BR');
                 }
               }
             }

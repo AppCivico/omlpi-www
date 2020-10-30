@@ -14,7 +14,19 @@ const formatterMixing = {
       if (values.value_absolute) {
         return Number(values.value_absolute).toLocaleString('pt-br');
       }
-      return true;
+      return 'invalid indicator format';
+    },
+    formatSingleIndicatorValue(value, isPercentage) {
+      if (value === null) {
+        return 'Não disponível';
+      }
+      if (value && isPercentage) {
+        return `${Math.round(value)}% `;
+      }
+      if (value && !isPercentage) {
+        return Number(value).toLocaleString('pt-br');
+      }
+      return 'invalid indicator format';
     },
   },
 };

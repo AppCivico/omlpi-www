@@ -281,7 +281,7 @@ if (document.querySelector('#app-compare')) {
         const allData = [];
         let data = [];
         const descriptions = [];
-        let tooltip = '';
+        let isPercentage = '';
 
         this.locales.comparison.forEach((comparison) => {
           const cityName = comparison.name;
@@ -294,7 +294,7 @@ if (document.querySelector('#app-compare')) {
                     if (subData.values) {
                       subData.values.forEach((value) => {
                         if (value.year === Number(this.selectedYear)) {
-                          tooltip = this.formatIndicatorValue(value, subData.is_percentage);
+                          isPercentage = subData.is_percentage;
                           descriptions.push(description);
                           data.push(value.value_relative
                             ? Number(value.value_relative)
@@ -311,7 +311,7 @@ if (document.querySelector('#app-compare')) {
             allData.push({
               name: cityName,
               data,
-              tooltip,
+              isPercentage,
             });
             data = [];
           }
@@ -340,20 +340,20 @@ if (document.querySelector('#app-compare')) {
         });
 
         this.localesWithIndicator.forEach((item) => {
-          let tooltip = '';
+          let isPercentage = '';
           data.push({
             name: item.name,
             data: item.indicators.filter(indicator => indicator.id === this.selectedIndicator.id)
               .map(locale => locale.values
                 .sort((a, b) => (a.year > b.year ? 1 : -1))
                 .map((i) => {
-                  tooltip = this.formatIndicatorValue(i, locale.is_percentage);
+                  isPercentage = locale.is_percentage;
                   if (i.value_relative) {
                     return Number(i.value_relative);
                   }
                   return Number(i.value_absolute);
                 }))[0],
-            tooltip,
+            isPercentage,
           });
         });
 
@@ -390,7 +390,8 @@ if (document.querySelector('#app-compare')) {
           tooltip: {
             // eslint-disable-next-line object-shorthand, func-names
             formatter: function () {
-              return this.series.userOptions.tooltip;
+              return window.$vueCompare
+                .formatSingleIndicatorValue(this.y, this.series.userOptions.isPercentage);
             },
             headerFormat: '',
           },
@@ -444,7 +445,8 @@ if (document.querySelector('#app-compare')) {
           tooltip: {
             /* eslint-disable object-shorthand, func-names, camelcase */
             formatter: function () {
-              return this.series.userOptions.tooltip;
+              return window.$vueCompare
+                .formatSingleIndicatorValue(this.y, this.series.userOptions.isPercentage);
             },
             valueSuffix: null,
           },

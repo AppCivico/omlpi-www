@@ -221,6 +221,7 @@ if (document.querySelector('#app-history')) {
         items.forEach((item) => {
           data.push({
             name: item.description,
+            isPercentage: item.is_percentage,
             data: item.values.map(internItem => (internItem.value_relative !== null
               ? Number(internItem.value_relative)
               : Number(internItem.value_absolute))),
@@ -237,6 +238,7 @@ if (document.querySelector('#app-history')) {
         items.values.forEach((item) => {
           data.push({
             name: item.year,
+            isPercentage: items.is_percentage,
             data: [item.value_relative !== null
               ? Number(item.value_relative)
               : Number(item.value_absolute)],
@@ -278,9 +280,8 @@ if (document.querySelector('#app-history')) {
           tooltip: {
             /* eslint-disable object-shorthand, func-names, camelcase */
             formatter: function () {
-              return window.$vueHistory.selectedIndicator.values[0].value_relative
-                ? `${Math.round(Number(this.y))}%`
-                : Number(this.y).toLocaleString('pt-BR');
+              return window.$vueHistory
+                .formatSingleIndicatorValue(this.y, this.series.userOptions.isPercentage);
             },
             headerFormat: '',
           },
@@ -338,9 +339,8 @@ if (document.querySelector('#app-history')) {
           tooltip: {
             // eslint-disable-next-line object-shorthand, func-names
             formatter: function () {
-              return window.$vueHistory.selectedSubindicator.data?.[0].values[0].value_relative
-                ? `${Math.round(Number(this.y))}%`
-                : Number(this.y).toLocaleString('pt-BR');
+              return window.$vueHistory
+                .formatSingleIndicatorValue(this.y, this.series.userOptions.isPercentage);
             },
             valueSuffix: null,
           },
