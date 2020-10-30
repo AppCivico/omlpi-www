@@ -199,9 +199,13 @@ if (window.location.href.indexOf('city') > -1) {
           data.push({
             name: item.description,
             is_null: item.values.value_relative === null && item.values.value_absolute === null,
-            data: [item.values.value_relative !== null
-              ? Number(item.values.value_relative)
-              : Number(item.values.value_absolute)],
+            isPercentage: item.is_percentage,
+            data: [{
+              isPercentage: item.is_percentage,
+              y: item.values.value_relative !== null
+                ? Number(item.values.value_relative)
+                : Number(item.values.value_absolute),
+            }],
           });
         });
         return data;
@@ -252,9 +256,6 @@ if (window.location.href.indexOf('city') > -1) {
             },
             yAxis: {
               min: 0,
-              labels: {
-                format: chart.data[0].values.value_relative,
-              },
               title: {
                 text: false,
               },
@@ -262,7 +263,8 @@ if (window.location.href.indexOf('city') > -1) {
             tooltip: {
               // eslint-disable-next-line object-shorthand, func-names
               formatter: function () {
-                return chart.data[0].values.value_relative ? `${this.y}` : this.y;
+                return window.$vuePopulateData
+                  .formatSingleIndicatorValue(this.y, this.series.userOptions.isPercentage);
               },
               headerFormat: '',
             },
@@ -275,9 +277,10 @@ if (window.location.href.indexOf('city') > -1) {
                 dataLabels: {
                   // eslint-disable-next-line object-shorthand, func-names
                   formatter: function () {
-                    return this.series.userOptions.is_null ? 'Não disponível' : Number(this.y).toLocaleString('pt-br');
+                    return window.$vuePopulateData
+                      .formatSingleIndicatorValue(this.y, this.point.isPercentage);
                   },
-                  useHTML: true,
+                  // useHTML: true,
                   enabled: true,
                 },
               },
@@ -290,9 +293,6 @@ if (window.location.href.indexOf('city') > -1) {
         });
 
         this.barsHorizontalData.forEach((chart) => {
-          // if (chart.indicatorId === 311 && chart.id === 124) {
-          //   console.log(document.querySelector('#bar-chart-horizontal-311-124'));
-          // }
           Highcharts.chart(`bar-chart-horizontal-${chart.indicatorId}-${chart.id}`, {
             chart: {
               type: 'bar',
@@ -327,6 +327,14 @@ if (window.location.href.indexOf('city') > -1) {
               },
             },
             tooltip: {
+              // eslint-disable-next-line object-shorthand, func-names
+              formatter: function () {
+                return window.$vuePopulateData
+                  .formatSingleIndicatorValue(this.y, this.series.userOptions.isPercentage);
+              },
+              style: {
+                zIndex: 999,
+              },
               headerFormat: '',
             },
             plotOptions: {
@@ -334,9 +342,9 @@ if (window.location.href.indexOf('city') > -1) {
                 dataLabels: {
                   // eslint-disable-next-line object-shorthand, func-names
                   formatter: function () {
-                    return this.series.userOptions.is_null ? 'Não disponível' : Number(this.y).toLocaleString('pt-br');
+                    return window.$vuePopulateData
+                      .formatSingleIndicatorValue(this.y, this.point.isPercentage);
                   },
-                  useHTML: true,
                   enabled: true,
                 },
               },
