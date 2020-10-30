@@ -9099,7 +9099,10 @@ if (document.querySelector('#app-compare')) {
                         if (value.year === Number(_this9.selectedYear)) {
                           isPercentage = subData.is_percentage;
                           descriptions.push(description);
-                          data.push(value.value_relative ? Number(value.value_relative) : Number(value.value_absolute));
+                          data.push({
+                            isPercentage: subData.is_percentage,
+                            y: value.value_relative ? Number(value.value_relative) : Number(value.value_absolute)
+                          });
                         }
                       });
                     }
@@ -9155,10 +9158,16 @@ if (document.querySelector('#app-compare')) {
                 isPercentage = locale.is_percentage;
 
                 if (i.value_relative) {
-                  return Number(i.value_relative);
+                  return {
+                    isPercentage: locale.is_percentage,
+                    y: Number(i.value_relative)
+                  };
                 }
 
-                return Number(i.value_absolute);
+                return {
+                  isPercentage: locale.is_percentage,
+                  y: Number(i.value_absolute)
+                };
               });
             })[0],
             isPercentage: isPercentage
@@ -9206,6 +9215,16 @@ if (document.querySelector('#app-compare')) {
             column: {
               pointPadding: 0.2,
               borderWidth: 0
+            },
+            series: {
+              borderWidth: 0,
+              dataLabels: {
+                // eslint-disable-next-line object-shorthand, func-names
+                formatter: function formatter() {
+                  return window.$vueCompare.formatSingleIndicatorValue(this.y, this.point.isPercentage);
+                },
+                enabled: true
+              }
             }
           },
           exporting: {
@@ -9221,7 +9240,7 @@ if (document.querySelector('#app-compare')) {
         return true;
       },
       generateSubindicatorChart: function generateSubindicatorChart() {
-        var _this$selectedSubindi17, _this$selectedSubindi18, _this$selectedSubindi19;
+        var _this$selectedSubindi17, _this$selectedSubindi18;
 
         var subIndicatorChart = Highcharts.chart('js-subindicators-chart', {
           chart: {
@@ -9261,10 +9280,13 @@ if (document.querySelector('#app-compare')) {
           },
           colors: ['#C97B84', '#A85751', '#251351', '#114B5F', '#028090', '#040926', '#F45B69', '#91A6FF'],
           plotOptions: {
-            bar: {
+            series: {
               dataLabels: {
                 enabled: true,
-                format: ((_this$selectedSubindi19 = this.selectedSubindicator.data) === null || _this$selectedSubindi19 === void 0 ? void 0 : _this$selectedSubindi19[0].values[0].value_relative) ? '{y}%' : '{y}'
+                // eslint-disable-next-line object-shorthand, func-names
+                formatter: function formatter() {
+                  return window.$vueCompare.formatSingleIndicatorValue(this.y, this.point.isPercentage);
+                }
               }
             }
           },
@@ -9649,7 +9671,10 @@ if (document.querySelector('#app-history')) {
             name: item.description,
             isPercentage: item.is_percentage,
             data: item.values.map(function (internItem) {
-              return internItem.value_relative !== null ? Number(internItem.value_relative) : Number(internItem.value_absolute);
+              return {
+                isPercentage: item.is_percentage,
+                y: internItem.value_relative !== null ? Number(internItem.value_relative) : Number(internItem.value_absolute)
+              };
             })
           });
         });
@@ -9665,7 +9690,10 @@ if (document.querySelector('#app-history')) {
           data.push({
             name: item.year,
             isPercentage: items.is_percentage,
-            data: [item.value_relative !== null ? Number(item.value_relative) : Number(item.value_absolute)]
+            data: [{
+              isPercentage: items.is_percentage,
+              y: item.value_relative !== null ? Number(item.value_relative) : Number(item.value_absolute)
+            }]
           });
         });
         return data.reverse();
@@ -9712,6 +9740,17 @@ if (document.querySelector('#app-history')) {
             column: {
               pointPadding: 0.2,
               borderWidth: 0
+            },
+            series: {
+              borderWidth: 0,
+              dataLabels: {
+                // eslint-disable-next-line object-shorthand, func-names
+                formatter: function formatter() {
+                  return window.$vueHistory.formatSingleIndicatorValue(this.y, this.point.isPercentage);
+                },
+                // useHTML: true,
+                enabled: true
+              }
             }
           },
           exporting: {
@@ -9773,9 +9812,7 @@ if (document.querySelector('#app-history')) {
               dataLabels: {
                 enabled: true,
                 formatter: function formatter() {
-                  var _window$$vueHistory$s;
-
-                  return ((_window$$vueHistory$s = window.$vueHistory.selectedSubindicator.data) === null || _window$$vueHistory$s === void 0 ? void 0 : _window$$vueHistory$s[0].values[0].value_relative) ? "".concat(Math.round(Number(this.y)), "%") : Number(this.y).toLocaleString('pt-BR');
+                  return window.$vueHistory.formatSingleIndicatorValue(this.y, this.point.isPercentage);
                 }
               }
             }
@@ -10744,7 +10781,11 @@ if (window.location.href.indexOf('city') > -1) {
           data.push({
             name: item.description,
             is_null: item.values.value_relative === null && item.values.value_absolute === null,
-            data: [item.values.value_relative !== null ? Number(item.values.value_relative) : Number(item.values.value_absolute)]
+            isPercentage: item.is_percentage,
+            data: [{
+              isPercentage: item.is_percentage,
+              y: item.values.value_relative !== null ? Number(item.values.value_relative) : Number(item.values.value_absolute)
+            }]
           });
         });
         return data;
@@ -10795,9 +10836,6 @@ if (window.location.href.indexOf('city') > -1) {
             },
             yAxis: {
               min: 0,
-              labels: {
-                format: chart.data[0].values.value_relative
-              },
               title: {
                 text: false
               }
@@ -10805,7 +10843,7 @@ if (window.location.href.indexOf('city') > -1) {
             tooltip: {
               // eslint-disable-next-line object-shorthand, func-names
               formatter: function formatter() {
-                return chart.data[0].values.value_relative ? "".concat(this.y) : this.y;
+                return window.$vuePopulateData.formatSingleIndicatorValue(this.y, this.series.userOptions.isPercentage);
               },
               headerFormat: ''
             },
@@ -10818,9 +10856,9 @@ if (window.location.href.indexOf('city') > -1) {
                 dataLabels: {
                   // eslint-disable-next-line object-shorthand, func-names
                   formatter: function formatter() {
-                    return this.series.userOptions.is_null ? 'Não disponível' : Number(this.y).toLocaleString('pt-br');
+                    return window.$vuePopulateData.formatSingleIndicatorValue(this.y, this.point.isPercentage);
                   },
-                  useHTML: true,
+                  // useHTML: true,
                   enabled: true
                 }
               }
@@ -10832,9 +10870,6 @@ if (window.location.href.indexOf('city') > -1) {
           });
         });
         this.barsHorizontalData.forEach(function (chart) {
-          // if (chart.indicatorId === 311 && chart.id === 124) {
-          //   console.log(document.querySelector('#bar-chart-horizontal-311-124'));
-          // }
           Highcharts.chart("bar-chart-horizontal-".concat(chart.indicatorId, "-").concat(chart.id), {
             chart: {
               type: 'bar'
@@ -10869,6 +10904,13 @@ if (window.location.href.indexOf('city') > -1) {
               }
             },
             tooltip: {
+              // eslint-disable-next-line object-shorthand, func-names
+              formatter: function formatter() {
+                return window.$vuePopulateData.formatSingleIndicatorValue(this.y, this.series.userOptions.isPercentage);
+              },
+              style: {
+                zIndex: 999
+              },
               headerFormat: ''
             },
             plotOptions: {
@@ -10876,9 +10918,8 @@ if (window.location.href.indexOf('city') > -1) {
                 dataLabels: {
                   // eslint-disable-next-line object-shorthand, func-names
                   formatter: function formatter() {
-                    return this.series.userOptions.is_null ? 'Não disponível' : Number(this.y).toLocaleString('pt-br');
+                    return window.$vuePopulateData.formatSingleIndicatorValue(this.y, this.point.isPercentage);
                   },
-                  useHTML: true,
                   enabled: true
                 }
               }

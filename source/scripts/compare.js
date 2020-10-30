@@ -296,9 +296,12 @@ if (document.querySelector('#app-compare')) {
                         if (value.year === Number(this.selectedYear)) {
                           isPercentage = subData.is_percentage;
                           descriptions.push(description);
-                          data.push(value.value_relative
-                            ? Number(value.value_relative)
-                            : Number(value.value_absolute));
+                          data.push({
+                            isPercentage: subData.is_percentage,
+                            y: value.value_relative
+                              ? Number(value.value_relative)
+                              : Number(value.value_absolute),
+                          });
                         }
                       });
                     }
@@ -349,9 +352,15 @@ if (document.querySelector('#app-compare')) {
                 .map((i) => {
                   isPercentage = locale.is_percentage;
                   if (i.value_relative) {
-                    return Number(i.value_relative);
+                    return {
+                      isPercentage: locale.is_percentage,
+                      y: Number(i.value_relative),
+                    };
                   }
-                  return Number(i.value_absolute);
+                  return {
+                    isPercentage: locale.is_percentage,
+                    y: Number(i.value_absolute),
+                  };
                 }))[0],
             isPercentage,
           });
@@ -400,6 +409,17 @@ if (document.querySelector('#app-compare')) {
             column: {
               pointPadding: 0.2,
               borderWidth: 0,
+            },
+            series: {
+              borderWidth: 0,
+              dataLabels: {
+                // eslint-disable-next-line object-shorthand, func-names
+                formatter: function () {
+                  return window.$vueCompare
+                    .formatSingleIndicatorValue(this.y, this.point.isPercentage);
+                },
+                enabled: true,
+              },
             },
           },
           exporting: {
@@ -452,10 +472,14 @@ if (document.querySelector('#app-compare')) {
           },
           colors: ['#C97B84', '#A85751', '#251351', '#114B5F', '#028090', '#040926', '#F45B69', '#91A6FF'],
           plotOptions: {
-            bar: {
+            series: {
               dataLabels: {
                 enabled: true,
-                format: this.selectedSubindicator.data?.[0].values[0].value_relative ? '{y}%' : '{y}',
+                // eslint-disable-next-line object-shorthand, func-names
+                formatter: function () {
+                  return window.$vueCompare
+                    .formatSingleIndicatorValue(this.y, this.point.isPercentage);
+                },
               },
             },
           },
