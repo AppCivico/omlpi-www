@@ -40,10 +40,10 @@
         </div>
       </div>
 
-      <section id="app-indicators-text" class="chart-text">
+      <section id="app-indicators-text">
         <div class="container" v-if="text">
           <h1>{{ "{{ text.titulo }}" }}</h1>
-          <div v-html="marked(text.texto)">
+          <div v-html="marked(text.texto)" class="chart-text">
           </div>
         </div>
         <div class="container" v-else>Carregando...</div>
