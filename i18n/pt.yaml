@@ -21,6 +21,8 @@
   translation: "Ex. Primeira Infancia"
 - id: exploreDataPlaceholder
   translation: "Ex: Oiapoque, Amapá, Norte"
+- id: city
+  translation: "Município"
 - id: cities
   translation: "Municípios"
 - id: news
