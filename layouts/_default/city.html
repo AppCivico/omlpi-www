@@ -130,6 +130,12 @@
 
                       <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
                       <div class="infobox" :class="subindicator.data.length === 1 ? 'infobox--single' : ''">
+                        <h3 class="infobox__general-title">
+                          {{ "{{ subindicator.classification }}" }}
+                          <small>
+                            {{ "{{ indicator.description }}" }}
+                          </small>
+                        </h3>
                         <div class="infobox__item" v-for="(subindicatorData, index) in subindicator.data">
                           <strong class="infobox__title">
                             {{ "{{ formatIndicatorValue(subindicatorData.values, subindicatorData.is_percentage) }}" }}
