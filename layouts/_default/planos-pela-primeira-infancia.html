@@ -266,10 +266,10 @@
             //map: 'countries/br/br-all',
             events: {
               drilldown: function (e) {
-                console.log(e.point.drilldown)
+                // console.log(e.point.drilldown)
                 console.log('DRIIIILDOWN')
                 if (!e.seriesOptions) {
-                  console.log('this?', this)
+                  // console.log('this?', this)
                   var chart = this,
                     // Handle error, the timeout is cleared on success
                     fail = setTimeout(function () {
@@ -288,11 +288,12 @@
                   fetch('/maps/br-mg.json')
                     .then(response => response.json())
                     .then(data => {
-                      console.log(data)
+                      // console.log(data)
 
                       // Set a non-random bogus value
                       data.mapData.forEach((item, i) => {
                         i.value = i;
+                        // console.log(i)
                       });
 
                       chart.hideLoading();
@@ -304,7 +305,7 @@
                         name: e.point.name,
                         data: data.mapData,
                         dataLabels: {
-                          enabled: true,
+                          enabled: false,
                           format: '{point.name}'
                         }
                       });
@@ -317,22 +318,6 @@
                 console.log('DRIIIILUUUP')
               }
             }
-          },
-          drilldown: {
-            series: [{
-              name: 'São Paulo',
-              id: 'São Paulo',
-              data: [
-                ['0 hours', 2134]
-              ]
-            }],
-            drillUpButton: {
-              relativeTo: 'spacingBox',
-              position: {
-                x: 0,
-                y: 60,
-              },
-            },
           },
           title: {
             text: 'Highmaps basic demo'
