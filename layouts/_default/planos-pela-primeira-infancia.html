@@ -7,6 +7,9 @@
         <img src="/assets/images/city.svg" alt="">
       </div>
 
+      <div id="map" style="height: 500px; min-width: 310px; max-width: 800px; margin: 0 auto"></div>
+
+
       <main class="alabaster" id="app">
         <section class="search-area search-area--alternative search-area--children-hands">
           <div class="container">
@@ -232,5 +235,148 @@
       {{ partial "footer.html" . }}
 
       {{ partial "scripts.html" . }}
+
+      <script src="http://code.highcharts.com/maps/modules/map.js"></script>
+      <script src="https://code.highcharts.com/mapdata/countries/br/br-all.js"></script>
+      <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+
+      <style>
+#map {
+  width: 100%;
+  max-width: 74rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+      </style>
+
+      <script>
+
+        function getScript(scriptUrl, callback) {
+          const script = document.createElement('script');
+          script.src = scriptUrl;
+          script.onload = callback;
+
+          document.body.appendChild(script);
+        }
+
+        // Prepare demo data
+        // Data is joined to map using value of 'hc-key' property by default.
+        // See API docs for 'joinBy' for more info on linking data and map.
+        let data = Highcharts.geojson(Highcharts.maps['countries/br/br-all']);
+
+        data.forEach((item, index) => {
+          item.drilldown = item.properties['hc-key'];
+          item.value = index; // Non-random bogus data
+        })
+        console.log(data)
+        // Create the chart
+        Highcharts.mapChart('map', {
+          chart: {
+            //map: 'countries/br/br-all',
+            events: {
+              drilldown: function (e) {
+                console.log(e.point.drilldown)
+                console.log('DRIIIILDOWN')
+                if (!e.seriesOptions) {
+                  console.log('this?', this)
+                  var chart = this,
+                    // Handle error, the timeout is cleared on success
+                    fail = setTimeout(function () {
+                      if (!Highcharts.maps[mapKey]) {
+                        chart.showLoading('<i class="icon-frown"></i> Failed loading ' + e.point.name);
+                        fail = setTimeout(function () {
+                          chart.hideLoading();
+                        }, 1000);
+                      }
+                    }, 3000);
+
+                  // Show the spinner
+                  chart.showLoading('carregando...'); // Font Awesome spinner
+
+                  // Load the drilldown map
+                  fetch('/maps/br-mg.json')
+                    .then(response => response.json())
+                    .then(data => {
+                      console.log(data)
+
+                      // Set a non-random bogus value
+                      data.mapData.forEach((item, i) => {
+                        i.value = i;
+                      });
+
+                      chart.hideLoading();
+
+                      // Hide loading and add series
+                      clearTimeout(fail);
+
+                      chart.addSeriesAsDrilldown(e.point, {
+                        name: e.point.name,
+                        data: data.mapData,
+                        dataLabels: {
+                          enabled: false,
+                          format: '{point.name}'
+                        }
+                      });
+                    });
+                }
+
+                this.setTitle(null, { text: e.point.name });
+              },
+              drillup: function () {
+                console.log('DRIIIILUUUP')
+              }
+            }
+          },
+          drilldown: {
+            series: [{
+              name: 'São Paulo',
+              id: 'São Paulo',
+              data: [
+                ['0 hours', 2134]
+              ]
+            }],
+            drillUpButton: {
+              relativeTo: 'spacingBox',
+              position: {
+                x: 0,
+                y: 60,
+              },
+            },
+          },
+          title: {
+            text: 'Highmaps basic demo'
+          },
+
+          subtitle: {
+            text: 'Source map: <a href="http://code.highcharts.com/mapdata/countries/br/br-all.js">Brazil</a>'
+          },
+
+          mapNavigation: {
+            enabled: true,
+            buttonOptions: {
+              verticalAlign: 'bottom'
+            }
+          },
+
+          colorAxis: {
+            min: 0
+          },
+
+          series: [{
+            joinBy: ['hc-key', 'code'],
+            data: data,
+            name: 'Random data',
+            states: {
+              hover: {
+                color: '#BADA55'
+              }
+            },
+            dataLabels: {
+              enabled: true,
+              format: '{point.name}'
+            }
+          }]
+        });
+      </script>
     </body>
 </html>
