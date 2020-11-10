@@ -29,7 +29,9 @@ if (document.querySelector('#app-home-indicators')) {
       startIndicatorsCounter(stop) {
         if (stop) {
           clearInterval(this.interval);
+          console.log('stop');
         } else {
+          console.log('else');
           this.interval = setInterval(() => {
             this.getIndicators();
           }, this.intervalTime);
@@ -48,8 +50,10 @@ if (document.querySelector('#app-home-indicators')) {
           fetch(url)
             .then(response => response.json())
             .then((response) => {
-              this.indicators = response;
-              this.additionalLocaleId = response.locales[1].id;
+              if (response.status !== 500) {
+                this.indicators = response;
+                this.additionalLocaleId = response.locales[1].id;
+              }
               return true;
             })
             .then(() => {

@@ -10034,7 +10034,9 @@ if (document.querySelector('#app-home-indicators')) {
 
         if (stop) {
           clearInterval(this.interval);
+          console.log('stop');
         } else {
+          console.log('else');
           this.interval = setInterval(function () {
             _this2.getIndicators();
           }, this.intervalTime);
@@ -10055,8 +10057,12 @@ if (document.querySelector('#app-home-indicators')) {
           fetch(url).then(function (response) {
             return response.json();
           }).then(function (response) {
-            _this3.indicators = response;
-            _this3.additionalLocaleId = response.locales[1].id;
+            if (response.status !== 500) {
+              console.log(response);
+              _this3.indicators = response;
+              _this3.additionalLocaleId = response.locales[1].id;
+            }
+
             return true;
           }).then(function () {
             _this3.loadingLocales = false;
