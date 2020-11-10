@@ -46,9 +46,9 @@
                   >
                   <span
                     class="plans-result__first-letter"
-                    :class="selectedLocale.type === 'region' ? 'plans-result__first-letter--region' : ''"
+                    :class="selectedLocale.type === 'state' ? 'plans-result__first-letter--state' : ''"
                   >
-                    {{ "{{ selectedLocale.type === 'region' ? '' : selectedLocale.name.split('')[0].toUpperCase() }}" }}
+                    {{ "{{ selectedLocale.type === 'state' ? '' : selectedLocale.name.split('')[0].toUpperCase() }}" }}
                   </span>
                     {{ "{{ selectedLocale.name }}" }} -
                     <a
@@ -80,12 +80,16 @@
                   v-for="relatedLocale in relatedLocales"
                   class="plans-result__list"
                 >
-                  <li class="plans-result__list-first-letter">{{ "{{ relatedLocale.title }}" }}</li>
+                  <li class="plans-result__list-first-letter">
+                    {{ "{{ relatedLocale.title }}" }}
+                  </li>
                   <template v-for="locale in relatedLocale.data">
                     <li
                       :class="locale.plan ? 'plans-result__has-plan' : ''"
                     >
-                      {{ "{{ locale.name }}" }} -
+                      {{ "{{ locale.name }}" }}
+                      {{ "{{ locale.type === 'city' ? `- ${locale.state}` : '' }}" }}
+                      -
                       <a
                         v-if="locale.plan"
                         :href="`${storageDomain}${locale.plan.url}`"
