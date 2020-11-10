@@ -9346,11 +9346,11 @@ var formatterMixing = {
         return 'Não disponível';
       }
 
-      if (values.value_relative) {
+      if (values.value_relative !== null) {
         return Math.round(values.value_relative) + (isPercentage ? '%' : '');
       }
 
-      if (values.value_absolute) {
+      if (values.value_absolute !== null) {
         return Number(values.value_absolute).toLocaleString('pt-br');
       }
 
@@ -9361,11 +9361,11 @@ var formatterMixing = {
         return 'Não disponível';
       }
 
-      if (value && isPercentage) {
+      if (value !== null && isPercentage) {
         return "".concat(Math.round(value), "% ");
       }
 
-      if (value && !isPercentage) {
+      if (value !== null && !isPercentage) {
         return Number(value).toLocaleString('pt-br');
       }
 
