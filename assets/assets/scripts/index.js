@@ -8558,10 +8558,6 @@ if (window.location.href.indexOf('biblioteca') > -1) {
                 return _this.getArticles();
 
               case 2:
-                _context.next = 4;
-                return _this.putHasmoreButtons();
-
-              case 4:
               case "end":
                 return _context.stop();
             }
