@@ -64,15 +64,15 @@
                 <span class="library-item__author">
                   <strong v-if="article.author">Autor: </strong>{{ "{{ article.author }}" }}
                   <br>
-                  <strong>Organização:</strong> {{ "{{ article.organization }}" }}
+                  <strong v-if="article.organization">Organização:</strong> {{ "{{ article.organization }}" }}
                   <template v-if="article.date">
                     <br>
-                    <strong>Ano:</strong>
+                    <strong v-if="article.date">Ano:</strong>
                     <time :datetime="article.date">{{ "{{ article.date }}" }}</time>
                   </template>
                   <span v-if="article.tags.length > 0" class="library-item__tags">
                     <br>
-                    <strong>Tags:</strong>
+                    <strong v-if="article.tags.length > 0">Tags:</strong>
                     <template v-for="(tag, index) in article.tags">
                       <span>
                         {{ "{{ tag.name }}" }}<template v-if="index !== article.tags.length - 1">, </template></span>
