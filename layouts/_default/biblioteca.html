@@ -62,7 +62,7 @@
               <div class="library-item__content" :ref="`js-description-${articleIndex}`">
                 <h2>{{ "{{ article.title }}" }}</h2>
                 <span class="library-item__author">
-                  <strong>Autor: </strong>{{ "{{ article.author }}" }}
+                  <strong v-if="article.author">Autor: </strong>{{ "{{ article.author }}" }}
                   <br>
                   <strong>Organização:</strong> {{ "{{ article.organization }}" }}
                   <template v-if="article.date">
