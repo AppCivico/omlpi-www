@@ -10058,7 +10058,6 @@ if (document.querySelector('#app-home-indicators')) {
             return response.json();
           }).then(function (response) {
             if (response.status !== 500) {
-              console.log(response);
               _this3.indicators = response;
               _this3.additionalLocaleId = response.locales[1].id;
             }

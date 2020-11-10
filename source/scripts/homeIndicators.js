@@ -29,9 +29,7 @@ if (document.querySelector('#app-home-indicators')) {
       startIndicatorsCounter(stop) {
         if (stop) {
           clearInterval(this.interval);
-          console.log('stop');
         } else {
-          console.log('else');
           this.interval = setInterval(() => {
             this.getIndicators();
           }, this.intervalTime);
