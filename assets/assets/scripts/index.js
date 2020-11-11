@@ -10034,9 +10034,7 @@ if (document.querySelector('#app-home-indicators')) {
 
         if (stop) {
           clearInterval(this.interval);
-          console.log('stop');
         } else {
-          console.log('else');
           this.interval = setInterval(function () {
             _this2.getIndicators();
           }, this.intervalTime);

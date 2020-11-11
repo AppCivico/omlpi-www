@@ -63,7 +63,7 @@
                   v-if="capital"
                   class="plans-result__capital-icon"
                 >
-                  {{ "{{ capital.name }}" }} -
+                  {{ "{{ capital.name }}" }} - {{ "{{ capital.state }}" }} -
                   <a
                     v-if="capital.plan"
                     :href="`${storageDomain}${capital.plan.url}`"
