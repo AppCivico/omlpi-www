@@ -1,4 +1,6 @@
 /* global Vue */
+/* global Highcharts */
+
 import Swal from 'sweetalert2/dist/sweetalert2';
 import config from './config';
 
@@ -31,8 +33,118 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
     async mounted() {
       await this.getInfoGraphic();
       await this.getPlansList();
+      await this.generateChart();
     },
     methods: {
+      generateChart() {
+        // Prepare demo data
+        // Data is joined to map using value of 'hc-key' property by default.
+        // See API docs for 'joinBy' for more info on linking data and map.
+        const data = Highcharts.geojson(Highcharts.maps['countries/br/br-all']);
+
+        data.forEach((item, index) => {
+          const newItem = item;
+          newItem.drilldown = item.properties['hc-key'];
+          newItem.value = index; // Non-random bogus data
+        });
+        // Create the chart
+        Highcharts.mapChart('map', {
+          chart: {
+            // map: 'countries/br/br-all',
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+            events: {
+              // eslint-disable-next-line object-shorthand, func-names
+              drilldown: function (e) {
+                // console.log(e.point.drilldown)
+                console.log('DRIIIILDOWN')
+                if (!e.seriesOptions) {
+                  // console.log('this?', this)
+                  const chart = this;
+                  // Handle error, the timeout is cleared on success
+                  const fail = setTimeout(() => {
+                    if (!Highcharts.maps[mapKey]) {
+                      chart.showLoading('<i class="icon-frown"></i> Failed loading ' + e.point.name);
+                      fail = setTimeout(function () {
+                        chart.hideLoading();
+                      }, 1000);
+                    }
+                  }, 3000);
+
+                  // Show the spinner
+                  chart.showLoading('carregando...'); // Font Awesome spinner
+
+                  // Load the drilldown map
+                  fetch('/maps/br-mg.json')
+                    .then(response => response.json())
+                    .then((Ndata) => {
+                      // console.log(data)
+
+                      // Set a non-random bogus value
+                      Ndata.mapData.forEach((item, i) => {
+                        const newI = i;
+                        newI.value = i;
+                        // console.log(i)
+                      });
+
+                      chart.hideLoading();
+
+                      // Hide loading and add series
+                      clearTimeout(fail);
+
+                      chart.addSeriesAsDrilldown(e.point, {
+                        name: e.point.name,
+                        data: Ndata.mapData,
+                        dataLabels: {
+                          enabled: false,
+                          format: '{point.name}',
+                        },
+                      });
+                    });
+                }
+
+                this.setTitle(null, { text: e.point.name });
+              },
+              drillup: function () {
+                console.log('DRIIIILUUUP')
+              }
+            }
+          },
+          title: {
+            text: ''
+          },
+
+          subtitle: {
+            text: ''
+          },
+
+          mapNavigation: {
+            enabled: true,
+            buttonOptions: {
+              verticalAlign: 'bottom'
+            }
+          },
+
+          colorAxis: {
+            min: 0
+          },
+
+          series: [{
+            joinBy: ['hc-key', 'code'],
+            data: data,
+            name: 'Random data',
+            states: {
+              hover: {
+                color: '#BADA55'
+              }
+            },
+            dataLabels: {
+              enabled: true,
+              format: '{point.name}'
+            }
+          }]
+        });
+
+      },
       updateFile(event) {
         this.form.file = [event.target.files[0]];
         this.form.fileName = this.form.file[0].name;

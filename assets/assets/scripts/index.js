@@ -94,6 +94,12 @@ function _nonIterableSpread() {
 
 module.exports = _nonIterableSpread;
 },{}],8:[function(require,module,exports){
+function _readOnlyError(name) {
+  throw new Error("\"" + name + "\" is read-only");
+}
+
+module.exports = _readOnlyError;
+},{}],9:[function(require,module,exports){
 var arrayWithoutHoles = require("./arrayWithoutHoles");
 
 var iterableToArray = require("./iterableToArray");
@@ -107,7 +113,7 @@ function _toConsumableArray(arr) {
 }
 
 module.exports = _toConsumableArray;
-},{"./arrayWithoutHoles":2,"./iterableToArray":6,"./nonIterableSpread":7,"./unsupportedIterableToArray":9}],9:[function(require,module,exports){
+},{"./arrayWithoutHoles":2,"./iterableToArray":6,"./nonIterableSpread":7,"./unsupportedIterableToArray":10}],10:[function(require,module,exports){
 var arrayLikeToArray = require("./arrayLikeToArray");
 
 function _unsupportedIterableToArray(o, minLen) {
@@ -120,7 +126,7 @@ function _unsupportedIterableToArray(o, minLen) {
 }
 
 module.exports = _unsupportedIterableToArray;
-},{"./arrayLikeToArray":1}],10:[function(require,module,exports){
+},{"./arrayLikeToArray":1}],11:[function(require,module,exports){
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -851,10 +857,10 @@ try {
   Function("r", "regeneratorRuntime = r")(runtime);
 }
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 module.exports = require("regenerator-runtime");
 
-},{"regenerator-runtime":10}],12:[function(require,module,exports){
+},{"regenerator-runtime":11}],13:[function(require,module,exports){
 /**
  * Simple, lightweight, usable local autocomplete library for modern browsers
  * Because there weren’t enough autocomplete scripts in the world? Because I’m completely insane and have NIH syndrome? Probably both. :P
@@ -1408,7 +1414,7 @@ return _;
 
 }());
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
@@ -2625,7 +2631,7 @@ return _;
 }));
 
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 (function (setImmediate){
 /*
 WHAT: SublimeText-like Fuzzy Search
@@ -3233,7 +3239,7 @@ return fuzzysortNew()
 // TODO: (performance) i have no idea how well optizmied the allowing typos algorithm is
 
 }).call(this,require("timers").setImmediate)
-},{"timers":28}],15:[function(require,module,exports){
+},{"timers":29}],16:[function(require,module,exports){
 const Renderer = require('./Renderer.js');
 const { defaults } = require('./defaults.js');
 const { inline } = require('./rules.js');
@@ -3528,7 +3534,7 @@ module.exports = class InlineLexer {
   }
 };
 
-},{"./Renderer.js":18,"./defaults.js":21,"./helpers.js":22,"./rules.js":24}],16:[function(require,module,exports){
+},{"./Renderer.js":19,"./defaults.js":22,"./helpers.js":23,"./rules.js":25}],17:[function(require,module,exports){
 const { defaults } = require('./defaults.js');
 const { block } = require('./rules.js');
 const {
@@ -3932,7 +3938,7 @@ module.exports = class Lexer {
   };
 };
 
-},{"./defaults.js":21,"./helpers.js":22,"./rules.js":24}],17:[function(require,module,exports){
+},{"./defaults.js":22,"./helpers.js":23,"./rules.js":25}],18:[function(require,module,exports){
 const Renderer = require('./Renderer.js');
 const Slugger = require('./Slugger.js');
 const InlineLexer = require('./InlineLexer.js');
@@ -4140,7 +4146,7 @@ module.exports = class Parser {
   };
 };
 
-},{"./InlineLexer.js":15,"./Renderer.js":18,"./Slugger.js":19,"./TextRenderer.js":20,"./defaults.js":21,"./helpers.js":22}],18:[function(require,module,exports){
+},{"./InlineLexer.js":16,"./Renderer.js":19,"./Slugger.js":20,"./TextRenderer.js":21,"./defaults.js":22,"./helpers.js":23}],19:[function(require,module,exports){
 const { defaults } = require('./defaults.js');
 const {
   cleanUrl,
@@ -4306,7 +4312,7 @@ module.exports = class Renderer {
   };
 };
 
-},{"./defaults.js":21,"./helpers.js":22}],19:[function(require,module,exports){
+},{"./defaults.js":22,"./helpers.js":23}],20:[function(require,module,exports){
 /**
  * Slugger generates header id
  */
@@ -4341,7 +4347,7 @@ module.exports = class Slugger {
   };
 };
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 /**
  * TextRenderer
  * returns only the textual part of the token
@@ -4385,7 +4391,7 @@ module.exports = class TextRenderer {
   }
 };
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 function getDefaults() {
   return {
     baseUrl: null,
@@ -4417,7 +4423,7 @@ module.exports = {
   changeDefaults
 };
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 /**
  * Helpers
  */
@@ -4662,7 +4668,7 @@ module.exports = {
   checkSanitizeDeprecation
 };
 
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 const Lexer = require('./Lexer.js');
 const Parser = require('./Parser.js');
 const Renderer = require('./Renderer.js');
@@ -4814,7 +4820,7 @@ marked.parse = marked;
 
 module.exports = marked;
 
-},{"./InlineLexer.js":15,"./Lexer.js":16,"./Parser.js":17,"./Renderer.js":18,"./Slugger.js":19,"./TextRenderer.js":20,"./defaults.js":21,"./helpers.js":22}],24:[function(require,module,exports){
+},{"./InlineLexer.js":16,"./Lexer.js":17,"./Parser.js":18,"./Renderer.js":19,"./Slugger.js":20,"./TextRenderer.js":21,"./defaults.js":22,"./helpers.js":23}],25:[function(require,module,exports){
 const {
   noopTest,
   edit,
@@ -5082,7 +5088,7 @@ module.exports = {
   inline
 };
 
-},{"./helpers.js":22}],25:[function(require,module,exports){
+},{"./helpers.js":23}],26:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -5268,7 +5274,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 
 ;(function (name, root, factory) {
   if (typeof exports === 'object') {
@@ -5334,7 +5340,7 @@ process.umask = function() { return 0; };
   return replace
 }))
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 /*!
 * sweetalert2 v9.10.12
 * Released under the MIT License.
@@ -8437,7 +8443,7 @@ process.umask = function() { return 0; };
 }));
 if (typeof this !== 'undefined' && this.Sweetalert2){  this.swal = this.sweetAlert = this.Swal = this.SweetAlert = this.Sweetalert2}
 
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 (function (setImmediate,clearImmediate){
 var nextTick = require('process/browser.js').nextTick;
 var apply = Function.prototype.apply;
@@ -8516,7 +8522,7 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
   delete immediateIds[id];
 };
 }).call(this,require("timers").setImmediate,require("timers").clearImmediate)
-},{"process/browser.js":25,"timers":28}],29:[function(require,module,exports){
+},{"process/browser.js":26,"timers":29}],30:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -8630,7 +8636,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
   });
 }
 
-},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/helpers/toConsumableArray":8,"@babel/runtime/regenerator":11}],30:[function(require,module,exports){
+},{"./config":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/helpers/toConsumableArray":9,"@babel/runtime/regenerator":12}],31:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -8705,7 +8711,7 @@ if (document.querySelector('#app-axis')) {
   });
 }
 
-},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"dompurify":13,"marked":23}],31:[function(require,module,exports){
+},{"./config":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":12,"dompurify":14,"marked":24}],32:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -9307,7 +9313,7 @@ if (document.querySelector('#app-compare')) {
   });
 }
 
-},{"./config":32,"./helpers":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/defineProperty":4,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/helpers/toConsumableArray":8,"@babel/runtime/regenerator":11,"awesomplete":12,"fuzzysort":14}],32:[function(require,module,exports){
+},{"./config":33,"./helpers":34,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/defineProperty":4,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/helpers/toConsumableArray":9,"@babel/runtime/regenerator":12,"awesomplete":13,"fuzzysort":15}],33:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9330,7 +9336,7 @@ var _default = {
 };
 exports.default = _default;
 
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9380,7 +9386,7 @@ var formatterMixing = {
 
 exports.formatterMixing = formatterMixing;
 
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -9836,7 +9842,7 @@ if (document.querySelector('#app-history')) {
   });
 }
 
-},{"./config":32,"./helpers":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/defineProperty":4,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"awesomplete":12,"fuzzysort":14}],35:[function(require,module,exports){
+},{"./config":33,"./helpers":34,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/defineProperty":4,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":12,"awesomplete":13,"fuzzysort":15}],36:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -9908,7 +9914,7 @@ if (document.querySelector('#app-home-about')) {
   });
 }
 
-},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/defineProperty":4,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"dompurify":13,"marked":23}],36:[function(require,module,exports){
+},{"./config":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/defineProperty":4,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":12,"dompurify":14,"marked":24}],37:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -9977,7 +9983,7 @@ if (document.querySelector('#app-home-banner')) {
   });
 }
 
-},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/defineProperty":4,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"dompurify":13,"marked":23}],37:[function(require,module,exports){
+},{"./config":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/defineProperty":4,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":12,"dompurify":14,"marked":24}],38:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10089,7 +10095,7 @@ if (document.querySelector('#app-home-indicators')) {
   });
 }
 
-},{"./config":32,"./helpers":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11}],38:[function(require,module,exports){
+},{"./config":33,"./helpers":34,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":12}],39:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10126,7 +10132,7 @@ require("./indicatorsText");
 (0, _searchPlans.default)();
 (0, _menu.default)();
 
-},{"./articles":29,"./axis":30,"./compare":31,"./history":34,"./homeAbout":35,"./homeBanner":36,"./homeIndicators":37,"./indicatorsText":39,"./menu":40,"./news":41,"./plans":42,"./populateData":43,"./search":45,"./search-plans":44,"@babel/runtime/helpers/interopRequireDefault":5}],39:[function(require,module,exports){
+},{"./articles":30,"./axis":31,"./compare":32,"./history":35,"./homeAbout":36,"./homeBanner":37,"./homeIndicators":38,"./indicatorsText":40,"./menu":41,"./news":42,"./plans":43,"./populateData":44,"./search":46,"./search-plans":45,"@babel/runtime/helpers/interopRequireDefault":5}],40:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10189,7 +10195,7 @@ if (document.querySelector('#app-indicators-text')) {
   });
 }
 
-},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"dompurify":13,"marked":23}],40:[function(require,module,exports){
+},{"./config":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":12,"dompurify":14,"marked":24}],41:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10210,7 +10216,7 @@ function startMenutoggle() {
   });
 }
 
-},{}],41:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10270,10 +10276,12 @@ if (document.querySelector('#app-news')) {
   });
 }
 
-},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11}],42:[function(require,module,exports){
+},{"./config":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":12}],43:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _readOnlyError2 = _interopRequireDefault(require("@babel/runtime/helpers/readOnlyError"));
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -10284,6 +10292,8 @@ var _sweetalert = _interopRequireDefault(require("sweetalert2/dist/sweetalert2")
 var _config = _interopRequireDefault(require("./config"));
 
 /* global Vue */
+
+/* global Highcharts */
 if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
   window.$vuePlans = new Vue({
     el: '#app',
@@ -10326,6 +10336,10 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                 return _this.getPlansList();
 
               case 4:
+                _context.next = 6;
+                return _this.generateChart();
+
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -10334,6 +10348,106 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
       }))();
     },
     methods: {
+      generateChart: function generateChart() {
+        // Prepare demo data
+        // Data is joined to map using value of 'hc-key' property by default.
+        // See API docs for 'joinBy' for more info on linking data and map.
+        var data = Highcharts.geojson(Highcharts.maps['countries/br/br-all']);
+        data.forEach(function (item, index) {
+          var newItem = item;
+          newItem.drilldown = item.properties['hc-key'];
+          newItem.value = index; // Non-random bogus data
+        }); // Create the chart
+
+        Highcharts.mapChart('map', {
+          chart: {
+            // map: 'countries/br/br-all',
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+            events: {
+              // eslint-disable-next-line object-shorthand, func-names
+              drilldown: function drilldown(e) {
+                // console.log(e.point.drilldown)
+                console.log('DRIIIILDOWN');
+
+                if (!e.seriesOptions) {
+                  // console.log('this?', this)
+                  var chart = this; // Handle error, the timeout is cleared on success
+
+                  var fail = setTimeout(function () {
+                    if (!Highcharts.maps[mapKey]) {
+                      chart.showLoading('<i class="icon-frown"></i> Failed loading ' + e.point.name);
+                      fail = ((0, _readOnlyError2.default)("fail"), setTimeout(function () {
+                        chart.hideLoading();
+                      }, 1000));
+                    }
+                  }, 3000); // Show the spinner
+
+                  chart.showLoading('carregando...'); // Font Awesome spinner
+                  // Load the drilldown map
+
+                  fetch('/maps/br-mg.json').then(function (response) {
+                    return response.json();
+                  }).then(function (Ndata) {
+                    // console.log(data)
+                    // Set a non-random bogus value
+                    Ndata.mapData.forEach(function (item, i) {
+                      var newI = i;
+                      newI.value = i; // console.log(i)
+                    });
+                    chart.hideLoading(); // Hide loading and add series
+
+                    clearTimeout(fail);
+                    chart.addSeriesAsDrilldown(e.point, {
+                      name: e.point.name,
+                      data: Ndata.mapData,
+                      dataLabels: {
+                        enabled: false,
+                        format: '{point.name}'
+                      }
+                    });
+                  });
+                }
+
+                this.setTitle(null, {
+                  text: e.point.name
+                });
+              },
+              drillup: function drillup() {
+                console.log('DRIIIILUUUP');
+              }
+            }
+          },
+          title: {
+            text: ''
+          },
+          subtitle: {
+            text: ''
+          },
+          mapNavigation: {
+            enabled: true,
+            buttonOptions: {
+              verticalAlign: 'bottom'
+            }
+          },
+          colorAxis: {
+            min: 0
+          },
+          series: [{
+            joinBy: ['hc-key', 'code'],
+            data: data,
+            name: 'Random data',
+            states: {
+              hover: {
+                color: '#BADA55'
+              }
+            },
+            dataLabels: {
+              enabled: true,
+              format: '{point.name}'
+            }
+          }]
+        });
+      },
       updateFile: function updateFile(event) {
         this.form.file = [event.target.files[0]];
         this.form.fileName = this.form.file[0].name;
@@ -10484,7 +10598,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
   });
 }
 
-},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"sweetalert2/dist/sweetalert2":27}],43:[function(require,module,exports){
+},{"./config":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/helpers/readOnlyError":8,"@babel/runtime/regenerator":12,"sweetalert2/dist/sweetalert2":28}],44:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10936,7 +11050,7 @@ if (window.location.href.indexOf('city') > -1) {
   });
 }
 
-},{"./config":32,"./helpers":33,"./search":45,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"slugify":26}],44:[function(require,module,exports){
+},{"./config":33,"./helpers":34,"./search":46,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":12,"slugify":27}],45:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11104,7 +11218,7 @@ function startPlansSearch() {
   }
 }
 
-},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"awesomplete":12,"fuzzysort":14}],45:[function(require,module,exports){
+},{"./config":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":12,"awesomplete":13,"fuzzysort":15}],46:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11319,4 +11433,4 @@ function startSearch() {
   }
 }
 
-},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"awesomplete":12,"fuzzysort":14}]},{},[38]);
+},{"./config":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":12,"awesomplete":13,"fuzzysort":15}]},{},[39]);
