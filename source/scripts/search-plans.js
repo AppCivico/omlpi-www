@@ -32,7 +32,7 @@ export default function startPlansSearch() {
         };
       }
       return {
-        label: `${region.name}:${region.type}:${!region.plan ? 'empty' : ''}`,
+        label: `${region.name}:${region.type}`,
         value: region.id,
       };
     });

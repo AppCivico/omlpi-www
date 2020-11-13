@@ -45,10 +45,5 @@
 }
 
 .buttons-group__submit button {
-  pointer-events: none;
   transition: background-color 0.3s;
-}
-
-.buttons-group__submit .button-icon--active {
-  pointer-events: auto;
 }

@@ -3,12 +3,13 @@
 
 import Awesomplete from 'awesomplete';
 import fuzzysort from 'fuzzysort';
-import { removeDiacritics } from './helpers';
+import { removeDiacritics, formatterMixing } from './helpers';
 import config from './config';
 
 if (document.querySelector('#app-compare')) {
   window.$vueCompare = new Vue({
     el: '#app-compare',
+    mixins: [formatterMixing],
     data: {
       locales_list: null,
       locales: { comparison: [{ indicators: [] }] },
@@ -72,7 +73,7 @@ if (document.querySelector('#app-compare')) {
             item.values.map(iitem => years.push(iitem.year));
           });
         }
-        return [...new Set(years)];
+        return [...new Set(years)].sort().reverse();
       },
       emptyIndicator() {
         return this.locale?.indicators?.length === 0
@@ -112,7 +113,7 @@ if (document.querySelector('#app-compare')) {
           this.selectedYear = this.selectedSubindicator?.data[0]?.values?.[0]?.year;
         }
 
-        if (this.locale.id) {
+        if (this.locale.id || this.locale.id === 0) {
           const newId = this.locale.id;
           this.updateUrlParams('location_id', newId);
           this.localeId = newId;
@@ -159,7 +160,7 @@ if (document.querySelector('#app-compare')) {
       },
       getLocale(localeId) {
         this.loadingLocale = true;
-        const url = `${config.api.domain}data/compare?locale_id=${localeId || config.fisrtCityId}`;
+        const url = `${config.api.domain}data/compare?locale_id=${localeId || localeId === 0 ? localeId : config.fisrtCityId}`;
         fetch(url)
           .then(response => response.json())
           .then((response) => {
@@ -180,7 +181,12 @@ if (document.querySelector('#app-compare')) {
               }
             });
             locales.comparison.sort((a, b) => ((a.display_order < b.display_order) ? 1 : -1));
-            if (Number(this.localeId) === 0) {
+            locales.comparison.forEach((locale) => {
+              locale.indicators.forEach((indicator) => {
+                indicator.values.sort((a, b) => ((a.year > b.year) ? 1 : -1));
+              });
+            });
+            if (Number(localeId) === 0) {
               locales.comparison.reverse();
             }
             this.locales = locales;
@@ -275,6 +281,8 @@ if (document.querySelector('#app-compare')) {
         const allData = [];
         let data = [];
         const descriptions = [];
+        let isPercentage = '';
+
         this.locales.comparison.forEach((comparison) => {
           const cityName = comparison.name;
           comparison.indicators.forEach((indicator) => {
@@ -286,10 +294,14 @@ if (document.querySelector('#app-compare')) {
                     if (subData.values) {
                       subData.values.forEach((value) => {
                         if (value.year === Number(this.selectedYear)) {
+                          isPercentage = subData.is_percentage;
                           descriptions.push(description);
-                          data.push(value.value_relative
-                            ? Number(value.value_relative)
-                            : Number(value.value_absolute));
+                          data.push({
+                            isPercentage: subData.is_percentage,
+                            y: value.value_relative
+                              ? Number(value.value_relative)
+                              : Number(value.value_absolute),
+                          });
                         }
                       });
                     }
@@ -302,6 +314,7 @@ if (document.querySelector('#app-compare')) {
             allData.push({
               name: cityName,
               data,
+              isPercentage,
             });
             data = [];
           }
@@ -330,15 +343,26 @@ if (document.querySelector('#app-compare')) {
         });
 
         this.localesWithIndicator.forEach((item) => {
+          let isPercentage = '';
           data.push({
             name: item.name,
             data: item.indicators.filter(indicator => indicator.id === this.selectedIndicator.id)
-              .map(locale => locale.values.map((i) => {
-                if (i.value_relative) {
-                  return Number(i.value_relative);
-                }
-                return Number(i.value_absolute);
-              }))[0],
+              .map(locale => locale.values
+                .sort((a, b) => (a.year > b.year ? 1 : -1))
+                .map((i) => {
+                  isPercentage = locale.is_percentage;
+                  if (i.value_relative) {
+                    return {
+                      isPercentage: locale.is_percentage,
+                      y: Number(i.value_relative),
+                    };
+                  }
+                  return {
+                    isPercentage: locale.is_percentage,
+                    y: Number(i.value_absolute),
+                  };
+                }))[0],
+            isPercentage,
           });
         });
 
@@ -375,18 +399,31 @@ if (document.querySelector('#app-compare')) {
           tooltip: {
             // eslint-disable-next-line object-shorthand, func-names
             formatter: function () {
-              return window.$vueCompare.selectedIndicator.values[0].value_relative
-                ? `${Math.round(Number(this.y))}%`
-                : Number(this.y).toLocaleString('pt-BR');
+              return window.$vueCompare
+                .formatSingleIndicatorValue(this.y, this.series.userOptions.isPercentage);
             },
             headerFormat: '',
           },
-          colors: ['#C97B84', '#A85751', '#251351', '#114B5F', '#028090', '#E4FDE1', '#040926', '#F45B69', '#91A6FF'],
+          colors: ['#C97B84', '#A85751', '#251351', '#114B5F', '#028090', '#040926', '#F45B69', '#91A6FF'],
           plotOptions: {
             column: {
               pointPadding: 0.2,
               borderWidth: 0,
             },
+            series: {
+              borderWidth: 0,
+              dataLabels: {
+                // eslint-disable-next-line object-shorthand, func-names
+                formatter: function () {
+                  return window.$vueCompare
+                    .formatSingleIndicatorValue(this.y, this.point.isPercentage);
+                },
+                enabled: true,
+              },
+            },
+          },
+          exporting: {
+            filename: `Observa_${this.locale.name}_Indicador_${this.selectedIndicator.id}_Comparação`,
           },
           series: this.formatDataToBarsCharts(this.locales),
         });
@@ -428,23 +465,30 @@ if (document.querySelector('#app-compare')) {
           tooltip: {
             /* eslint-disable object-shorthand, func-names, camelcase */
             formatter: function () {
-              return window.$vueCompare.selectedSubindicator.data?.[0].values[0].value_relative
-                ? `${Math.round(Number(this.y))}%`
-                : Number(this.y).toLocaleString('pt-BR');
+              return window.$vueCompare
+                .formatSingleIndicatorValue(this.y, this.series.userOptions.isPercentage);
             },
             valueSuffix: null,
           },
-          colors: ['#C97B84', '#A85751', '#251351', '#114B5F', '#028090', '#E4FDE1', '#040926', '#F45B69', '#91A6FF'],
+          colors: ['#C97B84', '#A85751', '#251351', '#114B5F', '#028090', '#040926', '#F45B69', '#91A6FF'],
           plotOptions: {
-            bar: {
+            series: {
               dataLabels: {
                 enabled: true,
-                format: this.selectedSubindicator.data?.[0].values[0].value_relative ? '{y}%' : '{y}',
+                // eslint-disable-next-line object-shorthand, func-names
+                formatter: function () {
+                  return window.$vueCompare
+                    .formatSingleIndicatorValue(this.y, this.point.isPercentage);
+                },
               },
             },
           },
           credits: {
-            enabled: false,
+            enabled: true,
+          },
+          exporting: {
+            filename: `Observa_${this.locale.name}_Indicador_${this.selectedIndicator.id}_Desagregador_${
+              this.selectedSubindicator.id}_Comparação`,
           },
           series: this.formatDataToSubindicatorsChart(this.selectedSubindicator.data),
         });

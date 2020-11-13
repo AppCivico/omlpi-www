@@ -62,17 +62,22 @@
               <div class="library-item__content" :ref="`js-description-${articleIndex}`">
                 <h2>{{ "{{ article.title }}" }}</h2>
                 <span class="library-item__author">
-                  <strong>Autor: </strong>{{ "{{ article.author }}" }}
-                  <br>
-                  <strong>Organização:</strong> {{ "{{ article.organization }}" }}
+                  <span>
+                    <template v-if="article.author">
+                      <strong>Autor: </strong>{{ "{{ article.author }}" }}
+                    </template>
+                  </span>
+                  <span>
+                    <strong v-if="article.organization">Organização:</strong> {{ "{{ article.organization }}" }}
+                  </span>
                   <template v-if="article.date">
-                    <br>
-                    <strong>Ano:</strong>
-                    <time :datetime="article.date">{{ "{{ article.date }}" }}</time>
+                    <span>
+                      <strong>Ano:</strong>
+                      <time :datetime="article.date">{{ "{{ article.date }}" }}</time>
+                    </span>
                   </template>
                   <span v-if="article.tags.length > 0" class="library-item__tags">
-                    <br>
-                    <strong>Tags:</strong>
+                    <strong v-if="article.tags.length > 0">Tags:</strong>
                     <template v-for="(tag, index) in article.tags">
                       <span>
                         {{ "{{ tag.name }}" }}<template v-if="index !== article.tags.length - 1">, </template></span>

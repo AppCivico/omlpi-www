@@ -104,7 +104,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
 
         if (this.selectedLocale.type === 'state') {
           const cities = this.locales.filter(
-            locale => locale.type === 'city' && locale.state === this.selectedLocale.state,
+            locale => locale.type === 'city' && locale.state === this.selectedLocale.state && locale.plan,
           );
           this.capital = this.locales.find(
             locale => locale.type === 'city' && locale.state === this.selectedLocale.state && locale.is_capital,

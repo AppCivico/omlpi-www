@@ -152,6 +152,10 @@
   font-size: ms(8);
 }
 
+.indicator-boxes__box h4 small {
+  font-size: ms(-4);
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s;

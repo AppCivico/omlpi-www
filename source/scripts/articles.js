@@ -19,7 +19,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
     },
     async mounted() {
       await this.getArticles();
-      await this.putHasmoreButtons();
+      // await this.putHasmoreButtons();
     },
     methods: {
       // putHasmoreButtons() {

@@ -35,21 +35,21 @@
                   <div class="buttons-group">
                     <button
                       @click="selectedArea = 1"
-                      class="button-icon button--icon button--social-care"
+                      class="button--icon button--social-care"
                       :class="selectedArea === 1 ? 'button-icon--active' : ''"
                       >
                       Assistência Social
                     </button>
                       <button
                         @click="selectedArea = 2"
-                        class="button-icon button--icon button--education"
+                        class="button--icon button--education"
                         :class="selectedArea === 2 ? 'button-icon--active' : ''"
                         >
                         Educação
                       </button>
                         <button
                           @click="selectedArea = 3"
-                          class="button-icon button--icon button--health"
+                          class="button--icon button--health"
                           :class="selectedArea === 3 ? 'button-icon--active' : ''"
                           >
                           Saúde
@@ -124,12 +124,18 @@
                     v-else
                     v-for="(subindicator, subIndicatorIndex) in indicator.subindicators">
                     <div
-                      v-if="showAsBigNumber(subindicator.data)"
+                      v-if="subindicator.showAs === 'bigNumber'"
                       :id="slugify(`subindicator-${subindicator.classification}-${indicator.id}-${subindicator.id}`)"
                       class="big-number">
 
                       <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
                       <div class="infobox" :class="subindicator.data.length === 1 ? 'infobox--single' : ''">
+                        <h3 class="infobox__general-title">
+                          {{ "{{ subindicator.classification }}" }}
+                          <small>
+                            {{ "{{ indicator.description }}" }}
+                          </small>
+                        </h3>
                         <div class="infobox__item" v-for="(subindicatorData, index) in subindicator.data">
                           <strong class="infobox__title">
                             {{ "{{ formatIndicatorValue(subindicatorData.values, subindicatorData.is_percentage) }}" }}
@@ -156,7 +162,11 @@
                               </time>
                         </div>
                         <a
-                          @click.prevent="print(slugify(`subindicator-${subindicator.classification}-${indicator.id}-${subindicator.id}`))"
+                          @click.prevent="print(
+                            slugify(`subindicator-${subindicator.classification}-${indicator.id}-${subindicator.id}`),
+                            indicator.id,
+                            subindicator.classification
+                          )"
                           title="Download"
                           class="infobox__download"
                         >
@@ -166,7 +176,7 @@
                     </div>
 
                     <div
-                      v-if="showAsHorizontalBarChart(subindicator.data)"
+                      v-else-if="subindicator.showAs === 'horizontalBarChart'"
                       class="big-number">
                       <div class="info-chart">
                         <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
@@ -177,7 +187,7 @@
                     </div>
 
                     <div
-                      v-if="showAsBarChart(subindicator.data)"
+                      v-else-if="subindicator.showAs === 'barsChart'"
                       class="big-number">
                       <div class="info-chart">
                         <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>

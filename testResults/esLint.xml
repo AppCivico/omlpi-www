@@ -30,6 +30,9 @@
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/index.js">
 <testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/index.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/index" />
 </testsuite>
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/indicatorsText.js">
+<testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/indicatorsText.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/indicatorsText" />
+</testsuite>
 <testsuite package="org.eslint" time="0" tests="1" errors="0" name="/home/eduruiz/code/omlpi-www/source/scripts/menu.js">
 <testcase time="0" name="/home/eduruiz/code/omlpi-www/source/scripts/menu.js" classname="/home/eduruiz/code/omlpi-www/source/scripts/menu" />
 </testsuite>

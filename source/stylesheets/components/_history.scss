@@ -65,11 +65,22 @@
 .history__radio-buttons label {
   margin-bottom: 0.5rem;
   margin-left: 1rem;
+  color: palette('white');
   background-color: palette('blue', 'greeny');
+  border: 0;
+
+  &::before {
+    filter: brightness(10);
+  }
 }
 
 .history__radio-buttons .button--purple {
+  color: palette('white');
   background-color: palette('purple');
+
+  &::before {
+    filter: brightness(10);
+  }
 }
 
 .history__radio-buttons input[type='radio']:checked + label {
