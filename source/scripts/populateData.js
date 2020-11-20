@@ -16,6 +16,8 @@ Highcharts.setOptions({
     downloadJPEG: 'Baixar JPG',
     downloadPDF: 'Baixar PDF',
     downloadSVG: 'Baixar SVG',
+
+    drillUpText: '◁ Voltar para {series.name}',
   },
 });
 

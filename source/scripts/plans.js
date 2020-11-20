@@ -1,4 +1,5 @@
 /* global Vue */
+/* global $vuePlans */
 /* global Highcharts */
 
 import Swal from 'sweetalert2/dist/sweetalert2';
@@ -11,18 +12,26 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
       infographic: null,
       plansList: null,
       locales: null,
+      localesWithPlan: null,
       selectedLocale: null,
       selectedLocaleId: null,
       relatedLocales: null,
       capital: null,
       storageDomain: config.storage.domain,
       formLoading: false,
+      isDrillDowned: false,
       form: {
         fileName: null,
         file: null,
         name: null,
         message: null,
         email: null,
+      },
+    },
+    watch: {
+      locales() {
+        this.localesWithPlan = this.locales.filter(locale => locale.plan);
+        this.generateChart();
       },
     },
     computed: {
@@ -33,7 +42,6 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
     async mounted() {
       await this.getInfoGraphic();
       await this.getPlansList();
-      await this.generateChart();
     },
     methods: {
       generateChart() {
@@ -42,29 +50,43 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
         // See API docs for 'joinBy' for more info on linking data and map.
         const data = Highcharts.geojson(Highcharts.maps['countries/br/br-all']);
 
-        data.forEach((item, index) => {
+        data.forEach((item) => {
           const newItem = item;
+
+          const filtered = this.localesWithPlan
+            ?.reduce((total, locale) => {
+              if (newItem.properties['hc-key'] === `br-${locale.state.toLowerCase()}`) {
+                total.push(locale);
+
+                if (locale.type === 'state' && locale.plan) {
+                  newItem.planUrl = `${$vuePlans.storageDomain}${locale.plan.url}`;
+                }
+              }
+              return total;
+            }, []);
+
           newItem.drilldown = item.properties['hc-key'];
-          newItem.value = index; // Non-random bogus data
+          newItem.value = filtered.length; // Non-random bogus data
         });
         // Create the chart
-        Highcharts.mapChart('map', {
+        return Highcharts.mapChart('map', {
           chart: {
             // map: 'countries/br/br-all',
             backgroundColor: 'rgba(0, 0, 0, 0)',
             events: {
               // eslint-disable-next-line object-shorthand, func-names
               drilldown: function (e) {
+                $vuePlans.isDrillDowned = true;
                 // console.log(e.point.drilldown)
-                console.log('DRIIIILDOWN')
+                // console.log('DRIIIILDOWN')
                 if (!e.seriesOptions) {
                   // console.log('this?', this)
                   const chart = this;
                   // Handle error, the timeout is cleared on success
-                  const fail = setTimeout(() => {
-                    if (!Highcharts.maps[mapKey]) {
-                      chart.showLoading('<i class="icon-frown"></i> Failed loading ' + e.point.name);
-                      fail = setTimeout(function () {
+                  let fail = setTimeout(() => {
+                    if (e.point.drilldown) {
+                      chart.showLoading(`<i class="icon-frown"></i> Failed loading  ${e.point.name}`);
+                      fail = setTimeout(() => {
                         chart.hideLoading();
                       }, 1000);
                     }
@@ -74,16 +96,29 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                   chart.showLoading('carregando...'); // Font Awesome spinner
 
                   // Load the drilldown map
-                  fetch('/maps/br-mg.json')
+                  fetch(`/maps/${e.point.drilldown}.json`)
                     .then(response => response.json())
-                    .then((Ndata) => {
+                    .then((response) => {
                       // console.log(data)
 
                       // Set a non-random bogus value
-                      Ndata.mapData.forEach((item, i) => {
-                        const newI = i;
-                        newI.value = i;
-                        // console.log(i)
+                      response.mapData.forEach((item) => {
+                        const newItem = item;
+
+                        const locale = $vuePlans.locales
+                          .find(loc => loc.cod_ibge === Number(item.name.replace('mun_', '')));
+
+                        if (locale?.name) {
+                          newItem.humanName = locale.name;
+                        } else {
+                          // eslint-disable-next-line no-console
+                          console.log(`locale ${JSON.stringify(item)} has no name`);
+                        }
+                        newItem.value = 0;
+                        if (locale?.plan) {
+                          newItem.value = 100;
+                          newItem.planUrl = `${$vuePlans.storageDomain}${locale.plan.url}`;
+                        }
                       });
 
                       chart.hideLoading();
@@ -93,57 +128,89 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
 
                       chart.addSeriesAsDrilldown(e.point, {
                         name: e.point.name,
-                        data: Ndata.mapData,
-                        dataLabels: {
-                          enabled: false,
-                          format: '{point.name}',
-                        },
+                        data: response.mapData,
+                        // dataLabels: {
+                        // eslint-disable-next-line object-shorthand, func-names
+                        // formatter: function () {
+                        // return this.humanName;
+                        // },
+                        // enabled: false,
+                        // format: '{point.name}',
+                        // },
                       });
                     });
                 }
 
                 this.setTitle(null, { text: e.point.name });
               },
+              // eslint-disable-next-line object-shorthand, func-names
               drillup: function () {
-                console.log('DRIIIILUUUP')
-              }
-            }
+                $vuePlans.isDrillDowned = false;
+                this.setTitle(null, { text: '' });
+              },
+            },
           },
           title: {
-            text: ''
+            text: '',
           },
 
           subtitle: {
-            text: ''
+            text: '',
           },
 
           mapNavigation: {
             enabled: true,
             buttonOptions: {
-              verticalAlign: 'bottom'
-            }
+              verticalAlign: 'bottom',
+            },
           },
 
           colorAxis: {
-            min: 0
+            min: 0,
           },
-
+          tooltip: {
+            useHTML: true,
+            followPointer: false,
+            hideDelay: 1500,
+            style: {
+              pointerEvents: 'auto',
+              textAlign: 'center',
+            },
+            // eslint-disable-next-line object-shorthand, func-names
+            formatter: function () {
+              if ($vuePlans.isDrillDowned) {
+                if (this.point.planUrl) {
+                  return `${this.point.humanName}:
+                    <br>
+                    <a target="_blank" href="${this.point.planUrl}">Baixar Plano</a>
+                    `;
+                }
+                return `${this.point.humanName}`;
+              }
+              if (this.point.planUrl) {
+                return `${this.point.name}: ${this.point.value} Planos
+                    <br>
+                    <a target="_blank" href="${this.point.planUrl}">Baixar Plano Estadual</a>
+                    `;
+              }
+              return `${this.point.name} : ${this.point.value} Planos`;
+            },
+          },
           series: [{
             joinBy: ['hc-key', 'code'],
-            data: data,
-            name: 'Random data',
+            data,
+            name: 'Brasil',
             states: {
               hover: {
-                color: '#BADA55'
-              }
+                color: '#BADA55',
+              },
             },
             dataLabels: {
               enabled: true,
-              format: '{point.name}'
-            }
-          }]
+              format: '{point.name}',
+            },
+          }],
         });
-
       },
       updateFile(event) {
         this.form.file = [event.target.files[0]];
@@ -261,7 +328,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
         this.capital = null;
       },
       getInfoGraphic() {
-        fetch(`${config.apiCMS.domain}infograficos/1`)
+        return fetch(`${config.apiCMS.domain}infograficos/1`)
           .then(response => response.json())
           .then((response) => {
             this.infographic = {};
@@ -282,7 +349,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           });
       },
       getPlansList() {
-        fetch(`${config.apiCMS.domain}listaplanos/1`)
+        return fetch(`${config.apiCMS.domain}listaplanos/1`)
           .then(response => response.json())
           .then((response) => {
             this.plansList = response;

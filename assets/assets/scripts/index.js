@@ -94,12 +94,6 @@ function _nonIterableSpread() {
 
 module.exports = _nonIterableSpread;
 },{}],8:[function(require,module,exports){
-function _readOnlyError(name) {
-  throw new Error("\"" + name + "\" is read-only");
-}
-
-module.exports = _readOnlyError;
-},{}],9:[function(require,module,exports){
 var arrayWithoutHoles = require("./arrayWithoutHoles");
 
 var iterableToArray = require("./iterableToArray");
@@ -113,7 +107,7 @@ function _toConsumableArray(arr) {
 }
 
 module.exports = _toConsumableArray;
-},{"./arrayWithoutHoles":2,"./iterableToArray":6,"./nonIterableSpread":7,"./unsupportedIterableToArray":10}],10:[function(require,module,exports){
+},{"./arrayWithoutHoles":2,"./iterableToArray":6,"./nonIterableSpread":7,"./unsupportedIterableToArray":9}],9:[function(require,module,exports){
 var arrayLikeToArray = require("./arrayLikeToArray");
 
 function _unsupportedIterableToArray(o, minLen) {
@@ -126,7 +120,7 @@ function _unsupportedIterableToArray(o, minLen) {
 }
 
 module.exports = _unsupportedIterableToArray;
-},{"./arrayLikeToArray":1}],11:[function(require,module,exports){
+},{"./arrayLikeToArray":1}],10:[function(require,module,exports){
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -857,10 +851,10 @@ try {
   Function("r", "regeneratorRuntime = r")(runtime);
 }
 
-},{}],12:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 module.exports = require("regenerator-runtime");
 
-},{"regenerator-runtime":11}],13:[function(require,module,exports){
+},{"regenerator-runtime":10}],12:[function(require,module,exports){
 /**
  * Simple, lightweight, usable local autocomplete library for modern browsers
  * Because there weren’t enough autocomplete scripts in the world? Because I’m completely insane and have NIH syndrome? Probably both. :P
@@ -1414,7 +1408,7 @@ return _;
 
 }());
 
-},{}],14:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
@@ -2631,7 +2625,7 @@ return _;
 }));
 
 
-},{}],15:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 (function (setImmediate){
 /*
 WHAT: SublimeText-like Fuzzy Search
@@ -3239,7 +3233,7 @@ return fuzzysortNew()
 // TODO: (performance) i have no idea how well optizmied the allowing typos algorithm is
 
 }).call(this,require("timers").setImmediate)
-},{"timers":29}],16:[function(require,module,exports){
+},{"timers":28}],15:[function(require,module,exports){
 const Renderer = require('./Renderer.js');
 const { defaults } = require('./defaults.js');
 const { inline } = require('./rules.js');
@@ -3534,7 +3528,7 @@ module.exports = class InlineLexer {
   }
 };
 
-},{"./Renderer.js":19,"./defaults.js":22,"./helpers.js":23,"./rules.js":25}],17:[function(require,module,exports){
+},{"./Renderer.js":18,"./defaults.js":21,"./helpers.js":22,"./rules.js":24}],16:[function(require,module,exports){
 const { defaults } = require('./defaults.js');
 const { block } = require('./rules.js');
 const {
@@ -3938,7 +3932,7 @@ module.exports = class Lexer {
   };
 };
 
-},{"./defaults.js":22,"./helpers.js":23,"./rules.js":25}],18:[function(require,module,exports){
+},{"./defaults.js":21,"./helpers.js":22,"./rules.js":24}],17:[function(require,module,exports){
 const Renderer = require('./Renderer.js');
 const Slugger = require('./Slugger.js');
 const InlineLexer = require('./InlineLexer.js');
@@ -4146,7 +4140,7 @@ module.exports = class Parser {
   };
 };
 
-},{"./InlineLexer.js":16,"./Renderer.js":19,"./Slugger.js":20,"./TextRenderer.js":21,"./defaults.js":22,"./helpers.js":23}],19:[function(require,module,exports){
+},{"./InlineLexer.js":15,"./Renderer.js":18,"./Slugger.js":19,"./TextRenderer.js":20,"./defaults.js":21,"./helpers.js":22}],18:[function(require,module,exports){
 const { defaults } = require('./defaults.js');
 const {
   cleanUrl,
@@ -4312,7 +4306,7 @@ module.exports = class Renderer {
   };
 };
 
-},{"./defaults.js":22,"./helpers.js":23}],20:[function(require,module,exports){
+},{"./defaults.js":21,"./helpers.js":22}],19:[function(require,module,exports){
 /**
  * Slugger generates header id
  */
@@ -4347,7 +4341,7 @@ module.exports = class Slugger {
   };
 };
 
-},{}],21:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 /**
  * TextRenderer
  * returns only the textual part of the token
@@ -4391,7 +4385,7 @@ module.exports = class TextRenderer {
   }
 };
 
-},{}],22:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 function getDefaults() {
   return {
     baseUrl: null,
@@ -4423,7 +4417,7 @@ module.exports = {
   changeDefaults
 };
 
-},{}],23:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 /**
  * Helpers
  */
@@ -4668,7 +4662,7 @@ module.exports = {
   checkSanitizeDeprecation
 };
 
-},{}],24:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 const Lexer = require('./Lexer.js');
 const Parser = require('./Parser.js');
 const Renderer = require('./Renderer.js');
@@ -4820,7 +4814,7 @@ marked.parse = marked;
 
 module.exports = marked;
 
-},{"./InlineLexer.js":16,"./Lexer.js":17,"./Parser.js":18,"./Renderer.js":19,"./Slugger.js":20,"./TextRenderer.js":21,"./defaults.js":22,"./helpers.js":23}],25:[function(require,module,exports){
+},{"./InlineLexer.js":15,"./Lexer.js":16,"./Parser.js":17,"./Renderer.js":18,"./Slugger.js":19,"./TextRenderer.js":20,"./defaults.js":21,"./helpers.js":22}],24:[function(require,module,exports){
 const {
   noopTest,
   edit,
@@ -5088,7 +5082,7 @@ module.exports = {
   inline
 };
 
-},{"./helpers.js":23}],26:[function(require,module,exports){
+},{"./helpers.js":22}],25:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -5274,7 +5268,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],27:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 
 ;(function (name, root, factory) {
   if (typeof exports === 'object') {
@@ -5340,7 +5334,7 @@ process.umask = function() { return 0; };
   return replace
 }))
 
-},{}],28:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 /*!
 * sweetalert2 v9.10.12
 * Released under the MIT License.
@@ -8443,7 +8437,7 @@ process.umask = function() { return 0; };
 }));
 if (typeof this !== 'undefined' && this.Sweetalert2){  this.swal = this.sweetAlert = this.Swal = this.SweetAlert = this.Sweetalert2}
 
-},{}],29:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 (function (setImmediate,clearImmediate){
 var nextTick = require('process/browser.js').nextTick;
 var apply = Function.prototype.apply;
@@ -8522,7 +8516,7 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
   delete immediateIds[id];
 };
 }).call(this,require("timers").setImmediate,require("timers").clearImmediate)
-},{"process/browser.js":26,"timers":29}],30:[function(require,module,exports){
+},{"process/browser.js":25,"timers":28}],29:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -8636,7 +8630,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
   });
 }
 
-},{"./config":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/helpers/toConsumableArray":9,"@babel/runtime/regenerator":12}],31:[function(require,module,exports){
+},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/helpers/toConsumableArray":8,"@babel/runtime/regenerator":11}],30:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -8711,7 +8705,7 @@ if (document.querySelector('#app-axis')) {
   });
 }
 
-},{"./config":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":12,"dompurify":14,"marked":24}],32:[function(require,module,exports){
+},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"dompurify":13,"marked":23}],31:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -9313,7 +9307,7 @@ if (document.querySelector('#app-compare')) {
   });
 }
 
-},{"./config":33,"./helpers":34,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/defineProperty":4,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/helpers/toConsumableArray":9,"@babel/runtime/regenerator":12,"awesomplete":13,"fuzzysort":15}],33:[function(require,module,exports){
+},{"./config":32,"./helpers":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/defineProperty":4,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/helpers/toConsumableArray":8,"@babel/runtime/regenerator":11,"awesomplete":12,"fuzzysort":14}],32:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9336,7 +9330,7 @@ var _default = {
 };
 exports.default = _default;
 
-},{}],34:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9386,7 +9380,7 @@ var formatterMixing = {
 
 exports.formatterMixing = formatterMixing;
 
-},{}],35:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -9842,7 +9836,7 @@ if (document.querySelector('#app-history')) {
   });
 }
 
-},{"./config":33,"./helpers":34,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/defineProperty":4,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":12,"awesomplete":13,"fuzzysort":15}],36:[function(require,module,exports){
+},{"./config":32,"./helpers":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/defineProperty":4,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"awesomplete":12,"fuzzysort":14}],35:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -9914,7 +9908,7 @@ if (document.querySelector('#app-home-about')) {
   });
 }
 
-},{"./config":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/defineProperty":4,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":12,"dompurify":14,"marked":24}],37:[function(require,module,exports){
+},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/defineProperty":4,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"dompurify":13,"marked":23}],36:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -9983,7 +9977,7 @@ if (document.querySelector('#app-home-banner')) {
   });
 }
 
-},{"./config":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/defineProperty":4,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":12,"dompurify":14,"marked":24}],38:[function(require,module,exports){
+},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/defineProperty":4,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"dompurify":13,"marked":23}],37:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10095,7 +10089,7 @@ if (document.querySelector('#app-home-indicators')) {
   });
 }
 
-},{"./config":33,"./helpers":34,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":12}],39:[function(require,module,exports){
+},{"./config":32,"./helpers":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11}],38:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10132,7 +10126,7 @@ require("./indicatorsText");
 (0, _searchPlans.default)();
 (0, _menu.default)();
 
-},{"./articles":30,"./axis":31,"./compare":32,"./history":35,"./homeAbout":36,"./homeBanner":37,"./homeIndicators":38,"./indicatorsText":40,"./menu":41,"./news":42,"./plans":43,"./populateData":44,"./search":46,"./search-plans":45,"@babel/runtime/helpers/interopRequireDefault":5}],40:[function(require,module,exports){
+},{"./articles":29,"./axis":30,"./compare":31,"./history":34,"./homeAbout":35,"./homeBanner":36,"./homeIndicators":37,"./indicatorsText":39,"./menu":40,"./news":41,"./plans":42,"./populateData":43,"./search":45,"./search-plans":44,"@babel/runtime/helpers/interopRequireDefault":5}],39:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10195,7 +10189,7 @@ if (document.querySelector('#app-indicators-text')) {
   });
 }
 
-},{"./config":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":12,"dompurify":14,"marked":24}],41:[function(require,module,exports){
+},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"dompurify":13,"marked":23}],40:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10216,7 +10210,7 @@ function startMenutoggle() {
   });
 }
 
-},{}],42:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10276,12 +10270,10 @@ if (document.querySelector('#app-news')) {
   });
 }
 
-},{"./config":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":12}],43:[function(require,module,exports){
+},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11}],42:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-var _readOnlyError2 = _interopRequireDefault(require("@babel/runtime/helpers/readOnlyError"));
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -10293,6 +10285,8 @@ var _config = _interopRequireDefault(require("./config"));
 
 /* global Vue */
 
+/* global $vuePlans */
+
 /* global Highcharts */
 if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
   window.$vuePlans = new Vue({
@@ -10301,18 +10295,28 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
       infographic: null,
       plansList: null,
       locales: null,
+      localesWithPlan: null,
       selectedLocale: null,
       selectedLocaleId: null,
       relatedLocales: null,
       capital: null,
       storageDomain: _config.default.storage.domain,
       formLoading: false,
+      isDrillDowned: false,
       form: {
         fileName: null,
         file: null,
         name: null,
         message: null,
         email: null
+      }
+    },
+    watch: {
+      locales: function locales() {
+        this.localesWithPlan = this.locales.filter(function (locale) {
+          return locale.plan;
+        });
+        this.generateChart();
       }
     },
     computed: {
@@ -10336,10 +10340,6 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                 return _this.getPlansList();
 
               case 4:
-                _context.next = 6;
-                return _this.generateChart();
-
-              case 6:
               case "end":
                 return _context.stop();
             }
@@ -10349,61 +10349,96 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
     },
     methods: {
       generateChart: function generateChart() {
+        var _this2 = this;
+
         // Prepare demo data
         // Data is joined to map using value of 'hc-key' property by default.
         // See API docs for 'joinBy' for more info on linking data and map.
         var data = Highcharts.geojson(Highcharts.maps['countries/br/br-all']);
-        data.forEach(function (item, index) {
+        data.forEach(function (item) {
+          var _this2$localesWithPla;
+
           var newItem = item;
+          var filtered = (_this2$localesWithPla = _this2.localesWithPlan) === null || _this2$localesWithPla === void 0 ? void 0 : _this2$localesWithPla.reduce(function (total, locale) {
+            if (newItem.properties['hc-key'] === "br-".concat(locale.state.toLowerCase())) {
+              total.push(locale);
+
+              if (locale.type === 'state' && locale.plan) {
+                newItem.planUrl = "".concat($vuePlans.storageDomain).concat(locale.plan.url);
+              }
+            }
+
+            return total;
+          }, []);
           newItem.drilldown = item.properties['hc-key'];
-          newItem.value = index; // Non-random bogus data
+          newItem.value = filtered.length; // Non-random bogus data
         }); // Create the chart
 
-        Highcharts.mapChart('map', {
+        return Highcharts.mapChart('map', {
           chart: {
             // map: 'countries/br/br-all',
             backgroundColor: 'rgba(0, 0, 0, 0)',
             events: {
               // eslint-disable-next-line object-shorthand, func-names
               drilldown: function drilldown(e) {
-                // console.log(e.point.drilldown)
-                console.log('DRIIIILDOWN');
+                $vuePlans.isDrillDowned = true; // console.log(e.point.drilldown)
+                // console.log('DRIIIILDOWN')
 
                 if (!e.seriesOptions) {
                   // console.log('this?', this)
                   var chart = this; // Handle error, the timeout is cleared on success
 
                   var fail = setTimeout(function () {
-                    if (!Highcharts.maps[mapKey]) {
-                      chart.showLoading('<i class="icon-frown"></i> Failed loading ' + e.point.name);
-                      fail = ((0, _readOnlyError2.default)("fail"), setTimeout(function () {
+                    if (e.point.drilldown) {
+                      chart.showLoading("<i class=\"icon-frown\"></i> Failed loading  ".concat(e.point.name));
+                      fail = setTimeout(function () {
                         chart.hideLoading();
-                      }, 1000));
+                      }, 1000);
                     }
                   }, 3000); // Show the spinner
 
                   chart.showLoading('carregando...'); // Font Awesome spinner
                   // Load the drilldown map
 
-                  fetch('/maps/br-mg.json').then(function (response) {
+                  fetch("/maps/".concat(e.point.drilldown, ".json")).then(function (response) {
                     return response.json();
-                  }).then(function (Ndata) {
+                  }).then(function (response) {
                     // console.log(data)
                     // Set a non-random bogus value
-                    Ndata.mapData.forEach(function (item, i) {
-                      var newI = i;
-                      newI.value = i; // console.log(i)
+                    response.mapData.forEach(function (item) {
+                      var newItem = item;
+                      var locale = $vuePlans.locales.find(function (loc) {
+                        return loc.cod_ibge === Number(item.name.replace('mun_', ''));
+                      });
+
+                      if (locale === null || locale === void 0 ? void 0 : locale.name) {
+                        newItem.humanName = locale.name;
+                      } else {
+                        // eslint-disable-next-line no-console
+                        console.log("locale ".concat(JSON.stringify(item), " has no name"));
+                      }
+
+                      newItem.value = 0;
+
+                      if (locale === null || locale === void 0 ? void 0 : locale.plan) {
+                        newItem.value = 100;
+                        newItem.planUrl = "".concat($vuePlans.storageDomain).concat(locale.plan.url);
+                      }
                     });
                     chart.hideLoading(); // Hide loading and add series
 
                     clearTimeout(fail);
                     chart.addSeriesAsDrilldown(e.point, {
                       name: e.point.name,
-                      data: Ndata.mapData,
-                      dataLabels: {
-                        enabled: false,
-                        format: '{point.name}'
-                      }
+                      data: response.mapData // dataLabels: {
+                      // eslint-disable-next-line object-shorthand, func-names
+                      // formatter: function () {
+                      // return this.humanName;
+                      // },
+                      // enabled: false,
+                      // format: '{point.name}',
+                      // },
+
                     });
                   });
                 }
@@ -10412,8 +10447,12 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                   text: e.point.name
                 });
               },
+              // eslint-disable-next-line object-shorthand, func-names
               drillup: function drillup() {
-                console.log('DRIIIILUUUP');
+                $vuePlans.isDrillDowned = false;
+                this.setTitle(null, {
+                  text: ''
+                });
               }
             }
           },
@@ -10432,10 +10471,35 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           colorAxis: {
             min: 0
           },
+          tooltip: {
+            useHTML: true,
+            followPointer: false,
+            hideDelay: 1500,
+            style: {
+              pointerEvents: 'auto',
+              textAlign: 'center'
+            },
+            // eslint-disable-next-line object-shorthand, func-names
+            formatter: function formatter() {
+              if ($vuePlans.isDrillDowned) {
+                if (this.point.planUrl) {
+                  return "".concat(this.point.humanName, ":\n                    <br>\n                    <a target=\"_blank\" href=\"").concat(this.point.planUrl, "\">Baixar Plano</a>\n                    ");
+                }
+
+                return "".concat(this.point.humanName);
+              }
+
+              if (this.point.planUrl) {
+                return "".concat(this.point.name, ": ").concat(this.point.value, " Planos\n                    <br>\n                    <a target=\"_blank\" href=\"").concat(this.point.planUrl, "\">Baixar Plano Estadual</a>\n                    ");
+              }
+
+              return "".concat(this.point.name, " : ").concat(this.point.value, " Planos");
+            }
+          },
           series: [{
             joinBy: ['hc-key', 'code'],
             data: data,
-            name: 'Random data',
+            name: 'Brasil',
             states: {
               hover: {
                 color: '#BADA55'
@@ -10463,7 +10527,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
         };
       },
       sendPlan: function sendPlan() {
-        var _this2 = this;
+        var _this3 = this;
 
         var data = new FormData();
         data.append('file', this.form.file[0]);
@@ -10481,14 +10545,14 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
               text: 'Seu plano foi enviado para avaliação',
               icon: 'success',
               confirmButtonText: 'Fechar'
-            }).then(_this2.formLoading = false).then(_this2.resetForm());
+            }).then(_this3.formLoading = false).then(_this3.resetForm());
           } else {
             _sweetalert.default.fire({
               title: 'Ops! Algo deu errado',
               text: 'Tivemos um problema no envio, por favor, tente novamente',
               icon: 'error',
               confirmButtonText: 'Fechar'
-            }).then(_this2.formLoading = false);
+            }).then(_this3.formLoading = false);
           }
         }).catch(function () {
           _sweetalert.default.fire({
@@ -10496,7 +10560,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
             text: 'Tivemos um problema no envio, por favor, tente novamente',
             icon: 'error',
             confirmButtonText: 'Fechar'
-          }).then(_this2.formLoading = false);
+          }).then(_this3.formLoading = false);
         });
       },
       setMapDestak: function setMapDestak(locale) {
@@ -10509,7 +10573,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
         map.querySelector(".".concat(locale)).classList.add('active');
       },
       setLocale: function setLocale(localeId) {
-        var _this3 = this;
+        var _this4 = this;
 
         this.resetSelectedLocales();
         this.selectedLocale = this.locales.find(function (locale) {
@@ -10518,10 +10582,10 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
 
         if (this.selectedLocale.type === 'state') {
           var cities = this.locales.filter(function (locale) {
-            return locale.type === 'city' && locale.state === _this3.selectedLocale.state && locale.plan;
+            return locale.type === 'city' && locale.state === _this4.selectedLocale.state && locale.plan;
           });
           this.capital = this.locales.find(function (locale) {
-            return locale.type === 'city' && locale.state === _this3.selectedLocale.state && locale.is_capital;
+            return locale.type === 'city' && locale.state === _this4.selectedLocale.state && locale.is_capital;
           });
           this.relatedLocales = this.getSectionedLocales(cities).sort(function (a, b) {
             return a.title > b.title ? 1 : -1;
@@ -10530,7 +10594,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
 
         if (this.selectedLocale.type === 'region') {
           var states = this.locales.filter(function (locale) {
-            return locale.type === 'state' && locale.region === _this3.selectedLocale.region;
+            return locale.type === 'state' && locale.region === _this4.selectedLocale.region;
           });
           this.relatedLocales = this.getSectionedLocales(states).sort(function (a, b) {
             return a.title > b.title ? 1 : -1;
@@ -10563,42 +10627,42 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
         this.capital = null;
       },
       getInfoGraphic: function getInfoGraphic() {
-        var _this4 = this;
+        var _this5 = this;
 
-        fetch("".concat(_config.default.apiCMS.domain, "infograficos/1")).then(function (response) {
+        return fetch("".concat(_config.default.apiCMS.domain, "infograficos/1")).then(function (response) {
           return response.json();
         }).then(function (response) {
-          _this4.infographic = {};
-          _this4.infographic.title = response.title;
-          _this4.infographic.description = response.description;
+          _this5.infographic = {};
+          _this5.infographic.title = response.title;
+          _this5.infographic.description = response.description;
 
           if (response.small && response.small.url) {
-            _this4.infographic.small = "".concat(_config.default.storage.domain).concat(response.small.url);
+            _this5.infographic.small = "".concat(_config.default.storage.domain).concat(response.small.url);
           }
 
           if (response.big && response.big.url) {
-            _this4.infographic.big = "".concat(_config.default.storage.domain).concat(response.big.url);
+            _this5.infographic.big = "".concat(_config.default.storage.domain).concat(response.big.url);
           }
 
           if (response.pdf && response.pdf.url) {
-            _this4.infographic.url = "".concat(_config.default.storage.domain).concat(response.pdf.url);
+            _this5.infographic.url = "".concat(_config.default.storage.domain).concat(response.pdf.url);
           }
         });
       },
       getPlansList: function getPlansList() {
-        var _this5 = this;
+        var _this6 = this;
 
-        fetch("".concat(_config.default.apiCMS.domain, "listaplanos/1")).then(function (response) {
+        return fetch("".concat(_config.default.apiCMS.domain, "listaplanos/1")).then(function (response) {
           return response.json();
         }).then(function (response) {
-          _this5.plansList = response;
+          _this6.plansList = response;
         });
       }
     }
   });
 }
 
-},{"./config":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/helpers/readOnlyError":8,"@babel/runtime/regenerator":12,"sweetalert2/dist/sweetalert2":28}],44:[function(require,module,exports){
+},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"sweetalert2/dist/sweetalert2":27}],43:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10626,7 +10690,8 @@ Highcharts.setOptions({
     downloadPNG: 'Baixar PNG',
     downloadJPEG: 'Baixar JPG',
     downloadPDF: 'Baixar PDF',
-    downloadSVG: 'Baixar SVG'
+    downloadSVG: 'Baixar SVG',
+    drillUpText: '◁ Voltar para {series.name}'
   }
 });
 
@@ -11050,7 +11115,7 @@ if (window.location.href.indexOf('city') > -1) {
   });
 }
 
-},{"./config":33,"./helpers":34,"./search":46,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":12,"slugify":27}],45:[function(require,module,exports){
+},{"./config":32,"./helpers":33,"./search":45,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"slugify":26}],44:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11218,7 +11283,7 @@ function startPlansSearch() {
   }
 }
 
-},{"./config":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":12,"awesomplete":13,"fuzzysort":15}],46:[function(require,module,exports){
+},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"awesomplete":12,"fuzzysort":14}],45:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11433,4 +11498,4 @@ function startSearch() {
   }
 }
 
-},{"./config":33,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":12,"awesomplete":13,"fuzzysort":15}]},{},[39]);
+},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"awesomplete":12,"fuzzysort":14}]},{},[38]);
