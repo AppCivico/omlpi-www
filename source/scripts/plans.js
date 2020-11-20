@@ -65,7 +65,9 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
               return total;
             }, []);
 
-          newItem.drilldown = item.properties['hc-key'];
+          if (filtered.length) {
+            newItem.drilldown = item.properties['hc-key'];
+          }
           newItem.value = filtered.length; // Non-random bogus data
         });
         // Create the chart
@@ -86,6 +88,12 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                   let fail = setTimeout(() => {
                     if (e.point.drilldown) {
                       chart.showLoading(`<i class="icon-frown"></i> Failed loading  ${e.point.name}`);
+                      Swal.fire({
+                        title: 'OPS!!',
+                        text: 'This state doesn\'t have a valid json yet',
+                        icon: 'error',
+                        confirmButtonText: 'Fechar',
+                      })
                       fail = setTimeout(() => {
                         chart.hideLoading();
                       }, 1000);
@@ -112,6 +120,12 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                           newItem.humanName = locale.name;
                         } else {
                           // eslint-disable-next-line no-console
+                          Swal.fire({
+                            title: 'OPS!!',
+                            text: `locale ${JSON.stringify(item.id)} has no name, details are on console`,
+                            icon: 'error',
+                            confirmButtonText: 'Fechar',
+                          })
                           console.log(`locale ${JSON.stringify(item)} has no name`);
                         }
                         newItem.value = 0;
@@ -165,8 +179,18 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
             },
           },
 
+          legend: {
+            enabled: false,
+          },
+
           colorAxis: {
-            min: 0,
+            min: 1,
+            max: 20, // max locales for a state
+            // type: 'logarithmic',
+            minColor: '#ffffff',
+            maxColor: '#693996',
+            lineColor: '#32215c',
+            lineWidth: 10,
           },
           tooltip: {
             useHTML: true,
@@ -188,12 +212,12 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                 return `${this.point.humanName}`;
               }
               if (this.point.planUrl) {
-                return `${this.point.name}: ${this.point.value} Planos
+                return `${this.point.name}: ${this.point.value} Plano${this.point.value === 1 ? '' : 's'}
                     <br>
                     <a target="_blank" href="${this.point.planUrl}">Baixar Plano Estadual</a>
                     `;
               }
-              return `${this.point.name} : ${this.point.value} Planos`;
+              return `${this.point.name} : ${this.point.value} Plano${this.point.value === 1 ? '' : 's'}`;
             },
           },
           series: [{
@@ -202,7 +226,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
             name: 'Brasil',
             states: {
               hover: {
-                color: '#BADA55',
+                color: '#32215c',
               },
             },
             dataLabels: {
