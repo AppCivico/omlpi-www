@@ -10359,9 +10359,14 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           var _this2$locales;
 
           var newItem = item;
-          var filtered = (_this2$locales = _this2.locales) === null || _this2$locales === void 0 ? void 0 : _this2$locales.reduce(function (total, locale) {
+          newItem.totalPlans = 0;
+          var localesPerState = (_this2$locales = _this2.locales) === null || _this2$locales === void 0 ? void 0 : _this2$locales.reduce(function (total, locale) {
             if (newItem.properties['hc-key'] === "br-".concat(locale.state.toLowerCase())) {
               total.push(locale);
+
+              if (locale.plan) {
+                newItem.totalPlans += 1;
+              }
 
               if (locale.type === 'state' && locale.plan) {
                 newItem.planUrl = "".concat($vuePlans.storageDomain).concat(locale.plan.url);
@@ -10374,7 +10379,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           // newItem.drilldown = item.properties['hc-key'];
           // }
 
-          newItem.value = filtered.length;
+          newItem.value = newItem.totalPlans / localesPerState.length;
         }); // Create the chart
 
         return Highcharts.mapChart('map', {
@@ -10490,8 +10495,8 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
             enabled: false
           },
           colorAxis: {
-            min: 1,
-            max: 20,
+            min: 0,
+            max: 1,
             // max locales for a state
             // type: 'logarithmic',
             minColor: '#ffffff',
@@ -10518,10 +10523,10 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
               }
 
               if (this.point.planUrl) {
-                return "".concat(this.point.name, ": ").concat(this.point.value, " Plano").concat(this.point.value === 1 ? '' : 's', "\n                    <br>\n                    <a target=\"_blank\" href=\"").concat(this.point.planUrl, "\">Baixar Plano Estadual</a>\n                    ");
+                return "".concat(this.point.name, ": ").concat(this.point.totalPlans, " Plano").concat(this.point.totalPlans === 1 ? '' : 's', "\n                    <br>\n                    <a target=\"_blank\" href=\"").concat(this.point.planUrl, "\">Baixar Plano Estadual</a>\n                    ");
               }
 
-              return "".concat(this.point.name, " : ").concat(this.point.value, " Plano").concat(this.point.value === 1 ? '' : 's');
+              return "".concat(this.point.name, " : ").concat(this.point.totalPlans, " Plano").concat(this.point.totalPlans === 1 ? '' : 's');
             }
           },
           series: [{
@@ -10534,7 +10539,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
               }
             },
             dataLabels: {
-              enabled: true,
+              enabled: false,
               format: '{point.name}'
             }
           }]

@@ -52,11 +52,16 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
 
         data.forEach((item) => {
           const newItem = item;
+          newItem.totalPlans = 0;
 
-          const filtered = this.locales
+          const localesPerState = this.locales
             ?.reduce((total, locale) => {
               if (newItem.properties['hc-key'] === `br-${locale.state.toLowerCase()}`) {
                 total.push(locale);
+
+                if (locale.plan) {
+                  newItem.totalPlans += 1;
+                }
 
                 if (locale.type === 'state' && locale.plan) {
                   newItem.planUrl = `${$vuePlans.storageDomain}${locale.plan.url}`;
@@ -69,7 +74,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           // if (filtered.length) {
           // newItem.drilldown = item.properties['hc-key'];
           // }
-          newItem.value = filtered.length;
+          newItem.value = newItem.totalPlans / localesPerState.length;
         });
         // Create the chart
         return Highcharts.mapChart('map', {
@@ -185,8 +190,8 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           },
 
           colorAxis: {
-            min: 1,
-            max: 20, // max locales for a state
+            min: 0,
+            max: 1, // max locales for a state
             // type: 'logarithmic',
             minColor: '#ffffff',
             maxColor: '#693996',
@@ -213,12 +218,12 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                 return `${this.point.humanName}`;
               }
               if (this.point.planUrl) {
-                return `${this.point.name}: ${this.point.value} Plano${this.point.value === 1 ? '' : 's'}
+                return `${this.point.name}: ${this.point.totalPlans} Plano${this.point.totalPlans === 1 ? '' : 's'}
                     <br>
                     <a target="_blank" href="${this.point.planUrl}">Baixar Plano Estadual</a>
                     `;
               }
-              return `${this.point.name} : ${this.point.value} Plano${this.point.value === 1 ? '' : 's'}`;
+              return `${this.point.name} : ${this.point.totalPlans} Plano${this.point.totalPlans === 1 ? '' : 's'}`;
             },
           },
           series: [{
@@ -231,7 +236,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
               },
             },
             dataLabels: {
-              enabled: true,
+              enabled: false,
               format: '{point.name}',
             },
           }],
