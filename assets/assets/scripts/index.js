@@ -10370,10 +10370,9 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
 
             return total;
           }, []);
-
-          if (filtered.length) {
-            newItem.drilldown = item.properties['hc-key'];
-          }
+          newItem.drilldown = item.properties['hc-key']; // if (filtered.length) {
+          // newItem.drilldown = item.properties['hc-key'];
+          // }
 
           newItem.value = filtered.length; // Non-random bogus data
         }); // Create the chart
@@ -10426,13 +10425,13 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                       if (locale === null || locale === void 0 ? void 0 : locale.name) {
                         newItem.humanName = locale.name;
                       } else {
-                        // eslint-disable-next-line no-console
                         _sweetalert.default.fire({
                           title: 'OPS!!',
                           text: "locale ".concat(JSON.stringify(item.id), " has no name, details are on console"),
                           icon: 'error',
                           confirmButtonText: 'Fechar'
-                        });
+                        }); // eslint-disable-next-line no-console
+
 
                         console.log("locale ".concat(JSON.stringify(item), " has no name"));
                       }

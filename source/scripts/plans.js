@@ -65,9 +65,10 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
               return total;
             }, []);
 
-          if (filtered.length) {
-            newItem.drilldown = item.properties['hc-key'];
-          }
+          newItem.drilldown = item.properties['hc-key'];
+          // if (filtered.length) {
+          // newItem.drilldown = item.properties['hc-key'];
+          // }
           newItem.value = filtered.length; // Non-random bogus data
         });
         // Create the chart
@@ -93,7 +94,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                         text: 'This state doesn\'t have a valid json yet',
                         icon: 'error',
                         confirmButtonText: 'Fechar',
-                      })
+                      });
                       fail = setTimeout(() => {
                         chart.hideLoading();
                       }, 1000);
@@ -119,13 +120,13 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                         if (locale?.name) {
                           newItem.humanName = locale.name;
                         } else {
-                          // eslint-disable-next-line no-console
                           Swal.fire({
                             title: 'OPS!!',
                             text: `locale ${JSON.stringify(item.id)} has no name, details are on console`,
                             icon: 'error',
                             confirmButtonText: 'Fechar',
-                          })
+                          });
+                          // eslint-disable-next-line no-console
                           console.log(`locale ${JSON.stringify(item)} has no name`);
                         }
                         newItem.value = 0;
