@@ -53,7 +53,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
         data.forEach((item) => {
           const newItem = item;
 
-          const filtered = this.localesWithPlan
+          const filtered = this.locales
             ?.reduce((total, locale) => {
               if (newItem.properties['hc-key'] === `br-${locale.state.toLowerCase()}`) {
                 total.push(locale);
@@ -69,7 +69,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           // if (filtered.length) {
           // newItem.drilldown = item.properties['hc-key'];
           // }
-          newItem.value = filtered.length; // Non-random bogus data
+          newItem.value = filtered.length;
         });
         // Create the chart
         return Highcharts.mapChart('map', {
@@ -99,7 +99,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                         chart.hideLoading();
                       }, 1000);
                     }
-                  }, 3000);
+                  }, 5000);
 
                   // Show the spinner
                   chart.showLoading('carregando...'); // Font Awesome spinner

@@ -10356,10 +10356,10 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
         // See API docs for 'joinBy' for more info on linking data and map.
         var data = Highcharts.geojson(Highcharts.maps['countries/br/br-all']);
         data.forEach(function (item) {
-          var _this2$localesWithPla;
+          var _this2$locales;
 
           var newItem = item;
-          var filtered = (_this2$localesWithPla = _this2.localesWithPlan) === null || _this2$localesWithPla === void 0 ? void 0 : _this2$localesWithPla.reduce(function (total, locale) {
+          var filtered = (_this2$locales = _this2.locales) === null || _this2$locales === void 0 ? void 0 : _this2$locales.reduce(function (total, locale) {
             if (newItem.properties['hc-key'] === "br-".concat(locale.state.toLowerCase())) {
               total.push(locale);
 
@@ -10374,7 +10374,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           // newItem.drilldown = item.properties['hc-key'];
           // }
 
-          newItem.value = filtered.length; // Non-random bogus data
+          newItem.value = filtered.length;
         }); // Create the chart
 
         return Highcharts.mapChart('map', {
@@ -10406,7 +10406,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                         chart.hideLoading();
                       }, 1000);
                     }
-                  }, 3000); // Show the spinner
+                  }, 5000); // Show the spinner
 
                   chart.showLoading('carregando...'); // Font Awesome spinner
                   // Load the drilldown map
