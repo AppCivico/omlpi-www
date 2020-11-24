@@ -7,6 +7,37 @@ import startSearch from './search';
 import { formatterMixing } from './helpers';
 
 Highcharts.setOptions({
+  drilldown: {
+    drillUpButton: {
+      // position: {
+      //   y: 0,
+      //   x: 0
+      // },
+      relativeTo: 'spacingBox',
+      position: 'left',
+      theme: {
+        fill: 'none',
+        'stroke-width': 0,
+        stroke: 'silver',
+        font: 'bold 1rem Lato',
+        style: {
+          fontSize: '1rem',
+          color: '#693996',
+          fontWeight: 'bold',
+          fontFamily: 'Lato',
+          textTransform: 'uppercase',
+        },
+        states: {
+          hover: {
+            fill: 'none',
+          },
+          select: {
+            fill: 'none',
+          },
+        },
+      },
+    },
+  },
   lang: {
     thousandsSep: '.',
     printChart: 'Imprimir Gráfico',
@@ -17,7 +48,7 @@ Highcharts.setOptions({
     downloadPDF: 'Baixar PDF',
     downloadSVG: 'Baixar SVG',
 
-    drillUpText: '◁ Voltar para {series.name}',
+    drillUpText: '< Voltar para {series.name}',
   },
 });
 

@@ -79,14 +79,11 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
         // Create the chart
         return Highcharts.mapChart('map', {
           chart: {
-            // map: 'countries/br/br-all',
             backgroundColor: 'rgba(0, 0, 0, 0)',
             events: {
               // eslint-disable-next-line object-shorthand, func-names
               drilldown: function (e) {
                 $vuePlans.isDrillDowned = true;
-                // console.log(e.point.drilldown)
-                // console.log('DRIIIILDOWN')
                 if (!e.seriesOptions) {
                   // console.log('this?', this)
                   const chart = this;
@@ -161,7 +158,18 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                     });
                 }
 
-                this.setTitle(null, { text: e.point.name });
+                this.setTitle(null, {
+                  text: e.point.name,
+                  align: 'right',
+                  margin: '1.5rem',
+                  style: {
+                    fontSize: '1.3rem',
+                    color: '#693996',
+                    fontWeight: 'bold',
+                    fontFamily: 'Lato',
+                    textTransform: 'uppercase',
+                  },
+                });
               },
               // eslint-disable-next-line object-shorthand, func-names
               drillup: function () {
@@ -176,6 +184,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
 
           subtitle: {
             text: '',
+            y: 60,
           },
 
           mapNavigation: {

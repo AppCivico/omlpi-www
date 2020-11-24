@@ -10384,13 +10384,11 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
 
         return Highcharts.mapChart('map', {
           chart: {
-            // map: 'countries/br/br-all',
             backgroundColor: 'rgba(0, 0, 0, 0)',
             events: {
               // eslint-disable-next-line object-shorthand, func-names
               drilldown: function drilldown(e) {
-                $vuePlans.isDrillDowned = true; // console.log(e.point.drilldown)
-                // console.log('DRIIIILDOWN')
+                $vuePlans.isDrillDowned = true;
 
                 if (!e.seriesOptions) {
                   // console.log('this?', this)
@@ -10467,7 +10465,16 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                 }
 
                 this.setTitle(null, {
-                  text: e.point.name
+                  text: e.point.name,
+                  align: 'right',
+                  margin: '1.5rem',
+                  style: {
+                    fontSize: '1.3rem',
+                    color: '#693996',
+                    fontWeight: 'bold',
+                    fontFamily: 'Lato',
+                    textTransform: 'uppercase'
+                  }
                 });
               },
               // eslint-disable-next-line object-shorthand, func-names
@@ -10483,7 +10490,8 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
             text: ''
           },
           subtitle: {
-            text: ''
+            text: '',
+            y: 60
           },
           mapNavigation: {
             enabled: true,
@@ -10716,6 +10724,37 @@ var _helpers = require("./helpers");
 
 /* global Highcharts */
 Highcharts.setOptions({
+  drilldown: {
+    drillUpButton: {
+      // position: {
+      //   y: 0,
+      //   x: 0
+      // },
+      relativeTo: 'spacingBox',
+      position: 'left',
+      theme: {
+        fill: 'none',
+        'stroke-width': 0,
+        stroke: 'silver',
+        font: 'bold 1rem Lato',
+        style: {
+          fontSize: '1rem',
+          color: '#693996',
+          fontWeight: 'bold',
+          fontFamily: 'Lato',
+          textTransform: 'uppercase'
+        },
+        states: {
+          hover: {
+            fill: 'none'
+          },
+          select: {
+            fill: 'none'
+          }
+        }
+      }
+    }
+  },
   lang: {
     thousandsSep: '.',
     printChart: 'Imprimir Gráfico',
@@ -10724,7 +10763,7 @@ Highcharts.setOptions({
     downloadJPEG: 'Baixar JPG',
     downloadPDF: 'Baixar PDF',
     downloadSVG: 'Baixar SVG',
-    drillUpText: '◁ Voltar para {series.name}'
+    drillUpText: '< Voltar para {series.name}'
   }
 });
 
