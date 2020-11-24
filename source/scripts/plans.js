@@ -201,7 +201,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           tooltip: {
             useHTML: true,
             followPointer: false,
-            hideDelay: 1500,
+            // hideDelay: 1500,
             style: {
               pointerEvents: 'auto',
               textAlign: 'center',
