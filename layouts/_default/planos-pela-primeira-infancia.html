@@ -140,15 +140,7 @@
                 </div>
               </div>
               <div class="big-banner__image">
-                <img
-                  v-if="infographic && (infographic.big || infographic.small)"
-                  v-bind:srcset="`
-                    ${infographic.small} 350w,
-                    ${infographic.big} 1059w
-                  `"
-                  :src="infographic.big"
-                  alt="O brasil na rota"
-                >
+                <div id="map"></div>
               </div>
             </div>
           </div>
@@ -235,5 +227,19 @@
       {{ partial "footer.html" . }}
 
       {{ partial "scripts.html" . }}
+
+
+      <style>
+        #map {
+          width: 100%;
+          height: 600px;
+          max-width: 74rem;
+          margin-right: auto;
+          margin-left: auto;
+        }
+      </style>
+
+      <script>
+      </script>
     </body>
 </html>

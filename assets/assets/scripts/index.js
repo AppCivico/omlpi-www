@@ -9317,10 +9317,10 @@ var _default = {
     docs: productionDomains.indexOf(window.location.hostname) > -1 ? 'https://omlpi-docs.appcivico.com/' : 'https://dev-omlpi-docs.appcivico.com/'
   },
   apiCMS: {
-    domain: productionDomains.indexOf(window.location.hostname) > -1 ? 'https://omlpi-strapi.appcivico.com/' : 'https://dev-omlpi-strapi.appcivico.com/'
+    domain: productionDomains.indexOf(window.location.hostname) > -1 ? 'https://omlpi-strapi.appcivico.com/' : 'https://omlpi-strapi-new.appcivico.com/'
   },
   storage: {
-    domain: productionDomains.indexOf(window.location.hostname) > -1 ? 'https://omlpi-strapi.appcivico.com/' : 'https://dev-omlpi-strapi.appcivico.com/'
+    domain: productionDomains.indexOf(window.location.hostname) > -1 ? 'https://omlpi-strapi.appcivico.com/' : 'https://omlpi-strapi-new.appcivico.com/'
   },
   fisrtCityId: 5200050
 };
@@ -9909,8 +9909,6 @@ if (document.querySelector('#app-home-about')) {
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
-
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
@@ -9921,10 +9919,7 @@ var _dompurify = _interopRequireDefault(require("dompurify"));
 
 var _config = _interopRequireDefault(require("./config"));
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
+/* global Vue */
 if (document.querySelector('#app-home-banner')) {
   window.$vueHomeBanner = new Vue({
     el: '#app-home-banner',
@@ -9960,10 +9955,10 @@ if (document.querySelector('#app-home-banner')) {
       getBanner: function getBanner() {
         var _this2 = this;
 
-        fetch("".concat(_config.default.apiCMS.domain, "banners?_limit=1")).then(function (response) {
+        fetch("".concat(_config.default.apiCMS.domain, "banners")).then(function (response) {
           return response.json();
         }).then(function (response) {
-          _this2.banner = _objectSpread({}, response[0]);
+          _this2.banner = response;
         });
       },
       marked: function marked(content) {
@@ -9973,7 +9968,7 @@ if (document.querySelector('#app-home-banner')) {
   });
 }
 
-},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/defineProperty":4,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"dompurify":13,"marked":23}],37:[function(require,module,exports){
+},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"dompurify":13,"marked":23}],37:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10175,7 +10170,7 @@ if (document.querySelector('#app-indicators-text')) {
       getText: function getText() {
         var _this2 = this;
 
-        fetch("".concat(_config.default.apiCMS.domain, "textoindicadors/1")).then(function (response) {
+        fetch("".concat(_config.default.apiCMS.domain, "textoindicadors")).then(function (response) {
           return response.json();
         }).then(function (response) {
           _this2.text = response;
@@ -10283,6 +10278,10 @@ var _sweetalert = _interopRequireDefault(require("sweetalert2/dist/sweetalert2")
 var _config = _interopRequireDefault(require("./config"));
 
 /* global Vue */
+
+/* global $vuePlans */
+
+/* global Highcharts */
 if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
   window.$vuePlans = new Vue({
     el: '#app',
@@ -10290,18 +10289,28 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
       infographic: null,
       plansList: null,
       locales: null,
+      localesWithPlan: null,
       selectedLocale: null,
       selectedLocaleId: null,
       relatedLocales: null,
       capital: null,
       storageDomain: _config.default.storage.domain,
       formLoading: false,
+      isDrillDowned: false,
       form: {
         fileName: null,
         file: null,
         name: null,
         message: null,
         email: null
+      }
+    },
+    watch: {
+      locales: function locales() {
+        this.localesWithPlan = this.locales.filter(function (locale) {
+          return locale.plan;
+        });
+        this.generateChart();
       }
     },
     computed: {
@@ -10333,6 +10342,211 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
       }))();
     },
     methods: {
+      generateChart: function generateChart() {
+        var _this2 = this;
+
+        // Prepare demo data
+        // Data is joined to map using value of 'hc-key' property by default.
+        // See API docs for 'joinBy' for more info on linking data and map.
+        var data = Highcharts.geojson(Highcharts.maps['countries/br/br-all']);
+        data.forEach(function (item) {
+          var _this2$locales;
+
+          var newItem = item;
+          newItem.totalPlans = 0;
+          var localesPerState = (_this2$locales = _this2.locales) === null || _this2$locales === void 0 ? void 0 : _this2$locales.reduce(function (total, locale) {
+            if (newItem.properties['hc-key'] === "br-".concat(locale.state.toLowerCase())) {
+              total.push(locale);
+
+              if (locale.plan) {
+                newItem.totalPlans += 1;
+              }
+
+              if (locale.type === 'state' && locale.plan) {
+                newItem.planUrl = "".concat($vuePlans.storageDomain).concat(locale.plan.url);
+              }
+            }
+
+            return total;
+          }, []);
+          newItem.drilldown = item.properties['hc-key']; // if (filtered.length) {
+          // newItem.drilldown = item.properties['hc-key'];
+          // }
+
+          newItem.value = newItem.totalPlans / localesPerState.length;
+        }); // Create the chart
+
+        return Highcharts.mapChart('map', {
+          chart: {
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+            events: {
+              // eslint-disable-next-line object-shorthand, func-names
+              drilldown: function drilldown(e) {
+                $vuePlans.isDrillDowned = true;
+
+                if (!e.seriesOptions) {
+                  // console.log('this?', this)
+                  var chart = this; // Handle error, the timeout is cleared on success
+
+                  var fail = setTimeout(function () {
+                    if (e.point.drilldown) {
+                      chart.showLoading("<i class=\"icon-frown\"></i> Failed loading  ".concat(e.point.name));
+
+                      _sweetalert.default.fire({
+                        title: 'OPS!!',
+                        text: 'This state doesn\'t have a valid json yet',
+                        icon: 'error',
+                        confirmButtonText: 'Fechar'
+                      });
+
+                      fail = setTimeout(function () {
+                        chart.hideLoading();
+                      }, 1000);
+                    }
+                  }, 5000); // Show the spinner
+
+                  chart.showLoading('carregando...'); // Font Awesome spinner
+                  // Load the drilldown map
+
+                  fetch("/maps/".concat(e.point.drilldown, ".json")).then(function (response) {
+                    return response.json();
+                  }).then(function (response) {
+                    // console.log(data)
+                    // Set a non-random bogus value
+                    response.mapData.forEach(function (item) {
+                      var newItem = item;
+                      var locale = $vuePlans.locales.find(function (loc) {
+                        return loc.cod_ibge === Number(item.name.replace('mun_', ''));
+                      });
+
+                      if (locale === null || locale === void 0 ? void 0 : locale.name) {
+                        newItem.humanName = locale.name;
+                      } else {
+                        _sweetalert.default.fire({
+                          title: 'OPS!!',
+                          text: "locale ".concat(JSON.stringify(item.id), " has no name, details are on console"),
+                          icon: 'error',
+                          confirmButtonText: 'Fechar'
+                        }); // eslint-disable-next-line no-console
+
+
+                        console.log("locale ".concat(JSON.stringify(item), " has no name"));
+                      }
+
+                      newItem.value = 0;
+
+                      if (locale === null || locale === void 0 ? void 0 : locale.plan) {
+                        newItem.value = 100;
+                        newItem.planUrl = "".concat($vuePlans.storageDomain).concat(locale.plan.url);
+                      }
+                    });
+                    chart.hideLoading(); // Hide loading and add series
+
+                    clearTimeout(fail);
+                    chart.addSeriesAsDrilldown(e.point, {
+                      name: e.point.name,
+                      data: response.mapData // dataLabels: {
+                      // eslint-disable-next-line object-shorthand, func-names
+                      // formatter: function () {
+                      // return this.humanName;
+                      // },
+                      // enabled: false,
+                      // format: '{point.name}',
+                      // },
+
+                    });
+                  });
+                }
+
+                this.setTitle(null, {
+                  text: e.point.name,
+                  align: 'right',
+                  margin: '1.5rem',
+                  style: {
+                    fontSize: '1.3rem',
+                    color: '#693996',
+                    fontWeight: 'bold',
+                    fontFamily: 'Lato',
+                    textTransform: 'uppercase'
+                  }
+                });
+              },
+              // eslint-disable-next-line object-shorthand, func-names
+              drillup: function drillup() {
+                $vuePlans.isDrillDowned = false;
+                this.setTitle(null, {
+                  text: ''
+                });
+              }
+            }
+          },
+          title: {
+            text: ''
+          },
+          subtitle: {
+            text: '',
+            y: 60
+          },
+          mapNavigation: {
+            enabled: true,
+            buttonOptions: {
+              verticalAlign: 'bottom'
+            }
+          },
+          legend: {
+            enabled: false
+          },
+          colorAxis: {
+            min: 0,
+            max: 1,
+            // max locales for a state
+            // type: 'logarithmic',
+            minColor: '#ffffff',
+            maxColor: '#693996',
+            lineColor: '#32215c',
+            lineWidth: 10
+          },
+          tooltip: {
+            useHTML: true,
+            followPointer: false,
+            // hideDelay: 1500,
+            style: {
+              pointerEvents: 'auto',
+              textAlign: 'center'
+            },
+            // eslint-disable-next-line object-shorthand, func-names
+            formatter: function formatter() {
+              if ($vuePlans.isDrillDowned) {
+                if (this.point.planUrl) {
+                  return "".concat(this.point.humanName, ":\n                    <br>\n                    <a target=\"_blank\" href=\"").concat(this.point.planUrl, "\">Baixar Plano</a>\n                    ");
+                }
+
+                return "".concat(this.point.humanName);
+              }
+
+              if (this.point.planUrl) {
+                return "".concat(this.point.name, ": ").concat(this.point.totalPlans, " Plano").concat(this.point.totalPlans === 1 ? '' : 's', "\n                    <br>\n                    <a target=\"_blank\" href=\"").concat(this.point.planUrl, "\">Baixar Plano Estadual</a>\n                    ");
+              }
+
+              return "".concat(this.point.name, " : ").concat(this.point.totalPlans, " Plano").concat(this.point.totalPlans === 1 ? '' : 's');
+            }
+          },
+          series: [{
+            joinBy: ['hc-key', 'code'],
+            data: data,
+            name: 'Brasil',
+            states: {
+              hover: {
+                color: '#32215c'
+              }
+            },
+            dataLabels: {
+              enabled: false,
+              format: '{point.name}'
+            }
+          }]
+        });
+      },
       updateFile: function updateFile(event) {
         this.form.file = [event.target.files[0]];
         this.form.fileName = this.form.file[0].name;
@@ -10348,7 +10562,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
         };
       },
       sendPlan: function sendPlan() {
-        var _this2 = this;
+        var _this3 = this;
 
         var data = new FormData();
         data.append('file', this.form.file[0]);
@@ -10366,14 +10580,14 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
               text: 'Seu plano foi enviado para avaliação',
               icon: 'success',
               confirmButtonText: 'Fechar'
-            }).then(_this2.formLoading = false).then(_this2.resetForm());
+            }).then(_this3.formLoading = false).then(_this3.resetForm());
           } else {
             _sweetalert.default.fire({
               title: 'Ops! Algo deu errado',
               text: 'Tivemos um problema no envio, por favor, tente novamente',
               icon: 'error',
               confirmButtonText: 'Fechar'
-            }).then(_this2.formLoading = false);
+            }).then(_this3.formLoading = false);
           }
         }).catch(function () {
           _sweetalert.default.fire({
@@ -10381,7 +10595,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
             text: 'Tivemos um problema no envio, por favor, tente novamente',
             icon: 'error',
             confirmButtonText: 'Fechar'
-          }).then(_this2.formLoading = false);
+          }).then(_this3.formLoading = false);
         });
       },
       setMapDestak: function setMapDestak(locale) {
@@ -10394,7 +10608,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
         map.querySelector(".".concat(locale)).classList.add('active');
       },
       setLocale: function setLocale(localeId) {
-        var _this3 = this;
+        var _this4 = this;
 
         this.resetSelectedLocales();
         this.selectedLocale = this.locales.find(function (locale) {
@@ -10403,10 +10617,10 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
 
         if (this.selectedLocale.type === 'state') {
           var cities = this.locales.filter(function (locale) {
-            return locale.type === 'city' && locale.state === _this3.selectedLocale.state && locale.plan;
+            return locale.type === 'city' && locale.state === _this4.selectedLocale.state && locale.plan;
           });
           this.capital = this.locales.find(function (locale) {
-            return locale.type === 'city' && locale.state === _this3.selectedLocale.state && locale.is_capital;
+            return locale.type === 'city' && locale.state === _this4.selectedLocale.state && locale.is_capital;
           });
           this.relatedLocales = this.getSectionedLocales(cities).sort(function (a, b) {
             return a.title > b.title ? 1 : -1;
@@ -10415,7 +10629,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
 
         if (this.selectedLocale.type === 'region') {
           var states = this.locales.filter(function (locale) {
-            return locale.type === 'state' && locale.region === _this3.selectedLocale.region;
+            return locale.type === 'state' && locale.region === _this4.selectedLocale.region;
           });
           this.relatedLocales = this.getSectionedLocales(states).sort(function (a, b) {
             return a.title > b.title ? 1 : -1;
@@ -10448,35 +10662,35 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
         this.capital = null;
       },
       getInfoGraphic: function getInfoGraphic() {
-        var _this4 = this;
+        var _this5 = this;
 
-        fetch("".concat(_config.default.apiCMS.domain, "infograficos/1")).then(function (response) {
+        return fetch("".concat(_config.default.apiCMS.domain, "infographics")).then(function (response) {
           return response.json();
         }).then(function (response) {
-          _this4.infographic = {};
-          _this4.infographic.title = response.title;
-          _this4.infographic.description = response.description;
+          _this5.infographic = {};
+          _this5.infographic.title = response.title;
+          _this5.infographic.description = response.description;
 
           if (response.small && response.small.url) {
-            _this4.infographic.small = "".concat(_config.default.storage.domain).concat(response.small.url);
+            _this5.infographic.small = "".concat(_config.default.storage.domain).concat(response.small.url);
           }
 
           if (response.big && response.big.url) {
-            _this4.infographic.big = "".concat(_config.default.storage.domain).concat(response.big.url);
+            _this5.infographic.big = "".concat(_config.default.storage.domain).concat(response.big.url);
           }
 
           if (response.pdf && response.pdf.url) {
-            _this4.infographic.url = "".concat(_config.default.storage.domain).concat(response.pdf.url);
+            _this5.infographic.url = "".concat(_config.default.storage.domain).concat(response.pdf.url);
           }
         });
       },
       getPlansList: function getPlansList() {
-        var _this5 = this;
+        var _this6 = this;
 
-        fetch("".concat(_config.default.apiCMS.domain, "listaplanos/1")).then(function (response) {
+        return fetch("".concat(_config.default.apiCMS.domain, "listaplanos")).then(function (response) {
           return response.json();
         }).then(function (response) {
-          _this5.plansList = response;
+          _this6.plansList = response;
         });
       }
     }
@@ -10504,6 +10718,37 @@ var _helpers = require("./helpers");
 
 /* global Highcharts */
 Highcharts.setOptions({
+  drilldown: {
+    drillUpButton: {
+      // position: {
+      //   y: 0,
+      //   x: 0
+      // },
+      relativeTo: 'spacingBox',
+      position: 'left',
+      theme: {
+        fill: 'none',
+        'stroke-width': 0,
+        stroke: 'silver',
+        font: 'bold 1rem Lato',
+        style: {
+          fontSize: '1rem',
+          color: '#693996',
+          fontWeight: 'bold',
+          fontFamily: 'Lato',
+          textTransform: 'uppercase'
+        },
+        states: {
+          hover: {
+            fill: 'none'
+          },
+          select: {
+            fill: 'none'
+          }
+        }
+      }
+    }
+  },
   lang: {
     thousandsSep: '.',
     printChart: 'Imprimir Gráfico',
@@ -10511,7 +10756,8 @@ Highcharts.setOptions({
     downloadPNG: 'Baixar PNG',
     downloadJPEG: 'Baixar JPG',
     downloadPDF: 'Baixar PDF',
-    downloadSVG: 'Baixar SVG'
+    downloadSVG: 'Baixar SVG',
+    drillUpText: '< Voltar para {series.name}'
   }
 });
 
@@ -10975,7 +11221,7 @@ function startPlansSearch() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("".concat(_config.default.apiCMS.domain, "localidades?_limit=7000"));
+              return fetch("".concat(_config.default.apiCMS.domain, "locales?_limit=-1"));
 
             case 2:
               response = _context.sent;

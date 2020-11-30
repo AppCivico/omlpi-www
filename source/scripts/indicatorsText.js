@@ -19,7 +19,7 @@ if (document.querySelector('#app-indicators-text')) {
     },
     methods: {
       getText() {
-        fetch(`${config.apiCMS.domain}textoindicadors/1`)
+        fetch(`${config.apiCMS.domain}textoindicadors`)
           .then(response => response.json())
           .then((response) => {
             this.text = response;
