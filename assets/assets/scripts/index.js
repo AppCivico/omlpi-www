@@ -8558,10 +8558,6 @@ if (window.location.href.indexOf('biblioteca') > -1) {
                 return _this.getArticles();
 
               case 2:
-                _context.next = 4;
-                return _this.putHasmoreButtons();
-
-              case 4:
               case "end":
                 return _context.stop();
             }
@@ -9321,10 +9317,10 @@ var _default = {
     docs: productionDomains.indexOf(window.location.hostname) > -1 ? 'https://omlpi-docs.appcivico.com/' : 'https://dev-omlpi-docs.appcivico.com/'
   },
   apiCMS: {
-    domain: productionDomains.indexOf(window.location.hostname) > -1 ? 'https://omlpi-strapi.appcivico.com/' : 'https://dev-omlpi-strapi.appcivico.com/'
+    domain: productionDomains.indexOf(window.location.hostname) > -1 ? 'https://omlpi-strapi.appcivico.com/' : 'https://omlpi-strapi-new.appcivico.com/'
   },
   storage: {
-    domain: productionDomains.indexOf(window.location.hostname) > -1 ? 'https://omlpi-strapi.appcivico.com/' : 'https://dev-omlpi-strapi.appcivico.com/'
+    domain: productionDomains.indexOf(window.location.hostname) > -1 ? 'https://omlpi-strapi.appcivico.com/' : 'https://omlpi-strapi-new.appcivico.com/'
   },
   fisrtCityId: 5200050
 };
@@ -9913,8 +9909,6 @@ if (document.querySelector('#app-home-about')) {
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
-
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
@@ -9925,10 +9919,7 @@ var _dompurify = _interopRequireDefault(require("dompurify"));
 
 var _config = _interopRequireDefault(require("./config"));
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
+/* global Vue */
 if (document.querySelector('#app-home-banner')) {
   window.$vueHomeBanner = new Vue({
     el: '#app-home-banner',
@@ -9964,10 +9955,10 @@ if (document.querySelector('#app-home-banner')) {
       getBanner: function getBanner() {
         var _this2 = this;
 
-        fetch("".concat(_config.default.apiCMS.domain, "banners?_limit=1")).then(function (response) {
+        fetch("".concat(_config.default.apiCMS.domain, "banners")).then(function (response) {
           return response.json();
         }).then(function (response) {
-          _this2.banner = _objectSpread({}, response[0]);
+          _this2.banner = response;
         });
       },
       marked: function marked(content) {
@@ -9977,7 +9968,7 @@ if (document.querySelector('#app-home-banner')) {
   });
 }
 
-},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/defineProperty":4,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"dompurify":13,"marked":23}],37:[function(require,module,exports){
+},{"./config":32,"@babel/runtime/helpers/asyncToGenerator":3,"@babel/runtime/helpers/interopRequireDefault":5,"@babel/runtime/regenerator":11,"dompurify":13,"marked":23}],37:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10176,7 +10167,7 @@ if (document.querySelector('#app-indicators-text')) {
       getText: function getText() {
         var _this2 = this;
 
-        fetch("".concat(_config.default.apiCMS.domain, "textoindicadors/1")).then(function (response) {
+        fetch("".concat(_config.default.apiCMS.domain, "textoindicadors")).then(function (response) {
           return response.json();
         }).then(function (response) {
           _this2.text = response;
@@ -10670,7 +10661,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
       getInfoGraphic: function getInfoGraphic() {
         var _this5 = this;
 
-        return fetch("".concat(_config.default.apiCMS.domain, "infograficos/1")).then(function (response) {
+        return fetch("".concat(_config.default.apiCMS.domain, "infographics")).then(function (response) {
           return response.json();
         }).then(function (response) {
           _this5.infographic = {};
@@ -10693,7 +10684,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
       getPlansList: function getPlansList() {
         var _this6 = this;
 
-        return fetch("".concat(_config.default.apiCMS.domain, "listaplanos/1")).then(function (response) {
+        return fetch("".concat(_config.default.apiCMS.domain, "listaplanos")).then(function (response) {
           return response.json();
         }).then(function (response) {
           _this6.plansList = response;
@@ -11227,7 +11218,7 @@ function startPlansSearch() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("".concat(_config.default.apiCMS.domain, "localidades?_limit=7000"));
+              return fetch("".concat(_config.default.apiCMS.domain, "locales?_limit=-1"));
 
             case 2:
               response = _context.sent;

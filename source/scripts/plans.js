@@ -367,7 +367,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
         this.capital = null;
       },
       getInfoGraphic() {
-        return fetch(`${config.apiCMS.domain}infograficos/1`)
+        return fetch(`${config.apiCMS.domain}infographics`)
           .then(response => response.json())
           .then((response) => {
             this.infographic = {};
@@ -388,7 +388,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           });
       },
       getPlansList() {
-        return fetch(`${config.apiCMS.domain}listaplanos/1`)
+        return fetch(`${config.apiCMS.domain}listaplanos`)
           .then(response => response.json())
           .then((response) => {
             this.plansList = response;

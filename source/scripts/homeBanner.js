@@ -20,10 +20,10 @@ if (document.querySelector('#app-home-banner')) {
     },
     methods: {
       getBanner() {
-        fetch(`${config.apiCMS.domain}banners?_limit=1`)
+        fetch(`${config.apiCMS.domain}banners`)
           .then(response => response.json())
           .then((response) => {
-            this.banner = { ...response[0] };
+            this.banner = response;
           });
       },
       marked(content) {
