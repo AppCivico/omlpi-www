@@ -10717,6 +10717,67 @@ var _helpers = require("./helpers");
 /* global Vue */
 
 /* global Highcharts */
+
+/* eslint-disable */
+(function (H) {
+  if (!H.Fullscreen) {
+    return;
+  }
+
+  var addEvent = H.addEvent,
+      wrap = H.wrap;
+
+  H.Fullscreen.prototype.open = function () {
+    var fullscreen = this;
+    var chart = fullscreen.chart;
+    var originalWidth = chart.chartWidth;
+    var originalHeight = chart.chartHeight; // eslint-disable-next-line no-restricted-globals
+
+    chart.setSize(screen.width, screen.height, false); // @see https://github.com/highcharts/highcharts/issues/13220
+
+    chart.pointer.chartPosition = null;
+    fullscreen.originalWidth = originalWidth;
+    fullscreen.originalHeight = originalHeight; // Handle exitFullscreen() method when user clicks 'Escape' button.
+
+    if (fullscreen.browserProps) {
+      fullscreen.unbindFullscreenEvent = addEvent(chart.container.ownerDocument, // chart's document
+      fullscreen.browserProps.fullscreenChange, function () {
+        // Handle lack of async of browser's fullScreenChange event.
+        if (fullscreen.isOpen) {
+          fullscreen.isOpen = false;
+          fullscreen.close();
+          chart.setSize(originalWidth, originalHeight, false);
+          chart.pointer.chartPosition = null;
+        } else {
+          fullscreen.isOpen = true;
+          fullscreen.setButtonText();
+        }
+      });
+      var promise = chart.renderTo[fullscreen.browserProps.requestFullscreen]();
+
+      if (promise) {
+        // No dot notation because of IE8 compatibility
+        promise['catch'](function () {
+          // eslint-disable-next-line no-alert
+          alert('Full screen is not supported inside a frame.');
+        });
+      }
+
+      addEvent(chart, 'destroy', fullscreen.unbindFullscreenEvent);
+    }
+  };
+
+  wrap(H.Fullscreen.prototype, 'close', function (proceed) {
+    // eslint-disable-next-line prefer-rest-params
+    proceed.apply(this, Array.prototype.slice.call(arguments, 1));
+    var fullscreen = this;
+    fullscreen.chart.setSize(fullscreen.originalWidth, fullscreen.originalHeight, false);
+    fullscreen.chart.pointer.chartPosition = null;
+  });
+})(Highcharts);
+/* eslint-enable */
+
+
 Highcharts.setOptions({
   drilldown: {
     drillUpButton: {
