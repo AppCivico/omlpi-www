@@ -9320,7 +9320,7 @@ var _default = {
     domain: productionDomains.indexOf(window.location.hostname) > -1 ? 'https://omlpi-strapi.appcivico.com/' : 'https://omlpi-strapi-new.appcivico.com/'
   },
   storage: {
-    domain: productionDomains.indexOf(window.location.hostname) > -1 ? 'https://omlpi-strapi.appcivico.com/' : 'https://omlpi-strapi-new.appcivico.com/'
+    domain: productionDomains.indexOf(window.location.hostname) > -1 ? 'https://omlpi-strapi.appcivico.com' : 'https://omlpi-strapi-new.appcivico.com'
   },
   fisrtCityId: 5200050
 };
