@@ -63,6 +63,8 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                   newItem.totalPlans += 1;
                 }
 
+                newItem.isDF = locale.state === 'DF';
+
                 if (locale.type === 'state' && locale.plan) {
                   newItem.planUrl = `${$vuePlans.storageDomain}${locale.plan.url}`;
                 }
@@ -323,12 +325,12 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
               if (this.point.planUrl) {
                 return `${this.point.name}: ${this.point.totalPlans} Plano${this.point.totalPlans === 1 ? '' : 's'}
                     <br>
-                    ${this.point.value}
-                    <br>
-                    <a target="_blank" href="${this.point.planUrl}">Baixar Plano Estadual</a>
+                    <a target="_blank" href="${this.point.planUrl}">
+                      Baixar Plano ${this.point.isDF ? 'Distrital' : 'Estadual'}
+                    </a>
                     `;
               }
-              return `${this.point.name}: ${this.point.value} <br> ${this.point.totalPlans} Plano${this.point.totalPlans === 1 ? '' : 's'}`;
+              return `${this.point.name}: <br> ${this.point.totalPlans} Plano${this.point.totalPlans === 1 ? '' : 's'}`;
             },
           },
           series: [{

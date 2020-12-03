@@ -10362,6 +10362,8 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                 newItem.totalPlans += 1;
               }
 
+              newItem.isDF = locale.state === 'DF';
+
               if (locale.type === 'state' && locale.plan) {
                 newItem.planUrl = "".concat($vuePlans.storageDomain).concat(locale.plan.url);
               }
@@ -10620,10 +10622,10 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
               }
 
               if (this.point.planUrl) {
-                return "".concat(this.point.name, ": ").concat(this.point.totalPlans, " Plano").concat(this.point.totalPlans === 1 ? '' : 's', "\n                    <br>\n                    ").concat(this.point.value, "\n                    <br>\n                    <a target=\"_blank\" href=\"").concat(this.point.planUrl, "\">Baixar Plano Estadual</a>\n                    ");
+                return "".concat(this.point.name, ": ").concat(this.point.totalPlans, " Plano").concat(this.point.totalPlans === 1 ? '' : 's', "\n                    <br>\n                    <a target=\"_blank\" href=\"").concat(this.point.planUrl, "\">\n                      Baixar Plano ").concat(this.point.isDF ? 'Distrital' : 'Estadual', "\n                    </a>\n                    ");
               }
 
-              return "".concat(this.point.name, ": ").concat(this.point.value, " <br> ").concat(this.point.totalPlans, " Plano").concat(this.point.totalPlans === 1 ? '' : 's');
+              return "".concat(this.point.name, ": <br> ").concat(this.point.totalPlans, " Plano").concat(this.point.totalPlans === 1 ? '' : 's');
             }
           },
           series: [{
