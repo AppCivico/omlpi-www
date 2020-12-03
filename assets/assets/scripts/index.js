@@ -10373,7 +10373,8 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           // newItem.drilldown = item.properties['hc-key'];
           // }
 
-          newItem.value = newItem.totalPlans / localesPerState.length;
+          var plansAverage = newItem.totalPlans / localesPerState.length;
+          newItem.value = plansAverage * 100;
         }); // Create the chart
 
         return Highcharts.mapChart('map', {
@@ -10438,6 +10439,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                       if (locale === null || locale === void 0 ? void 0 : locale.plan) {
                         newItem.value = 100;
                         newItem.planUrl = "".concat($vuePlans.storageDomain).concat(locale.plan.url);
+                        newItem.isLaw = locale.is_law;
                       }
                     });
                     chart.hideLoading(); // Hide loading and add series
@@ -10498,12 +10500,105 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           },
           colorAxis: {
             min: 0,
-            max: 1,
+            max: 100,
             // max locales for a state
             // type: 'logarithmic',
             minColor: '#ffffff',
+            // maxColor: '#000000',
             maxColor: '#693996',
             lineColor: '#32215c',
+            dataClasses: [{
+              to: 0,
+              color: '#fff'
+            }, {
+              from: 0.2,
+              to: 0.3,
+              color: '#e9d8fb'
+            }, {
+              from: 0.4,
+              to: 0.5,
+              color: '#e0cbf7'
+            }, {
+              from: 0.6,
+              to: 0.7,
+              color: '#d8c0f3'
+            }, {
+              from: 0.7,
+              to: 1,
+              color: '#d9bff5'
+            }, {
+              from: 1,
+              to: 5,
+              color: '#d1b3f2'
+            }, {
+              from: 6,
+              to: 10,
+              color: '#ccadee'
+            }, {
+              from: 10,
+              to: 20,
+              color: '#c7a7e9'
+            }, {
+              from: 20,
+              to: 25,
+              color: '#c2a2e5'
+            }, {
+              from: 25,
+              to: 30,
+              color: '#bd9ce0'
+            }, {
+              from: 30,
+              to: 35,
+              color: '#b896dc'
+            }, {
+              from: 35,
+              to: 40,
+              color: '#b390d8'
+            }, {
+              from: 45,
+              to: 40,
+              color: '#ae8ad3'
+            }, {
+              from: 40,
+              to: 45,
+              color: '#9f79c6'
+            }, {
+              from: 45,
+              to: 50,
+              color: '#9b73c2'
+            }, {
+              from: 50,
+              to: 55,
+              color: '#966dbd'
+            }, {
+              from: 55,
+              to: 60,
+              color: '#9167b9'
+            }, {
+              from: 60,
+              to: 65,
+              color: '#8c62b5'
+            }, {
+              from: 65,
+              to: 70,
+              color: '#875cb0'
+            }, {
+              from: 70,
+              to: 75,
+              color: '#8256ac'
+            }, {
+              from: 75,
+              to: 80,
+              color: '#7d50a8'
+            }, {
+              from: 80,
+              to: 95,
+              color: '#784aa3'
+            }, {
+              from: 95,
+              to: 100,
+              color: '#73459f'
+            }],
             lineWidth: 10
           },
           tooltip: {
@@ -10518,17 +10613,17 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
             formatter: function formatter() {
               if ($vuePlans.isDrillDowned) {
                 if (this.point.planUrl) {
-                  return "".concat(this.point.humanName, ":\n                    <br>\n                    <a target=\"_blank\" href=\"").concat(this.point.planUrl, "\">Baixar Plano</a>\n                    ");
+                  return "".concat(this.point.humanName, ":\n                    <a target=\"_blank\" href=\"").concat(this.point.planUrl, "\">Baixar ").concat(this.point.isLaw ? 'Lei' : 'Plano', "</a>\n                    ");
                 }
 
                 return "".concat(this.point.humanName);
               }
 
               if (this.point.planUrl) {
-                return "".concat(this.point.name, ": ").concat(this.point.totalPlans, " Plano").concat(this.point.totalPlans === 1 ? '' : 's', "\n                    <br>\n                    <a target=\"_blank\" href=\"").concat(this.point.planUrl, "\">Baixar Plano Estadual</a>\n                    ");
+                return "".concat(this.point.name, ": ").concat(this.point.totalPlans, " Plano").concat(this.point.totalPlans === 1 ? '' : 's', "\n                    <br>\n                    ").concat(this.point.value, "\n                    <br>\n                    <a target=\"_blank\" href=\"").concat(this.point.planUrl, "\">Baixar Plano Estadual</a>\n                    ");
               }
 
-              return "".concat(this.point.name, " : ").concat(this.point.totalPlans, " Plano").concat(this.point.totalPlans === 1 ? '' : 's');
+              return "".concat(this.point.name, ": ").concat(this.point.value, " <br> ").concat(this.point.totalPlans, " Plano").concat(this.point.totalPlans === 1 ? '' : 's');
             }
           },
           series: [{
