@@ -74,9 +74,14 @@
                 >
                   <summary @click="reflowCharts">
                     {{ "{{ indicator.description }}" }}:
-                    <strong>
+                    <strong
+                      v-if="formatIndicatorValue(indicator.values, indicator.is_percentage)"
+                    >
                       {{ "{{ formatIndicatorValue(indicator.values, indicator.is_percentage) }}" }}
                     </strong>
+                    <template v-else>
+                      Não disponível
+                    </template>
                   </summary>
                   <div class="indicator-header">
                     <a

@@ -9343,7 +9343,7 @@ var formatterMixing = {
   methods: {
     formatIndicatorValue: function formatIndicatorValue(values, isPercentage) {
       if (values.value_relative === null && values.value_absolute === null) {
-        return 'Não disponível';
+        return '';
       }
 
       if (values.value_relative !== null) {
