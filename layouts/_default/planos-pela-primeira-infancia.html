@@ -57,7 +57,7 @@
                     >
                       Download do documento
                     </a>
-                    <template v-else>sem informações</template>
+                    <template v-else>{{ i18n "unavailable" }}</template>
                 </span>
                 <span
                   v-if="capital"
@@ -71,7 +71,7 @@
                   >
                     Download do documento
                   </a>
-                  <template v-else>sem informações</template>
+                  <template v-else>{{ i18n "unavailable" }}</template>
                 </span>
               </header>
               <template v-if="relatedLocales">
@@ -96,7 +96,7 @@
                       >
                         Download do documento
                       </a>
-                      <template v-else>sem informações</template>
+                      <template v-else>{{ i18n "unavailable" }}</template>
                     </li>
                   </template>
                 </ul>
