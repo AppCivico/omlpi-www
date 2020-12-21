@@ -23,7 +23,7 @@
 
           <li class="{{if eq ($firstUrlElement|lower) (.URL) }}active{{end}}">
             <a
-              href="{{ .URL }}" {{ if ne $url.Host $baseurl.Host }} target="_blank" {{ end }}>
+              {{ with .URL }} href="{{ . }}" {{ end }} {{ if ne $url.Host $baseurl.Host }} target="_blank" {{ end }}>
               {{ .Name }}
             </a>
           </li>
