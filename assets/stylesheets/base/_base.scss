@@ -114,12 +114,11 @@ body {
   display: flex; /* 1 */
 
   flex-direction: column;
-
   // height: 100vh; /* 2 */
+
   min-height: 100%;
 
   margin: 0;
-
   // overflow: auto;
 
   color: palette('black');
@@ -165,11 +164,16 @@ section {
  */
 summary {
   position: relative;
+
   display: list-item;
+
   padding-right: 1rem;
   margin-bottom: 1rem;
+
   font-weight: font-weight('text');
+
   list-style-type: none;
+
   cursor: pointer;
 
   &::-webkit-details-marker {
@@ -184,6 +188,7 @@ summary {
     position: absolute;
     top: 0.75rem;
     right: 0;
+
     border-right: solid transparent;
     border-left: solid transparent;
     border-top-width: 5px;
@@ -191,7 +196,9 @@ summary {
     border-left-width: 5px;
     border-top-style: solid;
     border-top-color: palette('blue', 'greeny');
+
     content: '';
+
     transition: transform 0.3s;
 
     @media screen and (min-width: breakpoint('phablet')) {
@@ -216,8 +223,10 @@ details {
 
 details[open] > summary {
   margin-bottom: 0;
+
   font-weight: bold;
   font-size: ms(3);
+
   color: palette('blue', 'dianne');
 }
 
@@ -233,11 +242,13 @@ details summary ~ * {
 @keyframes sweep {
   0% {
     margin-left: -10px;
+
     opacity: 0;
   }
 
   100% {
     margin-left: 0;
+
     opacity: 1;
   }
 }
