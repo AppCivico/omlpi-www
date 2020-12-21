@@ -126,6 +126,7 @@
 
 .library-item .button {
   align-self: center;
+  color: palette('white');
 
   @media screen and (min-width: breakpoint('desktop')) {
     align-self: flex-start;
