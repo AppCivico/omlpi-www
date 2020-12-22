@@ -11,6 +11,8 @@
   translation: "Enviar"
 - id: developedBy
   translation: "Desenvolvido por:"
+- id: unavailable
+  translation: "Não disponível"
 
 # Home
 - id: exploreData
