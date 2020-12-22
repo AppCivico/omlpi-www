@@ -12,12 +12,12 @@ export default {
   apiCMS: {
     domain: (productionDomains.indexOf(window.location.hostname) > -1
       ? 'https://omlpi-strapi.appcivico.com/'
-      : 'https://omlpi-strapi-new.appcivico.com/'),
+      : 'https://omlpi-strapi.appcivico.com/'),
   },
   storage: {
     domain: (productionDomains.indexOf(window.location.hostname) > -1
       ? 'https://omlpi-strapi.appcivico.com'
-      : 'https://omlpi-strapi-new.appcivico.com'),
+      : 'https://omlpi-strapi.appcivico.com'),
   },
   fisrtCityId: 5200050,
 };
