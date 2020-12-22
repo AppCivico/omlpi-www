@@ -4,10 +4,16 @@
       dados abertos
     </a>
     ou a
+
+    {{ $pdf := resources.Get "pdfs/metodologia-e-metadados.pdf" | fingerprint }}
+
     <a
       target="_blank"
-      href="/pdfs/metodologia-e-metadados.pdf">
-      metodologia e metadados</a>.
+      download="metodologia-e-metadados.pdf"
+      href="{{ $pdf.Permalink }}"
+    >
+      metodologia e metadados
+    </a>.
     <span>
       Acesse a <a :href="apiDocsUrl" target="_blank">api para desenvolvedores</a>
     </span>
