@@ -63,7 +63,7 @@
     "awesomplete": "^1.1.5",
     "dompurify": "^2.0.17",
     "fuzzysort": "^1.1.4",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "marked": "^0.8.2",
     "print-js": "^1.0.63",
     "slugify": "^1.4.0",
