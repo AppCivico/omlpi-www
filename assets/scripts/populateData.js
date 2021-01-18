@@ -98,6 +98,13 @@ Highcharts.setOptions({
       },
     },
   },
+  exporting: {
+    buttons: {
+      contextButton: {
+        titleKey: 'contextButtonTitle',
+      },
+    },
+  },
   lang: {
     thousandsSep: '.',
     printChart: 'Imprimir Gráfico',
@@ -108,6 +115,7 @@ Highcharts.setOptions({
     downloadPDF: 'Baixar PDF',
     downloadSVG: 'Baixar SVG',
 
+    contextButtonTitle: 'Exibição, download e impressão',
     drillUpText: '< Voltar para {series.name}',
   },
 });
