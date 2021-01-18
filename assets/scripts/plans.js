@@ -207,22 +207,21 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
             max: 100, // max locales for a state
             // type: 'logarithmic',
             minColor: '#ffffff',
-            // maxColor: '#000000',
             maxColor: '#693996',
             lineColor: '#32215c',
             dataClasses: [{
               to: 0,
-              color: '#fff',
+              color: '#ffffff',
             }, {
-              from: 0.2,
+              from: 0.01,
               to: 0.3,
               color: '#e9d8fb',
             }, {
-              from: 0.4,
+              from: 0.3,
               to: 0.5,
               color: '#e0cbf7',
             }, {
-              from: 0.6,
+              from: 0.5,
               to: 0.7,
               color: '#d8c0f3',
             }, {
@@ -234,31 +233,31 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
               to: 5,
               color: '#d1b3f2',
             }, {
-              from: 6,
+              from: 5,
               to: 10,
               color: '#ccadee',
             }, {
               from: 10,
-              to: 20,
+              to: 15,
               color: '#c7a7e9',
+            }, {
+              from: 15,
+              to: 20,
+              color: '#c2a2e5',
             }, {
               from: 20,
               to: 25,
-              color: '#c2a2e5',
+              color: '#bd9ce0',
             }, {
               from: 25,
               to: 30,
-              color: '#bd9ce0',
+              color: '#b896dc',
             }, {
               from: 30,
               to: 35,
-              color: '#b896dc',
-            }, {
-              from: 35,
-              to: 40,
               color: '#b390d8',
             }, {
-              from: 45,
+              from: 35,
               to: 40,
               color: '#ae8ad3',
             }, {

@@ -98,6 +98,14 @@ Highcharts.setOptions({
       },
     },
   },
+  exporting: {
+    filename: 'Observa_Mapa Planos_PI',
+    buttons: {
+      contextButton: {
+        titleKey: 'contextButtonTitle',
+      },
+    },
+  },
   lang: {
     thousandsSep: '.',
     printChart: 'Imprimir Gráfico',
@@ -108,6 +116,7 @@ Highcharts.setOptions({
     downloadPDF: 'Baixar PDF',
     downloadSVG: 'Baixar SVG',
 
+    contextButtonTitle: 'Exibição, download e impressão',
     drillUpText: '< Voltar para {series.name}',
   },
 });
