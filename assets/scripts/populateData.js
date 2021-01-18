@@ -99,6 +99,7 @@ Highcharts.setOptions({
     },
   },
   exporting: {
+    filename: 'Observa_Mapa Planos_PI',
     buttons: {
       contextButton: {
         titleKey: 'contextButtonTitle',
