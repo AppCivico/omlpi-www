@@ -17,7 +17,7 @@
     "compress:img": "imagemin \"./source/images/**/*.{gif,jpg,png,svg}\" --out-dir=./static/assets/images",
     "prelint": "rimraf ./testResults/**/*.xml",
     "lint": "npm-run-all --parallel lint:*",
-    "lint:es": "eslint --ext .es,.js \"./source/scripts/**\" --format junit --output-file ./testResults/esLint.xml",
+    "lint:es": "eslint --ext .es,.js \"./assets/scripts/**\" --format junit --output-file ./testResults/esLint.xml",
     "lint:sass": "sass-lint \"./assets/stylesheets/**/*.scss\" --verbose --no-exit --format junit --output ./testResults/sassLint.xml",
     "serve": "npm-run-all build:assets --parallel watch start:*",
     "start:hugo": "cross-env NODE_ENV=development hugo server --noHTTPCache=true --ignoreCache --templateMetrics --disableFastRender",
