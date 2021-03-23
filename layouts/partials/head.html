@@ -30,6 +30,16 @@
   <link rel="preload" src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.min.js" crossorigin="anonymous">
   {{ end }}
 
+  {{ if hugo.IsProduction }}
+    {{ $sentry := "module.exports = window.sentry" | resources.FromString "js/shims/sentry.js" }}
+    {{/* Call RelPermalink unnecessarily to generate JS files */}}
+    {{ $placebo := slice $sentry.RelPermalink }}
+
+    {{ $sentryJS := resources.Get "scripts/sentry.js" }}
+    {{ $secureSentryJS := $sentryJS | js.Build | resources.Minify | resources.Fingerprint "sha512" }}
+
+    <script type="text/javascript" src="{{ $secureSentryJS.RelPermalink }}" integrity="{{ $secureSentryJS.Data.Integrity }}"></script>
+  {{ end }}
 
   <script type="text/javascript">
     document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/, '');
