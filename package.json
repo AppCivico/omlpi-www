@@ -60,6 +60,8 @@
     "vue-eslint-parser": "^7.0.0"
   },
   "dependencies": {
+    "@sentry/browser": "^6.2.3",
+    "@sentry/tracing": "^6.2.3",
     "awesomplete": "^1.1.5",
     "dompurify": "^2.0.17",
     "fuzzysort": "^1.1.4",
