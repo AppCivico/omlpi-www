@@ -30,7 +30,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
     },
     watch: {
       locales() {
-        this.localesWithPlan = this.locales.filter(locale => locale.plan);
+        this.localesWithPlan = this.locales.filter(locale => (locale.plan && !locale.hide_plan));
         this.generateChart();
       },
     },
@@ -59,7 +59,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
               if (newItem.properties['hc-key'] === `br-${locale.state.toLowerCase()}`) {
                 total.push(locale);
 
-                if (locale.plan) {
+                if (locale.plan && !locale.hide_plan) {
                   newItem.totalPlans += 1;
                 }
 
@@ -135,7 +135,8 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                           console.log(`locale ${JSON.stringify(item)} has no name`);
                         }
                         newItem.value = 0;
-                        if (locale?.plan) {
+                        // eslint-disable-next-line camelcase
+                        if (locale?.plan && !locale?.hide_plan) {
                           newItem.value = 100;
                           newItem.planUrl = `${$vuePlans.storageDomain}${locale.plan.url}`;
                           newItem.isLaw = locale.is_law;
