@@ -1,6 +1,6 @@
 /* global Vue */
-import marked from 'marked';
 import DOMPurify from 'dompurify';
+import marked from 'marked';
 import config from './config';
 
 if (document.querySelector('#app-home-about')) {
@@ -24,7 +24,7 @@ if (document.querySelector('#app-home-about')) {
     methods: {
       getAbout() {
         fetch(`${config.apiCMS.domain}sobres?_limit=1`)
-          .then(response => response.json())
+          .then((response) => response.json())
           .then((response) => {
             this.about = { ...response[0] };
           });

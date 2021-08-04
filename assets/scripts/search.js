@@ -22,7 +22,7 @@ export default function startSearch() {
     regionInput.removeAttribute('disabled');
     regionInput.removeAttribute('aria-busy');
 
-    const regionNames = list.map(region => ({
+    const regionNames = list.map((region) => ({
       label: `${region.name}:${region.type}`,
       value: region.id,
     }));
@@ -66,25 +66,24 @@ export default function startSearch() {
   function validateAreas(localeId) {
     document.querySelector('js-areas-buttons');
     document.querySelector('.js-areas-buttons').querySelectorAll('button')
-      .forEach(item => item.classList.remove('button-icon--active'));
-
+      .forEach((item) => item.classList.remove('button-icon--active'));
 
     function activeButton(buttonNumber) {
       document.querySelector(`#js-area-${buttonNumber}`).disabled = false;
     }
 
     fetch(`${config.api.domain}data?locale_id=${localeId}`)
-      .then(response => response.json())
+      .then((response) => response.json())
       .then((response) => {
-        if (response.locale.indicators.some(item => item.area.id === 1)) {
+        if (response.locale.indicators.some((item) => item.area.id === 1)) {
           activeButton(1);
         }
 
-        if (response.locale.indicators.some(item => item.area.id === 2)) {
+        if (response.locale.indicators.some((item) => item.area.id === 2)) {
           activeButton(2);
         }
 
-        if (response.locale.indicators.some(item => item.area.id === 3)) {
+        if (response.locale.indicators.some((item) => item.area.id === 3)) {
           activeButton(3);
         }
       });
@@ -119,7 +118,7 @@ export default function startSearch() {
 
     if (areasButtons) {
       areasButtons.querySelectorAll('button')
-        .forEach(item => item.addEventListener('click', (event) => {
+        .forEach((item) => item.addEventListener('click', (event) => {
           selectedArea = [event.target.id.split('-')[2]];
         }));
 

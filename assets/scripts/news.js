@@ -19,7 +19,7 @@ if (document.querySelector('#app-news')) {
     methods: {
       getNews() {
         fetch(`${config.apiCMS.domain}noticias?_limit=30&_sort=date:ASC`)
-          .then(response => response.json())
+          .then((response) => response.json())
           .then((response) => {
             this.news = response;
           });

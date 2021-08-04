@@ -3,8 +3,8 @@
 
 import slugify from 'slugify';
 import config from './config';
-import startSearch from './search';
 import { formatterMixing } from './helpers';
+import startSearch from './search';
 
 /* eslint-disable */
 (function(H) {
@@ -138,7 +138,7 @@ if (window.location.href.indexOf('city') > -1) {
       },
       indicatorsCount() {
         return this.locale.indicators.filter(
-          indicator => indicator.area.id === this.selectedArea,
+          (indicator) => indicator.area.id === this.selectedArea,
         ).length;
       },
       mapZoomLevel() {
@@ -204,7 +204,7 @@ if (window.location.href.indexOf('city') > -1) {
         return true;
       },
       showAsBigNumber(items) {
-        if (items.every(item => item.is_big_number) && items.length <= 2) {
+        if (items.every((item) => item.is_big_number) && items.length <= 2) {
           return true;
         }
         // if (items.length <= 2) {
@@ -219,7 +219,7 @@ if (window.location.href.indexOf('city') > -1) {
         return false;
       },
       showAsBarChart(items) {
-        if (items.some(item => !item.is_big_number) && items.length > 3) {
+        if (items.some((item) => !item.is_big_number) && items.length > 3) {
           return true;
         }
         // if (items.length > 3) {
@@ -269,10 +269,9 @@ if (window.location.href.indexOf('city') > -1) {
           const indicatorYear = indicator.values.year;
           newIndicator.subindicators = [];
 
-
           indicator.subindicators.forEach((subindicator) => {
             const subindicatorData = subindicator.data
-              .filter(item => item.values.year === indicatorYear);
+              .filter((item) => item.values.year === indicatorYear);
 
             const updatedSubindicator = subindicator;
             updatedSubindicator.data = subindicatorData;

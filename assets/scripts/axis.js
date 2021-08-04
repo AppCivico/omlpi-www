@@ -1,6 +1,6 @@
 /* global Vue */
-import marked from 'marked';
 import DOMPurify from 'dompurify';
+import marked from 'marked';
 import config from './config';
 
 if (document.querySelector('#app-axis')) {
@@ -21,7 +21,7 @@ if (document.querySelector('#app-axis')) {
     methods: {
       getAxis() {
         fetch(`${config.apiCMS.domain}eixos?_limit=30&_sort=order:ASC`)
-          .then(response => response.json())
+          .then((response) => response.json())
           .then((response) => {
             this.axis = response;
           });

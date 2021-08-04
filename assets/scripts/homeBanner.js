@@ -1,6 +1,6 @@
 /* global Vue */
-import marked from 'marked';
 import DOMPurify from 'dompurify';
+import marked from 'marked';
 import config from './config';
 
 if (document.querySelector('#app-home-banner')) {
@@ -21,7 +21,7 @@ if (document.querySelector('#app-home-banner')) {
     methods: {
       getBanner() {
         fetch(`${config.apiCMS.domain}banners`)
-          .then(response => response.json())
+          .then((response) => response.json())
           .then((response) => {
             this.banner = response;
           });

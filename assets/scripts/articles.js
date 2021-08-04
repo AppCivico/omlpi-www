@@ -49,7 +49,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
         }
 
         return fetch(url)
-          .then(response => response.json())
+          .then((response) => response.json())
           .then((response) => {
             if (loadMore) {
               this.articles = [...this.articles, ...response.results];

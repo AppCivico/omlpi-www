@@ -46,7 +46,7 @@ if (document.querySelector('#app-home-indicators')) {
 
         return new Promise((resolve, reject) => {
           fetch(url)
-            .then(response => response.json())
+            .then((response) => response.json())
             .then((response) => {
               if (response.status !== 500) {
                 this.indicators = response;

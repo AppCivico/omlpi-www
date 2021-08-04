@@ -30,7 +30,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
     },
     watch: {
       locales() {
-        this.localesWithPlan = this.locales.filter(locale => (locale.plan && !locale.hide_plan));
+        this.localesWithPlan = this.locales.filter((locale) => (locale.plan && !locale.hide_plan));
         this.generateChart();
       },
     },
@@ -111,7 +111,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
 
                   // Load the drilldown map
                   fetch(`/maps/${e.point.drilldown}.json`)
-                    .then(response => response.json())
+                    .then((response) => response.json())
                     .then((response) => {
                       // console.log(data)
 
@@ -120,7 +120,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                         const newItem = item;
 
                         const locale = $vuePlans.locales
-                          .find(loc => loc.cod_ibge === Number(item.name.replace('mun_', '')));
+                          .find((loc) => loc.cod_ibge === Number(item.name.replace('mun_', '')));
 
                         if (locale?.name) {
                           newItem.humanName = locale.name;
@@ -416,14 +416,14 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
       },
       setLocale(localeId) {
         this.resetSelectedLocales();
-        this.selectedLocale = this.locales.find(locale => locale.id === localeId);
+        this.selectedLocale = this.locales.find((locale) => locale.id === localeId);
 
         if (this.selectedLocale.type === 'state') {
           const cities = this.locales.filter(
-            locale => locale.type === 'city' && locale.state === this.selectedLocale.state && locale.plan,
+            (locale) => locale.type === 'city' && locale.state === this.selectedLocale.state && locale.plan,
           );
           this.capital = this.locales.find(
-            locale => locale.type === 'city' && locale.state === this.selectedLocale.state && locale.is_capital,
+            (locale) => locale.type === 'city' && locale.state === this.selectedLocale.state && locale.is_capital,
           );
           this.relatedLocales = this.getSectionedLocales(cities)
             .sort((a, b) => ((a.title > b.title) ? 1 : -1));
@@ -433,7 +433,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
 
         if (this.selectedLocale.type === 'region') {
           const states = this.locales.filter(
-            locale => locale.type === 'state' && locale.region === this.selectedLocale.region,
+            (locale) => locale.type === 'state' && locale.region === this.selectedLocale.region,
           );
           this.relatedLocales = this.getSectionedLocales(states)
             .sort((a, b) => ((a.title > b.title) ? 1 : -1));
@@ -466,7 +466,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
       },
       getInfoGraphic() {
         return fetch(`${config.apiCMS.domain}infographics`)
-          .then(response => response.json())
+          .then((response) => response.json())
           .then((response) => {
             this.infographic = {};
             this.infographic.title = response.title;
@@ -487,7 +487,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
       },
       getPlansList() {
         return fetch(`${config.apiCMS.domain}listaplanos`)
-          .then(response => response.json())
+          .then((response) => response.json())
           .then((response) => {
             this.plansList = response;
           });

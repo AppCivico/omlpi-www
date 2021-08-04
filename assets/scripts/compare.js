@@ -3,8 +3,8 @@
 
 import Awesomplete from 'awesomplete';
 import fuzzysort from 'fuzzysort';
-import { removeDiacritics, formatterMixing } from './helpers';
 import config from './config';
+import { formatterMixing, removeDiacritics } from './helpers';
 
 if (document.querySelector('#app-compare')) {
   window.$vueCompare = new Vue({
@@ -52,25 +52,25 @@ if (document.querySelector('#app-compare')) {
       },
       localesWithIndicator() {
         return this.locales.comparison.filter(
-          item => item.indicators.some(indicator => indicator.id === this.selectedIndicator.id),
+          (item) => item.indicators.some((indicator) => indicator.id === this.selectedIndicator.id),
         );
       },
       localesWithSubindicator() {
         return this.locales.comparison.filter(
-          item => item.indicators.forEach(indicator => indicator.subindicators)
-            .some(indicator => indicator.id === this.selectedIndicator.id),
+          (item) => item.indicators.forEach((indicator) => indicator.subindicators)
+            .some((indicator) => indicator.id === this.selectedIndicator.id),
         );
       },
       indicators() {
         return this.locale.indicators.filter(
-          item => item.area.id === this.selectedArea,
+          (item) => item.area.id === this.selectedArea,
         );
       },
       years() {
         const years = [];
         if (this.selectedSubindicator.data) {
           this.selectedSubindicator.data.forEach((item) => {
-            item.values.map(iitem => years.push(iitem.year));
+            item.values.map((iitem) => years.push(iitem.year));
           });
         }
         return [...new Set(years)].sort().reverse();
@@ -162,7 +162,7 @@ if (document.querySelector('#app-compare')) {
         this.loadingLocale = true;
         const url = `${config.api.domain}data/compare?locale_id=${localeId || localeId === 0 ? localeId : config.fisrtCityId}`;
         fetch(url)
-          .then(response => response.json())
+          .then((response) => response.json())
           .then((response) => {
             const locales = response;
             locales.comparison.forEach((item) => {
@@ -200,9 +200,9 @@ if (document.querySelector('#app-compare')) {
       getLocales() {
         this.loadingLocale = true;
         fetch(`${config.api.domain}locales`)
-          .then(response => response.json())
+          .then((response) => response.json())
           .then((response) => {
-            this.locales_list = response.locales.map(region => ({
+            this.locales_list = response.locales.map((region) => ({
               label: `${region.name}:${region.type}`,
               value: region.id,
             }));
@@ -263,14 +263,15 @@ if (document.querySelector('#app-compare')) {
         }
 
         return this.locale.indicators.filter(
-          indicator => indicator.id === this.selectedIndicator.id,
-        )[0].values.map(item => item.year);
+          (indicator) => indicator.id === this.selectedIndicator.id,
+        )[0].values.map((item) => item.year);
       },
+
       formatCategories(data) {
         if (!data) {
           return false;
         }
-        return data.map(internItem => internItem.description);
+        return data.map((internItem) => internItem.description);
       },
 
       formatDataToSubindicatorsChart(items) {
@@ -322,7 +323,6 @@ if (document.querySelector('#app-compare')) {
         return allData;
       },
 
-
       formatDataToBarsCharts() {
         if (!this.localesWithIndicator) {
           return false;
@@ -332,8 +332,8 @@ if (document.querySelector('#app-compare')) {
         const dataValues = [];
 
         this.localesWithIndicator.forEach((item) => {
-          item.indicators.filter(indicator => indicator.id === this.selectedIndicator.id)
-            .forEach(locale => locale.values.forEach((i) => {
+          item.indicators.filter((indicator) => indicator.id === this.selectedIndicator.id)
+            .forEach((locale) => locale.values.forEach((i) => {
               if (i.value_relative) {
                 dataValues.push(Number(i.value_relative));
               } else {
@@ -346,8 +346,8 @@ if (document.querySelector('#app-compare')) {
           let isPercentage = '';
           data.push({
             name: item.name,
-            data: item.indicators.filter(indicator => indicator.id === this.selectedIndicator.id)
-              .map(locale => locale.values
+            data: item.indicators.filter((indicator) => indicator.id === this.selectedIndicator.id)
+              .map((locale) => locale.values
                 .sort((a, b) => (a.year > b.year ? 1 : -1))
                 .map((i) => {
                   isPercentage = locale.is_percentage;

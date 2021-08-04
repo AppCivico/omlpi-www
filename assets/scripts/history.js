@@ -3,8 +3,8 @@
 
 import Awesomplete from 'awesomplete';
 import fuzzysort from 'fuzzysort';
-import { removeDiacritics, formatterMixing } from './helpers';
 import config from './config';
+import { formatterMixing, removeDiacritics } from './helpers';
 
 if (document.querySelector('#app-history')) {
   window.$vueHistory = new Vue({
@@ -48,7 +48,7 @@ if (document.querySelector('#app-history')) {
       },
       indicators() {
         return this.locale.historical[0].indicators.filter(
-          item => item.area.id === this.selectedArea,
+          (item) => item.area.id === this.selectedArea,
         );
       },
       emptyIndicator() {
@@ -130,7 +130,7 @@ if (document.querySelector('#app-history')) {
         this.loadingLocale = true;
         const url = `${config.api.domain}data/historical?locale_id=${localeId || localeId === 0 ? localeId : 1}`;
         fetch(url)
-          .then(response => response.json())
+          .then((response) => response.json())
           .then((response) => {
             this.locale = response;
             return true;
@@ -143,9 +143,9 @@ if (document.querySelector('#app-history')) {
       getLocales() {
         this.loadingLocale = true;
         fetch(`${config.api.domain}locales`)
-          .then(response => response.json())
+          .then((response) => response.json())
           .then((response) => {
-            this.locales = response.locales.map(region => ({
+            this.locales = response.locales.map((region) => ({
               label: `${region.name}:${region.type}`,
               value: region.id,
             }));
@@ -204,13 +204,13 @@ if (document.querySelector('#app-history')) {
         if (!data.values) {
           return false;
         }
-        return data.values.map(item => item.year);
+        return data.values.map((item) => item.year);
       },
       formatSubindicatorYears(data) {
         if (!data) {
           return false;
         }
-        return data[0].values.map(internItem => internItem.year);
+        return data[0].values.map((internItem) => internItem.year);
       },
       formatDataToSubindicatorsChart(items) {
         if (!items || !items.values) {
@@ -222,7 +222,7 @@ if (document.querySelector('#app-history')) {
           data.push({
             name: item.description,
             isPercentage: item.is_percentage,
-            data: item.values.map(internItem => ({
+            data: item.values.map((internItem) => ({
               isPercentage: item.is_percentage,
               y: internItem.value_relative !== null
                 ? Number(internItem.value_relative)

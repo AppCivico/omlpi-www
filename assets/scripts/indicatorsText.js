@@ -1,6 +1,6 @@
 /* global Vue */
-import marked from 'marked';
 import DOMPurify from 'dompurify';
+import marked from 'marked';
 import config from './config';
 
 if (document.querySelector('#app-indicators-text')) {
@@ -20,7 +20,7 @@ if (document.querySelector('#app-indicators-text')) {
     methods: {
       getText() {
         fetch(`${config.apiCMS.domain}textoindicadors`)
-          .then(response => response.json())
+          .then((response) => response.json())
           .then((response) => {
             this.text = response;
           });
