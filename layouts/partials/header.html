@@ -7,7 +7,7 @@
         <span></span>
       </button>
       <ul class="js-menu-list menu">
-        {{ $firstUrlElement := print "/" (index (split .URL "/") 1)  }}
+        {{ $firstUrlElement := print "/" (index (split .Permalink "/") 1)  }}
 
         {{ with .Site.Menus.header }}
           {{ range . }}
