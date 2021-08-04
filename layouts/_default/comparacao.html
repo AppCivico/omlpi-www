@@ -65,6 +65,39 @@
               <span v-if="!indicators.length">
                 Não há indicadores para essa localidade
               </span>
+              <h4>Filtrar por ano</h4>
+              <select
+                id="selectedYearOnIndicator"
+                name="selectedYearOnIndicator"
+                v-if="locale && availableYearsOnIndicator.length"
+                v-model="selectedYearOnIndicator"
+              >
+                <option
+                  :disabled="loadingLocale"
+                  selected
+                  :value="0"
+                >
+                  <template v-if="loadingLocale">
+                    Carregando...
+                  </template>
+                  <template v-else>
+                    Todos os anos disponíveis
+                  </template>
+                </option>
+
+                <template v-if="!loadingLocale">
+                  <option
+                    v-for="(year, idx) in availableYearsOnIndicator"
+                    :value="year"
+                    :key="idx"
+                  >
+                    {{ "{{ year }}" }}
+                  </option>
+                </template>
+              </select>
+              <span v-if="!availableYearsOnIndicator.length">
+                Não há indicadores para essa localidade
+              </span>
             </form>
           </div>
           <div class="history__graphics white-box">

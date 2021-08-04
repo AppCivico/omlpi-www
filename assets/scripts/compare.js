@@ -16,6 +16,7 @@ if (document.querySelector('#app-compare')) {
       selectedArea: Number(new URL(window.location.href).searchParams.get('area')) || 3,
       selectedIndicator: { description: null },
       selectedSubindicator: {},
+      selectedYearOnIndicator: 0,
       selectedYear: null,
       loadingLocale: false,
       additionalLocaleId: null,
@@ -65,6 +66,9 @@ if (document.querySelector('#app-compare')) {
         return this.locale.indicators.filter(
           (item) => item.area.id === this.selectedArea,
         );
+      },
+      availableYearsOnIndicator() {
+        return this.selectedIndicator?.values?.map((x) => x.year) || [];
       },
       years() {
         const years = [];
@@ -140,6 +144,9 @@ if (document.querySelector('#app-compare')) {
         }
 
         this.generateSubindicatorChart();
+      },
+      selectedYearOnIndicator() {
+        this.generateIndicatorChart();
       },
       selectedYear() {
         this.generateSubindicatorChart();
@@ -264,7 +271,9 @@ if (document.querySelector('#app-compare')) {
 
         return this.locale.indicators.filter(
           (indicator) => indicator.id === this.selectedIndicator.id,
-        )[0].values.map((item) => item.year);
+        )[0].values.map((item) => item.year)
+          // eslint-disable-next-line max-len
+          .filter((x) => (this.selectedYearOnIndicator ? (x === this.selectedYearOnIndicator) : true));
       },
 
       formatCategories(data) {
@@ -337,6 +346,8 @@ if (document.querySelector('#app-compare')) {
             data: item.indicators.filter((indicator) => indicator.id === this.selectedIndicator.id)
               .map((locale) => locale.values
                 .sort((a, b) => (a.year > b.year ? 1 : -1))
+                // eslint-disable-next-line max-len
+                .filter((x) => (this.selectedYearOnIndicator ? (x.year === this.selectedYearOnIndicator) : true))
                 .map((i) => {
                   isPercentage = locale.is_percentage;
                   if (i.value_relative) {
@@ -356,6 +367,7 @@ if (document.querySelector('#app-compare')) {
 
         return data;
       },
+
       generateIndicatorChart() {
         if (!this.selectedIndicator.id) {
           return false;
