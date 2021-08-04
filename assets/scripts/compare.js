@@ -329,18 +329,6 @@ if (document.querySelector('#app-compare')) {
         }
 
         const data = [];
-        const dataValues = [];
-
-        this.localesWithIndicator.forEach((item) => {
-          item.indicators.filter((indicator) => indicator.id === this.selectedIndicator.id)
-            .forEach((locale) => locale.values.forEach((i) => {
-              if (i.value_relative) {
-                dataValues.push(Number(i.value_relative));
-              } else {
-                dataValues.push(Number(i.value_absolute));
-              }
-            }));
-        });
 
         this.localesWithIndicator.forEach((item) => {
           let isPercentage = '';
