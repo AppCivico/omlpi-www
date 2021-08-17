@@ -24,10 +24,10 @@ export default function startPlansSearch() {
     regionInput.removeAttribute('disabled');
     regionInput.removeAttribute('aria-busy');
 
-    const regionNames = list.filter((x) => !x.hide_plan).map((region) => {
+    const regionNames = list.map((region) => {
       if (region.type === 'city') {
         return {
-          label: `${region.name} - ${region.state}:${region.type}:${!region.plan ? 'empty' : ''}`,
+          label: `${region.name} - ${region.state}:${region.type}:${!region.plan || region.hide_plan ? 'empty' : ''}`,
           value: region.id,
         };
       }
