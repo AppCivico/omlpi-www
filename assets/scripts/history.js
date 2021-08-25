@@ -256,10 +256,11 @@ if (document.querySelector('#app-history')) {
         if (!this.selectedIndicator.id) {
           return false;
         }
+        const categories = this.getYears(this.selectedIndicator);
 
         const indicatorChart = Highcharts.chart('js-history', {
           chart: {
-            type: 'column',
+            type: categories.length > 1 ? 'line' : 'column',
           },
           title: {
             text: this.selectedIndicator.description,

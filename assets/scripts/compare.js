@@ -372,10 +372,11 @@ if (document.querySelector('#app-compare')) {
         if (!this.selectedIndicator.id) {
           return false;
         }
+        const categories = this.getYears(this.selectedIndicator.id);
 
         const indicatorChart = Highcharts.chart('js-history', {
           chart: {
-            type: 'column',
+            type: categories.length > 1 ? 'line' : 'column',
           },
           title: {
             text: this.selectedIndicator.description,
@@ -384,7 +385,7 @@ if (document.querySelector('#app-compare')) {
             text: null,
           },
           xAxis: {
-            categories: this.getYears(this.selectedIndicator.id),
+            categories,
             crosshair: true,
           },
           yAxis: {
