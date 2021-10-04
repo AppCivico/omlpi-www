@@ -68,7 +68,7 @@ if (document.querySelector('#app-compare')) {
         );
       },
       availableYearsOnIndicator() {
-        return this.selectedIndicator?.values?.map((x) => x.year) || [];
+        return this.selectedIndicator?.values?.map((x) => x.year).sort((a, b) => b - a) || [];
       },
       years() {
         const years = [];
