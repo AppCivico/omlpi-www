@@ -376,7 +376,7 @@ if (document.querySelector('#app-compare')) {
 
         const indicatorChart = Highcharts.chart('js-history', {
           chart: {
-            type: categories.length > 1 ? 'line' : 'column',
+            type: categories.length > 2 ? 'line' : 'column',
           },
           title: {
             text: this.selectedIndicator.description,
@@ -428,9 +428,11 @@ if (document.querySelector('#app-compare')) {
           },
           series: this.formatDataToBarsCharts(this.locales),
         });
+
         if (this.indicators.length === 0) {
           indicatorChart.destroy();
         }
+
         return true;
       },
       generateSubindicatorChart() {

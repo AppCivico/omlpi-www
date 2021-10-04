@@ -213,12 +213,13 @@ if (document.querySelector('#app-history')) {
         return data[0].values.map((internItem) => internItem.year);
       },
       formatDataToSubindicatorsChart(items) {
-        if (!items || !items.values) {
+        if (!items) {
           return false;
         }
 
         const data = [];
         items.forEach((item) => {
+          if (!item.values) return;
           data.push({
             name: item.description,
             isPercentage: item.is_percentage,
@@ -230,6 +231,7 @@ if (document.querySelector('#app-history')) {
             })),
           });
         });
+
         return data;
       },
       formatDataToBarsCharts(items) {
@@ -260,7 +262,7 @@ if (document.querySelector('#app-history')) {
 
         const indicatorChart = Highcharts.chart('js-history', {
           chart: {
-            type: categories.length > 1 ? 'line' : 'column',
+            type: categories.length > 2 ? 'line' : 'column',
           },
           title: {
             text: this.selectedIndicator.description,
@@ -269,10 +271,12 @@ if (document.querySelector('#app-history')) {
             text: null,
           },
           xAxis: {
-            categories: this.getYears(this.selectedIndicator),
+            categories,
+            crosshair: true,
             gridLineWidth: 0,
+            reversed: (categories.length > 2),
             labels: {
-              enabled: false,
+              enabled: (categories.length > 2),
             },
           },
           yAxis: {
@@ -313,7 +317,9 @@ if (document.querySelector('#app-history')) {
           exporting: {
             filename: `Observa_${this.locale.historical[0].name}_Indicador_${this.selectedIndicator.id}_Série_Histórica`,
           },
-          series: this.formatDataToBarsCharts(this.selectedIndicator),
+          series: categories.length > 2
+            ? this.formatDataToSubindicatorsChart([this.selectedIndicator])
+            : this.formatDataToBarsCharts(this.selectedIndicator),
         });
 
         if (this.indicators.length === 0) {
