@@ -10,6 +10,7 @@
 
   @media screen and (min-width: breakpoint('tablet')) {
     flex-direction: row;
+    justify-content: flex-end;
   }
 
   @media screen and (min-width: breakpoint('desktop')) {
