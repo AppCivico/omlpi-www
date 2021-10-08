@@ -99,6 +99,16 @@
                   </button>
                   -->
                 </div>
+
+                <button
+                  v-if="article.youtube"
+                  id="open-modal"
+                  @click="toggleModal(article.youtube)"
+                  class="button button--blue button-video button--icon"
+                >
+                  Assistir
+                </button>
+
                 <a
                   v-if="article.file && article.file.url"
                   :href="`${storageDomain}${article.file.url}`"
@@ -122,6 +132,19 @@
             <p>Nenhum resultado para sua busca</p>
           </div>
         </div>
+
+        <div class="modal-overlay"
+          :class="{closed: !currentVideo}"
+          @click="toggleModal()" id="modal-overlay"
+        ></div>
+
+        <div class="modal" :class="{closed: !currentVideo}" id="modal">
+          <button class="close-button" id="close-button" @click="toggleModal()">&times;</button>
+            <div class="embed-container">
+              <iframe width="560" height="315" :src="currentVideo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen ref="iframeYoutube"></iframe>
+            </div>
+        </div>
+
       </main>
 
       {{ partial "footer.html" . }}

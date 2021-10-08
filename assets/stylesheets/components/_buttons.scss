@@ -18,10 +18,15 @@
 
 .button {
   @extend %button;
+
+  & + & {
+    margin-top: 1rem;
+  }
 }
 
 .button--small {
   @extend %button;
+
   font-size: ms(-2);
 }
 
@@ -29,10 +34,13 @@
   background-color: palette('purple');
 }
 
-
+.button--blue {
+  background-color: palette('blue', 'paradiso');
+}
 
 .button--icon {
   @extend %button;
+
   color: palette('purple');
   background-color: palette('white');
   border-width: 2px;
@@ -69,6 +77,18 @@
     width: 0.95rem;
     height: 0.95rem;
     background-image: image('arrow-down.svg');
+  }
+}
+
+.button-video {
+  background-color: palette('blue', 'paradiso');
+  font-size: 100%;
+  border-color: palette('blue', 'paradiso');
+
+  &::before {
+    width: 0.95rem;
+    height: 0.95rem;
+    background-image: image('youtube.svg');
   }
 }
 

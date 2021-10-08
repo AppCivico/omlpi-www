@@ -5,6 +5,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
   window.$vueArticles = new Vue({
     el: '#app',
     data: {
+      currentVideo: '',
       articles: null,
       searchQuery: null,
       storageDomain: config.storage.domain,
@@ -22,6 +23,27 @@ if (window.location.href.indexOf('biblioteca') > -1) {
       // await this.putHasmoreButtons();
     },
     methods: {
+      toggleModal(youtubeUrl = '') {
+        let func = '';
+        if (youtubeUrl) {
+          const re = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w-]+\?v=|embed\/|v\/)?)([\w-]+)(\S+)?$/i;
+          const videoId = (youtubeUrl.match(re) || [])[5] || '';
+          const embedUrl = videoId
+            ? `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&amp;showinfo=0&enablejsapi=1`
+            : '';
+
+          func = !videoId ? 'pauseVideo' : 'playVideo';
+          if (embedUrl !== this.currentVideo) {
+            this.currentVideo = embedUrl;
+          } else {
+            func = 'pauseVideo';
+          }
+        } else {
+          this.currentVideo = '';
+        }
+
+        this.$refs.iframeYoutube.contentWindow.postMessage(`{"event":"command","func":"${func}","args":""}`, '*');
+      },
       // putHasmoreButtons() {
       //   Object.keys(this.$refs).forEach((item) => {
       //     const description = this.$refs[item][0].querySelector('.library-item__description');
