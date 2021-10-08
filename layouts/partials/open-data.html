@@ -5,14 +5,25 @@
     </a>
     ou a
 
-    {{ $pdf := resources.Get "pdfs/metodologia-e-metadados.pdf" | fingerprint }}
+    {{ $pdf := resources.Get "pdfs/Metodologia_Observa.pdf" | fingerprint }}
 
     <a
       target="_blank"
-      download="metodologia-e-metadados.pdf"
+      download="Metodologia_Observa.pdf"
       href="{{ $pdf.Permalink }}"
     >
-      metodologia e metadados
+      metodologia
+    </a>
+    ou
+
+    {{ $pdf := resources.Get "pdfs/Metadados_Observa.pdf" | fingerprint }}
+
+    <a
+      target="_blank"
+      download="Metadados_Observa.pdf"
+      href="{{ $pdf.Permalink }}"
+    >
+      metadados
     </a>.
     <span>
       Acesse a <a :href="apiDocsUrl" target="_blank">api para desenvolvedores</a>
