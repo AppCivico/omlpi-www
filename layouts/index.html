@@ -157,7 +157,10 @@
                 >
                   <h2>{{ "{{ article.title }}" }}</h2>
                 </a>
-                <time :datetime="article.date">{{ "{{ convertDate(article.date) }}" }}</time>
+                <time
+                  v-if="!article.hide_date"
+                  :datetime="article.date"
+                >{{ "{{ convertDate(article.date) }}" }}</time>
               </div>
             </template>
           </div>
