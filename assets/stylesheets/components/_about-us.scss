@@ -51,6 +51,7 @@
   flex-direction: column;
 
   @media screen and (min-width: breakpoint('tablet')) {
+    justify-content: flex-end;
     flex-direction: row;
   }
 }
