@@ -42,6 +42,11 @@ if (document.querySelector('#app-compare')) {
           name: 'Saúde',
           class: 'health',
         },
+        {
+          id: 4,
+          name: 'Segurança',
+          class: 'security',
+        },
       ],
     },
     computed: {

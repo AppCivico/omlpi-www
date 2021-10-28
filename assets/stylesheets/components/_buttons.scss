@@ -116,6 +116,12 @@
   }
 }
 
+.button--security {
+  &::before {
+    background-image: image('police--purple.svg');
+  }
+}
+
 .button-icon--active {
   color: palette('white');
   background-color: palette('purple');

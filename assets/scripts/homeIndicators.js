@@ -69,13 +69,19 @@ if (document.querySelector('#app-home-indicators')) {
         });
       },
       getAxisClass(area) {
-        if (area === 3) {
-          return 'health';
+        switch (area) {
+          case 4:
+            return 'security';
+
+          case 3:
+            return 'health';
+
+          case 2:
+            return 'education';
+
+          default:
+            return 'social-assistance';
         }
-        if (area === 2) {
-          return 'education';
-        }
-        return 'social-assistance';
       },
     },
   });

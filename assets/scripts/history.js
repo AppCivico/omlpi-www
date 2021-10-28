@@ -40,6 +40,11 @@ if (document.querySelector('#app-history')) {
           name: 'Saúde',
           class: 'health',
         },
+        {
+          id: 4,
+          name: 'Segurança',
+          class: 'security',
+        },
       ],
     },
     computed: {
