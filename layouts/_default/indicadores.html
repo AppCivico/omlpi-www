@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <section id="app-indicators-text">
+      <section id="app-indicators-text" v-cloak>
         <div class="container" v-if="text">
           <h1>{{ "{{ text.titulo }}" }}</h1>
           <div v-html="marked(text.texto)" class="chart-text">

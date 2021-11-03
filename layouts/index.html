@@ -6,6 +6,7 @@
       <section
         id="app-home-banner"
         class='search-area search-area--alternative search-area--home'
+        v-cloak
       >
         <template v-if="banner">
           <div class="container">
@@ -19,7 +20,7 @@
         </template>
       </section>
 
-      <section id="app-axis">
+      <section id="app-axis" v-cloak>
         <div
           class="container main-areas"
           v-if="axis"
@@ -63,7 +64,7 @@
         </div>
       </section>
 
-      <section id="app-home-indicators">
+      <section id="app-home-indicators" v-cloak>
         <div class="container">
           <h1 class="indicator-title">{{ i18n "referencesTitle" }}</h1>
           <div v-if="indicators" class="indicator-boxes">
