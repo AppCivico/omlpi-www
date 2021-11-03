@@ -68,7 +68,9 @@ export default function startSearch() {
       .forEach((item) => item.classList.remove('button-icon--active'));
 
     function activeButton(buttonNumber) {
-      document.querySelector(`#js-area-${buttonNumber}`).disabled = false;
+      const button = document.querySelector(`#js-area-${buttonNumber}`);
+      button.removeAttribute('disabled');
+      button.removeAttribute('hidden');
     }
 
     fetch(`${config.api.domain}data?locale_id=${localeId}`)
@@ -84,6 +86,10 @@ export default function startSearch() {
 
         if (response.locale.indicators.some((item) => item.area.id === 3)) {
           activeButton(3);
+        }
+
+        if (response.locale.indicators.some((item) => item.area.id === 4)) {
+          activeButton(4);
         }
       });
   }

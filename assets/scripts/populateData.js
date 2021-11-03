@@ -191,6 +191,9 @@ if (window.location.href.indexOf('city') > -1) {
       startSearch();
     },
     methods: {
+      isAreaPresent(id) {
+        return this.locale.indicators.some((x) => x.area.id === id);
+      },
       formatIndicatorHeaderValue(values, isPercentage) {
         if (values.value_relative === null && values.value_absolute === null) {
           return 'Não disponível';
