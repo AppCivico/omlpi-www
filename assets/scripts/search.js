@@ -64,7 +64,6 @@ export default function startSearch() {
   }
 
   function validateAreas(localeId) {
-    document.querySelector('js-areas-buttons');
     document.querySelector('.js-areas-buttons').querySelectorAll('button')
       .forEach((item) => item.classList.remove('button-icon--active'));
 
