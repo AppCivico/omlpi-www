@@ -71,7 +71,7 @@ if (document.querySelector('#app-home-indicators')) {
       getAxisClass(area) {
         switch (area) {
           case 4:
-            return 'security';
+            return 'violence';
 
           case 3:
             return 'health';

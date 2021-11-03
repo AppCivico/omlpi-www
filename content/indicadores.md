@@ -9,7 +9,7 @@ draft: false
 ---
 Os indicadores disponibilizados pelo Observa buscam apoiar a incidência sobre os processos de formulação e implementação das políticas públicas voltadas à primeira infância, visando garantir prioridade a essa agenda em âmbito local e nacional.
 
-Cobrindo as áreas de Assistência Social, Educação, Saúde e Segurança, os indicadores foram desenvolvidos a partir de um amplo processo de discussão envolvendo gestores públicos e representantes da sociedade civil, de organismos multilaterais e de núcleos acadêmicos, tomando como referência as diretrizes estabelecidas no Marco Legal da Primeira Infância (Lei Federal nº 13.257/2016). Busca-se fortalecer, assim, a resposta da sociedade brasileira ao que estabelece o inciso IV do artigo 4º dessa legislação:
+Cobrindo as áreas de Assistência Social, Educação, Saúde e Violência, os indicadores foram desenvolvidos a partir de um amplo processo de discussão envolvendo gestores públicos e representantes da sociedade civil, de organismos multilaterais e de núcleos acadêmicos, tomando como referência as diretrizes estabelecidas no Marco Legal da Primeira Infância (Lei Federal nº 13.257/2016). Busca-se fortalecer, assim, a resposta da sociedade brasileira ao que estabelece o inciso IV do artigo 4º dessa legislação:
 
 > Art 4º As políticas públicas voltadas ao atendimento dos direitos da criança na primeira infância serão elaboradas e executadas de forma a: [...] IV - reduzir as desigualdades no acesso aos bens e serviços que atendam aos direitos da criança na primeira infância, priorizando o investimento público na promoção da justiça social, da equidade e da inclusão sem discriminação da criança;
 

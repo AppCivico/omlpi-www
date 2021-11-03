@@ -42,8 +42,8 @@ if (document.querySelector('#app-history')) {
         },
         {
           id: 4,
-          name: 'Segurança',
-          class: 'security',
+          name: 'Violência',
+          class: 'violence',
         },
       ],
     },

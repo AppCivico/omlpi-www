@@ -44,8 +44,8 @@ if (document.querySelector('#app-compare')) {
         },
         {
           id: 4,
-          name: 'Segurança',
-          class: 'security',
+          name: 'Violência',
+          class: 'violence',
         },
       ],
     },
