@@ -172,7 +172,7 @@ if (document.querySelector('#app-compare')) {
       },
       getLocale(localeId) {
         this.loadingLocale = true;
-        const url = `${config.api.domain}data/compare?locale_id=${localeId || localeId === 0 ? localeId : config.fisrtCityId}`;
+        const url = `${config.api.domain}data/compare?locale_id=${localeId || localeId === 0 ? localeId : config.firstCityId}`;
         fetch(url)
           .then((response) => response.json())
           .then((response) => {

@@ -19,5 +19,5 @@ export default {
       ? 'https://omlpi-strapi.appcivico.com'
       : 'https://omlpi-strapi.appcivico.com'),
   },
-  fisrtCityId: 5200050,
+  firstCityId: 5200050,
 };
