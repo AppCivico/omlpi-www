@@ -83,3 +83,7 @@ params:
     facebook: "https://www.facebook.com/observatorio"
 taxonomies:
   role: "role"
+security:
+  funcs:
+    getenv:
+      - "NODE_ENV"
