@@ -160,21 +160,21 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                         // format: '{point.name}',
                         // },
                       });
+                    }).then(() => {
+                      this.setTitle(null, {
+                        text: e.point.name,
+                        align: 'right',
+                        margin: '1.5rem',
+                        style: {
+                          fontSize: '1.3rem',
+                          color: '#693996',
+                          fontWeight: 'bold',
+                          fontFamily: 'Lato',
+                          textTransform: 'uppercase',
+                        },
+                      });
                     });
                 }
-
-                this.setTitle(null, {
-                  text: e.point.name,
-                  align: 'right',
-                  margin: '1.5rem',
-                  style: {
-                    fontSize: '1.3rem',
-                    color: '#693996',
-                    fontWeight: 'bold',
-                    fontFamily: 'Lato',
-                    textTransform: 'uppercase',
-                  },
-                });
               },
               // eslint-disable-next-line object-shorthand, func-names
               drillup: function () {
