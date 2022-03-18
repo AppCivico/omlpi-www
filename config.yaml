@@ -15,6 +15,16 @@ disableKinds:
   - "sitemap"
 googleAnalytics: ""
 languageCode: "pt-br"
+
+module:
+  mounts:
+    -
+      source: "node_modules/cookies-eu-banner/dist/"
+      target: "assets/cookies-eu-banner"
+    -
+      source: "assets/"
+      target: "assets/"
+
 menu:
   header:
   - identifier: "Início"
