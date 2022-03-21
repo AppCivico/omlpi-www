@@ -1,17 +1,22 @@
 %button {
   display: inline-flex;
+
   padding: 0.6rem 1.2rem;
+
   font-weight: font-weight('bold');
+  color: palette('white');
   text-decoration: none;
   text-transform: uppercase;
+
   cursor: pointer;
-  color: palette('white');
+
   background-color: palette('blue', 'greeny');
   border: 0;
   border-radius: 10px;
 
   &[disabled] {
     cursor: not-allowed;
+
     background-color: palette('gray', 'light');
   }
 }
@@ -42,17 +47,19 @@
   @extend %button;
 
   color: palette('purple');
+
   background-color: palette('white');
-  border-width: 2px;
-  border-style: solid;
   border-color: palette('purple');
+  border-style: solid;
+  border-width: 2px;
 
   &[disabled] {
     color: palette('black', 'lighter');
+
     background-color: palette('white');
     border-color: palette('white');
-    opacity: 0.6;
     box-shadow: 0;
+    opacity: 0.6;
 
     &::before {
       filter: grayscale(1);
@@ -65,8 +72,10 @@
     margin-top: auto;
     margin-right: 0.5rem;
     margin-bottom: auto;
-    background-size: contain;
+
     content: '';
+
+    background-size: contain;
   }
 }
 
@@ -76,18 +85,21 @@
   &::before {
     width: 0.95rem;
     height: 0.95rem;
+
     background-image: image('arrow-down.svg');
   }
 }
 
 .button-video {
   font-size: 100%;
+
   background-color: palette('blue', 'paradiso');
   border-color: palette('blue', 'paradiso');
 
   &::before {
     width: 0.95rem;
     height: 0.95rem;
+
     background-image: image('youtube.svg');
   }
 }
@@ -124,6 +136,7 @@
 
 .button-icon--active {
   color: palette('white');
+
   background-color: palette('purple');
   box-shadow: 0 2px 6px palette('shadow');
 

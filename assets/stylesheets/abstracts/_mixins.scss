@@ -7,6 +7,7 @@
   @media screen and (min-width: breakpoint('desktop')) {
     max-width: 75rem;
   }
+
   @media screen and (min-width: breakpoint('wide')) {
     width: 100%;
     padding-top: 0;
@@ -53,13 +54,11 @@
 /// }
 ///
 @mixin alt-ampersand {
-  .amp { // sass-lint:disable-line no-qualifying-elements
+  .amp { // stylelint-disable-line no-qualifying-elements
     @include _italic-overflow;
-
+    font-family: $ampersand-font-stack;
     font-size: 2em;
     line-height: 0.25;
-    font-family: $ampersand-font-stack;
-
     vertical-align: middle;
 
     @content;
@@ -87,7 +86,7 @@
 /// }
 ///
 @mixin alt-preposition {
-  .alt { // sass-lint:disable-line no-qualifying-elements
+  .alt { // stylelint-disable-line no-qualifying-elements
     @include _italic-overflow;
 
     font-family: $alt-font-stack;
@@ -139,16 +138,17 @@
 /// }
 ///
 @mixin inline-block-wrapper {
-  // sass-lint:disable-block no-duplicate-properties
+  // stylelint-disable no-duplicate-properties
   $_inline-block-font-stack: 'FreeSans', 'Arimo', 'Droid Sans', 'Helvetica', 'Arial', sans-serif;
-
-  font-size: 0;
   font-family: $_inline-block-font-stack;
+  font-size: 0;
   letter-spacing: -0.31em; /* Webkit: collapse white-space between units */
   letter-spacing: normal\9; /* reset IE < 8 */
+
   word-spacing: -0.43em\9; /* IE < 8: collapse white-space between units */
 
   text-rendering: optimizespeed; /* Webkit: fixes text-rendering: optimizeLegibility */
+  // stylelint-enable no-duplicate-properties
 }
 
 /// Helper for an inline-block grid.
@@ -186,15 +186,16 @@
 @mixin inline-block-item($align: 'top', $font-size:  1rem) {
   display: inline-block;
 
-  font-size: $font-size;
   font-family: $text-font-stack;
+  font-size: $font-size;
   letter-spacing: normal;
-  word-spacing: normal;
-
-  text-rendering: auto;
   vertical-align: unquote($align);
 
   zoom: 1;
+
+  word-spacing: normal;
+
+  text-rendering: auto;
 }
 
 /// Helper for an table grid layout.
@@ -260,7 +261,7 @@
 /// @access private
 ///
 @mixin _font-smoothing($value: true) {
-  // sass-lint:disable-block no-vendor-prefixes
+  // stylelint-disable no-vendor-prefixes
   @if ($value == true) {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -268,6 +269,7 @@
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
   }
+  // stylelint-enable no-vendor-prefixes
 }
 
 
@@ -297,13 +299,12 @@
 ///
 @mixin icon-font {
   @include _font-smoothing(true);
+  font-size: 14px; /* font-awesome pixel perfection is at 14px and multiples of 14 */ // stylelint-disable-line property-units
 
   font-style: normal;
-  font-variant: normal;
   font-weight: normal;
-  font-size: 14px; /* font-awesome pixel perfection is at 14px and multiples of 14 */ // sass-lint:disable-line property-units
+  font-variant: normal;
   line-height: 1;
-
   text-transform: none;
 
   speak: none;
@@ -325,9 +326,8 @@
   &::after {
     display: table; /* 2 */
 
-    content: ''; /* 1 */
-
     border-collapse: collapse; /* 3 */
+    content: ''; /* 1 */
   }
 
   &::after {
@@ -344,9 +344,8 @@
   &,
   &:link,
   &:visited {
-    text-decoration: inherit;
-
     color: inherit;
+    text-decoration: inherit;
 
     @content;
   }
@@ -391,15 +390,13 @@
 /// @link https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css#L119-L133
 ///
 @mixin visually-hidden {
-  // sass-lint:disable-block no-duplicate-properties no-important property-units
+  // stylelint-disable no-duplicate-properties, declaration-no-important, property-units
   position: absolute !important;
 
   width: 1px !important;
   height: 1px !important;
-
   padding: 0 !important;
   margin: -1px;
-
   overflow: hidden !important;
   clip: rect(1px 1px 1px 1px) !important;
   clip: rect(1px, 1px, 1px, 1px) !important;
@@ -408,10 +405,11 @@
   white-space: nowrap !important;
 
   border: 0 !important;
+  // stylelint-enable no-duplicate-properties, declaration-no-important, property-units
 }
 
 @mixin visually-hidden--focusable {
-  // sass-lint:disable-block no-important
+  /* stylelint-disable declaration-no-important */
   @include visually-hidden;
 
   &:active,
@@ -420,15 +418,14 @@
 
     width: auto !important;
     height: auto !important;
-
     margin: auto;
-
     overflow: visible !important;
     clip: auto !important;
     clip-path: none !important;
 
     white-space: normal !important;
   }
+  /* stylelint-enable declaration-no-important */
 }
 
 
@@ -513,7 +510,6 @@
    *    See: https://code.google.com/p/chromium/issues/detail?id=457146
    */
   padding: 0; /* 1 */
-
   overflow: hidden;
 
   text-indent: 101%;
@@ -532,10 +528,8 @@
     direction: ltr;
   } @else {
     font: 0/0 a;
-
-    text-shadow: none;
-
     color: transparent;
+    text-shadow: none;
 
     border: 0;
   }
@@ -585,22 +579,19 @@ $no-viewport: false !default;
     }
   }
 
-  // sass-lint:disable-block indentation brace-style
   @if (index($fallback-units, 'alpha') != null and $no-alpha != false) or
-  (index($fallback-units, 'calc') != null and $no-calc != false) or
-  (index($fallback-units, 'gradient') != null and $no-gradient != false) or
-  (index($fallback-units, 'rem') != null and $no-rem != false) or
-  (index($fallback-units, 'viewport') != null and $no-viewport != false)
-  {
+    (index($fallback-units, 'calc') != null and $no-calc != false) or
+    (index($fallback-units, 'gradient') != null and $no-gradient != false) or
+    (index($fallback-units, 'rem') != null and $no-rem != false) or
+    (index($fallback-units, 'viewport') != null and $no-viewport != false) {
     #{$property}: #{$fallback-values};
   }
 
   @if (index($fallback-units, 'alpha') != null and $no-alpha != true) or
-  (index($fallback-units, 'calc') != null and $no-calc != true) or
-  (index($fallback-units, 'gradient') != null and $no-gradient != true) or
-  (index($fallback-units, 'rem') != null and $no-rem != true) or
-  (index($fallback-units, 'viewport') != null and $no-viewport != true)
-  {
+    (index($fallback-units, 'calc') != null and $no-calc != true) or
+    (index($fallback-units, 'gradient') != null and $no-gradient != true) or
+    (index($fallback-units, 'rem') != null and $no-rem != true) or
+    (index($fallback-units, 'viewport') != null and $no-viewport != true) {
     #{$property}: #{$values};
   }
 }
@@ -621,18 +612,15 @@ $no-viewport: false !default;
 /// }
 ///
 @mixin viewport-unit($property, $value) {
-  // sass-lint:disable-block indentation
-
   #{$property}: $value;
 
   $unit: unit($value);
 
   @if (index((vw, vh, vmin, vmax), $unit) != null) {
     $devices: (
-    (768px, 1024px), // iPad (all versions)
-    (320px, 480px), // iPhone 4
-    (320px, 568px) // iPhone 5, 5C, 5S
-    );
+      (768px, 1024px),
+      (320px, 480px),
+      0, 568px        );
 
     @each $device in $devices {
       $device-width: nth($device, 1);
@@ -697,16 +685,18 @@ $no-viewport: false !default;
 /// @param {Color} $color [currentcolor] - Triangle color
 /// @param {number} $size [1em] - Triangle size
 @mixin triangle($direction, $color: currentcolor, $size: 1em) {
+
+  $perpendicular-borders: $size solid transparent;
+
+  z-index: 2;
+
+  width: 0;
+  height: 0;
+
   @if not index(top right bottom left, $direction) {
     @error 'Direction must be either `top`, `right`, `bottom` or `left`.';
   }
-
-  z-index: 2;
-  width: 0;
-  height: 0;
-  border-#{_opposite-direction($direction)}: ($size * 1.5) solid $color; // sass-lint:disable-line property-sort-order
-
-  $perpendicular-borders: $size solid transparent;
+  border-#{_opposite-direction($direction)}: ($size * 1.5) solid $color; // stylelint-disable-line property-sort-order
 
   @if $direction == top or $direction == bottom {
     border-right: $perpendicular-borders;
@@ -734,9 +724,9 @@ $no-viewport: false !default;
 
 @mixin debug-map($map) {
   @at-root {
+    /* stylelint-disable property-no-unknown, scss/at-rule-no-unknown */
     @debug-map {
       // these properties are for debug only. They do not exist
-      // sass-lint:disable-block no-misspelled-properties
       __toString__: inspect($map);
       __length__: length($map);
       __depth__: depth($map);
@@ -748,6 +738,7 @@ $no-viewport: false !default;
         }
       }
     }
+    /* stylelint-enable property-no-unknown, scss/at-rule-no-unknown */
   }
 }
 
@@ -809,16 +800,15 @@ $no-viewport: false !default;
 
   &::before {
     float: left;
-
     padding-top: ($h / $w * 100%);
 
     content: '';
   }
 
   &::after {
-    clear: both;
-
     display: table;
+
+    clear: both;
 
     content: '';
   }
@@ -834,7 +824,6 @@ $no-viewport: false !default;
   $line-length-lower-gate: map-get($line-lengths, 'min'),
   $line-length-upper-gate: map-get($line-lengths, 'max')
 ) {
-
   @if $font-size == null {
     @error 'the `font-size` of the element **must** be provided to calculate the media query limits.';
   } @else if unit($font-size) == '%' {
@@ -869,39 +858,35 @@ $no-viewport: false !default;
 
 /// Handle homepage slider backgrounds easily
 @mixin handle-background($bg-number, $bg-primary-color, $bg-secondary-color) {
+  /* stylelint-disable value-list-comma-newline-after */
   background-image: linear-gradient(to bottom,
-    $bg-primary-color, $bg-secondary-color
-  ),
-  image('bg-home-#{$bg-number}-320.jpg');
+  $bg-primary-color, $bg-secondary-color
+), image('bg-home-#{$bg-number}-320.jpg');
   background-size: cover;
   background-blend-mode: multiply;
 
   @media screen and (min-width: breakpoint('phablet')) {
     background-image: linear-gradient(to bottom,
-      $bg-primary-color, $bg-secondary-color
-    ),
-    image('bg-home-#{$bg-number}-480.jpg');
+    $bg-primary-color, $bg-secondary-color
+  ), image('bg-home-#{$bg-number}-480.jpg');
   }
 
   @media screen and (min-width: breakpoint('tablet')) {
     background-image: linear-gradient(to bottom,
-      $bg-primary-color, $bg-secondary-color
-    ),
-    image('bg-home-#{$bg-number}-768.jpg');
+    $bg-primary-color, $bg-secondary-color
+  ), image('bg-home-#{$bg-number}-768.jpg');
   }
 
   @media screen and (min-width: breakpoint('desktop')) {
     background-image: linear-gradient(to bottom,
-      $bg-primary-color, $bg-secondary-color
-    ),
-    image('bg-home-#{$bg-number}-1024.jpg');
+    $bg-primary-color, $bg-secondary-color
+  ), image('bg-home-#{$bg-number}-1024.jpg');
   }
 
   @media screen and (min-width: breakpoint('desktop')) {
     background-image: linear-gradient(to bottom,
-      $bg-primary-color, $bg-secondary-color
-    ),
-    image('bg-home-#{$bg-number}-1366.jpg');
+    $bg-primary-color, $bg-secondary-color
+  ), image('bg-home-#{$bg-number}-1366.jpg');
   }
+  /* stylelint-enable value-list-comma-newline-after */
 }
-

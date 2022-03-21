@@ -6,7 +6,6 @@
 ::before,
 ::after {
   line-height: inherit;
-
   text-decoration: inherit; /* 1 */
   vertical-align: inherit; /* 2 */
 }
@@ -15,11 +14,10 @@
  * Basic typography style for copy text
  */
 body {
-  font-weight: font-weight('text');
-  font-size: $body-font-size;
-  line-height: $leading;
   font-family: $text-font-stack;
-
+  font-size: $body-font-size;
+  font-weight: font-weight('text');
+  line-height: $leading;
   color: palette('text', 'dark');
 }
 
@@ -43,6 +41,7 @@ caption {
 
   break-after: avoid;
   page-break-after: avoid;
+
   color: palette('dark-blue-grey');
 }
 
@@ -55,14 +54,12 @@ h6 a,
 legend a,
 caption a,
 dt a {
+  color: inherit;
   text-decoration: inherit;
 
-  color: inherit;
-
   &:link {
-    text-decoration: inherit;
-
     color: inherit;
+    text-decoration: inherit;
   }
 }
 
@@ -76,8 +73,8 @@ h1 {
 }
 
 h2 {
-  font-weight: font-weight('text');
   font-size: ms(2);
+  font-weight: font-weight('text');
   line-height: 1;
   color: palette('gray');
 
@@ -90,6 +87,7 @@ p {
   padding: 0;
   margin-top: 0;
   margin-bottom: $leading * 1em;
+
   font-size: ms(-1);
 
   @media screen and (min-width: breakpoint('desktop')) {
@@ -98,8 +96,8 @@ p {
 }
 
 a {
-  text-decoration: underline;
   color: palette('perrywinkle');
+  text-decoration: underline;
 }
 
 /**
@@ -167,9 +165,8 @@ abbr {
  */
 dfn {
   @extend %abbr-title;
-
-  font-style: italic; /* 1 */
   font-size: 1em;
+  font-style: italic; /* 1 */
 }
 
 /**
@@ -181,19 +178,21 @@ dfn {
  * @see https://github.com/necolas/normalize.css/pull/342#issuecomment-173801037
  */
 
-// sass-lint:disable no-mergeable-selectors
+// stylelint-disable no-mergeable-selectors
 b,
 strong {
-  // sass-lint:disable-block no-duplicate-properties
+  // stylelint-disable no-duplicate-properties
   font-weight: bold;
   font-weight: inherit; /* 1 */
+  // stylelint-enable no-duplicate-properties
 }
 
+/* stylelint-disable-next-line no-duplicate-selectors */
 b,
 strong {
   font-weight: font-weight('bold'); /* 2 */
 }
-// sass-lint:enable no-mergeable-selectors
+// stylelint-enable no-mergeable-selectors
 
 em,
 i {
@@ -233,7 +232,6 @@ sup {
 
   font-size: 83.3333%; /* 1 */
   line-height: 0;
-
   vertical-align: baseline;
 }
 
@@ -267,8 +265,8 @@ kbd,
 pre,
 samp,
 var {
-  font-size: 1em; /* 1 */
   font-family: $code-font-stack, monospace, monospace; /* 2 */
+  font-size: 1em; /* 1 */
 }
 
 code {
@@ -283,11 +281,12 @@ kbd {
  * Contain overflow in all browsers.
  */
 pre {
-  // sass-lint:disable-block no-duplicate-properties
+  // stylelint-disable no-duplicate-properties
   word-wrap: break-word; /* IE */
   white-space: pre; /* CSS2 */
   white-space: pre-wrap; /* CSS 2.1 */
   white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+  // stylelint-enable no-duplicate-properties
 }
 
 samp {
@@ -312,7 +311,6 @@ s {
 %updated {
   &::before {
     font-weight: bold;
-
     text-decoration: none;
 
     content: '[update] ';
@@ -386,8 +384,8 @@ del {
 
 blockquote {
   font-size: ms(3);
-  text-align: center;
   color: palette('black');
+  text-align: center;
 
   @media screen and (min-width: breakpoint('desktop')) {
     padding-top: 2em;
@@ -410,7 +408,6 @@ blockquote > p {
 q,
 blockquote {
   font-style: italic;
-
   color: palette('quotes');
 }
 
@@ -434,15 +431,16 @@ blockquote li {
   font-size: 1em;
 }
 
-blockquote.verse { // sass-lint:disable-line no-qualifying-elements
+/* stylelint-disable-next-line selector-no-qualifying-type */
+blockquote.verse {
   text-align: center;
 }
 
-blockquote.verse p { // sass-lint:disable-line no-qualifying-elements
+/* stylelint-disable-next-line selector-no-qualifying-type */
+blockquote.verse p {
   display: inline-block;
 
   width: auto;
-
   margin-right: auto;
   margin-left: auto;
 

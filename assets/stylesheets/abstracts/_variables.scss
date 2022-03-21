@@ -282,7 +282,6 @@ $max-width: 80em !default; // 1180px
 $max-width--narrow: 40.75em; // 668 px
 
 
-
 /// Z-indexes map, gathering all Z layers of the application. Avoid to edit it.
 /// @access public
 /// @type Map
@@ -293,8 +292,6 @@ $layers: (
   'default': 1,
   'below': -1,
 );
-
-
 
 
 /// Relative or absolute URL where all assets are served from.

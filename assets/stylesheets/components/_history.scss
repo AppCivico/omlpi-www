@@ -1,12 +1,16 @@
 .history {
   display: flex;
+
   flex-direction: column;
+
   padding-top: 2rem;
 
   @media screen and (min-width: breakpoint('desktop')) {
     flex-direction: row;
     flex-wrap: wrap;
+
     justify-content: space-between;
+
     padding-top: 3rem;
   }
 }
@@ -17,6 +21,7 @@
 
 .history form {
   display: flex;
+
   flex-direction: column;
 }
 
@@ -30,15 +35,17 @@
 
 .history__filters h4 {
   margin-bottom: 0.5rem;
-  font-weight: font-weight('normal');
+
   font-size: ms(-1);
-  text-transform: uppercase;
+  font-weight: font-weight('normal');
   color: palette('green');
+  text-transform: uppercase;
 }
 
 .history__filters .awesomplete input {
   width: 100%;
   padding: 0.8rem 0.5rem;
+
   background-color: transparent;
   border: 2px solid palette('green', 'dark');
   border-radius: 5px;
@@ -54,7 +61,9 @@
 
 .history__radio-buttons {
   display: flex;
+
   flex-wrap: wrap;
+
   margin-left: -1rem;
 }
 
@@ -65,7 +74,9 @@
 .history__radio-buttons label {
   margin-bottom: 0.5rem;
   margin-left: 1rem;
+
   color: palette('white');
+
   background-color: palette('blue', 'greeny');
   border: 0;
 
@@ -76,6 +87,7 @@
 
 .history__radio-buttons .button--purple {
   color: palette('white');
+
   background-color: palette('purple');
 
   &::before {
@@ -94,6 +106,7 @@
 .history select {
   width: 100%;
   padding: 0.8rem 0.5rem;
+
   background-color: transparent;
   border: 2px solid palette('green', 'dark');
   border-radius: 5px;
@@ -123,11 +136,13 @@
 
 .history__desagregation--full {
   width: 100%;
+
   text-align: center;
 }
 
 .history__desagregation h2 {
   margin-bottom: 0;
+
   font-size: ms(4);
   color: palette('green');
 }

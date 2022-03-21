@@ -5,9 +5,9 @@
 /* CLASSES
 ============================================================================ */
 %loading-bg {
+  background-repeat: no-repeat;
   // background-image: image('loading.svg');
   background-position: 50% 50%;
-  background-repeat: no-repeat;
 }
 
 %loading-el {
@@ -21,7 +21,6 @@
     right: 0;
     bottom: 0;
     left: 0;
-
     z-index: layer('modal');
 
     content: '';
@@ -120,10 +119,10 @@ textarea {
     bottom: 0;
     left: 0;
 
+    content: '';
+
     background-image: grid-image(2);
     background-position: center top;
-
-    content: '';
 
     @media screen and (min-width: breakpoint('phablet')) {
       background-image: grid-image(3);
@@ -173,6 +172,7 @@ textarea {
 }
 
 .hide {
-  // sass-lint:disable-block no-important
+  // stylelint-disable declaration-no-important
   display: none !important;
+  // stylelint-enable declaration-no-important
 }

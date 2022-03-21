@@ -9,10 +9,12 @@
 
 .plans-result__first-letter {
   display: inline-block;
+
   width: 1.25rem;
   margin-right: 2rem;
-  font-weight: font-weight('bold');
+
   font-size: ms(1);
+  font-weight: font-weight('bold');
   color: palette('blue', 'greeny');
 }
 
@@ -21,10 +23,13 @@
 
   &::before {
     display: block;
+
     width: 1.25rem;
     height: 1.25rem;
-    background-image: image('region.svg');
+
     content: '';
+
+    background-image: image('region.svg');
   }
 }
 
@@ -33,18 +38,24 @@
 
   &::before {
     display: block;
+
     width: 1.25rem;
     height: 1.25rem;
-    background-image: image('location-pin--green.svg');
+
     content: '';
+
+    background-image: image('location-pin--green.svg');
   }
 }
 
 .plans-result__header {
   display: flex;
+
   flex-direction: column;
+
   margin-top: 2rem;
   margin-bottom: 1.5rem;
+
   color: palette('blue', 'greeny');
 }
 
@@ -58,28 +69,36 @@
 
 .plans-result__capital-icon {
   display: inline-block;
+
   margin-top: 2rem;
+
   vertical-align: sub;
 
   &::before {
     display: inline-block;
+
     width: 1.25rem;
     height: 1.25rem;
     margin-right: 2rem;
-    background-image: image('capital.svg');
+
     content: '';
+
+    background-image: image('capital.svg');
   }
 }
 
 .plans-result__list {
   position: relative;
+
   padding-top: 1.5rem;
   padding-left: 0;
   margin-top: 2rem;
+
   border-top: 1px solid palette('gray', 'x-light');
 
   @media screen and (min-width: breakpoint('desktop')) {
     display: flex;
+
     flex-wrap: wrap;
   }
 }
@@ -89,14 +108,17 @@
   padding-top: 1rem;
   padding-left: 0;
   margin-top: 2rem;
-  font-weight: font-weight('bold');
+
   font-size: ms(1);
-  list-style: none;
+  font-weight: font-weight('bold');
   color: palette('blue', 'greeny');
+  list-style: none;
+
   border-top: 1px solid palette('gray', 'x-light');
 
   &:first-child {
     margin-top: 0;
+
     border-top: 0;
   }
 
@@ -107,12 +129,14 @@
 
 .plans-result__list li {
   margin-bottom: 0.5rem;
+
   font-size: ms(-1);
-  list-style: none;
   color: palette('gray');
+  list-style: none;
 
   @media screen and (min-width: breakpoint('phablet')) {
     padding-left: 3.2rem;
+
     font-size: ms(0);
   }
 

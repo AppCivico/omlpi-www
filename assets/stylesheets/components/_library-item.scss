@@ -1,6 +1,8 @@
 .library-container {
   display: flex;
+
   flex-wrap: wrap;
+
   margin-top: 3rem;
 
   @media screen and (min-width: breakpoint('desktop')) {
@@ -10,22 +12,28 @@
 
 .library-item {
   display: flex;
+
   flex-direction: column;
+
   padding-bottom: 2.5rem;
   margin-bottom: 2.5rem;
 
   @media screen and (min-width: breakpoint('desktop')) {
     display: flex;
+
     flex-direction: row;
     flex-wrap: wrap;
+
     width: 49%;
   }
 }
 
 .library-item__image {
   display: flex;
+
   align-self: flex-start;
   justify-content: center;
+
   margin-right: auto;
   margin-bottom: 2rem;
   margin-left: auto;
@@ -41,6 +49,7 @@
 
 .library-item__content {
   display: flex;
+
   flex-direction: column;
 
   @media screen and (min-width: breakpoint('desktop')) {
@@ -53,33 +62,39 @@
 }
 
 .library-item__description {
-  // sass-lint:disable-block no-vendor-prefixes
-  display: -webkit-box;
+  // stylelint-disable no-vendor-prefixes
+  display: box;
+
   max-width: 100%;
   max-height: 6rem;
   margin-bottom: 0;
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
+  // stylelint-enable no-vendor-prefixes
 }
 
 .library-item__description--full {
-  // sass-lint:disable-block no-vendor-prefixes
+  // stylelint-disable no-vendor-prefixes
   max-height: 100%;
   -webkit-line-clamp: initial;
+  // stylelint-enable no-vendor-prefixes
 }
 
 .library-item h2 {
   margin-top: 0;
-  font-weight: font-weight('bold');
+
   font-size: ms(3);
+  font-weight: font-weight('bold');
   line-height: 1.2;
   color: palette('black');
 }
 
 .library-item__author {
   display: flex;
+
   flex-direction: column;
+
   margin-bottom: 1rem;
 }
 
@@ -89,6 +104,7 @@
 
 .library-item__time time {
   margin-left: 1rem;
+
   font-style: normal;
 }
 
@@ -116,16 +132,20 @@
 
 .library-item__show-more {
   padding: 0;
+
   font-size: ms(0);
-  text-decoration: underline;
-  cursor: pointer;
   color: palette('purple');
+  text-decoration: underline;
+
+  cursor: pointer;
+
   background: none;
   border: 0;
 }
 
 .library-item .button {
   align-self: center;
+
   color: palette('white');
 
   @media screen and (min-width: breakpoint('desktop')) {
@@ -135,12 +155,13 @@
 
 .library-item__load-more {
   display: block;
+
   width: 11rem;
   margin-right: auto;
   margin-bottom: 2rem;
   margin-left: auto;
+
   text-align: center;
+
   cursor: pointer;
 }
-
-

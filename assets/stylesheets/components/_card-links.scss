@@ -1,8 +1,11 @@
 .card-links {
   display: flex;
-  align-items: center;
+
   flex-direction: column;
+
+  align-items: center;
   justify-content: space-between;
+
   margin-top: 2rem;
 
   @media screen and (min-width: breakpoint('tablet')) {
@@ -12,19 +15,24 @@
 
 .card-links a {
   display: flex;
-  align-items: center;
+
   flex-wrap: wrap;
+
+  align-items: center;
   justify-content: center;
+
   width: 17.5rem;
   height: 12.25rem;
   padding-top: 1.05rem;
   padding-bottom: 0.5rem;
   margin-bottom: 2rem;
-  font-weight: bold;
+
   font-size: ms(-1);
+  font-weight: bold;
+  color: palette('white');
   text-align: center;
   text-transform: uppercase;
-  color: palette('white');
+
   background-color: palette('blue', 'dianne');
   border-radius: 5px;
   box-shadow: 0 2px 4px 0 palette('shadow');
@@ -32,33 +40,42 @@
 
 .card-links a[disabled] {
   pointer-events: none;
+
   background-color: palette('gray', 'light');
   filter: grayscale(1);
 }
 
 .card-links i {
   display: flex;
-  align-items: center;
+
   flex-direction: column;
   flex-wrap: wrap;
+
+  align-items: center;
+
   width: 100%;
   padding-bottom: 1rem;
+
   text-align: center;
 
   &::before {
     width: 7.4rem;
     height: 7.4rem;
+
+    content: '';
+
     background: palette('blue', 'paradiso');
     border-radius: 50%;
-    content: '';
   }
 
   &::after {
     width: 4.4rem;
     height: 4.4rem;
     margin-top: -6.25rem;
-    background-position: center;
+
     content: '';
+
+    background-position: center;
   }
 }
 
@@ -67,6 +84,7 @@
     width: 5.68rem;
     height: 5.37rem;
     margin-right: -0.625rem;
+
     background-image: image('calendar.svg');
   }
 }
@@ -76,6 +94,7 @@
     width: 6.06rem;
     height: 5.87rem;
     margin-top: -6.75rem;
+
     background-image: image('comparison.svg');
   }
 }
@@ -84,6 +103,7 @@
   &::after {
     width: 4.68rem;
     height: 5.18rem;
+
     background-image: image('csv.svg');
   }
 }
@@ -92,6 +112,7 @@
   &::after {
     width: 4.68rem;
     height: 5.18rem;
+
     background-image: image('indicator.svg');
   }
 }

@@ -9,19 +9,18 @@
 *,
 ::before,
 ::after {
-  background-repeat: no-repeat;
-
   box-sizing: inherit;
 
   tab-size: inherit;
+
+  background-repeat: no-repeat;
 }
 
 /* User interaction (https://www.w3.org/TR/html5/editing.html)
 ========================================================================== */
 ::selection {
-  text-shadow: none;
-
   color: palette('selection', 'foreground');
+  text-shadow: none;
 
   background-color: palette('selection', 'background');
 }
@@ -85,22 +84,19 @@ textarea,
  * www.456bereastreet.com/archive/201012/controlling_text_size_in_safari_for_ios_without_disabling_user_zoom/
  */
 html {
-  height: 100%; /* 2 */
+  box-sizing: border-box;
 
+  height: 100%; /* 2 */
   padding: 0;
   margin: 0;
-
   overflow-y: scroll; /* 3 */
 
   font-size: 100.01%; /* 1 */
-
-  text-size-adjust: 100%; /* 4 */
+  tab-size: 4;
 
   background: palette('white');
 
-  box-sizing: border-box;
-
-  tab-size: 4;
+  text-size-adjust: 100%; /* 4 */
 }
 
 /**
@@ -117,7 +113,6 @@ body {
   // height: 100vh; /* 2 */
 
   min-height: 100%;
-
   margin: 0;
   // overflow: auto;
 
@@ -172,7 +167,6 @@ summary {
   margin-bottom: 1rem;
 
   font-weight: font-weight('text');
-
   list-style-type: none;
 
   cursor: pointer;
@@ -190,15 +184,15 @@ summary {
     top: 0.75rem;
     right: 0;
 
-    border-right: solid transparent;
-    border-left: solid transparent;
-    border-top-width: 5px;
-    border-right-width: 5px;
-    border-left-width: 5px;
-    border-top-style: solid;
-    border-top-color: palette('blue', 'greeny');
-
     content: '';
+
+    border-top-color: palette('blue', 'greeny');
+    border-top-style: solid;
+    border-top-width: 5px;
+    border-right: solid transparent;
+    border-right-width: 5px;
+    border-left: solid transparent;
+    border-left-width: 5px;
 
     transition: transform 0.3s;
 
@@ -225,9 +219,8 @@ details {
 details[open] > summary {
   margin-bottom: 0;
 
-  font-weight: bold;
   font-size: ms(3);
-
+  font-weight: bold;
   color: palette('blue', 'dianne');
 }
 
@@ -281,7 +274,6 @@ template,
 }
 
 
-
 /* BLOCK TEXT
 ============================================================================ */
 
@@ -297,22 +289,18 @@ hr {
   /* line-height */
   @include fallback('margin', calc(#{$leading * 1em} - 1px) 0 #{$leading * 1em}, #{$leading * 1em} 0);
 
-  clear: both;
-
+  box-sizing: content-box; /* 1 */
   display: block;
 
   height: 0; /* 1 */
-
   padding: 0;
-
   overflow: visible; /* 2 */
+  clear: both;
 
   color: palette('gray');
 
   border: 0;
   border-top: 1px solid palette('gray');
-
-  box-sizing: content-box; /* 1 */
 }
 
 /* MEDIA ELEMENTS
@@ -328,7 +316,7 @@ svg:not(:root) {
  * SVGs should fallback to their surrounding text color
  */
 svg {
-  fill: currentColor;
+  fill: currentcolor;
 }
 
 a > svg {
@@ -376,8 +364,7 @@ iframe,
 img,
 object {
   font-size: 83.3333%;
-
-  color: currentColor;
+  color: currentcolor;
 
   border-style: none;
 }
@@ -400,7 +387,6 @@ video > source {
 .ie:not(.ie6-8),
 object > img {
   position: relative;
-
   z-index: layer('below');
 
   font-size: 1em;
@@ -415,7 +401,6 @@ object > img {
 /// @link https://bitsofco.de/styling-broken-images/
 %broken-image {
   font-style: normal;
-
   text-align: center;
 
   &::before {
@@ -430,7 +415,6 @@ object > img {
     display: block;
 
     font-size: small;
-
     color: palette('gray');
 
     content: '(url: ' attr(src) ')';
@@ -444,12 +428,12 @@ object > img {
  */
 img {
   @extend %broken-image;
-
-  height: auto;
   max-width: 100%;
+  height: auto;
 
-  image-rendering: optimizeQuality; /* 1 */
-  -ms-interpolation-mode: bicubic; /* 1 */ // sass-lint:disable-line no-misspelled-properties
+  image-rendering: optimizequality; /* 1 */
+  /* stylelint-disable-next-line property-no-unknown */
+  interpolation-mode: bicubic; /* 1 */
 }
 
 [usemap] {
@@ -478,12 +462,10 @@ a > picture {
 /* links
 ============================================================================ */
 a {
-  // sass-lint:disable-block property-sort-order
   padding: 0;
   margin: 0;
 
   font-size: 100%;
-
   vertical-align: baseline;
 
   @include on-event {
@@ -494,7 +476,7 @@ a {
     text-decoration: inherit;
 
     cursor: pointer;
-    -webkit-tap-highlight-color: palette('tap-highlight'); // sass-lint:disable-line no-vendor-prefixes
+    -webkit-tap-highlight-color: palette('tap-highlight'); // stylelint-disable-line no-vendor-prefixes
   }
 
   &:visited {
@@ -547,11 +529,9 @@ address {
 pre {
   padding: $leading * 0.5rem $gutter * 0.5;
   margin: 0 0 $leading * 1rem;
-
   overflow: auto;
 
   font-size: ms(-1);
-
   color: palette('text', 'light');
 
   background-color: palette('text', 'dark');

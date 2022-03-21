@@ -1,7 +1,10 @@
 .buttons-group {
   display: flex;
+
   flex-wrap: wrap;
+
   justify-content: center;
+
   margin-top: 2rem;
   margin-right: auto;
   margin-left: auto;
@@ -9,6 +12,7 @@
 
 .buttons-group--intern {
   justify-content: flex-start;
+
   margin: 2rem 0;
 }
 
@@ -17,18 +21,20 @@
 }
 
 .buttons-group .button--icon {
-  margin-left: 0.5rem;
   margin-right: 0.5rem;
   margin-bottom: 1rem;
+  margin-left: 0.5rem;
 }
 
 .buttons-group__normie-links {
   width: 100%;
+
   text-align: left;
 }
 
 .buttons-group__normie-links a {
   margin-left: 1rem;
+
   font-size: ms(-2);
   text-decoration: underline;
 

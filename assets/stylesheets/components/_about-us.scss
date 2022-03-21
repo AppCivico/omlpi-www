@@ -1,15 +1,19 @@
 .about-us {
   display: flex;
+
   flex-direction: column;
+
   padding-top: 1rem;
   padding-bottom: 1rem;
   margin-right: auto;
   margin-left: auto;
-  background-position: bottom left;
+
   background-color: palette('purple');
+  background-position: bottom left;
 
   @media screen and (min-width: breakpoint('tablet')) {
     flex-direction: row;
+
     justify-content: flex-end;
   }
 
@@ -21,8 +25,8 @@
 }
 
 .about-us--no-bg {
-  background-image: none;
   background-color: transparent;
+  background-image: none;
 }
 
 .about-us--container {
@@ -37,6 +41,7 @@
 
 .about-us--container .about-us {
   justify-content: flex-end;
+
   width: 100%;
 }
 
@@ -48,11 +53,13 @@
 
 .about-us--boxed .container {
   display: flex;
+
   flex-direction: column;
 
   @media screen and (min-width: breakpoint('tablet')) {
-    justify-content: flex-end;
     flex-direction: row;
+
+    justify-content: flex-end;
   }
 }
 
@@ -75,8 +82,10 @@
 
 .about-us__image {
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   margin: 0;
 }
 
@@ -86,6 +95,7 @@
 
 .about-us__text {
   padding-bottom: 3rem;
+
   color: palette('white');
 
   @media screen and (min-width: breakpoint('tablet')) {
@@ -100,19 +110,21 @@
     padding-right: 3rem;
     padding-left: 3rem;
     margin-left: auto;
+
     text-shadow: none;
   }
 }
 
 .about-us__text h1 {
   font-weight: font-weight('text');
-  text-transform: uppercase;
   color: palette('white');
+  text-transform: uppercase;
 }
 
 .about-us__text .button {
   margin-right: 1rem;
   margin-bottom: 1rem;
+
   text-shadow: none;
 
   @media screen and (min-width: breakpoint('tablet')) {
