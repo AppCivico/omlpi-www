@@ -1,7 +1,7 @@
     {{ partial "head.html" . }}
 
     {{ if eq (getenv "NODE_ENV") "development" }}
-      <link rel="preload" src="https://vuejs.org/js/vue.js" crossorigin="anonymous">
+      <link rel="preload" src="https://unpkg.com/vue@2" crossorigin="anonymous">
     {{ else }}
       <link rel="preload" src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js" crossorigin="anonymous">
     {{ end }}
@@ -194,7 +194,7 @@
       {{ partial "footer.html" . }}
 
       {{ if eq (getenv "NODE_ENV") "development" }}
-        <script src="https://vuejs.org/js/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
       {{ else }}
         <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
       {{ end }}
