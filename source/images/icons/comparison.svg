@@ -19,7 +19,7 @@
         <path stroke="#979797" stroke-linecap="round" stroke-linejoin="round" d="M44.021 48L49.979 48M44.021 50L49.979 50"/>
         <path stroke="#979797" stroke-linecap="round" d="M44.125 44L79.875 44"/>
         <g>
-            <path fill="#47B3AF" d="M3.27 21.183H9.307V28.748H3.27zM12.074 17.148H18.111V28.747999999999998H12.074zM20.877 12.861H26.913999999999998V28.748H20.877zM29.681 9.33H35.718V28.747H29.681z" transform="translate(43 11)"/>
+            <path fill="#40a19d" d="M3.27 21.183H9.307V28.748H3.27zM12.074 17.148H18.111V28.747999999999998H12.074zM20.877 12.861H26.913999999999998V28.748H20.877zM29.681 9.33H35.718V28.747H29.681z" transform="translate(43 11)"/>
             <path fill="#D8D8D8" stroke="#1F1F1F" stroke-linecap="round" stroke-linejoin="round" stroke-width=".5" d="M.252.204v28.592m40.573-.048H.175" transform="translate(43 11)"/>
         </g>
         <path stroke="#979797" stroke-linecap="round" stroke-linejoin="round" d="M18.125 86L53.875 86M18.127 88.75L48 88.5"/>

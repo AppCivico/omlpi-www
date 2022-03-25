@@ -3,10 +3,12 @@
 
   padding: 0.6rem 1.2rem;
 
+  font-size: ms(1);
   font-weight: font-weight('bold');
+  font-variant: small-caps;
   color: palette('white');
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: lowercase;
 
   cursor: pointer;
 

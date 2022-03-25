@@ -8,6 +8,10 @@
   background: palette('blue', 'greeny');
 }
 
+.news a {
+  @include link-undercover;
+}
+
 .news .container {
   @media screen and (min-width: breakpoint('tablet')) {
     display: flex;
@@ -56,7 +60,7 @@
 .news h1 {
   font-size: ms(7);
   font-weight: font-weight('text');
-  color: palette('white');
+  color: inherit;
   text-transform: uppercase;
 
   @media screen and (min-width: breakpoint('tablet')) {
@@ -69,7 +73,7 @@
   padding-bottom: 0.8rem;
   margin-bottom: 0.8rem;
 
-  color: palette('white');
+  color: inherit;
 }
 
 .news time {

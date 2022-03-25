@@ -106,6 +106,7 @@ $palette: (
   'blue-footer-border': rgb(22, 15, 62),
   'perrywinkle': (
     'base': rgb(159, 147, 221),
+    'dark': hsl(254, 53%, 50%),
   ),
   'red': (
     'light': rgb(252, 124, 108),
@@ -121,17 +122,19 @@ $palette: (
     'base': rgb(228, 186, 128),
   ),
   'purple': (
+    'light': hsl(252, 21%, 37%),
     'base': rgb(105, 57, 150),
     'dark': rgb(59, 12, 103),
+    'darker': hsl(256, 43%, 25%),
   ),
   'green': (
     'light': rgb(149, 255, 7),
-    'base': rgb(32, 80, 88),
-    'dark': rgb(16, 130, 88),
+    'base': hsl(189, 47%, 24%),
+    'dark': hsl(158, 78%, 29%),
   ),
   'blue': (
-    'paradiso': rgb(57, 133, 142),
-    'greeny': rgb(71, 179, 175),
+    'paradiso': hsl(187, 37%, 29%),
+    'greeny': hsl(178, 43%, 35%),
     'dianne': rgb(32, 80, 88),
     'light': rgb(193, 241, 240),
     'base': rgb(73, 39, 188),

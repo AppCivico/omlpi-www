@@ -13,20 +13,32 @@
 }
 
 .search-area--children-hands {
+  color: palette('white');
+
+  background-color: palette('purple', 'darker');
   background-image: image('children-hands.jpg');
   background-size: cover;
 }
 
 .search-area--library {
+  color: palette('white');
+
+  background-color: palette('purple', 'light');
   background-image: image('library-banner.jpg');
   background-size: cover;
 }
 
 .search-area--home {
+  color: palette('white');
+
+  background-color: palette('purple', 'darker');
   background-image: image('home-banner.jpg');
 }
 
 .search-area--indicators {
+  color: palette('white');
+
+  background-color: palette('purple', 'light');
   background-image: image('children.jpg');
 }
 
@@ -140,7 +152,7 @@
 
   font-size: ms(6);
   line-height: 1.2;
-  color: palette('white');
+  color: inherit;
   text-transform: uppercase;
 
   @media screen and (min-width: breakpoint('desktop')) {
@@ -176,6 +188,7 @@
   margin-right: auto;
   margin-left: auto;
 
+  background-color: transparent;
   background-image: none;
 }
 
