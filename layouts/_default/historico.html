@@ -45,7 +45,7 @@
                 name="indicator"
                 v-if="locale && locale.historical && locale.historical.length > 0 && locale.historical[0].indicators"
                 v-model="selectedIndicator"
-                aria-labelledby="aria-labelledby"
+                aria-labelledby="indicator-label"
               >
                 <option
                   v-if="loadingLocale"
