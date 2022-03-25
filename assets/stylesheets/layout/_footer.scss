@@ -44,7 +44,11 @@
   }
 }
 
-.site-footer__logo {
+.site-footer__logo > a {
+  @include image-replacement;
+
+  display: block;
+
   width: 10rem;
   height: 2.55rem;
   margin-top: 2rem;

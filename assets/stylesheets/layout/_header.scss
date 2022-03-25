@@ -142,6 +142,8 @@
 
 
 .main-header__logo {
+  @include image-replacement;
+
   display: block;
 
   width: 17rem;
