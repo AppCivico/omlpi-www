@@ -38,13 +38,14 @@
               <h4>
                 <label for="myLocation">Selecione outra localidade</label>
               </h4>
-              <input id="myLocation">
-              <h4>Selecione outro indicador</h4>
+              <input id="myLocation" data-listlabel="Selecione outra localidade">
+              <h4 id="indicator-label">Selecione outro indicador</h4>
               <select
                 id="indicator"
                 name="indicator"
                 v-if="locale && locale.historical && locale.historical.length > 0 && locale.historical[0].indicators"
                 v-model="selectedIndicator"
+                aria-labelledby="aria-labelledby"
               >
                 <option
                   v-if="loadingLocale"
@@ -82,8 +83,8 @@
               v-else
             >
               <h2>Veja a série histórica das desagregações</h2>
-              <h4>Selecione outra desagregação</h4>
-              <select id="subindicators" name="subindicators" v-model="selectedSubindicator">
+              <h4 id="subindicator-label">Selecione outra desagregação</h4>
+              <select id="subindicators" name="subindicators" v-model="selectedSubindicator" aria-labelledby="subindicator-label">
                 <option
                   v-if="loadingLocale"
                   disabled

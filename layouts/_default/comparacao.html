@@ -38,13 +38,14 @@
               <h4>
                 <label for="myLocation">Selecione outra localidade</label>
               </h4>
-              <input id="myLocation">
-              <h4>Selecione outro indicador</h4>
+              <input id="myLocation" data-listlabel="Selecione outra localidade">
+              <h4 id="indicator-label">Selecione outro indicador</h4>
               <select
                 id="indicator"
                 name="indicator"
                 v-if="locale && locale.indicators"
                 v-model="selectedIndicator"
+                aria-labelledby="indicator-label"
               >
                 <option
                   v-if="loadingLocale"
@@ -65,12 +66,13 @@
               <span v-if="!indicators.length">
                 Não há indicadores para essa localidade
               </span>
-              <h4>Filtrar por ano</h4>
+              <h4 id="year-label">Filtrar por ano</h4>
               <select
                 id="selectedYearOnIndicator"
                 name="selectedYearOnIndicator"
                 v-if="locale && availableYearsOnIndicator.length"
                 v-model="selectedYearOnIndicator"
+                aria-labelledby="year-label"
               >
                 <option
                   :disabled="loadingLocale"
@@ -118,8 +120,8 @@
               v-else
             >
               <h2>Compare as desagregações</h2>
-              <h4>Selecione outra desagregação</h4>
-              <select id="subindicators" name="subindicators" v-model="selectedSubindicator">
+              <h4 id="subindicator-label">Selecione outra desagregação</h4>
+              <select id="subindicators" name="subindicators" v-model="selectedSubindicator" aria-labelledby="subindicator-label">
                 <option
                   v-if="loadingLocale"
                   disabled
@@ -143,12 +145,13 @@
                   {{ "{{ subindicator.classification }}" }}
                 </option>
               </select>
-              <h4>Selecione outro ano</h4>
+              <h4 id="subindicator-year-label">Selecione outro ano</h4>
               <select
                 id=""
                 name=""
                 required
                 v-model="selectedYear"
+                aria-labelledby="subindicator-year-label"
               >
               <template v-for="year in years">
                 <option :value="year">{{ "{{ year }}" }}</option>

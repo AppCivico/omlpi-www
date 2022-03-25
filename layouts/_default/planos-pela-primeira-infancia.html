@@ -29,6 +29,7 @@
                   disabled
                   aria-busy="true"
                   type="text"
+                  data-listlabel="{{ i18n "exploreData" }}"
                   placeholder="Olinda ou Pernambuco"
                 />
               </form>
@@ -214,6 +215,7 @@
                   type="submit"
                   class="button button--purple"
                   :disabled="formLoading"
+                  title="{{ i18n "send" }}"
                 >
                   <template v-if="formLoading">{{ i18n "sending" }}</template>
                   <template v-else>{{ i18n "send" }}</template>
