@@ -3,7 +3,9 @@
     <body>
       {{ partial "header.html" . }}
 
-      {{ $content_parts := split .Content "<!-- more -->" }}
+      <main>
+        {{ $content_parts := split .Content "<!-- more -->" }}
+      </main>
 
       {{ partial "footer.html" . }}
 

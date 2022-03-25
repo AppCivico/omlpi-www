@@ -1,8 +1,9 @@
 {{ partial "head.html" . }}
 
-    <body>
-      {{ partial "header.html" . }}
+  <body>
+    {{ partial "header.html" . }}
 
+    <main>
       <div id="app" class="bg-gray">
         <div class="loading" v-if="loading">
           Aguarde, carregando as informações...
@@ -14,7 +15,6 @@
           >
             <div class="container">
               <h1>{{ "{{ locale.name }}" }}</h1>
-
               <section class="search-area search-area__intern">
                 <form action="">
                   <label for="js-region-input">
@@ -70,14 +70,12 @@
               </section>
             </div>
           </header>
-
           <section>
             <div class="container">
               <p v-if="!indicatorsCount">Não há dados para esse tema</p>
             </div>
             <div class="container">
               <h1>Indicadores</h1>
-
               <template v-for="(indicator, index) in locale.indicators">
                 <details
                   v-show="indicator.area.id === selectedArea"
@@ -143,7 +141,6 @@
                       v-if="subindicator.showAs === 'bigNumber'"
                       :id="slugify(`subindicator-${subindicator.classification}-${indicator.id}-${subindicator.id}`)"
                       class="big-number">
-
                       <h2 class="title">{{ "{{ subindicator.classification }}" }}</h2>
                       <div class="infobox" :class="subindicator.data.length === 1 ? 'infobox--single' : ''">
                         <h3 class="infobox__general-title">
@@ -190,7 +187,6 @@
                         </a>
                       </div>
                     </div>
-
                     <div
                       v-else-if="subindicator.showAs === 'horizontalBarChart'"
                       class="big-number">
@@ -201,7 +197,6 @@
                         </div>
                       </div>
                     </div>
-
                     <div
                       v-else-if="subindicator.showAs === 'barsChart'"
                       class="big-number">
@@ -216,7 +211,6 @@
                 </details>
               </template>
           </section>
-
           <div class="container">
             <section class="card-links">
               <a
@@ -240,15 +234,11 @@
               </a>
             </section>
           </div>
-
           {{ partial "open-data.html" . }}
-
         </template>
       </div>
-
       <svg height="0" width="0">
         <defs>
-
         clip-path: circle(50% at 50% 50%);
         <clipPath id="svgPath">
           <path d="M0,7a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
@@ -264,9 +254,10 @@
         </clipPath>
         </defs>
       </svg>
+    </main>
 
-        {{ partial "footer.html" . }}
+      {{ partial "footer.html" . }}
 
-        {{ partial "scripts.html" . }}
-    </body>
+      {{ partial "scripts.html" . }}
+  </body>
 </html>

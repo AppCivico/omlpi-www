@@ -1,8 +1,9 @@
-    {{ partial "head.html" . }}
+  {{ partial "head.html" . }}
 
-    <body>
-      {{ partial "header.html" . }}
+  <body>
+    {{ partial "header.html" . }}
 
+    <main>
       <section
         id="app-home-banner"
         class='search-area search-area--alternative search-area--home'
@@ -19,7 +20,6 @@
           </div>
         </template>
       </section>
-
       <section id="app-axis" v-cloak>
         <div
           class="container main-areas"
@@ -63,7 +63,6 @@
           </div>
         </div>
       </section>
-
       <section id="app-home-indicators" v-cloak>
         <div class="container">
           <h1 class="indicator-title">{{ i18n "referencesTitle" }}</h1>
@@ -99,7 +98,6 @@
                   >
                     {{ "{{ indicator.area.name }}" }}
                   </span>
-
                   <transition name="fade" mode="out-in">
                     <h3
                       :key="indicator.description"
@@ -108,7 +106,6 @@
                       {{ "{{ indicator.description }}" }}
                     </h3>
                   </transition>
-
                   <transition name="fade" mode="out-in">
                     <h4
                       :key="indicator.values.value_relative ? indicator.values.value_relative : indicator.values.value_absolute"
@@ -129,7 +126,6 @@
           </div>
         </div>
       </section>
-
       <section id="app-news">
         <div
           class="news"
@@ -167,7 +163,6 @@
           </div>
         </div>
       </section>
-
       <section
         id="app-home-about"
         class="about-us about-us--container"
@@ -198,19 +193,19 @@
               >
                 {{ "{{ about.link2_title }}" }}
               </a>
-
             </div>
           </div>
         </div>
       </section>
+    </main>
 
 
-      {{ partial "footer.html" . }}
-      <script src="https://cdn.jsdelivr.net/npm/wowjs@1.1.2/dist/wow.min.js"></script>
-      {{ partial "scripts.html" . }}
+    {{ partial "footer.html" . }}
+    <script src="https://cdn.jsdelivr.net/npm/wowjs@1.1.2/dist/wow.min.js"></script>
+    {{ partial "scripts.html" . }}
 
-      <script>
-        new WOW().init();
-      </script>
-    </body>
+    <script>
+      new WOW().init();
+    </script>
+  </body>
 </html>

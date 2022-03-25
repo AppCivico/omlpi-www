@@ -1,8 +1,9 @@
-    {{ partial "head.html" . }}
+  {{ partial "head.html" . }}
 
-    <body>
-      {{ partial "header.html" . }}
+  <body>
+    {{ partial "header.html" . }}
 
+    <main>
       <section class="search-area search-area--alternative search-area--indicators">
         <div class="container">
           <header>
@@ -49,11 +50,12 @@
         </div>
         <div class="container" v-else>Carregando...</div>
       </section>
+    </main>
 
-      {{ partial "footer.html" . }}
+    {{ partial "footer.html" . }}
 
-      {{ partial "scripts.html" . }}
+    {{ partial "scripts.html" . }}
 
-      <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    </body>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </body>
 </html>
