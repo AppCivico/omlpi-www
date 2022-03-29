@@ -279,19 +279,19 @@
 }
 
 .search-area__input-country {
-  background-image: image('brazil.svg');
+  background-image: image('icons/brazil.svg');
 }
 
 .search-area__input-region {
-  background-image: image('region.svg');
+  background-image: image('icons/region.svg');
 }
 
 .search-area__input-state {
-  background-image: image('location-pin.svg');
+  background-image: image('icons/location-pin.svg');
 }
 
 .search-area__input-city {
-  background-image: image('city.svg');
+  background-image: image('icons/city.svg');
 }
 
 
@@ -313,7 +313,7 @@
 
     content: '';
 
-    background-image: image('info-black.svg');
+    background-image: image('icons/info-black.svg');
   }
 }
 
@@ -333,7 +333,7 @@
   text-indent: -999em;
 
   background-color: transparent;
-  background-image: image('search.svg');
+  background-image: image('icons/search.svg');
   background-position: center;
   background-size: 70%;
   border: 0;
@@ -382,7 +382,7 @@
   text-indent: -9999em;
 
   background-color: palette('purple');
-  background-image: image('search-white.svg');
+  background-image: image('icons/search-white.svg');
   background-position: center;
   background-size: 50%;
   border: 0;

@@ -57,17 +57,17 @@
 }
 
 .awesomplete__country::before {
-  background-image: image('brazil.svg');
+  background-image: image('icons/brazil.svg');
 }
 
 .awesomplete__region::before {
-  background-image: image('region.svg');
+  background-image: image('icons/region.svg');
 }
 
 .awesomplete__state::before {
-  background-image: image('location-pin.svg');
+  background-image: image('icons/location-pin.svg');
 }
 
 .awesomplete__city::before {
-  background-image: image('city.svg');
+  background-image: image('icons/city.svg');
 }

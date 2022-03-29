@@ -1,7 +1,7 @@
 list:
   - name: facebook
-    icon: "assets/facebook.svg"
+    icon: "assets/images/logos/facebook.svg"
     url: 'https://www.facebook.com/AppCivicoCSB/'
   - name: twitter
-    icon: "assets/twitter.svg"
+    icon: "assets/images/logos/twitter.svg"
     url: 'https://twitter.com/appcivico'

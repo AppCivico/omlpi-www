@@ -53,7 +53,7 @@
   height: 2.55rem;
   margin-top: 2rem;
 
-  background-image: image('logo.svg');
+  background-image: image('logos/logo.svg');
   background-size: contain;
 
   @media screen and (min-width: breakpoint('tablet')) {
@@ -123,23 +123,23 @@
 }
 
 .site-footer__social .facebook {
-  background-image: image('facebook.svg');
+  background-image: image('logos/facebook.svg');
 }
 
 .site-footer__social .twitter {
-  background-image: image('twitter.svg');
+  background-image: image('logos/twitter.svg');
 }
 
 .site-footer__social .instagram {
-  background-image: image('instagram.svg');
+  background-image: image('logos/instagram.svg');
 }
 
 .site-footer__social .whatsapp {
-  background-image: image('whatsapp.svg');
+  background-image: image('logos/whatsapp.svg');
 }
 
 .site-footer__social .github {
-  background: image('github.svg');
+  background: image('logos/github.svg');
 }
 
 
@@ -192,5 +192,5 @@
   color: palette('white');
   text-decoration: none;
 
-  background-image: image('appcivico.svg');
+  background-image: image('logos/appcivico.svg');
 }

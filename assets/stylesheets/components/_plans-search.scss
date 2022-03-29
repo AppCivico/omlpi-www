@@ -7,9 +7,9 @@
   // }
 
   // @media screen and (min-width: breakpoint('extra-wide')) {
-  //   background-image: image('plans-top-left.svg'),
-  //   image('plans-bottom-left.svg'),
-  //   image('plans-bottom-right.svg');
+  //   background-image: image('ornaments/plans-top-left.svg'),
+  //   image('ornaments/plans-bottom-left.svg'),
+  //   image('ornaments/plans-bottom-right.svg');
   //   background-position: top left, bottom left, bottom right;
   //   background-size: auto;
   // }
@@ -74,7 +74,7 @@
   text-indent: -999em;
 
   background-color: transparent;
-  background-image: image('search.svg');
+  background-image: image('icons/search.svg');
   background-position: center;
   background-size: 70%;
   border: 0;

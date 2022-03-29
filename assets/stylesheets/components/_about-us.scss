@@ -18,7 +18,7 @@
   }
 
   @media screen and (min-width: breakpoint('desktop')) {
-    background-image: image('about-us-ornament.png'), image('about-us.jpg');
+    background-image: image('home/about-us-ornament.png'), image('home/about-us.jpg');
     background-position: left bottom, center;
     background-size: 250px, cover;
   }
