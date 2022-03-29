@@ -1,6 +1,6 @@
 /* global Vue */
 import DOMPurify from 'dompurify';
-import marked from 'marked';
+import { marked } from 'marked';
 import config from './config';
 
 if (document.querySelector('#app-home-about')) {
