@@ -20,7 +20,19 @@ module:
   mounts:
     -
       source: "node_modules/cookies-eu-banner/dist/"
-      target: "assets/cookies-eu-banner"
+      target: "assets/vendor/"
+    -
+      source: "node_modules/highcharts/"
+      target: "assets/vendor/highcharts/"
+    -
+      source: "node_modules/@highcharts/"
+      target: "assets/vendor/@highcharts/"
+    -
+      source: "node_modules/vue/dist/"
+      target: "assets/vendor/"
+    -
+      source: "node_modules/wowjs/dist/"
+      target: "assets/vendor/"
     -
       source: "assets/"
       target: "assets/"

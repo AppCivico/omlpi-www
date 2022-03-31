@@ -24,11 +24,27 @@
   <link rel="preload" type="text/javascript" as="script"
     href="{{ $secureJS.RelPermalink }}" integrity="{{ $secureJS.Data.Integrity }}">
 
-  {{ if eq (getenv "NODE_ENV") "development" }}
-  <link rel="preload" src="https://unpkg.com/vue@2" crossorigin="anonymous">
-  {{ else }}
-  <link rel="preload" src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.min.js" crossorigin="anonymous">
-  {{ end }}
+  {{ $highCharts := resources.Get "vendor/highcharts/highcharts.js" | resources.Minify | resources.Fingerprint "sha512" }}
+  <link rel="preload" type="text/javascript" as="script" href="{{ $highCharts.RelPermalink }}" integrity="{{ $highCharts.Data.Integrity }}">
+
+  {{ $exporting := resources.Get "vendor/highcharts/modules/exporting.js" | resources.Minify | resources.Fingerprint "sha512" }}
+  <link rel="preload" type="text/javascript" as="script" href="{{ $exporting.RelPermalink }}" integrity="{{ $exporting.Data.Integrity }}">
+
+  {{ $map := resources.Get "vendor/highcharts/modules/map.js" | resources.Minify | resources.Fingerprint "sha512" }}
+  <link rel="preload" type="text/javascript" as="script" href="{{ $map.RelPermalink }}" integrity="{{ $map.Data.Integrity }}">
+
+  {{ $br := resources.Get "vendor/@highcharts/map-collection/countries/br/br-all.js" | resources.Minify | resources.Fingerprint "sha512" }}
+  <link rel="preload" type="text/javascript" as="script" href="{{ $br.RelPermalink }}" integrity="{{ $br.Data.Integrity }}">
+
+  {{ $drillDown := resources.Get "vendor/highcharts/modules/drilldown.js" | resources.Minify | resources.Fingerprint "sha512" }}
+  <link rel="preload" type="text/javascript" as="script" href="{{ $drillDown.RelPermalink }}" integrity="{{ $drillDown.Data.Integrity }}">
+
+  {{ $vue := resources.Get "vendor/vue.min.js" | resources.Fingerprint "sha512" }}
+  <link rel="preload" type="text/javascript" as="script" href="{{ $vue.RelPermalink }}" integrity="{{ $vue.Data.Integrity }}">
+
+  {{ $vue := resources.Get "vendor/vue.js" | js.Build | resources.Minify | resources.Fingerprint "sha512" }}
+  <link rel="preload" type="text/javascript" as="script" href="{{ $vue.RelPermalink }}"
+    integrity="{{ $vue.Data.Integrity }}">
 
   {{ if hugo.IsProduction }}
     {{ $sentry := "module.exports = window.sentry" | resources.FromString "js/shims/sentry.js" }}

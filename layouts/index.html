@@ -199,9 +199,11 @@
       </section>
     </main>
 
-
     {{ partial "footer.html" . }}
-    <script src="https://cdn.jsdelivr.net/npm/wowjs@1.1.2/dist/wow.min.js"></script>
+
+    {{ $wow := resources.Get "vendor/wow.min.js" | resources.Fingerprint "sha512" }}
+    <script src="{{ $wow.RelPermalink }}" integrity="{{ $wow.Data.Integrity }}"></script>
+
     {{ partial "scripts.html" . }}
 
     <script>
