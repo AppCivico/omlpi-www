@@ -44,21 +44,22 @@
           class="main-areas bg-gray"
           v-if="axis"
         >
-        <div class="container">
-          <div class="main-area__boxes">
-            <div
-              class="main-area__box"
-              v-for="(item, index) in axis"
-            >
-              <figure>
-                <img
-                  :src="`${storageDomain}${item.image.url}`"
-                  :alt="item.title"
-                >
-              </figure>
-              <h2>{{ "{{ item.title }}" }}</h2>
-              <div v-html="marked(item.text)"></div>
-              <a :href="item.link" class="button button--purple">{{ "{{ item.link_title }}" }}</a>
+          <div class="container">
+            <div class="main-area__boxes">
+              <div
+                class="main-area__box"
+                v-for="(item, index) in axis"
+              >
+                <figure>
+                  <img
+                    :src="`${storageDomain}${item.image.url}`"
+                    :alt="item.title"
+                  >
+                </figure>
+                <h2>{{ "{{ item.title }}" }}</h2>
+                <div v-html="marked(item.text)"></div>
+                <a :href="item.link" class="button button--purple">{{ "{{ item.link_title }}" }}</a>
+              </div>
             </div>
           </div>
         </div>
