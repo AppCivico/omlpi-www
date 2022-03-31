@@ -2,7 +2,7 @@
   "name": "omlpi",
   "version": "1.0.0",
   "description": "omlpi",
-  "main": "index.html",
+  "main": "public/index.html",
   "scripts": {
     "audit-deps": "rimraf -f package-lock.json && synp --source-file yarn.lock && npm audit & rimraf -f package-lock.json",
     "prebuild": "npm-run-all --parallel lint clean",
