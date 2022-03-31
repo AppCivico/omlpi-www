@@ -46,7 +46,7 @@
 - id: consent
   translation: >
     A visitação a esse site implica no aceite
-    <a href="./read-more.html" id="cookies-eu-more">
+    <a href="/rastreio" id="cookies-eu-more">
       do rastreio usando cookies do Google Analytics e do Facebook
     </a>
     para propósitos estatísticos.
