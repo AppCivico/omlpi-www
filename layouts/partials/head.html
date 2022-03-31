@@ -15,7 +15,9 @@
   {{ $style := resources.Get "stylesheets/index.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint "sha512" }}
 
   <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+  {{ $animateCSS := resources.Get "vendor/animate.min.css" | resources.Fingerprint "sha512" }}
+  <link rel="stylesheet" href="{{ $animateCSS.RelPermalink }}" integrity="{{ $animateCSS.Data.Integrity }}">
 
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,600&display=swap" rel="stylesheet">
 

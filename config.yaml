@@ -34,6 +34,9 @@ module:
       source: "node_modules/wowjs/dist/"
       target: "assets/vendor/"
     -
+      source: "node_modules/animate.css/"
+      target: "assets/vendor/"
+    -
       source: "assets/"
       target: "assets/"
 
