@@ -85,7 +85,7 @@
 	{{ end }}
 
 	<!-- Schema.org for Google -->
-	<meta itemprop="name" content="{{ .Site.Title }}">
+	<meta itemprop="name" content="{{ if not .IsHome }}{{ .Title }} &middot; {{ end }}{{ .Site.Title }}">
 
 	{{ with $.Site.Params.siteDescription }}
 	<meta itemprop="description" content="{{ . }}">
@@ -96,7 +96,7 @@
 	{{ end }}
 
 	<!-- Twitter and Open Graph general -->
-	<meta name="twitter:title" property="og:title" content="{{ .Site.Title }}">
+	<meta name="twitter:title" property="og:title" content="{{ if not .IsHome }}{{ .Title }} &middot; {{ end }}{{ .Site.Title }}">
 
 	{{ with $.Site.Params.siteDescription }}
     {{ if gt (len .) 200 }}
