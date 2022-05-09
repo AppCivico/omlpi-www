@@ -1,26 +1,66 @@
 ---
-title: Rastreio de visitantes
-date: 2022-03-31T14:49:56.000Z
+title: Política de Privacidade dos Sites do Observatório do marco da primeira infância
+date: 2022-05-09T14:24:56.000Z
 type: page
 draft: false
 ---
 
-## The standard Lorem Ipsum passage, used since the 1500s
+Versão: 1.0
 
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+Data: 09 de Maio de 2022.
 
-## Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
+**ESCOPO**
 
-"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+A presente Política de Privacidade descreve o tratamento dado pela Rede Nacional Primeira Infância (RNPI) aos dados pessoais coletados durante a navegação pelo portal do "O Observa" - Observatório do Marco Legal da Primeira Infância (https&#x3A;//rnpiobserva.org.br/), bem como pelos sistemas e pelas aplicações utilizados a partir da internet, acessados por meio do portal ou a partir das interfaces das próprias aplicações. Descreve, ainda, a forma de acesso aos dados mantidos pelo RNPI, que são acessíveis por intermédio de serviços disponibilizados em seus sites.
 
-## 1914 translation by H. Rackham
+Solicitamos informações pessoais apenas quando realmente precisamos delas para lhe fornecer um serviço. Fazemo-lo por meios justos e legais, com o seu conhecimento e consentimento. Também informamos por que estamos coletando e como será usado.
 
-"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"
+Não compartilhamos informações de identificação pessoal publicamente ou com terceiros, exceto quando exigido por lei.
 
-## Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
+O uso continuado de nosso site será considerado como aceitação de nossas práticas em torno de privacidade e informações pessoais. Se você tiver alguma dúvida sobre como lidamos com dados do usuário e informações pessoais, entre em contacto conosco.
 
-"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."
+O usuário se compromete a fazer uso adequado dos conteúdos e da informação que o "O Observa" oferece no site.
 
-## 1914 translation by H. Rackham
+**INFORMAÇÕES QUE COLETAMOS DURANTE SUA NAVEGAÇÃO**
 
-"On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."
+Ao visitarmos sites na internet, algumas informações a respeito do computador e dos softwares que utilizamos para essa finalidade são transmitidas automaticamente entre nossos computadores e os que residem os sites. Isso também ocorre no caso de acessos aos sites do "O Observa", e tais informações são coletadas pela "RNPI" para que tenhamos conhecimento sobre as origens dos acessos, bem como para a agregação de estatísticas sobre características técnicas dos computadores de nossos usuários, que nos permitam avaliar e incrementar a qualidade dos serviços prestados. As informações coletadas referidas são:
+
+1\. O endereço IP (número atribuído automaticamente ao seu computador pelo seu provedor de acesso todas as vezes que se conectar à internet) com o qual você realizou o acesso ao nosso site;
+
+2\. O tipo de navegador e sistema operacional utilizado para realizar o acesso;
+
+3\. Data e hora do acesso;
+
+4\. As páginas que você visita dentro do portal;
+
+5\. Se você acessa nossas páginas a partir de outro site, o nome e endereço IP deste site;
+
+6\. Eventualmente, informações de georreferenciamento, caso você esteja usando o serviço de justificação de ausência às urnas por estar fora de seu domicílio eleitoral em dia de eleições; e
+
+7\. Informações de georreferenciamento podem ainda ser utilizadas para a identificação de uso não autêntico como, por exemplo, acessos anormais advindos de regiões geográficas atípicas.
+
+**USO DE COOKIES**
+
+Um cookie é um pequeno arquivo de texto, enviado pelo site visitado por meio do navegador de internet, para registrar em seu disco rígido alguns dados. Ele não pode ler informações do seu disco rígido ou de cookies criados por outros sites. A maioria dos navegadores os aceita automaticamente, mas você pode evitar esta ação modificando as preferências em seu navegador.
+
+Ao acessar o site, você tem a opção de aceitar todos os cookies, ser notificado quando um deles for enviado pelo site que estiver visitando ou rejeitar todos. Se você optar por rejeitar, não conseguirá usar alguns dos serviços ou das funcionalidades do site visitado, incluindo os do "O Observa".
+
+Nossos cookies não contêm qualquer informação pessoal identificável, mas nos permitem oferecer determinadas funcionalidades que facilitam a navegação. Nos sites do "O Observa", os cookies são utilizados para:
+
+**Gerenciamento de sessão**
+
+Armazenamento de suas informações de login nos sites do "O Observa" de forma que você possa ter acesso às diversas páginas, que componham a área restrita, às quais você teve acesso depois de se autenticar por meio do fornecimento de usuário e senha, certificado digital, ou outro tipo de autenticação.
+
+**Análise de utilização dos sites do "O Observa"**
+
+Acompanhamento das formas de utilização dos sites do "O Observa", de forma a nos permitir compreender que assuntos são mais procurados, que caminhos de navegação são mais utilizados e outras informações semelhantes, permitindo-nos evoluir a configuração dos sites e prover uma experiência de navegação cada vez mais adequada às necessidades de nossos usuários.
+
+Este site usa o Google Analytics e o Pixel Facebook, que são soluções de análise de terceiros, para nos ajudar a entender como você usa o site e como podemos melhorar sua experiência. Esses cookies podem rastrear itens como quanto tempo você gasta no site e as páginas visitadas, para que possamos continuar produzindo conteúdo atraente.
+
+Para mais informações sobre os _cookies_ do Google Analytics ou do Pixel Facebook, consulte a página oficial dos respectivos serviços.
+
+**LINKS PARA OUTROS SÍTIOS**
+
+O site do "O Observa" contém links para outros sítios. Neste caso, é importante ressaltar que as informações que você vier a fornecer aos sítios não estão sujeitas à Política de Privacidade do "O Observa". Caso deseje conhecer a política do site de destino, deverá procurar a informação naquele sítio.
+
+Esta política é efetiva a partir de Maio de 2022.
