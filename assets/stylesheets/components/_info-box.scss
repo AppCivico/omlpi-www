@@ -143,7 +143,7 @@
 
   font-size: ms(0);
   font-weight: font-weight('text');
-  color: palette('gray', 'light');
+  color: palette('gray', 'base');
 }
 
 .infobox__icons {
@@ -185,7 +185,7 @@
 
   font-size: ms(-1);
   font-style: normal;
-  color: palette('gray', 'light');
+  color: palette('gray', 'x-dark');
 }
 
 .infobox--single .infobox__percentage,
