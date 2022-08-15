@@ -36,8 +36,8 @@
             <h2>Patrocínio</h2>
             {{ $img := resources.Get "images/footer/petrobras.svg" | resources.Minify | resources.Fingerprint "sha512" }}
             <img src="{{ $img.RelPermalink }}" integrity="{{ $img.Data.Integrity }}" class="footer-logos__petrobras" alt="Petrobrás" />
-            {{ $img := resources.Get "images/footer/governo-federal.svg" | resources.Minify | resources.Fingerprint "sha512" }}
-            <img src="{{ $img.RelPermalink }}" integrity="{{ $img.Data.Integrity }}" class="footer-logos__governo-federal" alt="Governo Federal" />
+            {{/*{{ $img := resources.Get "images/footer/governo-federal.svg" | resources.Minify | resources.Fingerprint "sha512" }}
+            <img src="{{ $img.RelPermalink }}" integrity="{{ $img.Data.Integrity }}" class="footer-logos__governo-federal" alt="Governo Federal" />*/}}
           </div>
         </div>
       </div>
