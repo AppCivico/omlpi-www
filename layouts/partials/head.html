@@ -13,7 +13,6 @@
   <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0" name="viewport">
 
   {{ $style := resources.Get "stylesheets/index.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint "sha512" }}
-
   <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
 
   {{ $animateCSS := resources.Get "vendor/animate.min.css" | resources.Fingerprint "sha512" }}
@@ -41,12 +40,9 @@
   {{ $drillDown := resources.Get "vendor/highcharts/modules/drilldown.js" | resources.Minify | resources.Fingerprint "sha512" }}
   <link rel="preload" type="text/javascript" as="script" href="{{ $drillDown.RelPermalink }}" integrity="{{ $drillDown.Data.Integrity }}">
 
-  {{ $vue := resources.Get "vendor/vue.min.js" | resources.Fingerprint "sha512" }}
-  <link rel="preload" type="text/javascript" as="script" href="{{ $vue.RelPermalink }}" integrity="{{ $vue.Data.Integrity }}">
+  {{ $vue := resources.Get (cond hugo.IsProduction "vendor/vue.min.js" "vendor/vue.js") | resources.Fingerprint "sha512" }}
 
-  {{ $vue := resources.Get "vendor/vue.js" | js.Build | resources.Minify | resources.Fingerprint "sha512" }}
-  <link rel="preload" type="text/javascript" as="script" href="{{ $vue.RelPermalink }}"
-    integrity="{{ $vue.Data.Integrity }}">
+  <link rel="preload" type="text/javascript" as="script" href="{{ $vue.RelPermalink }}" integrity="{{ $vue.Data.Integrity }}" />
 
   {{ if hugo.IsProduction }}
     {{ $sentry := "module.exports = window.sentry" | resources.FromString "js/shims/sentry.js" }}
