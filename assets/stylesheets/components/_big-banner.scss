@@ -18,19 +18,16 @@
   @media screen and (min-width: breakpoint('tablet')) {
     width: 40%;
     padding-right: 4rem;
-  }
-}
-
-.big-banner__text--small {
-  margin-top: 2rem;
-
-  @media screen and (min-width: breakpoint('tablet')) {
     margin-bottom: 6rem;
   }
 
   @media screen and (min-width: breakpoint('desktop')) {
     margin-bottom: 10rem;
   }
+}
+
+.big-banner__text--small {
+  margin-top: 2rem;
 }
 
 .big-banner__text h1 {

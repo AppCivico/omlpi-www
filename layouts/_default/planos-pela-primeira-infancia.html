@@ -104,30 +104,32 @@
             <div class="big-banner">
               <div class="big-banner__text">
                 <template v-if="infographic">
-                  <h1>{{ "{{ infographic.title }}" }}</h1>
-                  <p>
+                  <h1 v-if="infographic.title">
+                    {{ "{{ infographic.title }}" }}
+                  </h1>
+                  <p v-if="infographic.description">
                     {{ "{{ infographic.description }}" }}
                   </p>
+                  <a
+                    class="button button--purple"
+                    v-if="infographic.url"
+                    :href="infographic.url"
+                    target="_blank"
+                  >
+                    Acessar resultados
+                  </a>
                 </template>
-                <a
-                  class="button button--purple"
-                  v-if="infographic && infographic.url"
-                  :href="infographic.url"
-                  target="_blank"
-                >
-                  Acessar resultados
-                </a>
 
-                <div class="big-banner__text--small">
-                  <template v-if="plansList">
-                    <h1>{{ "{{ plansList.title }}" }}</h1>
-                    <p>
-                      {{ "{{ plansList.description }}" }}
-                    </p>
-                  </template>
+                <div class="big-banner__text--small" v-if="plansList">
+                  <h1 v-if="plansList.title">
+                    {{ "{{ plansList.title }}" }}
+                  </h1>
+                  <p v-if="plansList.description">
+                    {{ "{{ plansList.description }}" }}
+                  </p>
                   <a
                     class="button button--small button--purple"
-                    v-if="plansList && plansList.file.url"
+                    v-if="plansList.file && plansList.file.url"
                     :href="`${storageDomain}${plansList.file.url}`"
                     target="_blank"
                   >
