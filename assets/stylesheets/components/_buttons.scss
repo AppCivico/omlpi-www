@@ -16,6 +16,11 @@
   border: 0;
   border-radius: 10px;
 
+  > * {
+    margin-right: 0.125em;
+    margin-left: 0.125em;
+  }
+
   &[disabled] {
     cursor: not-allowed;
 
