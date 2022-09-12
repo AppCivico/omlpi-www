@@ -9,7 +9,14 @@ const formatterMixing = {
         return '';
       }
       if (values.value_relative !== null) {
-        return Math.round(values.value_relative) + (isPercentage ? '%' : '');
+        const relativeValue = /^\d+,\d*$/.test(values.value_relative)
+          ? Number(values.value_relative).toLocaleString('pt-br')
+          // parseFloat already does some kind of rounding
+          : parseFloat(values.value_relative);
+
+        return Number.isNaN(relativeValue)
+          ? 'invalid indicator format'
+          : Math.round(relativeValue) + (isPercentage ? '%' : '');
       }
       if (values.value_absolute !== null) {
         return Number(values.value_absolute).toLocaleString('pt-br');
