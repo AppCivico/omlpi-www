@@ -10,6 +10,8 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
     el: '#app',
     data: {
       infographic: null,
+      nationalPlan: null,
+      cityPlanGuide: null,
       plansList: null,
       locales: null,
       localesWithPlan: null,

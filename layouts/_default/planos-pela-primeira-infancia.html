@@ -120,6 +120,23 @@
                   </a>
                 </template>
 
+                <div class="big-banner__text--small" v-if="nationalPlan">
+                  <h1 v-if="nationalPlan.title">
+                    {{ "{{ nationalPlan.title }}" }}
+                  </h1>
+                  <p v-if="nationalPlan.description">
+                    {{ "{{ nationalPlan.description }}" }}
+                  </p>
+                  <a
+                    class="button button--small button--purple"
+                    v-if="nationalPlan.url"
+                    :href="nationalPlan.url"
+                    target="_blank"
+                  >
+                    Acessar plano nacional
+                  </a>
+                </div>
+
                 <div class="big-banner__text--small" v-if="plansList">
                   <h1 v-if="plansList.title">
                     {{ "{{ plansList.title }}" }}
@@ -159,6 +176,19 @@
                 <p>Envie para o Observatório para que ele seja disponibilizado aqui, preenchendo o formulário.</p>
 
                 <p>Faça parte do Observatório!</p>
+
+                <p v-if="cityPlanGuide">
+                  <a
+                    class="button button--small button--purple"
+                    v-if="cityPlanGuide.url"
+                    :href="cityPlanGuide.url"
+                    target="_blank"
+                    :title="cityPlanGuide.description || null"
+                    :download="cityPlanGuide.title"
+                  >
+                    Baixar guia de elaboração do <abbr title="Plano Municipal de Primeira Infância">PMPI</abbr>
+                  </a>
+                </p>
               </div>
               <div class="send-plan__fields">
                 <label for="name">
