@@ -466,7 +466,12 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
       },
       getInfoGraphic() {
         return fetch(`${config.apiCMS.domain}infographics`)
-          .then((response) => response.json())
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not OK');
+            }
+            return response.json();
+          })
           .then((response) => {
             this.infographic = {};
             this.infographic.title = response.title;
@@ -483,13 +488,24 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
             if (response.pdf && response.pdf.url) {
               this.infographic.url = `${config.storage.domain}${response.pdf.url}`;
             }
+          })
+          .catch((error) => {
+            console.error('There has been a problem with your fetch operation:', error);
           });
       },
       getPlansList() {
         return fetch(`${config.apiCMS.domain}listaplanos`)
-          .then((response) => response.json())
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not OK');
+            }
+            return response.json();
+          })
           .then((response) => {
             this.plansList = response;
+          })
+          .catch((error) => {
+            console.error('There has been a problem with your fetch operation:', error);
           });
       },
     },
