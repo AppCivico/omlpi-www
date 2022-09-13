@@ -27,7 +27,13 @@
 }
 
 .big-banner__text--small {
-  margin-top: 2rem;
+  display: block;
+
+  margin-bottom: 2rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .big-banner__text h1 {

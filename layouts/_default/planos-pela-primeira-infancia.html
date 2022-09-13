@@ -103,56 +103,35 @@
           <div class="container">
             <div class="big-banner">
               <div class="big-banner__text">
-                <template v-if="infographic">
-                  <h1 v-if="infographic.title">
-                    {{ "{{ infographic.title }}" }}
-                  </h1>
-                  <p v-if="infographic.description">
-                    {{ "{{ infographic.description }}" }}
-                  </p>
-                  <a
-                    class="button button--purple"
-                    v-if="infographic.url"
-                    :href="infographic.url"
-                    target="_blank"
-                  >
-                    Acessar resultados
-                  </a>
-                </template>
-
-                <div class="big-banner__text--small" v-if="nationalPlan">
-                  <h1 v-if="nationalPlan.title">
-                    {{ "{{ nationalPlan.title }}" }}
-                  </h1>
-                  <p v-if="nationalPlan.description">
-                    {{ "{{ nationalPlan.description }}" }}
-                  </p>
-                  <a
-                    class="button button--small button--purple"
-                    v-if="nationalPlan.url"
-                    :href="nationalPlan.url"
-                    target="_blank"
-                  >
-                    Acessar plano nacional
-                  </a>
-                </div>
-
-                <div class="big-banner__text--small" v-if="plansList">
-                  <h1 v-if="plansList.title">
-                    {{ "{{ plansList.title }}" }}
-                  </h1>
-                  <p v-if="plansList.description">
-                    {{ "{{ plansList.description }}" }}
-                  </p>
-                  <a
-                    class="button button--small button--purple"
-                    v-if="plansList.file && plansList.file.url"
-                    :href="`${storageDomain}${plansList.file.url}`"
-                    target="_blank"
-                  >
-                    Acessar lista
-                  </a>
-                </div>
+                <h1 v-if="infographic || nationalPlan || plansList || cityPlanGuide">
+                  Documentos de referência
+                </h1>
+                <ul>
+                  <li class="big-banner__text--small" v-if="infographic && infographic.url">
+                    <a :href="infographic.url" target="_blank" download>
+                      {{ "{{ infographic.title }}" }}
+                    </a>
+                      {{ "{{ infographic.description }}" }}
+                  </li>
+                  <li class="big-banner__text--small" v-if="nationalPlan && nationalPlan.url">
+                    <a :href="nationalPlan.url" target="_blank" download>
+                      {{ "{{ nationalPlan.title }}" }}
+                    </a>
+                      {{ "{{ nationalPlan.description }}" }}
+                  </li>
+                  <li class="big-banner__text--small" v-if="plansList && plansList.file && plansList.file.url">
+                    <a :href="`${storageDomain}${plansList.file.url}`" target="_blank" download>
+                      {{ "{{ plansList.title }}" }}
+                    </a>
+                      {{ "{{ plansList.description }}" }}
+                  </li>
+                  <li class="big-banner__text--small" v-if="cityPlanGuide && cityPlanGuide.url">
+                    <a :href="cityPlanGuide.url" target="_blank" download>
+                      {{ "{{ cityPlanGuide.title }}" }}
+                    </a>
+                    {{ "{{ cityPlanGuide.description }}" }}
+                  </li>
+                </ul>
               </div>
               <div class="big-banner__image">
                 <div id="map"></div>
@@ -176,19 +155,6 @@
                 <p>Envie para o Observatório para que ele seja disponibilizado aqui, preenchendo o formulário.</p>
 
                 <p>Faça parte do Observatório!</p>
-
-                <p v-if="cityPlanGuide">
-                  <a
-                    class="button button--small button--purple"
-                    v-if="cityPlanGuide.url"
-                    :href="cityPlanGuide.url"
-                    target="_blank"
-                    :title="cityPlanGuide.description || null"
-                    :download="cityPlanGuide.title"
-                  >
-                    Baixar guia de elaboração do <abbr title="Plano Municipal de Primeira Infância">PMPI</abbr>
-                  </a>
-                </p>
               </div>
               <div class="send-plan__fields">
                 <label for="name">
