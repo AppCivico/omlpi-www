@@ -513,6 +513,22 @@ a {
   &[target='_blank'],
   &[rel='external'] {
   }
+
+  &[download] {
+    &::after {
+      display: inline-block;
+
+      width: 1.25rem;
+      height: 1em;
+
+      cursor: pointer;
+      content: '';
+
+      background-image: image('icons/download-icon.svg');
+      background-position: 50% 100%;
+      background-size: contain;
+    }
+  }
 }
 
 /* Contact info and addresses

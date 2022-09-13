@@ -1,6 +1,8 @@
 %button {
   display: inline-flex;
 
+  align-items: baseline;
+
   padding: 0.6rem 1.2rem;
 
   font-size: ms(1);
@@ -25,6 +27,10 @@
     cursor: not-allowed;
 
     background-color: palette('gray', 'light');
+  }
+
+  &[download]::after {
+    content: none;
   }
 }
 
