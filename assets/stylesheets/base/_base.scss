@@ -552,3 +552,20 @@ pre {
 
   background-color: palette('text', 'dark');
 }
+
+/* Code blocks
+---------------------------------------------------------------------------- */
+ul {
+  padding: 0;
+  margin: 0 0 #{$gutter * 0.5} 0;
+}
+
+ul ul {
+  padding: 0 0 0 #{$gutter * 0.5};
+}
+
+ul li {
+  &::marker {
+    color: #47b3af;
+  }
+}
