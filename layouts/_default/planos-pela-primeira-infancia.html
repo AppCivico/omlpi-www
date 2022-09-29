@@ -102,34 +102,31 @@
 
           <div class="container">
             <div class="big-banner">
-              <div class="big-banner__text">
-                <h1 v-if="infographic || nationalPlan || plansList || cityPlanGuide">
+              <div class="big-banner__text" v-if="infographic || guides?.length || plansList">
+                <h1>
                   Documentos de referência
                 </h1>
                 <ul>
+                  <template v-for="(guide, idx) in guides">
+                    <li class="big-banner__text--small" v-if="guide.url" :key="idx">
+                      <a :href="guide.url" target="_blank" download>
+                        <strong>{{ "{{ guide.title }}" }}</strong>
+                      </a>
+                        {{ "{{ guide.description }}" }}
+                    </li>
+                  </template>
+
                   <li class="big-banner__text--small" v-if="infographic && infographic.url">
                     <a :href="infographic.url" target="_blank" download>
-                      {{ "{{ infographic.title }}" }}
+                      <strong>{{ "{{ infographic.title }}" }}</strong>
                     </a>
                       {{ "{{ infographic.description }}" }}
                   </li>
-                  <li class="big-banner__text--small" v-if="nationalPlan && nationalPlan.url">
-                    <a :href="nationalPlan.url" target="_blank" download>
-                      {{ "{{ nationalPlan.title }}" }}
-                    </a>
-                      {{ "{{ nationalPlan.description }}" }}
-                  </li>
                   <li class="big-banner__text--small" v-if="plansList && plansList.file && plansList.file.url">
                     <a :href="`${storageDomain}${plansList.file.url}`" target="_blank" download>
-                      {{ "{{ plansList.title }}" }}
+                      <strong>{{ "{{ plansList.title }}" }}</strong>
                     </a>
                       {{ "{{ plansList.description }}" }}
-                  </li>
-                  <li class="big-banner__text--small" v-if="cityPlanGuide && cityPlanGuide.url">
-                    <a :href="cityPlanGuide.url" target="_blank" download>
-                      {{ "{{ cityPlanGuide.title }}" }}
-                    </a>
-                    {{ "{{ cityPlanGuide.description }}" }}
                   </li>
                 </ul>
               </div>

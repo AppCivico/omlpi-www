@@ -10,8 +10,8 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
     el: '#app',
     data: {
       infographic: null,
-      nationalPlan: null,
-      cityPlanGuide: null,
+      guides: [
+      ],
       plansList: null,
       locales: null,
       localesWithPlan: null,
@@ -489,6 +489,29 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
 
             if (response.pdf && response.pdf.url) {
               this.infographic.url = `${config.storage.domain}${response.pdf.url}`;
+            }
+          })
+          .catch((error) => {
+            console.error('There has been a problem with your fetch operation:', error);
+          });
+      },
+      getHelperFiles() {
+        const url = `${config.apiCMS.domain}guides`;
+
+        return fetch(url)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not OK');
+            }
+            return response.json();
+          })
+          .then((response) => {
+            if (Array.isArray(response)) {
+              this.guides = response;
+            } else if (response.url && response.title) {
+              this.guides = [response];
+            } else {
+              throw new Error(`Response of \`${url}\` out of expected format.`);
             }
           })
           .catch((error) => {
