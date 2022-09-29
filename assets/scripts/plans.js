@@ -507,7 +507,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           })
           .then((response) => {
             if (Array.isArray(response)) {
-              this.guides = response;
+              this.guides = response.map((x) => ({ ...x, url: `${config.storage.domain}${x.url}` }));
             } else if (response.url && response.title) {
               this.guides = [response];
             } else {
