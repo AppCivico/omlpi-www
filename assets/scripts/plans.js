@@ -10,8 +10,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
     el: '#app',
     data: {
       infographic: null,
-      guides: [
-      ],
+      guides: [],
       plansList: null,
       locales: null,
       localesWithPlan: null,
@@ -43,7 +42,8 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
     },
     async mounted() {
       await this.getInfoGraphic();
-      await this.getPlansList();
+      this.getPlansList();
+      this.getHelperFiles();
     },
     methods: {
       generateChart() {
@@ -496,7 +496,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
           });
       },
       getHelperFiles() {
-        const url = `${config.apiCMS.domain}guides`;
+        const url = `${config.apiCMS.domain}guias`;
 
         return fetch(url)
           .then((response) => {
