@@ -102,7 +102,7 @@
 
           <div class="container">
             <div class="big-banner">
-              <div class="big-banner__text" v-if="infographic || guides?.length || plansList">
+              <div class="big-banner__text" v-if="guides && guides.length">
                 <h1>
                   Documentos de referência
                 </h1>
@@ -115,19 +115,6 @@
                         {{ "{{ guide.description }}" }}
                     </li>
                   </template>
-
-                  <li class="big-banner__text--small" v-if="infographic && infographic.url">
-                    <a :href="infographic.url" target="_blank" download>
-                      <strong>{{ "{{ infographic.title }}" }}</strong>
-                    </a>
-                      {{ "{{ infographic.description }}" }}
-                  </li>
-                  <li class="big-banner__text--small" v-if="plansList && plansList.file && plansList.file.url">
-                    <a :href="`${storageDomain}${plansList.file.url}`" target="_blank" download>
-                      <strong>{{ "{{ plansList.title }}" }}</strong>
-                    </a>
-                      {{ "{{ plansList.description }}" }}
-                  </li>
                 </ul>
               </div>
               <div class="big-banner__image">

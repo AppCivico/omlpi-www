@@ -9,9 +9,7 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
   window.$vuePlans = new Vue({
     el: '#app',
     data: {
-      infographic: null,
       guides: [],
-      plansList: null,
       locales: null,
       localesWithPlan: null,
       selectedLocale: null,
@@ -41,8 +39,6 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
       },
     },
     async mounted() {
-      await this.getInfoGraphic();
-      this.getPlansList();
       this.getHelperFiles();
     },
     methods: {
@@ -466,35 +462,6 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
         this.relatedLocales = null;
         this.capital = null;
       },
-      getInfoGraphic() {
-        return fetch(`${config.apiCMS.domain}infographics`)
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error('Network response was not OK');
-            }
-            return response.json();
-          })
-          .then((response) => {
-            this.infographic = {};
-            this.infographic.title = response.title;
-            this.infographic.description = response.description;
-
-            if (response.small && response.small.url) {
-              this.infographic.small = `${config.storage.domain}${response.small.url}`;
-            }
-
-            if (response.big && response.big.url) {
-              this.infographic.big = `${config.storage.domain}${response.big.url}`;
-            }
-
-            if (response.pdf && response.pdf.url) {
-              this.infographic.url = `${config.storage.domain}${response.pdf.url}`;
-            }
-          })
-          .catch((error) => {
-            console.error('There has been a problem with your fetch operation:', error);
-          });
-      },
       getHelperFiles() {
         const url = `${config.apiCMS.domain}guias`;
 
@@ -513,21 +480,6 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
             } else {
               throw new Error(`Response of \`${url}\` out of expected format.`);
             }
-          })
-          .catch((error) => {
-            console.error('There has been a problem with your fetch operation:', error);
-          });
-      },
-      getPlansList() {
-        return fetch(`${config.apiCMS.domain}listaplanos`)
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error('Network response was not OK');
-            }
-            return response.json();
-          })
-          .then((response) => {
-            this.plansList = response;
           })
           .catch((error) => {
             console.error('There has been a problem with your fetch operation:', error);
