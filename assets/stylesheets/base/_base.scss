@@ -124,15 +124,6 @@ body {
   }
 }
 
-
-/**
- * 1. Set sticky footer
- */
-main,
-[role='main'] {
-  flex-grow: 1; /* 1 */
-}
-
 /* section items HTML5
 ============================================================================ */
 /**
@@ -153,6 +144,21 @@ menu,
 nav,
 section {
   display: block;
+}
+
+/**
+ * 1. Set sticky footer
+ */
+main,
+[role='main'] {
+  display: flex;
+
+  flex-direction: column;
+  flex-grow: 1; /* 1 */
+}
+
+[id='app'] {
+  flex-grow: 1; /* 1 */
 }
 
 /*
