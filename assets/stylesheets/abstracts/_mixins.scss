@@ -858,35 +858,50 @@ $no-viewport: false !default;
 
 /// Handle homepage slider backgrounds easily
 @mixin handle-background($bg-number, $bg-primary-color, $bg-secondary-color) {
-  /* stylelint-disable value-list-comma-newline-after */
-  background-image: linear-gradient(to bottom,
-  $bg-primary-color, $bg-secondary-color
-), image('bg-home-#{$bg-number}-320.jpg');
+  background-image: linear-gradient(to bottom, $bg-primary-color, $bg-secondary-color), image('bg-home-#{$bg-number}-320.jpg');
   background-size: cover;
   background-blend-mode: multiply;
 
   @media screen and (min-width: breakpoint('phablet')) {
-    background-image: linear-gradient(to bottom,
-    $bg-primary-color, $bg-secondary-color
-  ), image('bg-home-#{$bg-number}-480.jpg');
+    background-image: linear-gradient(to bottom, $bg-primary-color, $bg-secondary-color), image('bg-home-#{$bg-number}-480.jpg');
   }
 
   @media screen and (min-width: breakpoint('tablet')) {
-    background-image: linear-gradient(to bottom,
-    $bg-primary-color, $bg-secondary-color
-  ), image('bg-home-#{$bg-number}-768.jpg');
+    background-image: linear-gradient(to bottom, $bg-primary-color, $bg-secondary-color), image('bg-home-#{$bg-number}-768.jpg');
   }
 
   @media screen and (min-width: breakpoint('desktop')) {
-    background-image: linear-gradient(to bottom,
-    $bg-primary-color, $bg-secondary-color
-  ), image('bg-home-#{$bg-number}-1024.jpg');
+    background-image: linear-gradient(to bottom, $bg-primary-color, $bg-secondary-color), image('bg-home-#{$bg-number}-1024.jpg');
   }
 
   @media screen and (min-width: breakpoint('desktop')) {
-    background-image: linear-gradient(to bottom,
-    $bg-primary-color, $bg-secondary-color
-  ), image('bg-home-#{$bg-number}-1366.jpg');
+    background-image: linear-gradient(to bottom, $bg-primary-color, $bg-secondary-color), image('bg-home-#{$bg-number}-1366.jpg');
   }
-  /* stylelint-enable value-list-comma-newline-after */
+}
+
+@mixin download {
+  width: 1.25rem;
+  min-width: 22px;
+  height: 1.25rem;
+  min-height: 22px;
+
+  line-height: 1em;
+
+  cursor: pointer;
+
+  background-image: image('icons/download-icon.svg');
+  background-position: 50% 0%;
+  background-size: 15px 18px;
+  border-bottom: 2px solid palette('gray', 'light');
+  opacity: 0.65;
+
+  /// @see https://easings.net/#easeOutBack
+  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-duration: 300ms;
+  transition-property: background-position, opacity;
+}
+
+@mixin download--hover {
+  background-position: 50% 6px;
+  opacity: 1;
 }
