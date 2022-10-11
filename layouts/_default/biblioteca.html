@@ -157,7 +157,9 @@
         <div class="modal" :class="{closed: !currentVideo}" id="modal">
           <button class="close-button" id="close-button" @click="toggleModal()">&times;</button>
             <div class="embed-container">
-              <iframe width="560" height="315" :src="currentVideo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen ref="iframeYoutube"></iframe>
+              <iframe name="iframe-youtube" width="560" height="315"
+              :src="currentVideo" frameborder="0" allow="autoplay;
+             fullscreen; encrypted-media" allowfullscreen ref="iframeYoutube"></iframe>
             </div>
         </div>
 
