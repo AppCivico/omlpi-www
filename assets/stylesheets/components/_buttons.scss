@@ -158,6 +158,11 @@
   }
 }
 
-.button-like-text {
+.button--like-text {
+  padding: 0;
 
+  cursor: pointer;
+
+  background-color: transparent;
+  border: 0;
 }
