@@ -20,10 +20,13 @@
 
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,600&display=swap" rel="stylesheet">
 
+  {{ $defines := dict "process.env.NODE_ENV" (printf "'%s'" hugo.Environment) }}
+  {{ $opts := dict "defines" $defines }}
   {{ $js := resources.Get "scripts/index.js" }}
-  {{ $secureJS := $js | js.Build | resources.Minify | resources.Fingerprint "sha512" }}
+  {{ .Scratch.Set "secureJS" ($js | js.Build $opts | resources.Minify | resources.Fingerprint "sha512") }}
+
   <link rel="preload" type="text/javascript" as="script"
-    href="{{ $secureJS.RelPermalink }}" integrity="{{ $secureJS.Data.Integrity }}">
+    href="{{ (.Scratch.Get "secureJS").RelPermalink }}" integrity="{{ (.Scratch.Get "secureJS").Data.Integrity }}">
 
   {{ $highCharts := resources.Get "vendor/highcharts/highcharts.js" | resources.Minify | resources.Fingerprint "sha512" }}
   <link rel="preload" type="text/javascript" as="script" href="{{ $highCharts.RelPermalink }}" integrity="{{ $highCharts.Data.Integrity }}">

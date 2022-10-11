@@ -16,8 +16,7 @@
 {{ $vue := resources.Get (cond hugo.IsProduction "vendor/vue.min.js" "vendor/vue.js") | resources.Fingerprint "sha512" }}
 <script src="{{ $vue.RelPermalink }}" integrity="{{ $vue.Data.Integrity }}"></script>
 
-{{ $secureJS := resources.Get "scripts/index.js" | js.Build | resources.Minify | resources.Fingerprint "sha512" }}
-<script type="text/javascript" src="{{ $secureJS.RelPermalink }}" integrity="{{ $secureJS.Data.Integrity }}"></script>
+<script type="text/javascript" src="{{ (.Scratch.Get "secureJS").RelPermalink }}" integrity="{{ (.Scratch.Get "secureJS").Data.Integrity }}"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180028503-1"></script>
