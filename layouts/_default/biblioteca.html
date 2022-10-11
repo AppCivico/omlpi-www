@@ -87,7 +87,7 @@
                       <time :datetime="article.date">{{ "{{ article.date }}" }}</time>
                     </span>
                   </template>
-                  <span v-if="article.tags.length > 0" class="library-item__tags">
+                  <span v-if="article.tags?.length > 0" class="library-item__tags">
                     <strong v-if="article.tags.length > 0">Tags:</strong>
                     <template v-for="(tag, index) in article.tags">
                       <span>
