@@ -8,6 +8,9 @@ if (window.location.href.indexOf('biblioteca') > -1) {
       currentVideo: '',
       articles: null,
       searchQuery: null,
+      pending: {
+        articles: true,
+      },
       storageDomain: config.storage.domain,
       has_more: false,
       pagination_offset: 0,
@@ -59,6 +62,8 @@ if (window.location.href.indexOf('biblioteca') > -1) {
       //   event.target.setAttribute('hidden', true);
       // },
       getArticles(loadMore, search = false) {
+        this.pending.articles = true;
+
         if (search) {
           this.pagination_offset = 0;
           this.pagination_limit = 15;
@@ -93,6 +98,9 @@ if (window.location.href.indexOf('biblioteca') > -1) {
                 results.scrollIntoView({ behavior: 'smooth' });
               }
             }
+          })
+          .finally(() => {
+            this.pending.articles = false;
           });
       },
     },

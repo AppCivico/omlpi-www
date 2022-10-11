@@ -121,9 +121,14 @@
               </div>
             </article>
           </div>
+
+          <div class="loading" :aria-busy="pending.articles" v-if="pending.articles">
+            Aguarde, carregando as informações...
+          </div>
+
           <a
             class="button library-item__load-more"
-            v-if="has_more"
+            v-else-if="has_more"
             @click.prevent="getArticles(true)"
           >
             Carregar mais
