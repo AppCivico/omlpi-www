@@ -30,7 +30,18 @@
                     v-model="searchQuery"
                     placeholder="{{ i18n "exploreArticlesPlaceholder" }}"
                   >
-                    <button class="search-area__search-text-button">{{ i18n "search" }}</button>
+
+                  <button type="submit" class="search-area__search-text-button">{{ i18n "search" }}</button>
+
+                  <ul class="search-suggestions" v-if="searchSuggestions?.length">
+                    <li class="search-suggestions__term" v-for="suggestion in
+                    searchSuggestions" :key="suggestion.id">
+                      <button type="submit" class="button button--small button--blue" title="procurar por..."
+                      :value="suggestion.tag?.name || suggestion?.term" @click="searchQuery = suggestion.tag?.name
+                      || suggestion.term">
+                        {{ "{{ suggestion.term }}" }}</button>
+                    </li>
+                  </ul>
                 </form>
               </section>
             </div>

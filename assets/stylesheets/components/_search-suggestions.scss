@@ -1,0 +1,33 @@
+.search-suggestions {
+}
+
+.search-suggestions__term,
+.search-suggestions__term > button {
+  font-weight: inherit;
+  text-transform: none;
+}
+
+.search-suggestions__term {
+  display: inline-block;
+
+  margin-right: 0.25em;
+
+  list-style: none;
+}
+
+.search-suggestions__term > button {
+  padding-top: 0;
+  padding-right: 0.5em;
+  padding-bottom: 0;
+  padding-left: 0.5em;
+
+  font-variant: normal;
+
+  border: 0;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: palette('perrywinkle', 'dark');
+  }
+}

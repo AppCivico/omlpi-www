@@ -8,6 +8,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
       currentVideo: '',
       articles: null,
       searchQuery: null,
+      searchSuggestions: [],
       pending: {
         articles: true,
       },
@@ -23,6 +24,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
     },
     async mounted() {
       await this.getArticles();
+      this.getSearchSuggestions();
       // await this.putHasmoreButtons();
     },
     methods: {
@@ -61,6 +63,27 @@ if (window.location.href.indexOf('biblioteca') > -1) {
       //   event.target.previousElementSibling.classList.add('library-item__description--full');
       //   event.target.setAttribute('hidden', true);
       // },
+      getSearchSuggestions() {
+        const url = `${config.apiCMS.domain}search-suggestions?_limit=12`;
+
+        return fetch(url)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not OK');
+            }
+            return response.json();
+          })
+          .then((results) => {
+            if (Array.isArray(results)) {
+              this.searchSuggestions = results;
+            } else {
+              throw new Error('Response out of expected format');
+            }
+          })
+          .catch((error) => {
+            console.error('There has been a problem with your fetch operation:', error);
+          });
+      },
       getArticles(loadMore, search = false) {
         this.pending.articles = true;
 
