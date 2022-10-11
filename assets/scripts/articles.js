@@ -32,7 +32,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
           const re = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w-]+\?v=|embed\/|v\/)?)([\w-]+)(\S+)?$/i;
           const videoId = (youtubeUrl.match(re) || [])[5] || '';
           const embedUrl = videoId
-            ? `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&amp;showinfo=0&enablejsapi=1`
+            ? `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&showinfo=0&enablejsapi=1&origin=${window.location.origin}`
             : '';
 
           func = !videoId ? 'pauseVideo' : 'playVideo';
