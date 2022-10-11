@@ -64,21 +64,24 @@ if (window.location.href.indexOf('biblioteca') > -1) {
           this.pagination_limit = 15;
         }
 
-        let url = `${config.apiCMS.domain}artigos?_limit=${this.pagination_limit}&_offset=${this.pagination_offset}`;
-
-        if (this.searchQuery) {
-          url = `${config.apiCMS.domain}artigos?_q=${this.searchQuery}&_limit=${this.pagination_limit}&_offset=${this.pagination_offset}`;
-        }
+        const url = !this.searchQuery
+          ? `${config.apiCMS.domain}artigos?_limit=${this.pagination_limit}&_start=${this.pagination_offset}`
+          : `${config.apiCMS.domain}artigos?_q=${this.searchQuery}&_limit=${this.pagination_limit}&_start=${this.pagination_offset}`;
 
         return fetch(url)
           .then((response) => response.json())
           .then((response) => {
+            const results = Array.isArray(response.results)
+              ? response.results
+              : response;
+
+            this.has_more = response.hasMore ?? results.length === this.pagination_limit;
+
             if (loadMore) {
-              this.articles = [...this.articles, ...response.results];
+              this.articles = [...this.articles, ...results];
             } else {
-              this.articles = response.results;
+              this.articles = results;
             }
-            this.has_more = response.hasMore;
           })
           .then(() => {
             if (this.has_more) {
