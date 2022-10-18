@@ -173,20 +173,20 @@
               class="card-links__indicators"
               :href="`/city?location_id=${localeId}&area=${this.selectedArea}`"
             >
-              <i></i>Indicadores
+              <i aria-hidden="true"></i>Indicadores
             </a>
             <a
               class="card-links__history"
               :href="`/historico?location_id=${localeId}&area=${this.selectedArea}`"
             >
-                <i></i>Histórico
+                <i aria-hidden="true"></i>Histórico
             </a>
             <a
               class="card-links__data"
               target="_blank"
               :href="`${apiUrl}data/resume/?locale_id=${localeId}`"
             >
-                <i></i>Relatório personalizado
+                <i aria-hidden="true"></i>Relatório personalizado
             </a>
           </section>
         </div>
