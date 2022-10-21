@@ -74,7 +74,12 @@ export default function startSearch() {
     }
 
     fetch(`${config.api.domain}data?locale_id=${localeId}`)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not OK');
+        }
+        return response.json();
+      })
       .then((response) => {
         if (response.locale.indicators.some((item) => item.area.id === 1)) {
           activeButton(1);
@@ -91,6 +96,9 @@ export default function startSearch() {
         if (response.locale.indicators.some((item) => item.area.id === 4)) {
           activeButton(4);
         }
+      })
+      .catch((error) => {
+        console.error('There has been a problem with your fetch operation:', error);
       });
   }
 

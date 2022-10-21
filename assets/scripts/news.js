@@ -19,9 +19,17 @@ if (document.querySelector('#app-news')) {
     methods: {
       getNews() {
         fetch(`${config.apiCMS.domain}noticias?_limit=30&_sort=date:ASC`)
-          .then((response) => response.json())
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not OK');
+            }
+            return response.json();
+          })
           .then((response) => {
             this.news = response;
+          })
+          .catch((error) => {
+            console.error('There has been a problem with your fetch operation:', error);
           });
       },
       convertDate(date) {

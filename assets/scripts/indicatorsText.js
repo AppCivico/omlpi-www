@@ -20,9 +20,17 @@ if (document.querySelector('#app-indicators-text')) {
     methods: {
       getText() {
         fetch(`${config.apiCMS.domain}textoindicadors`)
-          .then((response) => response.json())
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not OK');
+            }
+            return response.json();
+          })
           .then((response) => {
             this.text = response;
+          })
+          .catch((error) => {
+            console.error('There has been a problem with your fetch operation:', error);
           });
       },
       marked(content) {

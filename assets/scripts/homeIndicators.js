@@ -46,7 +46,12 @@ if (document.querySelector('#app-home-indicators')) {
 
         return new Promise((resolve, reject) => {
           fetch(url)
-            .then((response) => response.json())
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not OK');
+              }
+              return response.json();
+            })
             .then((response) => {
               if (response.status !== 500) {
                 this.indicators = response;
@@ -54,10 +59,7 @@ if (document.querySelector('#app-home-indicators')) {
               }
               return true;
             })
-            .then(() => {
-              this.loadingLocales = false;
-              return true;
-            })
+            .then(() => true)
             .then(() => {
               this.startIndicatorsCounter();
 
@@ -65,6 +67,9 @@ if (document.querySelector('#app-home-indicators')) {
             })
             .catch((err) => {
               reject(err);
+            })
+            .finally(() => {
+              this.loadingLocales = false;
             });
         });
       },

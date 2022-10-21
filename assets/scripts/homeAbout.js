@@ -24,9 +24,17 @@ if (document.querySelector('#app-home-about')) {
     methods: {
       getAbout() {
         fetch(`${config.apiCMS.domain}sobres?_limit=1`)
-          .then((response) => response.json())
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not OK');
+            }
+            return response.json();
+          })
           .then((response) => {
             this.about = { ...response[0] };
+          })
+          .catch((error) => {
+            console.error('There has been a problem with your fetch operation:', error);
           });
       },
       marked(content) {

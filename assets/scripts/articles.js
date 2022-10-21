@@ -97,7 +97,12 @@ if (window.location.href.indexOf('biblioteca') > -1) {
           : `${config.apiCMS.domain}artigos?_q=${this.searchQuery}&_limit=${this.pagination_limit}&_start=${this.pagination_offset}`;
 
         return fetch(url)
-          .then((response) => response.json())
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not OK');
+            }
+            return response.json();
+          })
           .then((response) => {
             const results = Array.isArray(response.results)
               ? response.results
@@ -121,6 +126,9 @@ if (window.location.href.indexOf('biblioteca') > -1) {
                 results.scrollIntoView({ behavior: 'smooth' });
               }
             }
+          })
+          .catch((error) => {
+            console.error('There has been a problem with your fetch operation:', error);
           })
           .finally(() => {
             this.pending.articles = false;

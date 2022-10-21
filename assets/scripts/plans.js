@@ -109,7 +109,12 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
 
                   // Load the drilldown map
                   fetch(`/maps/${e.point.drilldown}.json`)
-                    .then((response) => response.json())
+                    .then((response) => {
+                      if (!response.ok) {
+                        throw new Error('Network response was not OK');
+                      }
+                      return response.json();
+                    })
                     .then((response) => {
                       // console.log(data)
 
@@ -171,6 +176,9 @@ if (window.location.href.indexOf('planos-pela-primeira-infancia') > -1) {
                           textTransform: 'uppercase',
                         },
                       });
+                    })
+                    .catch((error) => {
+                      console.error('There has been a problem with your fetch operation:', error);
                     });
                 }
               },

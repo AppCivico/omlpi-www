@@ -135,20 +135,33 @@ if (document.querySelector('#app-history')) {
         this.loadingLocale = true;
         const url = `${config.api.domain}data/historical?locale_id=${localeId || localeId === 0 ? localeId : 1}`;
         fetch(url)
-          .then((response) => response.json())
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not OK');
+            }
+            return response.json();
+          })
           .then((response) => {
             this.locale = response;
             return true;
           })
-          .then(() => {
+          .then(() => true)
+          .catch((error) => {
+            console.error('There has been a problem with your fetch operation:', error);
+          })
+          .finally(() => {
             this.loadingLocale = false;
-            return true;
           });
       },
       getLocales() {
         this.loadingLocale = true;
         fetch(`${config.api.domain}locales`)
-          .then((response) => response.json())
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not OK');
+            }
+            return response.json();
+          })
           .then((response) => {
             this.locales = response.locales.map((region) => ({
               label: `${region.name}:${region.type}`,
@@ -194,9 +207,12 @@ if (document.querySelector('#app-history')) {
             awesomplete.list = this.locales;
             this.watchSelection();
           })
-          .then(() => {
+          .then(() => true)
+          .catch((error) => {
+            console.error('There has been a problem with your fetch operation:', error);
+          })
+          .finally(() => {
             this.loadingLocales = false;
-            return true;
           });
       },
       watchSelection() {

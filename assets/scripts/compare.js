@@ -174,7 +174,12 @@ if (document.querySelector('#app-compare')) {
         this.loadingLocale = true;
         const url = `${config.api.domain}data/compare?locale_id=${localeId || localeId === 0 ? localeId : config.firstCityId}`;
         fetch(url)
-          .then((response) => response.json())
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not OK');
+            }
+            return response.json();
+          })
           .then((response) => {
             const locales = response;
             locales.comparison.forEach((item) => {
@@ -212,7 +217,12 @@ if (document.querySelector('#app-compare')) {
       getLocales() {
         this.loadingLocale = true;
         fetch(`${config.api.domain}locales`)
-          .then((response) => response.json())
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not OK');
+            }
+            return response.json();
+          })
           .then((response) => {
             this.locales_list = response.locales.map((region) => ({
               label: `${region.name}:${region.type}`,
