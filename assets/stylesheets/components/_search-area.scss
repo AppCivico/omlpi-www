@@ -261,13 +261,7 @@
 }
 
 .search-area input {
-  width: 100%;
-  padding: 0.8rem 2.2rem;
-
-  font-size: ms(-1);
-
-  border: 2px solid palette('perrywinkle');
-  border-radius: 13px;
+  @include input;
 }
 
 .search-area__input-country,
@@ -293,7 +287,6 @@
 .search-area__input-city {
   background-image: image('icons/city.svg');
 }
-
 
 .search-area__info {
   display: flex;

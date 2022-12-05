@@ -905,3 +905,18 @@ $no-viewport: false !default;
   background-position: 50% 6px;
   opacity: 1;
 }
+
+@mixin input {
+  width: 100%;
+  padding: 0.8rem 2.2rem;
+
+  font-size: ms(-1);
+
+  border: 2px solid palette('perrywinkle');
+  border-radius: 13px;
+
+  &:hover,
+  &:focus {
+    border-color: palette('purple');
+  }
+}
