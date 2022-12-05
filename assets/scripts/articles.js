@@ -1,14 +1,19 @@
 /* global Vue */
+import listBox from './components/listBox';
 import config from './config';
+
+const qs = require('qs');
 
 if (window.location.href.indexOf('biblioteca') > -1) {
   window.$vueArticles = new Vue({
     el: '#app',
+    components: {
+      'list-box': listBox,
+    },
     data: {
       currentVideo: '',
       articles: null,
       searchQuery: null,
-      searchSuggestions: [],
       pending: {
         articles: true,
       },
@@ -16,16 +21,33 @@ if (window.location.href.indexOf('biblioteca') > -1) {
       has_more: false,
       pagination_offset: 0,
       pagination_limit: 15,
+      selectedTags: [],
+      tags: [],
     },
     computed: {
       loading() {
         return !this.locale;
       },
+      tagsAndIds({ tags } = this) {
+        const mappedTags = tags.reduce((acc, cur) => {
+          if (cur.tags_aliases?.length) {
+            cur.tags_aliases.forEach((el) => {
+              acc[el.Alias] = acc[el.Alias] ? [...acc[el.Alias], cur.id] : [cur.id];
+            });
+          }
+          acc[cur.name] = acc[cur.name] ? [...acc[cur.name], cur.id] : [cur.id];
+          return acc;
+        }, {});
+
+        return Object.keys(mappedTags)
+          .sort((a, b) => a.localeCompare(b))
+          .reduce((acc, cur) => [...acc, { name: cur, value: mappedTags[cur].sort() }], []);
+      },
     },
     async mounted() {
       await this.getArticles();
-      this.getSearchSuggestions();
       // await this.putHasmoreButtons();
+      this.getTags();
     },
     methods: {
       toggleModal(youtubeUrl = '') {
@@ -63,8 +85,8 @@ if (window.location.href.indexOf('biblioteca') > -1) {
       //   event.target.previousElementSibling.classList.add('library-item__description--full');
       //   event.target.setAttribute('hidden', true);
       // },
-      getSearchSuggestions() {
-        const url = `${config.apiCMS.domain}search-suggestions?_limit=12`;
+      getTags() {
+        const url = `${config.apiCMS.domain}tags`;
 
         return fetch(url)
           .then((response) => {
@@ -75,7 +97,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
           })
           .then((results) => {
             if (Array.isArray(results)) {
-              this.searchSuggestions = results;
+              this.tags = results;
             } else {
               throw new Error('Response out of expected format');
             }
@@ -92,9 +114,22 @@ if (window.location.href.indexOf('biblioteca') > -1) {
           this.pagination_limit = 15;
         }
 
-        const url = !this.searchQuery
-          ? `${config.apiCMS.domain}artigos?_limit=${this.pagination_limit}&_start=${this.pagination_offset}`
-          : `${config.apiCMS.domain}artigos?_q=${this.searchQuery}&_limit=${this.pagination_limit}&_start=${this.pagination_offset}`;
+        let url = `${config.apiCMS.domain}artigos?`;
+
+        if (this.searchQuery) {
+          url += `_q=${this.searchQuery}&`;
+        }
+
+        if (this.selectedTags.length) {
+          const tags = this.selectedTags
+            .reduce((acc, cur) => [...acc, ...JSON.parse(cur)], []);
+
+          const query = qs.stringify({ _where: { tags } });
+
+          url += `${query}&`;
+        }
+
+        url += `_limit=${this.pagination_limit}&_start=${this.pagination_offset}`;
 
         return fetch(url)
           .then((response) => {

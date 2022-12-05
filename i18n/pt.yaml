@@ -41,6 +41,12 @@
 #buttons
 - id: sending
   translation: "enviando..."
+- id: allTags
+  translation: "qualquer tema"
+- id: tags
+  translation: "temas"
+- id: searchTerms
+  translation: "termos"
 
 #consent
 - id: consent

@@ -3,6 +3,10 @@
     <body>
       {{ partial "header.html" . }}
 
+      <script type="text/x-template" id="list-box-markup">
+        {{ partial "components/listBox.html" }}
+      </script>
+
       <main class="alabaster" id="app">
         <section class='search-area search-area--alternative search-area--library'>
             <div class="container">
@@ -20,28 +24,40 @@
           <section class="search-area search-area--no-image">
             <div class="container">
               <section class='search-area search-area__library'>
-                <form action="" @submit.prevent="getArticles(false, true)">
-                  <label for="js-articles-search">
-                    {{ i18n "exploreArticles" }}
-                  </label>
-                  <input
-                    id="js-articles-search"
-                    type="text"
-                    v-model="searchQuery"
-                    placeholder="{{ i18n "exploreArticlesPlaceholder" }}"
-                  >
+                <form action="" @submit.prevent="getArticles(false, true)" class="search-area__form">
+                  <fieldset class="search-area__fieldset">
+                    <legend class="search-area__legend">
+                      {{ i18n "exploreArticles" }}
+                    </legend>
 
-                  <button type="submit" class="search-area__search-text-button">{{ i18n "search" }}</button>
+                    <fieldset class="list-box__wrapper search-area__field-wrapper search-area__field-wrapper--tags">
+                      <legend class="like-a__label list-box__label">{{ i18n "tags" }}</legend>
+                      <list-box
+                        id="tags"
+                        name="tags"
+                        v-model="selectedTags"
+                        :value="selectedTags"
 
-                  <ul class="search-suggestions" v-if="searchSuggestions?.length">
-                    <li class="search-suggestions__term" v-for="suggestion in
-                    searchSuggestions" :key="suggestion.id">
-                      <button type="submit" class="button button--small button--blue" title="procurar por..."
-                      :value="suggestion.tag?.name || suggestion?.term" @click="searchQuery = suggestion.tag?.name
-                      || suggestion.term">
-                        {{ "{{ suggestion.term }}" }}</button>
-                    </li>
-                  </ul>
+                        label-for-empty="{{ i18n "allTags" }}"
+                        :options="tagsAndIds"
+                        multiple
+                      ></list-box>
+                    </fieldset>
+
+                    <fieldset class="search-area__field-wrapper search-area__field-wrapper--search-terms">
+                      <label for="js-articles-search">
+                        {{ i18n "searchTerms" }}
+                      </label>
+                      <input
+                        id="js-articles-search"
+                        type="text"
+                        v-model="searchQuery"
+                        placeholder="{{ i18n "exploreArticlesPlaceholder" }}"
+                      />
+                    </fieldset>
+
+                    <button type="submit" class="search-area__search-text-button">{{ i18n "search" }}</button>
+                  </fieldset>
                 </form>
               </section>
             </div>
@@ -49,10 +65,7 @@
         </div>
 
         <div class="container">
-          <span
-            v-if="searchQuery && 1 !== 1"
-            class="search-area__informative"
-          >
+          <span v-if="searchQuery && 1 !== 1" class="search-area__informative">
             Resultados de busca para: {{ "{{ searchQuery }}" }}
           </span>
           <div
@@ -145,7 +158,8 @@
             Carregar mais
           </a>
           <div v-else>
-            <p>Nenhum resultado para sua busca</p>
+            <p v-if="articles && articles.length">Não há mais resultados para sua busca</p>
+            <p v-else>Nenhum resultado para sua busca</p>
           </div>
         </div>
 
