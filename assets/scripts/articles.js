@@ -46,7 +46,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
     },
     async mounted() {
       await this.getArticles();
-      // await this.putHasmoreButtons();
+      // await this.putHasMoreButtons();
       this.getTags();
     },
     methods: {
@@ -71,7 +71,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
 
         this.$refs.iframeYoutube.contentWindow.postMessage(`{"event":"command","func":"${func}","args":""}`, '*');
       },
-      // putHasmoreButtons() {
+      // putHasMoreButtons() {
       //   Object.keys(this.$refs).forEach((item) => {
       //     const description = this.$refs[item][0].querySelector('.library-item__description');
       //     const button = this.$refs[item][0].querySelector('button');

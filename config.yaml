@@ -80,8 +80,8 @@ menu:
     url: "/conselho"
     weight: 5
   footer:
-  - identifier: "Infancia e Juentude"
-    name: "Infancia e Juentude"
+  - identifier: "Infância e Juventude"
+    name: "Infância e Juventude"
     url: "/infancia-e-juventude"
     weight: 1
   - identifier: "Inclusão e Sustentabilidade"
