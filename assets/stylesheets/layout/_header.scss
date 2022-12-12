@@ -68,6 +68,13 @@
   }
 }
 
+.menu li {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
 .menu.active {
   top: 4.5rem;
 
