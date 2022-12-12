@@ -104,7 +104,7 @@
 }
 
 .menu .active a {
-  @media screen and (min-width: breakpoint('desktop')) {
+  @media screen and (min-width: breakpoint('tablet')) {
     border-bottom: 2px solid palette('blue', 'greeny');
   }
 }
