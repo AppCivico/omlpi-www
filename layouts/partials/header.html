@@ -13,7 +13,7 @@
           {{ range . }}
 
           <!--
-            this is a workaround for seting target on hugo menu links
+            this is a workaround for setting target on hugo menu links
             there is no official way to do it by now.
             @see https://github.com/jpescador/hugo-future-imperfect/issues/100
           -->
@@ -21,7 +21,10 @@
           {{ $url := urls.Parse .URL }}
           {{ $baseurl := urls.Parse $.Site.Params.Baseurl }}
 
-          <li class="{{if eq ($firstUrlElement|lower) (.URL) }}active{{end}}">
+          <li
+            class="{{if eq ($firstUrlElement|lower) (.URL) }}active{{end}}"
+            {{ with .Params.endpoint }}hidden data-endpoint="{{ . }}"{{ end }}
+          >
             <a
               {{ with .URL }} href="{{ . }}" {{ end }} {{ if ne $url.Host $baseurl.Host }} target="_blank" {{ end }}>
               {{ .Name }}

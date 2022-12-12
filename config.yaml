@@ -58,6 +58,12 @@ menu:
     name: "biblioteca"
     url: "/biblioteca"
     weight: 4
+  - identifier: "tracking"
+    name: "Rastreio"
+    url: "/rastreio"
+    weight: 100
+    Params:
+      endpoint: "privacy-policy"
   about:
   - identifier: "Sobre a Andi"
     name: "Sobre a Andi"

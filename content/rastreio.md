@@ -1,8 +1,10 @@
 ---
 title: Política de Privacidade dos Sites do Observatório do marco da primeira infância
 date: 2022-05-09T14:24:56.000Z
+layout: singleForVue
 type: page
 draft: false
+endpoint: privacy-policy
 ---
 
 Versão: 1.0

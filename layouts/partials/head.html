@@ -12,6 +12,12 @@
 
   <meta content="width=device-width,initial-scale=1.0" name="viewport" />
 
+  {{ with .Params.endpoint }}
+    <meta name="omlpi:page:endpoint" content="{{- . -}}" />
+    <meta name="fragment" content="!" />
+    <script> window.prerenderReady = false; </script>
+  {{ end }}
+
   {{ $style := resources.Get "stylesheets/index.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint "sha512" }}
   <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" />
 
