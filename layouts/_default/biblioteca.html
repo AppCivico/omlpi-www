@@ -37,7 +37,7 @@
                         name="tags"
                         v-model="selectedTags"
                         :value="selectedTags"
-
+                        @change="getArticles(false, true, false)"
                         label-for-empty="{{ i18n "allTags" }}"
                         :options="tagsAndIds"
                         multiple

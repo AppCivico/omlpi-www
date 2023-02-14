@@ -106,7 +106,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
             console.error('There has been a problem with your fetch operation:', error);
           });
       },
-      getArticles(loadMore, search = false) {
+      getArticles(loadMore = false, search = false, scrollToResults = true) {
         this.pending.articles = true;
 
         if (search) {
@@ -157,7 +157,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
             }
             if (search) {
               const results = document.querySelector('#js-search-results');
-              if (results) {
+              if (results && scrollToResults) {
                 results.scrollIntoView({ behavior: 'smooth' });
               }
             }
