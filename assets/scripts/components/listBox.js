@@ -84,8 +84,10 @@ export default {
           this.value = [];
         }
 
+        this.$emit('change', newValues);
         this.$emit('input', newValues);
       } else {
+        this.$emit('change', value);
         this.$emit('input', value);
       }
     },
