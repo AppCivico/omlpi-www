@@ -176,3 +176,7 @@ textarea {
   display: none !important;
   // stylelint-enable declaration-no-important
 }
+
+.visually-hidden {
+  @include visually-hidden;
+}
