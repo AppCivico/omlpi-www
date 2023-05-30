@@ -481,3 +481,21 @@ $gap--half: $gap * 0.5;
     }
   }
 }
+
+.search-area__filter {
+  background-image: image('icons/filter_list_alt--purple.svg');
+  background-position: 1rem center;
+
+  &::before {
+    display: block;
+
+    padding-right: calc(1.0625rem + 0.25em);
+    margin-right: calc(-1.0625rem - 0.25em);
+
+    content: 'Filtro';
+
+    background-image: image('icons/keyboard_arrow_down--gray.svg');
+    background-position: right 0.125rem;
+
+  }
+}

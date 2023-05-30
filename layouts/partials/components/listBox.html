@@ -17,7 +17,8 @@
 </select>
 <div class="list-box" :class="{'list-box--empty': !normalizedOptions.length}"
 tabindex="0" @focus="return false" v-else>
-  <ul class="list-box__container" :class="{'list-box--empty': !normalizedOptions.length}">
+  <ul class="list-box__container" :class="{'list-box--empty':
+  !normalizedOptions.length}" :title="title || null">
     <li class="list-box__option list-box__option--empty" v-if="labelForEmpty || !required">
       <input
         :id="`option__${ name }--empty`"

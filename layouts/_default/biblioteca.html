@@ -23,7 +23,7 @@
         <div class="search-area--gradient">
           <section class="search-area search-area--no-image">
             <div class="container">
-              <section class='search-area search-area__library'>
+              <section class="search-area search-area__library">
                 <form action="" @submit.prevent="getArticles(false, true)" class="search-area__form">
                   <fieldset class="search-area__fieldset">
                     <legend class="search-area__legend">
@@ -31,14 +31,18 @@
                     </legend>
 
                     <fieldset class="list-box__wrapper search-area__field-wrapper search-area__field-wrapper--tags">
-                      <legend class="like-a__label list-box__label">{{ i18n "tags" }}</legend>
+                      <legend class="like-a__label list-box__label visually-hidden">
+                        {{ i18n "tags" }}
+                      </legend>
                       <list-box
+                        class="search-area__filter"
                         id="tags"
                         name="tags"
                         v-model="selectedTags"
                         :value="selectedTags"
                         @change="getArticles(false, true, false)"
                         label-for-empty="{{ i18n "allTags" }}"
+                        title="Temas"
                         :options="tagsAndIds"
                         multiple
                       ></list-box>

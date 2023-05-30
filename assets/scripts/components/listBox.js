@@ -11,6 +11,10 @@ export default {
       type: String,
       default: '',
     },
+    title: {
+      type: String,
+      default: '',
+    },
     labelForEmpty: {
       type: String,
       default: '',
