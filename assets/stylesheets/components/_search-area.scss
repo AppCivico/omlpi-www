@@ -228,7 +228,7 @@ $gap--half: $gap * 0.5;
   border: 0;
 }
 
-.search-area__legend {
+.search-area__legend[class] {
   display: block;
 
   width: 100%;
@@ -342,10 +342,10 @@ $gap--half: $gap * 0.5;
 }
 
 .search-area__field-wrapper--selected-tags output {
-  padding: 0 $gap;
+  padding: $gap $gap $gap 0;
 
   @media screen and (min-width: breakpoint('phablet')) {
-    padding: 0 $gap--half $gap--half $gap--half;
+    padding: $gap--half $gap--half $gap--half 0;
   }
 }
 
