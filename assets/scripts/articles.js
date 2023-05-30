@@ -43,6 +43,37 @@ if (window.location.href.indexOf('biblioteca') > -1) {
           .sort((a, b) => a.localeCompare(b))
           .reduce((acc, cur) => [...acc, { name: cur, value: mappedTags[cur].sort() }], []);
       },
+      tagsPorId({ tagsAndIds } = this) {
+        return tagsAndIds.reduce((acc, cur) => {
+          if (Array.isArray(cur.value)) {
+            cur.value.forEach((x) => { acc[x] = cur.name; });
+          } else {
+            acc[cur.value] = cur.name;
+          }
+          return acc;
+        }, {});
+      },
+      selectedTagsNames({ selectedTags, tagsPorId } = this) {
+        return selectedTags.reduce((acc, cur) => {
+          let currentItem;
+
+          try {
+            // the value scan be an array in for of a string
+            currentItem = JSON.parse(cur);
+          } catch (_error) {
+            currentItem = cur;
+          }
+
+          if (Array.isArray(currentItem)) {
+            currentItem.forEach((x) => {
+              acc.push(tagsPorId[x]);
+            });
+          } else {
+            acc.push(tagsPorId[currentItem]);
+          }
+          return acc;
+        }, []);
+      },
     },
     async mounted() {
       await this.getArticles();
