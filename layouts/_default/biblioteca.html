@@ -44,19 +44,20 @@
                       ></list-box>
                     </fieldset>
 
-                    <fieldset class="search-area__field-wrapper search-area__field-wrapper--search-terms">
-                      <label for="js-articles-search">
+                    <fieldset class="search-area__field-wrapper search-area__field-wrapper--search-terms-and-button">
+                      <label for="js-articles-search" class="visually-hidden">
                         {{ i18n "searchTerms" }}
                       </label>
                       <input
+                        class="search-area__search-terms-field"
                         id="js-articles-search"
                         type="text"
                         v-model="searchQuery"
                         placeholder="{{ i18n "exploreArticlesPlaceholder" }}"
                       />
+                      <button type="submit" class="search-area__search-text-button">{{ i18n "search" }}</button>
                     </fieldset>
 
-                    <button type="submit" class="search-area__search-text-button">{{ i18n "search" }}</button>
                   </fieldset>
 
                   <fieldset class="search-area__field-wrapper search-area__field-wrapper--selected-tags" v-if="selectedTagsNames.length" >
