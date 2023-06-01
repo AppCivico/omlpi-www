@@ -1,3 +1,4 @@
+/* eslint-disable */
 import CookiesEuBanner from 'cookies-eu-banner';
 import config from './config';
 
