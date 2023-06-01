@@ -30,7 +30,9 @@
                       {{ i18n "exploreArticles" }}
                     </legend>
 
-                    <fieldset class="list-box__wrapper search-area__field-wrapper search-area__field-wrapper--tags">
+                    <fieldset class="list-box__wrapper
+                    search-area__field-wrapper search-area__field-wrapper--tags"
+                    v-if="tagsAndIds.length">
                       <legend class="like-a__label list-box__label visually-hidden">
                         {{ i18n "tags" }}
                       </legend>
