@@ -15,7 +15,7 @@
     "lint": "npm-run-all --parallel lint:*",
     "lint:es": "npx eslint --ext .es,.js \"./assets/scripts/**\" --format junit --output-file ./testResults/esLint.xml",
     "lint:style": "stylelint \"./assets/stylesheets/**/*.scss\" -- --custom-formatter \"node_modules/stylelint-junit-formatter\" > ./testResults/styleLint.xml",
-    "serve": "npm-run-all build:assets --parallel watch start:*",
+    "serve": "npm-run-all watch start:*",
     "start:hugo": "cross-env NODE_ENV=development hugo server --noHTTPCache=true --ignoreCache --templateMetrics --disableFastRender",
     "pretest": "npm run lint",
     "test": "jest",
