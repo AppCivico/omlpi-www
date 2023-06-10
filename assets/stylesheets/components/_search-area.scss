@@ -492,10 +492,18 @@ $gap--half: $gap * 0.5;
     padding-right: calc(1.0625rem + 0.25em);
     margin-right: calc(-1.0625rem - 0.25em);
 
+    color: palette('placeholder', 'base');
+
     content: 'Filtro';
 
     background-image: image('icons/keyboard_arrow_down--gray.svg');
     background-position: right 0.125rem;
+  }
 
+  &:hover,
+  &:focus {
+    &::before {
+      color: palette('placeholder', 'focus');
+    }
   }
 }

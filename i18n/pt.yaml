@@ -42,7 +42,7 @@
 - id: sending
   translation: "enviando..."
 - id: allTags
-  translation: "qualquer tema"
+  translation: "sem filtro"
 - id: tags
   translation: "temas"
 - id: searchTerms
