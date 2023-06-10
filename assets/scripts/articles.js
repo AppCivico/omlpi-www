@@ -42,47 +42,16 @@ if (window.location.href.indexOf('biblioteca') > -1) {
           .sort((a, b) => a.localeCompare(b))
           .reduce((acc, cur) => [...acc, { name: cur, value: mappedTags[cur].sort() }], []);
       },
-      tagsAndIds({ tags } = this) {
-        const mappedTags = tags.reduce((acc, cur) => {
-          if (cur.tags_aliases?.length) {
-            cur.tags_aliases.forEach((el) => {
-              acc[el.Alias] = acc[el.Alias] ? [...acc[el.Alias], cur.id] : [cur.id];
-            });
-          }
-          acc[cur.name] = acc[cur.name] ? [...acc[cur.name], cur.id] : [cur.id];
-          return acc;
-        }, {});
 
-        return Object.keys(mappedTags)
-          .sort((a, b) => a.localeCompare(b))
-          .reduce((acc, cur) => [...acc, { name: cur, value: mappedTags[cur].sort() }], []);
-      },
-      tagsPorId({ tags } = this) {
-        return tags.reduce((acc, cur) => {
-          acc[cur.id] = cur.name;
+      tagAliasesNamesByValue({ tagAliases } = this) {
+        return tagAliases.reduce((acc, cur) => {
+          acc[JSON.stringify(cur.value)] = cur.name;
           return acc;
         }, {});
       },
-      selectedTagsNames({ selectedTags, tagsPorId } = this) {
-        return selectedTags.reduce((acc, cur) => {
-          let currentItem;
 
-          try {
-            // the value scan be an array in for of a string
-            currentItem = JSON.parse(cur);
-          } catch (_error) {
-            currentItem = cur;
-          }
-
-          if (Array.isArray(currentItem)) {
-            currentItem.forEach((x) => {
-              acc.push(tagsPorId[x]);
-            });
-          } else {
-            acc.push(tagsPorId[currentItem]);
-          }
-          return acc;
-        }, []);
+      selectedTagAlisesNames({ selectedTags, tagAliasesNamesByValue } = this) {
+        return selectedTags.map((x) => tagAliasesNamesByValue[x]);
       },
     },
     async mounted() {
