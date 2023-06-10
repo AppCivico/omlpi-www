@@ -28,6 +28,20 @@ if (window.location.href.indexOf('biblioteca') > -1) {
       loading() {
         return !this.locale;
       },
+      tagAliases({ tags } = this) {
+        const mappedTags = tags.reduce((acc, cur) => {
+          if (cur.tags_aliases?.length) {
+            cur.tags_aliases.forEach((el) => {
+              acc[el.Alias] = acc[el.Alias] ? [...acc[el.Alias], cur.id] : [cur.id];
+            });
+          }
+          return acc;
+        }, {});
+
+        return Object.keys(mappedTags)
+          .sort((a, b) => a.localeCompare(b))
+          .reduce((acc, cur) => [...acc, { name: cur, value: mappedTags[cur].sort() }], []);
+      },
       tagsAndIds({ tags } = this) {
         const mappedTags = tags.reduce((acc, cur) => {
           if (cur.tags_aliases?.length) {
@@ -43,13 +57,9 @@ if (window.location.href.indexOf('biblioteca') > -1) {
           .sort((a, b) => a.localeCompare(b))
           .reduce((acc, cur) => [...acc, { name: cur, value: mappedTags[cur].sort() }], []);
       },
-      tagsPorId({ tagsAndIds } = this) {
-        return tagsAndIds.reduce((acc, cur) => {
-          if (Array.isArray(cur.value)) {
-            cur.value.forEach((x) => { acc[x] = cur.name; });
-          } else {
-            acc[cur.value] = cur.name;
-          }
+      tagsPorId({ tags } = this) {
+        return tags.reduce((acc, cur) => {
+          acc[cur.id] = cur.name;
           return acc;
         }, {});
       },
