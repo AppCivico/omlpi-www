@@ -40,13 +40,13 @@
 
 #buttons
 - id: sending
-  translation: "enviando..."
+  translation: "Enviando..."
 - id: allTags
-  translation: "sem filtro"
+  translation: "Sem filtro"
 - id: tags
-  translation: "temas"
+  translation: "Temas"
 - id: searchTerms
-  translation: "termos"
+  translation: "Termos"
 
 #consent
 - id: consent
