@@ -96,7 +96,7 @@ if (window.location.href.indexOf('biblioteca') > -1) {
       //   event.target.setAttribute('hidden', true);
       // },
       getTags() {
-        const url = `${config.apiCMS.domain}tags`;
+        const url = `${config.apiCMS.domain}tags?_limit=-1`;
 
         return fetch(url)
           .then((response) => {
