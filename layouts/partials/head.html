@@ -27,7 +27,7 @@
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,600&display=swap" rel="stylesheet">
 
   {{ $defines := dict "process.env.NODE_ENV" (printf "'%s'" hugo.Environment) }}
-  {{ $opts := dict "defines" $defines }}
+  {{ $opts := dict "defines" $defines "sourceMap" "external" }}
   {{ $js := resources.Get "scripts/index.js" }}
 
   {{ $secureJS := $js | js.Build $opts | resources.Minify | resources.Fingerprint "sha512" }}
