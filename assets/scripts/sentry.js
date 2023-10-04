@@ -1,12 +1,19 @@
 import * as Sentry from '@sentry/browser';
-import { Integrations } from '@sentry/tracing';
 
 Sentry.init({
-  dsn: 'https://0b3313ced14347eeb247f647a45fa8a9@sentry.appcivico.com/6',
-  integrations: [new Integrations.BrowserTracing()],
+  dsn: 'https://15f95f8632a51920cc8b12a0f79d7ee1@o75154.ingest.sentry.io/4505987750100992',
+  integrations: [
+    new Sentry.BrowserTracing({
+      tracePropagationTargets: [
+        'localhost',
+        /^https:\/\/(?:[\w-]+.)?rnpiobserva.org.br/,
+        /^https:\/\/(?:[\w-]+.)?appcivico.com/,
+      ],
+    }),
+    new Sentry.Replay(),
+  ],
 
-  // Set tracesSampleRate to 1.0 to capture 100%
-  // of transactions for performance monitoring.
-  // We recommend adjusting this value in production
   tracesSampleRate: 1.0,
+  replaysSessionSampleRate: 0.1,
+  replaysOnErrorSampleRate: 1.0,
 });
