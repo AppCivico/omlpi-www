@@ -34,6 +34,7 @@
     "@babel/plugin-transform-runtime": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
     "@babel/runtime": "^7.9.2",
+    "@sentry/cli": "^2.21.2",
     "@vue/eslint-config-airbnb": "^5.3.0",
     "autoprefixer": "^9.7.6",
     "babel-preset-env": "^1.7.0",
