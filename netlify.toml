@@ -5,11 +5,7 @@
 # “command” is your build command.
 # “publish” is the directory to publish (relative to the root of your repo).
 
-[context.v2]
-  command = "npm run build"
-  environment = { HUGO_VERSION = "0.119.0" }
-
-[context.dev]
+[build]
   command = "npm run build"
   environment = { HUGO_VERSION = "0.119.0" }
 
