@@ -1,7 +1,8 @@
-list:
-  - name: email
-    url: 'mailto:contato@andi.com'
-    value: 'contato@andi.com'
-  - name: openData
-    value: 'Dados abertos para desenvolvedores'
-    url: 'https://omlpi-docs.appcivico.com/'
+email:
+  name: email
+  url: 'mailto:observa@andi.org.br'
+  value: 'observa@andi.org.br'
+openData:
+  name: openData
+  value: 'Dados abertos para desenvolvedores'
+  url: 'https://omlpi-docs.appcivico.com/'

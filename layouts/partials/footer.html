@@ -6,7 +6,9 @@
           <a href="{{ .Site.BaseURL }}" class="logo">{{ .Site.Title }}</a>
         </div>
 
-        <a class="site-footer__email" href="mailto:observa@primeirainfancia.org.br">observa@primeirainfancia.org.br</a>
+        {{ with .Site.Data.footerLinks.email }}
+          <a class="site-footer__email" href="{{ .url }}">{{ .value }}</a>
+        {{ end }}
       </div>
 
       <div class="footer-logos">
