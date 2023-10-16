@@ -18,11 +18,11 @@
     <script> window.prerenderReady = false; </script>
   {{ end }}
 
-  {{ $style := resources.Get "stylesheets/index.scss" | resources.ToCSS (dict "enableSourceMap" true) | resources.Minify | resources.Fingerprint "sha384" }}
-  <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" />
+  {{ $style := resources.Get "stylesheets/index.scss" | resources.ToCSS (dict "enableSourceMap" true) | resources.Minify }}
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}">
 
-  {{ $animateCSS := resources.Get "vendor/animate.min.css" | resources.Fingerprint "sha384" }}
-  <link rel="stylesheet" href="{{ $animateCSS.RelPermalink }}" integrity="{{ $animateCSS.Data.Integrity }}">
+  {{ $animateCSS := resources.Get "vendor/animate.min.css" }}
+  <link rel="stylesheet" href="{{ $animateCSS.RelPermalink }}">
 
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,600&display=swap" rel="stylesheet">
 
@@ -30,33 +30,33 @@
   {{ $opts := dict "defines" $defines "sourcemap" "external" }}
   {{ $js := resources.Get "scripts/index.js" }}
 
-  {{ $secureJS := $js | js.Build $opts | resources.Minify | resources.Fingerprint "sha384" }}
+  {{ $secureJS := $js | js.Build $opts | resources.Minify }}
   {{ .Scratch.Set "secureJS" $secureJS }}
-  <link rel="preload" type="text/javascript" as="script" href="{{ $secureJS.RelPermalink }}" integrity="{{ $secureJS.Data.Integrity }}" />
+  <link rel="preload" type="text/javascript" as="script" href="{{ $secureJS.RelPermalink }}">
 
-  {{ $highCharts := resources.Get "vendor/highcharts/highcharts.js" | resources.Minify | resources.Fingerprint "sha384" }}
+  {{ $highCharts := resources.Get "vendor/highcharts/highcharts.js" | resources.Minify }}
   {{ .Scratch.Set "highCharts" $highCharts }}
-  <link rel="preload" type="text/javascript" as="script" href="{{ $highCharts.RelPermalink }}" integrity="{{ $highCharts.Data.Integrity }}" />
+  <link rel="preload" type="text/javascript" as="script" href="{{ $highCharts.RelPermalink }}">
 
-  {{ $exporting := resources.Get "vendor/highcharts/modules/exporting.js" | resources.Minify | resources.Fingerprint "sha384" }}
+  {{ $exporting := resources.Get "vendor/highcharts/modules/exporting.js" | resources.Minify }}
   {{ .Scratch.Set "exporting" $exporting }}
-  <link rel="preload" type="text/javascript" as="script" href="{{ $exporting.RelPermalink }}" integrity="{{ $exporting.Data.Integrity }}" />
+  <link rel="preload" type="text/javascript" as="script" href="{{ $exporting.RelPermalink }}">
 
-  {{ $map := resources.Get "vendor/highcharts/modules/map.js" | resources.Minify | resources.Fingerprint "sha384" }}
+  {{ $map := resources.Get "vendor/highcharts/modules/map.js" | resources.Minify }}
   {{ .Scratch.Set "map" $map }}
-  <link rel="preload" type="text/javascript" as="script" href="{{ $map.RelPermalink }}" integrity="{{ $map.Data.Integrity }}" />
+  <link rel="preload" type="text/javascript" as="script" href="{{ $map.RelPermalink }}">
 
-  {{ $br := resources.Get "vendor/@highcharts/map-collection/countries/br/br-all.js" | resources.Minify | resources.Fingerprint "sha384" }}
+  {{ $br := resources.Get "vendor/@highcharts/map-collection/countries/br/br-all.js" | resources.Minify }}
   {{ .Scratch.Set "br" $br }}
-  <link rel="preload" type="text/javascript" as="script" href="{{ $br.RelPermalink }}" integrity="{{ $br.Data.Integrity }}" />
+  <link rel="preload" type="text/javascript" as="script" href="{{ $br.RelPermalink }}">
 
-  {{ $drillDown := resources.Get "vendor/highcharts/modules/drilldown.js" | resources.Minify | resources.Fingerprint "sha384" }}
+  {{ $drillDown := resources.Get "vendor/highcharts/modules/drilldown.js" | resources.Minify }}
   {{ .Scratch.Set "drillDown" $drillDown }}
-  <link rel="preload" type="text/javascript" as="script" href="{{ $drillDown.RelPermalink }}" integrity="{{ $drillDown.Data.Integrity }}" />
+  <link rel="preload" type="text/javascript" as="script" href="{{ $drillDown.RelPermalink }}">
 
-  {{ $vue := resources.Get (cond hugo.IsProduction "vendor/vue.min.js" "vendor/vue.js") | resources.Fingerprint "sha384" }}
+  {{ $vue := resources.Get (cond hugo.IsProduction "vendor/vue.min.js" "vendor/vue.js") }}
   {{ .Scratch.Set "vue" $vue }}
-  <link rel="preload" type="text/javascript" as="script" href="{{ $vue.RelPermalink }}" integrity="{{ $vue.Data.Integrity }}" />
+  <link rel="preload" type="text/javascript" as="script" href="{{ $vue.RelPermalink }}">
 
   {{ if hugo.IsProduction }}
     {{ $sentry := "module.exports = window.sentry" | resources.FromString "js/shims/sentry.js" }}
@@ -64,9 +64,9 @@
     {{ $placebo := slice $sentry.RelPermalink }}
 
     {{ $sentryJS := resources.Get "scripts/sentry.js" }}
-    {{ $secureSentryJS := $sentryJS | js.Build | resources.Minify | resources.Fingerprint "sha384" }}
+    {{ $secureSentryJS := $sentryJS | js.Build | resources.Minify }}
 
-    <script type="text/javascript" src="{{ $secureSentryJS.RelPermalink }}" integrity="{{ $secureSentryJS.Data.Integrity }}"></script>
+    <script type="text/javascript" src="{{ $secureSentryJS.RelPermalink }}"></script>
   {{ end }}
 
   <script type="text/javascript">

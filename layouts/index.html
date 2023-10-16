@@ -202,8 +202,8 @@
 
     {{ partial "footer.html" . }}
 
-    {{ $wow := resources.Get "vendor/wow.min.js" | resources.Fingerprint "sha384" }}
-    <script src="{{ $wow.RelPermalink }}" integrity="{{ $wow.Data.Integrity }}"></script>
+    {{ $wow := resources.Get "vendor/wow.min.js" }}
+    <script src="{{ $wow.RelPermalink }}"></script>
 
     {{ partial "scripts.html" . }}
 
