@@ -14,15 +14,15 @@
       <div class="footer-logos">
         <div class="footer-logos__first-row">
           <div class="footer-logos__primeira-infancia">
-            {{ $img := resources.Get "images/footer/projeto-pip.svg" | resources.Minify | resources.Fingerprint "sha512" }}
+            {{ $img := resources.Get "images/footer/projeto-pip.svg" | resources.Minify | resources.Fingerprint "sha384" }}
             <img src="{{ $img.RelPermalink }}" integrity="{{ $img.Data.Integrity }}" alt="Projeto PIP">
           </div>
 
           <div class="footer-logos__rnpi-andi">
             <h2>Realização:</h2>
-            {{ $img := resources.Get "images/footer/rnpi.svg" | resources.Minify | resources.Fingerprint "sha512" }}
+            {{ $img := resources.Get "images/footer/rnpi.svg" | resources.Minify | resources.Fingerprint "sha384" }}
             <img src="{{ $img.RelPermalink }}" integrity="{{ $img.Data.Integrity }}" class="footer-logos__rnpi" alt="Rede Nacional Primeira Infancia" />
-            {{ $img := resources.Get "images/footer/andi.svg" | resources.Minify | resources.Fingerprint "sha512" }}
+            {{ $img := resources.Get "images/footer/andi.svg" | resources.Minify | resources.Fingerprint "sha384" }}
             <img src="{{ $img.RelPermalink }}" integrity="{{ $img.Data.Integrity }}" class="footer-logos__andi" alt="Andi"/>
           </div>
         </div>
@@ -30,15 +30,15 @@
         <div class="footer-logos__second-row">
           <div class="footer-logos__bvl">
             <h2>Parceria</h2>
-            {{ $img := resources.Get "images/footer/bvl.svg" | resources.Minify | resources.Fingerprint "sha512" }}
+            {{ $img := resources.Get "images/footer/bvl.svg" | resources.Minify | resources.Fingerprint "sha384" }}
             <img src="{{ $img.RelPermalink }}" integrity="{{ $img.Data.Integrity }}" alt="Bernard van Leer" />
           </div>
 
           <div class="footer-logos__petrobras-gov-fed">
             <h2>Patrocínio</h2>
-            {{ $img := resources.Get "images/footer/petrobras.svg" | resources.Minify | resources.Fingerprint "sha512" }}
+            {{ $img := resources.Get "images/footer/petrobras.svg" | resources.Minify | resources.Fingerprint "sha384" }}
             <img src="{{ $img.RelPermalink }}" integrity="{{ $img.Data.Integrity }}" class="footer-logos__petrobras" alt="Petrobrás" />
-            {{/*{{ $img := resources.Get "images/footer/governo-federal.svg" | resources.Minify | resources.Fingerprint "sha512" }}
+            {{/*{{ $img := resources.Get "images/footer/governo-federal.svg" | resources.Minify | resources.Fingerprint "sha384" }}
             <img src="{{ $img.RelPermalink }}" integrity="{{ $img.Data.Integrity }}" class="footer-logos__governo-federal" alt="Governo Federal" />*/}}
           </div>
         </div>
