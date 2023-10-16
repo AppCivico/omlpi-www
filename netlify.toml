@@ -7,11 +7,11 @@
 
 [context.v2]
   command = "npm run build"
-  environment = { HUGO_VERSION = "0.80.0" }
+  environment = { HUGO_VERSION = "0.119.0" }
 
 [context.dev]
   command = "npm run build"
-  environment = { HUGO_VERSION = "0.80.0" }
+  environment = { HUGO_VERSION = "0.119.0" }
 
 [[redirects]]
   from = "/pt/*"
