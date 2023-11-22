@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/browser';
 
 Sentry.init({
-  dsn: 'https://15f95f8632a51920cc8b12a0f79d7ee1@o75154.ingest.sentry.io/4505987750100992',
+  dsn: 'https://afa524ecfc15511efdd238c7f5fe8492@o75154.ingest.sentry.io/4505987756589056',
   integrations: [
     new Sentry.BrowserTracing({
       tracePropagationTargets: [
