@@ -1,7 +1,7 @@
 email:
   name: email
-  url: 'mailto:observa@andi.org.br'
-  value: 'observa@andi.org.br'
+  url: 'mailto:observa@primeirainfancia.org.br'
+  value: 'observa@primeirainfancia.org.br'
 openData:
   name: openData
   value: 'Dados abertos para desenvolvedores'
