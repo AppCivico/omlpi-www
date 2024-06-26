@@ -6,8 +6,6 @@
   <meta content="IE=edge" http-equiv="X-UA-Compatible" />
 
   <meta charset="utf-8" />
-
-  <link rel="dns-prefetch" href="https://cdn.polyfill.io/" />
   <link rel="dns-prefetch" href="https://maps.googleapis.com/" crossorigin="anonymous" />
 
   <meta content="width=device-width,initial-scale=1.0" name="viewport" />
@@ -142,7 +140,4 @@
 	{{ end }}
 
   <title>{{ if not .IsHome }}{{ .Title }} &middot; {{ end }}{{ .Site.Title }}</title>
-
-  <!-- Polyfills must load sync, since they need to be active before other script runs -->
-  <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 </head>
